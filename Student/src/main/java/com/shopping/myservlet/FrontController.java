@@ -83,6 +83,16 @@ public class FrontController extends HttpServlet {
 			System.out.println("file upload event invoked");
 			
 			MultipartRequest mr = MyUtility.getMultipartRequest(request,imageUploadWebPath);
+			
+			if(mr ==null) {
+				command = mr.getParameter("command");
+				//MyUtility.deleteOldImageFile(imageUploadWebPath);
+				
+				// file upload object binding in request scope.
+				request.setAttribute("mr", mr);
+			}else {
+				System.out.println("MultipartRequest object is null");
+			}
 		}
 		
 		System.out.println("command is [" + command + "]");
