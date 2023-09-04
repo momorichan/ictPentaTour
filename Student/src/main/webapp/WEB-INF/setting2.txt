@@ -1,0 +1,3 @@
+company=롯데
+name=문박열
+state=부산

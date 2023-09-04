@@ -1,0 +1,12 @@
+# 구현해야 할 목록들입니다.
+home=com.shopping.controller.HomeController
+# member section
+meLogin=com.shopping.controller.member.MemberLoginController
+meLogout=com.shopping.controller.member.MemberLogoutController
+meInsert=com.shopping.controller.member.MemberInsertController
+meList=com.shopping.controller.member.MemberListController
+# board section
+boInsert=com.shopping.controller.board.BoardInsertController
+boList=com.shopping.controller.board.BoardListController
+# product section
+prList=com.shopping.controller.product.ProductListController
