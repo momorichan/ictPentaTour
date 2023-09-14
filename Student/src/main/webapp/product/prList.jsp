@@ -14,7 +14,9 @@
       .card-img-top{width:300px;height:300px;}
       .removeUnderLine{text-decoration-line: none;}
 		#buttonList{margin-top:10px;}		
-		#updateAnchor, #deleteAnchor{opacity:0.8;}      
+		#updateAnchor, #deleteAnchor{opacity:0.8;}   
+		.mode, .keyword, .col{margin: auto;}  
+		.form-control-sm{border: 1px solid Gainsboro;}
 </style>
 <script type="text/javascript">
       $(document).ready(function(){
@@ -24,7 +26,21 @@
               return new bootstrap.Popover(popoverTriggerEl);
          });
 
+         var optionList = $('#mode option');
+			for(var i = 0 ; i < optionList.length ; i++){
+				if(optionList[i].value == '${requestScope.pageInfo.mode}'){
+					optionList[i].selected = true;
+				}
+			}
+			$('#keyword').val('${requestScope.pageInfo.keyword}');
       });
+      function searchAll(){ 
+			location.href = '<%=notWithFormTag%>prList';
+		}
+	
+		function writeForm(){ 
+			location.href = '<%=notWithFormTag%>prInsert';
+		}
    </script>
 </head>
 <body>
@@ -35,6 +51,35 @@
 			<thead>
 			</thead>
 			<tbody>
+			<tr>
+			<td colspan="7" align="center">
+				<div class="row">
+	            <div class="col-sm-12">               
+                <form name="myform" action="<%=withFormTag%>" method="get">
+                   <input type="hidden" name="command" value="prList">
+                   <div class="row">
+                      <div class="col-sm-12 mode">
+                         <select class="form-control-sm" id="mode" name="mode">
+                            <option value="all" selected="selected">--- 선택해 주세요 ---
+                            <option value="name">상품 이름
+                            <option value="company">제조 회사
+                            <option value="category">카테고리
+                         </select>    
+                      <input class="form-control-sm" type="text" name="keyword" id="keyword"
+                         placeholder="키워드 입력">                             
+                         <button type="submit" class="btn btn-warning form-control-sm" onclick="">검색</button>    
+                         <button type="button" class="btn btn-warning form-control-sm" onclick="searchAll();">전체 검색</button>       
+                      	 <c:if test="${whologin==2}">
+                         <button type="button" class="btn btn-info form-control-sm"  onclick="writeForm();">상품 등록</button>
+                         </c:if>          
+                         <span class="label label-default">${requestScope.pageInfo.pagingStatus}</span> 
+                      </div>
+                   </div>
+                </form>                     
+             	</div>
+          		</div>
+			</td>
+			</tr>
 				<c:set var="colsu" value="${applicationScope.settingMap['product_list_column_size']}"/>
 				<c:forEach var="bean" items="${requestScope.datalist}" varStatus="status">
 				<c:if test="${status.index%colsu==0}">
@@ -42,8 +87,8 @@
 				</c:if>
 				<td>
 					<div class="card" style="width:19rem;">
-						<a href="prDetail02.jsp?pnum=${bean.pnum}" class="removeUnderLine">
-							<img class="card-img-top" alt="${bean.name}" src="${pageContext.request.contextPath}/image/${bean.image01}" >
+						<a href="<%=notWithFormTag%>prDetail&pnum=${bean.pnum}${requestScope.pageInfo.flowParameter}" class="removeUnderLine">
+							<img class="card-img-top" alt="${bean.name}" src="${pageContext.request.contextPath}/upload/${bean.image01}" >
 							<div class="card-body"> 
 								<h5 class="card-title">${bean.name}</h5> 
 								<p class="card-text">
@@ -61,9 +106,9 @@
 								</p>
 							<c:if test="${whologin == 2}">
 								<div id="buttonList">
-									<a id="updateAnchor" href="#" class="btn btn-info">
+									<a id="updateAnchor" href="<%=notWithFormTag%>prUpdate&pnum=${bean.pnum}${requestScope.pageInfo.flowParameter}" class="btn btn-info">
 									수정</a>
-									<a id="updateAnchor" href="#" class="btn btn-info">
+									<a id="deleteAnchor" href="<%=notWithFormTag%>prDelete&pnum=${bean.pnum}${requestScope.pageInfo.flowParameter}" class="btn btn-info">
 									삭제</a>							
 								</div>
 							</c:if>
@@ -78,7 +123,8 @@
 				</c:if>					
 				</c:forEach>
 			</tbody>
-		</table>			
+		</table>
+		${requestScope.pageInfo.pagingHtml}	
 	</div>	 
 </body>
 </html>

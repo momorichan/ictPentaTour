@@ -6,34 +6,10 @@ import java.util.ArrayList;
 import java.util.List;
 
 import com.shopping.model.bean.Member;
+import com.shopping.utility.Paging;
 
 public class MemberDao extends SuperDao{
-	public Member getDataByPk(String id) {
-		Member bean = new Member(id, "김호철", "abc123", "female", "2023/08/20", "미혼", 
-				100, "역삼", "kim9", "탁구,축구,");
-		
-		return bean;
-	}
 	
-	public List<Member> getDataList(){
-		List<Member> lists = new ArrayList<Member>();
-		
-		lists.add(new Member("kim", "김호철", "abc123", "female", "2023/08/20", "미혼", 
-				100, "역삼", "kim9", "탁구,축구,"));
-		lists.add(new Member("hong", "홍길동", "abc123", "female", "2023/08/20", "미혼", 
-				100, "마포", "kim9", "탁구,축구,"));
-		lists.add(new Member("park", "박영희", "abc123", "female", "2023/08/20", "미혼", 
-				100, "역삼", "kim9", "탁구,축구,"));
-		lists.add(new Member("kang", "강우식", "abc123", "female", "2023/08/20", "미혼", 
-				100, "역삼", "kim9", "탁구,축구,"));
-		lists.add(new Member("choi", "최문숙", "abc123", "female", "2023/08/20", "미혼", 
-				100, "역삼", "kim9", "탁구,축구,"));
-		lists.add(new Member("kim", "김호철", "abc123", "female", "2023/08/20", "미혼", 
-				100, "역삼", "kim9", "탁구,축구,"));
-		
-		return lists;
-	}
-
 	public Member getDataByPk(String id, String password) throws Exception{
 		Member bean = null;
 		PreparedStatement pstmt = null;
@@ -118,19 +94,61 @@ public class MemberDao extends SuperDao{
 		return cnt;
 	}
 
-	public List<Member> selectAll() throws Exception{
-		//모든 게시물 목록을 게시물 글번호 역순 정렬하여 반환합니다.
+	public Member getDataByPrimaryKey(String id) throws Exception{
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		Member bean = null;
+		
+		String sql = " select * from members";
+		sql += " where id = ?";
+		
+		conn = super.getConncetion();
+		pstmt = conn.prepareStatement(sql); 
+		
+		pstmt.setString(1, id);
+		
+		rs = pstmt.executeQuery();
+		
+		while (rs.next()) {
+			bean = getBeanData(rs);
+		}
+		
+		if(rs!= null) {rs.close();}
+		if(pstmt != null) {pstmt.close();}
+		if(conn != null) {conn.close();}
+		
+		return bean;
+	}
+
+	public List<Member> selectAll(Paging pageInfo) throws Exception{
+		//topN 구문을 사용하여 페이징 처리된 게시물 목록을 반환합니다.
 		List<Member> lists = new ArrayList<Member>();
 		
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
 		
-		String sql = " select * from members";
-
+		String mode = pageInfo.getMode();
+		String keyword = pageInfo.getKeyword();
+		
+		String sql = " select ID, NAME, PASSWORD, GENDER, BIRTH, MARRIAGE, SALARY, ADDRESS, MANAGER";
+		sql += " from (select ID, NAME, PASSWORD, GENDER, BIRTH, MARRIAGE, SALARY, ADDRESS, MANAGER, rank() over(order by id asc) as ranking";
+		sql += 		 " from members";
+		
+		if(mode==null||mode.equals("all")) {//전체 모드인 경우
+			
+		}else {//전체 모드가 아닌 경우
+		    sql += " where " + mode + " like '%" + keyword + "%'";
+		}
+		
+		sql += 		 ")";
+		sql += 		 " where ranking between ? and ?";
 		conn = super.getConncetion();
 		conn.setAutoCommit(false);
 		
 		pstmt = conn.prepareStatement(sql); 
+		
+		pstmt.setInt(1, pageInfo.getBeginRow());
+		pstmt.setInt(2, pageInfo.getEndRow());
 		
 		rs = pstmt.executeQuery();
 		

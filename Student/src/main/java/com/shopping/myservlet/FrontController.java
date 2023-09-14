@@ -13,8 +13,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import com.oreilly.servlet.MultipartRequest;
-import com.shopping.Utility.MyUtility;
 import com.shopping.controller.SuperController;
+import com.shopping.utility.MyUtility;
 
 
 @WebServlet(
@@ -66,7 +66,7 @@ public class FrontController extends HttpServlet {
 		
 		//in setting.txt 파일 내의 uploadPath=upload 항목 참조 요망
 		//이미지 업로드 경로를 변수에 저장합니다. 
-		String tempPath = settingMap.get("UploadPath");
+		String tempPath = settingMap.get("uploadPath");
 		if(tempPath==null) {tempPath = "image";}
 		
 		imageUploadWebPath = application.getRealPath(tempPath);
@@ -84,10 +84,12 @@ public class FrontController extends HttpServlet {
 			
 			MultipartRequest mr = MyUtility.getMultipartRequest(request,imageUploadWebPath);
 			
-			if(mr ==null) {
+			if(mr != null) {
 				command = mr.getParameter("command");
-				//MyUtility.deleteOldImageFile(imageUploadWebPath);
 				
+				if(command.equals("prUpdate")) {
+					MyUtility.deleteOldImageFile(imageUploadWebPath, mr);
+				}
 				// file upload object binding in request scope.
 				request.setAttribute("mr", mr);
 			}else {

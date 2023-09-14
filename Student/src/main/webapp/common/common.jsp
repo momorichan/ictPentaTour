@@ -22,6 +22,7 @@
 <%-- jstl을 위한 태그 라이브러리 선언 --%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%
 /* 	Member mem = new Member();
 	mem.setId("admin");
@@ -87,7 +88,7 @@
 							<c:if test="${whologin != 0}">			
 								<li><a class="dropdown-item" href="<%=notWithFormTag%>meLogout">로그아웃</a></li>								
 								<li><a class="dropdown-item" href="<%=notWithFormTag%>">정보수정</a></li>										
-								<li><a class="dropdown-item" href="<%=notWithFormTag%>">상세보기</a></li>
+								<li><a class="dropdown-item" href="<%=notWithFormTag%>meDetail&id=${sessionScope.loginfo.id}">상세보기</a></li>
 								<c:if test="${whologin == 1}">
 									<li><a class="dropdown-item" href="<%=notWithFormTag%>">회원탈퇴</a></li>
 								</c:if>
@@ -118,11 +119,32 @@
 						<ul class="dropdown-menu">
 							<li><a class="dropdown-item" href="<%=notWithFormTag%>prList">목록보기</a></li>
 						<c:if test="${whologin == 2}">
-							<li><a class="dropdown-item" href="#">상품 등록</a></li>
+							<li><a class="dropdown-item" href="<%=notWithFormTag%>prInsert">상품 등록</a></li>
 						</c:if>							
 						</ul>
 					</li>					
-										
+					
+					<!-- view section  -->
+					<li class="nav-item dropdown">
+					<a	class="nav-link dropdown-toggle" href="#" role="button"
+						data-bs-toggle="dropdown">데이터 보기</a>
+						<ul class="dropdown-menu">
+							<li><a class="dropdown-item" href="<%=notWithFormTag%>vwList">목록보기</a></li>					
+						</ul>
+					</li>	
+
+					<!-- accommodation section  -->
+					<li class="nav-item dropdown">
+					<a	class="nav-link dropdown-toggle" href="#" role="button"
+						data-bs-toggle="dropdown">숙박 보기</a>
+						<ul class="dropdown-menu">
+							<li><a class="dropdown-item" href="<%=notWithFormTag%>acList">목록보기</a></li>
+						<c:if test="${whologin == 2}">
+							<li><a class="dropdown-item" href="<%=notWithFormTag%>acInsert">숙박 등록</a></li>
+						</c:if>							
+						</ul>
+						
+					</li>											
 				</ul>
 			</div>
 		</div>

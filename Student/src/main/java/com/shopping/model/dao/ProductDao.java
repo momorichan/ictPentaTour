@@ -5,101 +5,10 @@ import java.util.ArrayList;
 import java.util.List;
 
 import com.shopping.model.bean.Product;
+import com.shopping.model.mall.CartItem;
+import com.shopping.utility.Paging;
 
 public class ProductDao extends SuperDao{
-	public Product getDataByPk(int pnum) {
-		Product bean = new Product(1, "콜라", "갑을 상회", 
-				"images/americano03.png", "images/americano03.png", "images/americano03.png", 
-				10, 1000, "bread", "이 상품은 매우 시원하고 맛있습니다.", 5, "2023/10/10");
-		
-		return bean;
-	}
-	public List<Product> getDataList(){
-		List<Product> lists = new ArrayList<Product>();
-		
-		lists.add(new Product(1, "콜라", "갑을 상회", 
-				"images/americano01.png", "images/americano02.png", "images/americano03.png", 
-				10, 1000, "bread", "이 상품은 매우 시원하고 맛있습니다.", 5, "2023/10/10"));
-		lists.add(new Product(2, "사이다", "갑을 상회", 
-				"images/brioche_01.png", "images/brioche_02.png", "images/brioche_03.png", 
-				10, 1000,"bread", "이 상품은 매우 시원하고 맛있습니다.", 5, "2023/10/10"));
-		lists.add(new Product(3, "환타", "갑을 상회", 
-				"images/cappuccino01.png", "images/cappuccino02.png", "images/cappuccino03.png", 
-				10, 1000,"bread", "톡 쏩니다.", 5, "2023/10/10"));
-		lists.add(new Product(4, "맥콜", "갑을 상회", 
-				"images/ciabatta_01.png", "images/ciabatta_02.png", "images/ciabatta_03.png", 
-				10, 1000,"bread", "이 상품은 매우 시원하고 맛있습니다.", 5, "2023/10/10"));
-		lists.add(new Product(5, "닥터페퍼", "갑을 상회", 
-				"images/coffee01.png", "images/coffee02.jpg", "images/chocolate_cake_01.png", 
-				10, 1000,"bread", "이 상품은 매우 시원하고 맛있습니다.", 5, "2023/10/10"));
-		lists.add(new Product(6, "세븐업", "갑을 상회", 
-				"images/juice01.png", "images/juice02.png", "images/redwine01.png", 
-				10, 1000,"bread", "이 상품은 매우 시원하고 맛있습니다.", 5, "2023/10/10"));
-		lists.add(new Product(7, "칠성사이다", "갑을 상회", 
-				"images/milk01.jpg", "images/milk02.jpg", null, 
-				10, 1000000000,"bread", "이 상품은 매우 시원하고 맛있습니다.", 5, "2023/10/10"));
-		
-		return lists;
-	}
-	
-	public Product getDataByPk02(int pnum) {
-		if(pnum == 1) {
-			return new Product(1, "콜라", "갑을 상회", 
-					"images/americano01.png", "images/americano02.png", "images/americano03.png", 
-					10, 1000, "bread", "이 상품은 매우 시원하고 맛있습니다.", 5, "2023/10/10");
-		}else if(pnum == 2) {
-			return new Product(2, "사이다", "갑을 상회", 
-					"images/brioche_01.png", "images/brioche_02.png", "images/brioche_03.png", 
-					10, 1000,"bread", "이 상품은 매우 시원하고 맛있습니다.", 5, "2023/10/10");
-		}else if(pnum == 3) {
-			return new Product(3, "환타", "갑을 상회", 
-					"images/cappuccino01.png", "images/cappuccino02.png", "images/cappuccino03.png", 
-					10, 1000,"bread", "톡 쏩니다.", 5, "2023/10/10");
-		}else if(pnum == 4) {
-			return new Product(4, "맥콜", "갑을 상회", 
-					"images/ciabatta_01.png", "images/ciabatta_02.png", "images/ciabatta_03.png", 
-					10, 1000,"bread", "이 상품은 매우 시원하고 맛있습니다.", 5, "2023/10/10");
-		}else if(pnum == 5) {
-			return new Product(5, "닥터페퍼", "갑을 상회", 
-					"images/coffee01.png", "images/coffee02.jpg", "images/chocolate_cake_01.png", 
-					10, 1000,"bread", "이 상품은 매우 시원하고 맛있습니다.", 5, "2023/10/10");
-		}else if(pnum == 6) {
-			return new Product(6, "세븐업", "갑을 상회", 
-					"images/juice01.png", "images/juice02.png", "images/redwine01.png", 
-					10, 1000,"bread", "이 상품은 매우 시원하고 맛있습니다.", 5, "2023/10/10");
-		}else if(pnum == 7) {
-			return new Product(7, "칠성사이다", "갑을 상회", 
-					"images/milk01.jpg", "images/milk02.jpg", null, 
-					10, 1000000000,"bread", "이 상품은 매우 시원하고 맛있습니다.", 5, "2023/10/10");
-		}
-		return null;
-	}
-	public List<Product> selectAll() throws Exception{
-		List<Product> lists = new ArrayList<Product>();
-		
-		PreparedStatement pstmt = null;
-		ResultSet rs = null;
-		
-		String sql = " select * from products";
-
-		conn = super.getConncetion();
-		conn.setAutoCommit(false);
-		
-		pstmt = conn.prepareStatement(sql); 
-		
-		rs = pstmt.executeQuery();
-		
-		while (rs.next()) {
-			lists.add(getBeanData(rs));
-		}
-		
-		if(rs!= null) {rs.close();}
-		if(pstmt != null) {pstmt.close();}
-		if(conn != null) {conn.close();}
-		
-		return lists;
-	}
-	
 	private Product getBeanData(ResultSet rs) throws Exception{
 		//ResultSet의 데이터를 읽어서 Bean에 기록한 다음, 반환해 줍니다.
 		Product bean = new Product();
@@ -113,8 +22,6 @@ public class ProductDao extends SuperDao{
 		bean.setContents(rs.getString("contents"));
 		bean.setInputdate(rs.getString("inputdate"));
 
-		
-		
 		bean.setPnum(rs.getInt("pnum"));
 		bean.setPrice(rs.getInt("price"));
 		bean.setStock(rs.getInt("stock"));
@@ -122,8 +29,157 @@ public class ProductDao extends SuperDao{
 
 		return bean;
 	}
+	public int InsertData(Product bean) throws Exception{
+		// 기입한 상품 정보를 이용하여 데이터 베이스에 추가합니다.
+		System.out.println("상품 등록 빈 :\n" + bean);
+		
+		int cnt = -1;
+		PreparedStatement pstmt = null;
+		
+		String sql = " insert into products(pnum, name, company, image01, image02, image03, stock, price, category, contents, point, inputdate)";
+		sql += " 		  values(seqprod.nextval,    ?,       ?,	   ?,		?,		 ?,		?,	   ?,	 	 ?,		   ?,	  ?,		 ?)";
+		
+		conn = super.getConncetion();
+		conn.setAutoCommit(false);
+		pstmt = conn.prepareStatement(sql);
+		
+		pstmt.setString(1, bean.getName());
+		pstmt.setString(2, bean.getCompany());
+		pstmt.setString(3, bean.getImage01());
+		pstmt.setString(4, bean.getImage02());
+		pstmt.setString(5, bean.getImage03());
+		pstmt.setInt(6, bean.getStock());
+		pstmt.setInt(7, bean.getPrice());
+		pstmt.setString(8, bean.getCategory());
+		pstmt.setString(9, bean.getContents());
+		pstmt.setInt(10, bean.getPoint());
+		pstmt.setString(11, bean.getInputdate());
+		
+		cnt = pstmt.executeUpdate();
+		
+		conn.commit();
+		if(pstmt != null) {pstmt.close();}
+		if(conn != null) {conn.close();}
+		
+		return cnt;
+	}
+
+	public List<Product> selectAll(Paging pageInfo) throws Exception{
+		//topN 구문을 사용하여 페이징 처리된 게시물 목록을 반환합니다.
+		List<Product> lists = new ArrayList<Product>();
+		
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		
+		String mode = pageInfo.getMode();
+		String keyword = pageInfo.getKeyword();
+		
+		String sql = " select PNUM, NAME, COMPANY, IMAGE01, IMAGE02, IMAGE03, STOCK, PRICE, CATEGORY, CONTENTS, POINT, INPUTDATE";
+		sql += " from (select PNUM, NAME, COMPANY, IMAGE01, IMAGE02, IMAGE03, STOCK, PRICE, CATEGORY, CONTENTS, POINT, INPUTDATE, rank() over(order by PNUM asc) as ranking";
+		sql += 		 " from products";
+		
+		if(mode==null||mode.equals("all")) {//전체 모드인 경우
+			
+		}else {//전체 모드가 아닌 경우
+		    sql += " where " + mode + " like '%" + keyword + "%'";
+		}
+		
+		sql += 		 ")";
+		sql += 		 " where ranking between ? and ?";
+		conn = super.getConncetion();
+		
+		pstmt = conn.prepareStatement(sql); 
+		
+		pstmt.setInt(1, pageInfo.getBeginRow());
+		pstmt.setInt(2, pageInfo.getEndRow());
+		
+		rs = pstmt.executeQuery();
+		
+		while (rs.next()) {
+			lists.add(getBeanData(rs));
+		}
+		
+		if(rs!= null) {rs.close();}
+		if(pstmt != null) {pstmt.close();}
+		if(conn != null) {conn.close();}
+		
+		return lists;
+	}
+	public Product getDataByPk(Integer pnum) throws Exception{
+		Product bean = null;
+		
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		
+		String sql = " select * from products";
+		sql += " where pnum = ? ";
+		
+		conn = super.getConncetion();
+		pstmt = conn.prepareStatement(sql);
+		pstmt.setInt(1, pnum);
+		rs = pstmt.executeQuery();
+		
+		if (rs.next()) {
+			bean = getBeanData(rs);
+		}
+		
+		if(rs!= null) {rs.close();}
+		if(pstmt != null) {pstmt.close();}
+		if(conn != null) {conn.close();}
 	
+		return bean;
+	}
 	
+	public int UpdateData(Product bean) throws Exception{
+		// 기입한 상품 정보를 이용하여 데이터 베이스에 추가합니다.
+		System.out.println("상품 등록 빈 :\n" + bean);
+		
+		int cnt = -1;
+		PreparedStatement pstmt = null;
+		
+		String sql = " update products set name = ?, company = ?, image01 = ?, image02 = ?, image03 = ?, stock = ?, price = ?, category = ?, contents = ?, point = ?, inputdate = ?";
+		sql += " where pnum = ?";
+		
+		conn = super.getConncetion();
+		conn.setAutoCommit(false);
+		pstmt = conn.prepareStatement(sql);
+		
+		pstmt.setString(1, bean.getName());
+		pstmt.setString(2, bean.getCompany());
+		pstmt.setString(3, bean.getImage01());
+		pstmt.setString(4, bean.getImage02());
+		pstmt.setString(5, bean.getImage03());
+		pstmt.setInt(6, bean.getStock());
+		pstmt.setInt(7, bean.getPrice());
+		pstmt.setString(8, bean.getCategory());
+		pstmt.setString(9, bean.getContents());
+		pstmt.setInt(10, bean.getPoint());
+		pstmt.setString(11, bean.getInputdate());
+		pstmt.setInt(12, bean.getPnum());
+		
+		cnt = pstmt.executeUpdate();
+		
+		conn.commit();
+		if(pstmt != null) {pstmt.close();}
+		if(conn != null) {conn.close();}
+		
+		return cnt;
+	}
+	public CartItem getCartItem(Integer pnum, Integer qty) throws Exception{
+		Product bean = this.getDataByPk(pnum);//상품 정보
+		CartItem item = new CartItem();//상품 정보 + 구매 수량 + 로그인 아이디
+		
+		item.setId(null); //wishList용 테이블과 관련 있음(지금은 의미 없음)
+		item.setPname(bean.getName());
+		item.setImage01(bean.getImage01());
+		item.setPnum(pnum);
+		item.setQty(qty);
+		item.setPrice(bean.getPrice());
+		item.setPoint(bean.getPoint());
+		
+		return item;
+	}
+
 	
 	
 	

@@ -13,8 +13,8 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import com.shopping.Utility.MyUtility;
 import com.shopping.transport.VehicleController;
+import com.shopping.utility.MyUtility;
 
 
 @WebServlet(urlPatterns = {"/Traffic"}, initParams = {

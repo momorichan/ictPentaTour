@@ -1,5 +1,6 @@
-package com.shopping.Utility;
+package com.shopping.utility;
 
+import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
@@ -19,6 +20,25 @@ import com.shopping.transport.VehicleController;
 
 public class MyUtility {
 
+	public static void deleteOldImageFile(String webPath, MultipartRequest mr) {
+		//상품 수정시 과거에 업로드했던 이미지를 웹 서버에서 삭제 
+		String[] deleteImages = 
+			{
+				mr.getParameter("deleteImage01"),	
+				mr.getParameter("deleteImage02"),	
+				mr.getParameter("deleteImage03")	
+			};
+		for(String delFile:deleteImages) {
+			if(delFile != null) {
+				String deleteFile = webPath + "/" + delFile;
+				File target = new File(deleteFile);
+				if(target.delete()) {
+					System.out.println(deleteFile + " file delete success");
+				}
+			}
+		}
+	}
+	
 	public static Map<String, VehicleController> getTransportationMap(String webFullPathName) {
 		//운송 수단 텍스트 파일을 이용하여 각각 객체를 생성합니다.
 		//이 항목들을 Map 구조에 담아서 반환합니다.
@@ -201,3 +221,4 @@ public class MyUtility {
 	
 
 }
+
