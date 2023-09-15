@@ -55,6 +55,7 @@ public class MemberDao extends SuperDao{
 		bean.setSalary(rs.getInt("salary"));
 		bean.setAddress(rs.getString("address"));
 		bean.setManager(rs.getString("manager"));
+		bean.setMpoint(rs.getInt("mpoint"));
 
 		return bean;
 	}
@@ -65,8 +66,8 @@ public class MemberDao extends SuperDao{
 		int cnt = -1;
 
 		// ?를 placehoder라고 합니다. 치환되어야 할 영역		
-		String sql = " insert into members(id, name, password, gender, birth, marriage, salary, address, manager)";
-		sql += " values(?, ?, ?, ?, ?, ?, ?, ?, ?)";
+		String sql = " insert into members(id, name, password, gender, birth, marriage, salary, address, manager, mpoint)";
+		sql += " values(?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
 		PreparedStatement pstmt = null;
 		
 		conn = super.getConncetion();//단계2
@@ -83,6 +84,7 @@ public class MemberDao extends SuperDao{
 		pstmt.setInt(7, bean.getSalary());
 		pstmt.setString(8, bean.getAddress());
 		pstmt.setString(9, bean.getManager());
+		pstmt.setInt(10, bean.getMpoint());
 		
 		cnt = pstmt.executeUpdate();//단계4-1
 		conn.commit();
@@ -130,8 +132,8 @@ public class MemberDao extends SuperDao{
 		String mode = pageInfo.getMode();
 		String keyword = pageInfo.getKeyword();
 		
-		String sql = " select ID, NAME, PASSWORD, GENDER, BIRTH, MARRIAGE, SALARY, ADDRESS, MANAGER";
-		sql += " from (select ID, NAME, PASSWORD, GENDER, BIRTH, MARRIAGE, SALARY, ADDRESS, MANAGER, rank() over(order by id asc) as ranking";
+		String sql = " select ID, NAME, PASSWORD, GENDER, BIRTH, MARRIAGE, SALARY, ADDRESS, MANAGER, mpoint";
+		sql += " from (select ID, NAME, PASSWORD, GENDER, BIRTH, MARRIAGE, SALARY, ADDRESS, MANAGER, mpoint, rank() over(order by id asc) as ranking";
 		sql += 		 " from members";
 		
 		if(mode==null||mode.equals("all")) {//전체 모드인 경우

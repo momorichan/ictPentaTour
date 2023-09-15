@@ -1,3 +1,4 @@
+#####
 # 구현해야 할 목록들입니다.
 home=com.shopping.controller.HomeController
 # member section
@@ -24,12 +25,12 @@ cmInsert=com.shopping.controller.comment.CommentInsertController
 cmDelete=com.shopping.controller.comment.CommentDeleteController
 # mall section
 maInsert=com.shopping.controller.mall.MallInsertController
-#maUpdate=com.shopping.controller.mall.MallUpdateController
-#maDelete=com.shopping.controller.mall.MallDeleteController
+maUpdate=com.shopping.controller.mall.MallUpdateController
+maDelete=com.shopping.controller.mall.MallDeleteController
 maList=com.shopping.controller.mall.MallListController
 #maDetail=com.shopping.controller.mall.MallDetailController
-#maHistory=com.shopping.controller.mall.MallHistoryController
-#maCalculate=com.shopping.controller.mall.MallCalculateController
+maHistory=com.shopping.controller.mall.MallHistoryController
+maCalculate=com.shopping.controller.mall.MallCalculateController
 # view section
 vwList=com.shopping.controller.view.ViewListController
 vwExam01=com.shopping.controller.view.View01Controller
