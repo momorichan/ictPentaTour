@@ -1,18 +1,41 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-<%@ include file="/common/common.jsp"%>
+<%@ include file="./../common/common.jsp"%>
 <!DOCTYPE html>
 <html lang="en">
 <head>
 <title>Bootstrap Example</title>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<link
-	href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css"
-	rel="stylesheet">
-<script
-	src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js"></script>
+<style type="text/css">
+.navbar {
+	margin-bottom: 20px;
+	position: fixed;
+	top:0px;
+	width:100%;
+	z-index: 2;
+}
+.nav-link.login {
+	color: aqua;
+}
+
+.nav-link.logout {
+	color : red;
+	opacity: 90%;
+}
+
+.nav-link.create {
+	color : white;
+}
+
+.navbar-text {
+	text-decoration-line : none;
+	color: white;
+	padding-top : 0.5rem;
+}
+</style>
 </head>
+
 <body>
 
 	<!-- Carousel -->
