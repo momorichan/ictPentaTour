@@ -15,8 +15,6 @@ import javax.servlet.http.HttpServletRequest;
 import com.oreilly.servlet.MultipartRequest;
 import com.oreilly.servlet.multipart.DefaultFileRenamePolicy;
 import com.shopping.controller.SuperController;
-import com.shopping.sport.Sportcontroller;
-import com.shopping.transport.VehicleController;
 
 public class MyUtility {
 
@@ -39,35 +37,6 @@ public class MyUtility {
 		}
 	}
 	
-	public static Map<String, VehicleController> getTransportationMap(String webFullPathName) {
-		//운송 수단 텍스트 파일을 이용하여 각각 객체를 생성합니다.
-		//이 항목들을 Map 구조에 담아서 반환합니다.
-		Map<String, VehicleController> map = new HashMap<String, VehicleController>();
-		
-		Properties prop = GetPropertiesData(webFullPathName);
-
-
-		Enumeration<Object> keys = prop.keys();
-		
-		while(keys.hasMoreElements()) {
-			String command = keys.nextElement().toString();
-			String className = prop.getProperty(command);
-
-			
-			try {
-				Class<?> handleClass = Class.forName(className);
-				VehicleController instance = (VehicleController)handleClass.newInstance();
-				map.put(command, instance);
-
-			} catch (Exception e) {
-				e.printStackTrace();
-			}
-			
-			
-		}
-		return map;
-	}
-
 	private static Properties GetPropertiesData(String webFullPathName) {
 		//스트림을 이용하여 프로퍼티 목록을 반환해줍니다.
 		
@@ -125,29 +94,7 @@ public class MyUtility {
 		return map;
 	}
 
-	public static Map<String, Sportcontroller> getSportMap(String webFullPathName) {
-		Map<String,Sportcontroller> map = new HashMap<String, Sportcontroller>();
-		Properties prop = GetPropertiesData(webFullPathName);
 
-		Enumeration<Object> keys = prop.keys();
-		
-		while(keys.hasMoreElements()) {
-			String key = keys.nextElement().toString();
-			String className = prop.getProperty(key);
-
-			
-			try {
-				Class<?> handleClass = Class.forName(className);
-				Sportcontroller instance = (Sportcontroller)handleClass.newInstance();
-				map.put(key, instance);
-
-			} catch (Exception e) {
-				e.printStackTrace();
-			}
-		}
-		
-		return map;
-	}
 
 	public static Map<String, SuperController> getTodolistMap(String todolistFile) {
 		Map<String, SuperController> map = new HashMap<String, SuperController>();
