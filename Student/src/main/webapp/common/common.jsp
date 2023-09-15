@@ -123,7 +123,22 @@
 						</c:if>							
 						</ul>
 					</li>					
-					
+                 <!-- 쇼핑몰 section -->
+                 <li class="nav-item dropdown">
+                   <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown">쇼핑몰</a>
+                   <ul class="dropdown-menu">          
+                     <li>
+                        <a class="dropdown-item" href="<%=notWithFormTag%>maList">
+                           카트 내역 보기
+                        </a>
+                     </li>
+                     <li>
+                        <a class="dropdown-item" href="<%=notWithFormTag%>maHistory">
+                           나의 쇼핑 내역
+                        </a>
+                     </li>
+                   </ul>
+                 </li> 					
 					<!-- view section  -->
 					<li class="nav-item dropdown">
 					<a	class="nav-link dropdown-toggle" href="#" role="button"

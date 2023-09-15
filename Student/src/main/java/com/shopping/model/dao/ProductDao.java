@@ -179,6 +179,32 @@ public class ProductDao extends SuperDao{
 		
 		return item;
 	}
+	public int getMileagePoint(Integer pnum) throws Exception{
+		int point = 0;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+				
+		String sql = " select point from products ";
+		sql += " where pnum = ?";
+	
+		
+		conn = super.getConncetion();
+		pstmt = conn.prepareStatement(sql);
+		pstmt.setInt(1, pnum);
+		rs = pstmt.executeQuery();
+		
+
+		
+		if(rs.next()) {
+			point = rs.getInt("point");
+		}
+		
+		if (rs != null) {rs.close();}
+		if (pstmt != null) {pstmt.close();}	
+		if (conn != null) {conn.close();}
+		
+		return point;
+	}
 
 	
 	

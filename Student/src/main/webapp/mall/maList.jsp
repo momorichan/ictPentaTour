@@ -62,6 +62,23 @@
 				reCalculateAmount();
 			});
 		});
+		
+		//카트 목록에서 특정 상품(변수 : pnum) 개수를 변경해주는 함수
+		function editQty(pnum){
+			//입력 양식을 edit_상품번호 형식으로 만들어 둠
+			var qty = $('#edit_' + pnum).val();
+			
+			if(!qty){
+				swal('수정할 개수를 입력해주세요.');
+				$('#edit_' + pnum).focus();
+				return false;
+			}
+			
+			//수정될 상품의 번호와 수정량을 컨트롤러로 넘김
+			location.href = '<%=notWithFormTag%>maUpdate&pnum=' + pnum + '&qty=' + qty;
+			
+		}
+		
 	</script>
 </head>
 <body>
@@ -122,7 +139,7 @@
 	                  	<div class="row">
 	                  	<div class="col"> 
 	                       <input class="form-control-sm" type="text" id="edit_${bean.pnum}" name="edit_${bean.pnum}">
-	                       <button class="btn btn-outline-secondary btn-sm" onclick="editQty('${bean.pnum}');">                      
+	                       <button class="btn btn-outline-secondary btn-sm" onclick="editQty('${bean.pnum}');" >                      
 	                       수정
 	                    </button>
 	                    </div>
@@ -142,7 +159,7 @@
 			<%--결제하기, 추가 주문 기능, 총 금액, 총 누적 포인트 보여 주기 --%>
 			<tr>
 				<td align="center" colspan="3">
-					<a href="<%=notWithFormTag%>">결제 하기</a>
+					<a href="<%=notWithFormTag%>maCalculate">결제 하기</a>
 					&nbsp;&nbsp;&nbsp;
 					<a href="<%=notWithFormTag%>prList">추가 주문</a>
 				</td>
