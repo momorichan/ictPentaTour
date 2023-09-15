@@ -44,3 +44,5 @@ acInsert=com.shopping.controller.accommodation.AccommodationInsertController
 #acUpdate=com.shopping.controller.accommodation.AccommodationUpdateController
 #acDelete=com.shopping.controller.accommodation.AccommodationDeleteController
 #acDetail=com.shopping.controller.accommodation.AccommodationDetailController
+## rentalcar section
+#rcList=com.shopping.controller.rentalcar.RentalcarListController

@@ -53,8 +53,12 @@
 	});
 </script>
 
-<style>
+<!-- script test -->
+<script src="https://cdn2.rcstatic.com/com.rentalcars.185492029745.eu-west-1.web.prod.static-live/chat-mfe/js/chat-window.e15dbc3f1ba7bcd3f288.js"></script>
+<script src="https://cdn2.rcstatic.com/com.rentalcars.185492029745.eu-west-1.web.prod.static-live/rc-header-footer-mfe/js/client.c3b396a3b5b3ebb420b8.js"></script>
+<script src="https://cdn2.rcstatic.com/com.rentalcars.185492029745.eu-west-1.web.prod.static-live/search-mfe/js/client.83de3fdc76c672f357ec.js"></script>
 
+<style>
 #search-box{
   border: 2px solid yellow;  
   padding: 10px;
