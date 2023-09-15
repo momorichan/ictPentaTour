@@ -13,7 +13,7 @@ public class ProductDao extends SuperDao{
 		//ResultSet의 데이터를 읽어서 Bean에 기록한 다음, 반환해 줍니다.
 		Product bean = new Product();
 		
-		bean.setName(rs.getString("name"));
+		bean.setName(rs.getString("pname"));
 		bean.setCompany(rs.getString("company"));
 		bean.setImage01(rs.getString("image01"));
 		bean.setImage02(rs.getString("image02"));
@@ -74,8 +74,8 @@ public class ProductDao extends SuperDao{
 		String mode = pageInfo.getMode();
 		String keyword = pageInfo.getKeyword();
 		
-		String sql = " select PNUM, NAME, COMPANY, IMAGE01, IMAGE02, IMAGE03, STOCK, PRICE, CATEGORY, CONTENTS, POINT, INPUTDATE";
-		sql += " from (select PNUM, NAME, COMPANY, IMAGE01, IMAGE02, IMAGE03, STOCK, PRICE, CATEGORY, CONTENTS, POINT, INPUTDATE, rank() over(order by PNUM asc) as ranking";
+		String sql = " select PNUM, pNAME, COMPANY, IMAGE01, IMAGE02, IMAGE03, STOCK, PRICE, CATEGORY, CONTENTS, POINT, INPUTDATE";
+		sql += " from (select PNUM, pNAME, COMPANY, IMAGE01, IMAGE02, IMAGE03, STOCK, PRICE, CATEGORY, CONTENTS, POINT, INPUTDATE, rank() over(order by PNUM asc) as ranking";
 		sql += 		 " from products";
 		
 		if(mode==null||mode.equals("all")) {//전체 모드인 경우
