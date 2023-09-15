@@ -188,7 +188,7 @@ function deleteCheck(toid){
 					</div>
 				</thead>
 				<tbody>
-					<c:set var="colsu" value="${applicationScope.map['product_list_column_size']}"/>
+					<c:set var="colsu" value="3"/>
 					<c:forEach var="bean" items="${requestScope.datalist }" varStatus="asdf">
 						<c:if test="${asdf.index % colsu == 0}">
 							<tr></tr>
