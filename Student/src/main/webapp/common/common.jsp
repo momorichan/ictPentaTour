@@ -157,6 +157,9 @@
 		    <strong>오류</strong> ${sessionScope.alertMessage}
 		</div>
 	</c:if>
+	<aside class="aside__menubar">
+		sdfsadfsdafsdaf
+	</aside>
 	<!-- 보여준 alert box를 제거합니다. -->
 	<c:remove var="alertMessage" scope="session"/>
 </body>
