@@ -1,9 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
     
-<%@ include file="./../common/common.jsp" %>    
 <%@ include file="./../common/bootstrap5.jsp" %>
-
+<%@ include file="./../common/common.jsp" %>
     
 <!DOCTYPE html>
 <html>
@@ -13,7 +12,7 @@
 	<script type="text/javascript">
   		$(document).ready(function(){
   	  		/* $('#birth').datepicker(); */
-  	  		$('#birth111').datepicker({dateFormat: "yy/mm/dd"});   	  	 	
+  	  		$('#birth').datepicker({dateFormat: "yy/mm/dd"});   	  	 	
   		});
   	</script>
   	<style type="text/css">
@@ -33,8 +32,7 @@
 	<div class="container">
 		<h2>회원 가입</h2>
 		<p>회원 가입하는 페이지 입니다.</p>
-		<form action="<%=withFormTag%>" method="post">
-			<input type="hidden" name = "command" value="meInsert">
+		<form action="">
 			<div class="input-group">
 				<span class="input-group-text">아이디</span>
 				<input class="form-control" type="text" id="id" name="id">				
@@ -80,7 +78,7 @@
 			
 			<div class="input-group">
 				<span class="input-group-text">생일</span>
-				<input class="form-control" type="date" id="birth" name="birth">				
+				<input class="form-control" type="datetime" id="birth" name="birth">				
 			</div>
 			<div class="input-group">
 				<span class="input-group-text">결혼 여부</span>

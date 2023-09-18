@@ -7,13 +7,13 @@ grant connect, resource to shopping;
 -- exerd를 사용하여 쇼핑(shopping) 사용자에게 테이블을 생성하세요.
 
 -- 다음 문장들을 실행합니다.
--- 회원 데이터
+-- 회원 데이터(성별은 영어로 입력하도록 할 것)
 insert into members(id, name, password, gender, birth, marriage, salary, address, manager)
-values('admin', '관리자', 'abc123', '남자', '1990/12/25', '미혼', 100, '용산', null) ;
+values('admin', '관리자', 'abc123', 'male', '1990/12/25', '미혼', 100, '용산', null) ;
 insert into members(id, name, password, gender, birth, marriage, salary, address, manager)
-values('kim', '김철수', 'abc123', '남자', '1990/12/25', '결혼', 200, '용산', null) ;
+values('kim', '김철수', 'abc123', 'male', '1990/12/25', '결혼', 200, '용산', null) ;
 insert into members(id, name, password, gender, birth, marriage, salary, address, manager)
-values('park', '박영희', 'abc123', '여자', '1990/12/25', '이혼', 300, '용산', null) ;
+values('park', '박영희', 'abc123', 'female', '1990/12/25', '이혼', 300, '용산', null) ;
 
 
 -- 게시물 데이터
@@ -38,6 +38,26 @@ insert into boards(no, id, password, subject, content, readhit, regdate)
 values(seqboard.nextval, null, 'abc123', '자바', 'java', default, '1990/01/22') ;
 insert into boards(no, id, password, subject, content, readhit, regdate)
 values(seqboard.nextval, null, 'abc123', 'sql', '호호호', default, '2008/06/17') ;
+
+-- 답글 시스템으로 인한 컬럼 추가
+alter table boards add(depth number default 0) ;
+
+
+-- 상품 관련 시퀀스 및 테이블 생성
+-- 상품 카테고리 테이블
+-- engname) 영문 이름, kornaame) 한글 이름
+create table Categories(
+    module varchar2(20),
+    type varchar2(20),
+    ordering number,
+    engname varchar2(255),
+    korname varchar2(255)
+);
+
+insert into categories values('product', 'select', 1, '-', '카테고리를 선택해 주세요.');
+insert into categories values('product', 'select', 2, 'bread', '빵');
+insert into categories values('product', 'select', 3, 'beverage', '음료수');
+insert into categories values('product', 'select', 4, 'cake', '케익');
 
 
 -- 상품 관련 테이블 생성
@@ -101,5 +121,6 @@ select * from boards ;
 select * from products ;
 select * from orders ;
 select * from orderdetails ;
+select * from Categories ;
 
 -- end of file

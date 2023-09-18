@@ -13,16 +13,16 @@ public class BoardListController01 extends SuperClass{
 	@Override
 	public void doGet(HttpServletRequest request, HttpServletResponse response) throws Exception {
 		super.doGet(request, response);
-
+		
 		BoardDao dao = new BoardDao();
 		try {
 			List<Board> lists = dao.selectAll();
 			
-			request.setAttribute("datalist", lists);			
-			super.gotopage("board/boList.jsp");
+			request.setAttribute("datalist", lists);
+			super.gotoPage("board/boList.jsp");
+			
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-
 	}
 }

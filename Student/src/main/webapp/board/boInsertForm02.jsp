@@ -21,31 +21,38 @@
   		#buttonset{margin-top: 15px;}
   	</style>
   	<script type="text/javascript">
-  	function validChack(){
-
-		
-		var subject = $('#subject').val();
-		if(subject.length<3||subject.length>20){
-			swal('글 제목은 3글자 이상 20글자 이하이어야 합니다.');
-			return false;
-		}
-		
-		var content = $('#content').val();
-		if(content.length<5||content.length>30){
-			swal('글 내용은 5글자 이상 30글자 이하이어야 합니다.');
-			return false;
-		}
-		
-		var regdate = $('#regdate').val();
-		var regex1 = /^\d{4}\/[01]\d{1}\/[0123]\d{1}$/;
-		var regex2 = /^\d{4}\-[01]\d{1}\-[0123]\d{1}$/;
-		var result = regex1.test(regdate) || regex2.test(regdate);
-		if(result==false){
-			swal('날짜 형식은 반드시 yyyy/mm/dd 형식 또는 yyyy-mm-dd으로 작성해 주세요.');
-			return false;
-		}		
-  	}
-  	</script>
+  		$(document).ready(function(){
+  	  		/* $('#regdate').datepicker(); */
+  	  		$('#regdate').datepicker({dateFormat: "yy/mm/dd"});  	  	 
+  		});
+  		
+  		function validCheck(){/* 폼 유효성 검사 */
+  			var subject = $('#subject').val();
+  			if(subject.length < 3 || subject.length > 20){
+  				alert('글 제목은 3글자 이상 20글자 이하이어야 합니다.');
+  				$('#subject').focus() ;
+  				return false ;
+  			}
+  			
+  			var content = $('#content').val();
+  			if(content.length < 5 || content.length > 30){
+  				alert('글 내용은 5글자 이상 30글자 이하이어야 합니다.');
+  				$('#content').focus() ;
+  				return false ;
+  			}
+  			
+  			var regdate = $('#regdate').val();
+  			
+  			var regex = /^\d{4}[\/-][01]\d{1}[\/-][0123]\d{1}$/ ;
+  			var result = regex.test(regdate) ;
+  			
+  			if(result == false){
+  				alert('날짜 형식은 반드시 yyyy/mm/dd 형식 또는 yyyy-mm-dd으로 작성해 주세요.');
+  				$('#regdate').focus() ;
+  				return false ;
+  			}
+  		}
+  	</script>  	
 </head>
 <body>
 	<div class="container">
@@ -59,7 +66,7 @@
 			</div> 
 			<div class="input-group">
 				<span class="input-group-text col-md-2">작성자</span> 
-				<input id="writer" name="writer" type="text" class="form-control" placeholder="">
+				<input id="id" name="id" type="text" class="form-control" placeholder="">
 			</div>
 			<div class="input-group">
 				<span class="input-group-text col-md-2">글제목</span> 
@@ -74,7 +81,10 @@
 				<input id="regdate" name="regdate" type="datetime" class="form-control" placeholder="">
 			</div>
 			<div id="buttonset" class="input-group">
-				<button type="submit" class="btn btn-primary btn-lg" onclick="return validChack();">등록</button>
+				<button type="submit" class="btn btn-primary btn-lg"
+					onclick="return validCheck();">
+					등록 
+				</button>
 				&nbsp;&nbsp;&nbsp;
 				<button type="reset" class="btn btn-secondary btn-lg">초기화</button>
 			</div>

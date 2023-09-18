@@ -15,7 +15,9 @@ import javax.servlet.http.HttpSession;
 
 import com.shopping.model.bean.Hello;
 
-
+/**
+ * Servlet implementation class HelloServlet
+ */
 @WebServlet(
 		urlPatterns = { "/hello" }, 
 		initParams = { 
@@ -23,94 +25,86 @@ import com.shopping.model.bean.Hello;
 				@WebInitParam(name = "address", value = "강남구 역삼동")
 		})
 public class HelloServlet extends HttpServlet {
-	private static final long serialVersionUID = 1L;
-	private String company;
-	private String address;
+	private String company ;
+	private String address ;	
 	
-    public HelloServlet() {}
-
-
-	public void init(ServletConfig config) throws ServletException {
-
-		this.company = config.getInitParameter("company");
-		this.address = config.getInitParameter("address");
+	private static final long serialVersionUID = 1L;    
+	public HelloServlet() { }
 	
-		
-		ServletContext application = config.getServletContext();
-		String hello = "여러분 안녕하세요.";
-		application.setAttribute("hello", hello);
-	}
-
-
-	protected void service(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		request.setCharacterEncoding("UTF-8");
-		String method = request.getMethod();
-		if(method.equalsIgnoreCase("post")) {
-			this.doPost(request, response);
-		}else {
-			this.doGet(request, response);
-		}
-		
-	}
-	
-
-
-	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-
-	}
-
-
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-
+		System.out.println(this.getClass() + " doPost");
 		String id = request.getParameter("id");
 		String name = request.getParameter("name");
 		Integer age = Integer.parseInt(request.getParameter("age"));
 		String[] hobbies = request.getParameterValues("hobby");
 		
-		String hobby = "";
+		String hobby = "" ;
 		if(hobbies == null) {
-			hobby = "";
+			hobby = "" ;
 		}else {
 			for (int i = 0; i < hobbies.length; i++) {
-				hobby += hobbies[i] + ", ";
+				hobby += hobbies[i] + "," ;
 			}
 		}
+
+		System.out.println("id : " + id);
+		System.out.println("name : " + name);
+		System.out.println("age : " + age);
+		System.out.println("hobby : " + hobby);
 		
-		//개별 변수를 바인딩
-		request.setAttribute("id", id); //id를 request영역에 바인딩
-		request.setAttribute("name", name); //name을 request영역에 바인딩
-		request.setAttribute("age", age); //age를 request영역에 바인딩
-		request.setAttribute("hobby", hobby); //hobby를 request영역에 바인딩
+		// 개별 변수를 바인딩
+		request.setAttribute("id", id);
+		request.setAttribute("name", name);
+		request.setAttribute("age", age);
+		request.setAttribute("hobby", hobby);
 		
-		//bean 객체를 이용한 바인딩
+		// bean 객체를 이용한 바인딩
 		Hello bean = new Hello();
-		bean.setId(id);
-		bean.setName(name);
 		bean.setAge(age);
 		bean.setHobby(hobby);
+		bean.setId(id);
+		bean.setName(name);
 		
 		request.setAttribute("bean", bean);
 		
-		HttpSession session = request.getSession();
-		session.setAttribute("company",company );
-		session.setAttribute("address",address );
+		HttpSession session =  request.getSession();
+		session.setAttribute("company", company);
+		session.setAttribute("address", address);
 		
 		String gotopage = "example/servletTo01.jsp";
 		
-		//리다이렉션 방식
-		//이 방식은 request 객체를 다시 만들기 때문에 이전 바인딩 정보가 휘발됩니다.
-		//response.sendRedirect(gotopage);
+		// 리다이렉션 방식
+		// 이 방식은 request 객체를 다시 만들기 때문에 이전 바인딩 정보가 휘발이 됩니다.
+		//response.sendRedirect(gotopage); ;
 		
-		//포워딩 방식
-		RequestDispatcher dispatcher = request.getRequestDispatcher(gotopage);
-		dispatcher.forward(request, response);
+		// 포워딩 방식
+		RequestDispatcher dispatcher = request.getRequestDispatcher(gotopage) ;
+		dispatcher.forward(request, response); 
 		
+	}	
+	public void init(ServletConfig config) throws ServletException {
+		System.out.println("서블릿이 초기화 됩니다.");
+		this.company = config.getInitParameter("company");
+		this.address = config.getInitParameter("address");
 		
+		System.out.println("company : " + this.company);
+		System.out.println("address : " + this.address);		
 		
-		
-		
-		
-		
+		ServletContext application = config.getServletContext();
+		String hello = "여러분 안녕하세요.";
+		application.setAttribute("hello", hello); 
 	}
 
+	protected void service(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		request.setCharacterEncoding("UTF-8");
+		String method = request.getMethod() ;
+		if(method.equalsIgnoreCase("post")) {
+			this.doPost(request, response);
+		}else {
+			this.doGet(request, response);
+		}
+	}
+	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		System.out.println(this.getClass() + " doGet");
+	}
 }

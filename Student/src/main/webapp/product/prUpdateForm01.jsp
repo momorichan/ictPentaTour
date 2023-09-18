@@ -57,7 +57,7 @@
 			</div>
 			<div class="input-group">
 				<span class="input-group-text">이미지</span>
-				<input class="form-control" type="file" id="image" name="image">				
+				<input class="form-control" type="file" id="image01" name="image01">				
 			</div>
 			<div class="input-group">
 				<span class="input-group-text">재고 수량</span>

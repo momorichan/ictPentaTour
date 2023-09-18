@@ -6,9 +6,9 @@ public class Rentalcar {
 	private String startLocation; // 픽업 장소. 렌트시작
 	private String endLocation; // 반납 장소. 렌트 끝
 	private String startDate; // 대여 시작일
-	private String endDate; // 
-	private int price;
-	private String paaengers;
+	private String endDate; // 반납일
+	private int price; // 대여료, 가격
+	private String paaengers;// 차량의 최대 탑승인원
 
 	public Rentalcar(int rcid, String cartype, String startLocation, String endLocation, String startDate,
 			String endDate, int price, String paaengers) {

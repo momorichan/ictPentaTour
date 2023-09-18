@@ -51,6 +51,7 @@
 					$(this).val('');
 				});
 	});
+	
 </script>
 
 <!-- script test -->

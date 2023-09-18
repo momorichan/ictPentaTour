@@ -9,17 +9,19 @@ import com.shopping.controller.SuperClass;
 import com.shopping.model.bean.Combo02;
 import com.shopping.model.dao.CompositeDao;
 
-public class View02Controller extends SuperClass{
+public class View02Controller extends SuperClass {
 	@Override
 	public void doGet(HttpServletRequest request, HttpServletResponse response) throws Exception {
 		super.doGet(request, response);
 		
-		CompositeDao dao = new CompositeDao();
-		List<Combo02> lists = null;
+		CompositeDao dao = new CompositeDao() ;
+		List<Combo02> lists = null ; 
+		
 		try {
-			lists = dao.view02();
-			request.setAttribute("lists", lists);
-			super.gotopage("view/view02.jsp");
+			lists = dao.View02() ;
+			request.setAttribute("lists", lists); 
+			super.gotoPage("view/View02.jsp"); 
+			
 		} catch (Exception e) {
 			e.printStackTrace();
 		}

@@ -13,13 +13,16 @@ public class View03Controller extends SuperClass {
 	@Override
 	public void doGet(HttpServletRequest request, HttpServletResponse response) throws Exception {
 		super.doGet(request, response);
-
-		CompositeDao dao = new CompositeDao();
-		List<Combo03> lists = null;
+		
+		CompositeDao dao = new CompositeDao() ;
+		
+		List<Combo03> lists = null ;
+		
 		try {
-			lists = dao.view03();
+			lists = dao.View03();
 			request.setAttribute("lists", lists);
-			super.gotopage("view/view03.jsp");
+			super.gotoPage("view/View03.jsp"); 
+			
 		} catch (Exception e) {
 			e.printStackTrace();
 		}

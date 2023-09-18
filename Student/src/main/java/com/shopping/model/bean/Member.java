@@ -11,6 +11,16 @@ public class Member {
 	private String address ;
 	private String manager ;
 	
+	private Integer mpoint;
+	
+	public Integer getMpoint() {
+		return mpoint;
+	}
+
+	public void setMpoint(Integer mpoint) {
+		this.mpoint = mpoint;
+	}
+
 	// 취미는 차후 데이터 베이스에서 반영 하지 않을 것임
 	private String hobby ;	
 	
@@ -102,6 +112,8 @@ public class Member {
 	public void setManager(String manager) {
 		this.manager = manager;
 	}
+
+
 	
 	
 }

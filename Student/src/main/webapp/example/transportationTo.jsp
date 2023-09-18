@@ -1,6 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<%@ include file="./../common/common.jsp" %> 
 <!DOCTYPE html>
 <html>
 <head>
@@ -8,10 +7,10 @@
 <title>Insert title here</title>
 </head>
 <body>
-	회사 : ${applicationScope.map['company']}<br>
-	대표 : ${applicationScope.map['ceo']}<br>
-	이메일 : ${applicationScope.map['email']}<br>
-	전화 : ${applicationScope.map['phone']}<br>
-	업로드경로 : ${applicationScope.map['uploadPath']}<br>
+	회사 : ${applicationScope.map['company']}<br/>
+	대표 : ${applicationScope.map['ceo']}<br/>
+	이메일 : ${applicationScope.map['email']}<br/>
+	전화 : ${applicationScope.map.phone}<br/>
+	업로드 경로 : ${applicationScope.map.uploadPath}<br/>
 </body>
 </html>

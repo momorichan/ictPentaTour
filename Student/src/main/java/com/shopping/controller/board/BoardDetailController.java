@@ -9,27 +9,25 @@ import com.shopping.model.dao.BoardDao;
 
 public class BoardDetailController extends SuperClass {
 	@Override
-	public void doGet(HttpServletRequest request, HttpServletResponse response) throws Exception {
+	public void doGet(HttpServletRequest request, HttpServletResponse response) throws Exception {	
 		super.doGet(request, response);
 		
-		
-		String no = request.getParameter("no");
-		BoardDao dao = new BoardDao();
-		Board bean = null;
+		Integer no = Integer.parseInt(request.getParameter("no"));
+		BoardDao dao = new BoardDao() ;
+		Board bean = null ;
 		
 		try {
 			bean = dao.getDataByPrimaryKey(no);
-
+			
 			if(bean == null) {
-				super.setAlertMessage("잘못된 게시물 정보입니다.");
-				super.gotopage("board/boList.jsp");
+				super.setAlertMessage("잘못된 게시물 번호입니다.");
+				super.gotoPage("common/home.jsp"); 
 			}else {
-				request.setAttribute("bean", bean);
-				super.gotopage("board/boDetail.jsp");
+				request.setAttribute("bean", bean) ;
+				super.gotoPage("board/boDetail.jsp"); 
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-		
 	}
 }

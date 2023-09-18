@@ -21,6 +21,11 @@
   		#buttonset{margin-top: 15px;}
   		.radio_gender, .checkbox_hobby{font-size: 1.1rem;} /* 주위 글꼴의 1.1배 */
   	</style>
+  	<script type="text/javascript">
+  		$(document).ready(function(){
+  	  		$('#inputdate').datepicker();   	  	 	
+  		});
+  	</script>  	
 </head>
 <body>
 	<div class="container">
@@ -53,7 +58,7 @@
 			</div>
 			<div class="input-group">
 				<span class="input-group-text">카테고리</span>
-				<select id="category" name="category" class="form-select form-select-lg">
+				<select id="category" name="category" class="form-select">
 					<option value="-">-- 항목을 선택해 주세요</option>
 					<option value="bread">빵</option>
 					<option value="beverage">음료수</option>
@@ -70,7 +75,7 @@
 			</div>			
 			<div class="input-group">
 				<span class="input-group-text">입고 일자</span>
-				<input class="form-control" type="datetime" id="inputDate" name="inputDate">				
+				<input class="form-control" type="datetime" id="inputdate" name="inputdate">				
 			</div>
 			<div class="input-group">
 				<button type="submit" class="btn btn-primary">등록</button>

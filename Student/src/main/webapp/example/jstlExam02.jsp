@@ -2,62 +2,66 @@
     pageEncoding="UTF-8"%>
 <%@ include file="./../common/bootstrap5.jsp"%>
 <%@ include file="./../common/common.jsp"%>
+   
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>   
+   
 <!DOCTYPE html>
-<html>
+<html> 
 <head>
-<meta charset="UTF-8">
-<title>Insert title here</title>
+	<meta charset="UTF-8">
+	<title>Insert title here</title>
+	<style type="text/css">
+		body{margin: 10px;}
+	</style>	
 </head>
 <body>
-
-	<!-- 1부터 100까지의 홀수의 총합을 구해 봅니다. 총합 구하기 : 1+3+5+...+99 = 2500 -->
-	<c:set var="total" value="0"/>
-	<c:forEach var="i" begin="1" end="100" step="1">
-		<c:if test="${i%2==1}">
-			<c:set var="total" value="${total+i}"/>
-		</c:if>
+	<!-- 1+3+5+...+99 = 2500 -->
+	<c:set var="total" value="0" />
+	<c:forEach var="i" begin="1" end="100" step="2">	
+		<c:set var="total" value="${total + i}"/>		
 	</c:forEach>
-	1부터 100까지의 홀수의 총합 : <c:out value="${total}"/>
-	<br>
-	<!-- 시험 점수(jumsu)가 82점일때, 학점을 구해 보세요.
-	'If 구문을 사용한 방식'과 'Choose 구문을 사용한 방식'으로 각각 풀어 보세요. -->
-	<c:set var="jumsu" value="70"/>	
-	<c:set var="grade" value=""/>	
-	<c:if test="${jumsu>90}">
-		<c:set var="grade" value="A"/>
+	홀수의 총합 : <c:out value="${total}"/><br/> 
+	
+	<!-- 시험 점수(jumsu)가 82점일때, 학점을 구해 보세요. -->
+	<c:set var="jumsu" value="82" />
+	
+	시험 점수 : <c:out value="${jumsu}" /><br/>
+		
+	If 구문을 사용한 방식 ==>
+	<c:if test="${jumsu >= 90}">
+		학점 : A<br/>
 	</c:if>
-	<c:if test="${jumsu>80&&jumsu<=90}">
-		<c:set var="grade" value="B"/>
+	<c:if test="${jumsu >= 80 and jumsu < 90}">
+		학점 : B<br/>
 	</c:if>	
-	<c:if test="${jumsu>70&&jumsu<=80}">
-		<c:set var="grade" value="C"/>
+	<c:if test="${jumsu >= 70 and jumsu < 80}">
+		학점 : C<br/>
+	</c:if>
+	<c:if test="${jumsu >= 60 and jumsu < 70}">
+		학점 : D<br/>
 	</c:if>	
-	<c:if test="${jumsu>60&&jumsu<=70}">
-		 <c:set var="grade" value="D"/> 
-	</c:if>	
-	<c:if test="${jumsu<=60}">
-		<c:set var="grade" value="F"/>
-	</c:if>	
-	학점 : <c:out value="${grade}"/>
-	<br>	
+	<c:if test="${jumsu < 60}">
+		학점 : F<br/>
+	</c:if>		
+	
+	Choose 구문을 사용한 방식 ==>
+		
 	<c:choose>
-		<c:when test="${jumsu>90}">
-			<c:set var="grade" value="A"/>
-		</c:when>	
-		<c:when test="${jumsu>80}">
-			<c:set var="grade" value="B"/>
-		</c:when>	
-		<c:when test="${jumsu>70}">
-			<c:set var="grade" value="C"/>
-		</c:when>	
-		<c:when test="${jumsu>60}">
-			<c:set var="grade" value="D"/>
-		</c:when>	
+		<c:when test="${jumsu ge 90}">
+			학점 : A<br/>
+		</c:when>
+		<c:when test="${jumsu ge 80 and jumsu lt 90}">
+			학점 : B<br/>
+		</c:when>
+		<c:when test="${jumsu ge 70 and jumsu lt 80}">
+			학점 : C<br/>
+		</c:when>
+		<c:when test="${jumsu ge 60 and jumsu lt 70}">
+			학점 : D<br/>
+		</c:when>
 		<c:otherwise>
-			<c:set var="grade" value="F"/>
-		</c:otherwise>
-	</c:choose>
-	학점 : <c:out value="${grade}"/>
-	<br>		
+			학점 : F<br/>
+		</c:otherwise>	
+	</c:choose>		
 </body>
 </html>

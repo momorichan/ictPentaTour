@@ -20,6 +20,11 @@
   		}
   		#buttonset{margin-top: 15px;}
   	</style>
+  	<script type="text/javascript">
+  		$(document).ready(function(){
+  	  		$('#regdate').datepicker();   	  	 	
+  		});
+  	</script>
 </head>
 <body>
 	<div class="container">
@@ -33,7 +38,7 @@
 			</div> 
 			<div class="input-group">
 				<span class="input-group-text col-md-2">작성자</span> 
-				<input id="writer" name="writer" type="text" class="form-control" placeholder="">
+				<input id="id" name="id" type="text" class="form-control" placeholder="">
 			</div>
 			<div class="input-group">
 				<span class="input-group-text col-md-2">글제목</span> 

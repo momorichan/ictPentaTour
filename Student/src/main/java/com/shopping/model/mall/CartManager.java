@@ -13,41 +13,38 @@ public class CartManager {
 		this.carts = new HashMap<Integer, Integer>() ;
 	}
 
-	public int getCartItemSize() {
+	public int GetCartItemSize() {
 		// 카트에 담겨져 있는 품목의 갯수를 반환합니다.
 		return this.carts.size();
 	}
 
-	public void addCart(int pnum, int qty) {
-		//카트에 상품을 추가합니다.
-		if(this.carts.containsKey(pnum)) {//이미 카트에 품목이 있는 경우
-			int newQty = this.carts.get(pnum) + qty;
-			this.carts.put(pnum, newQty);
+	public void AddCart(int pnum, int qty) {
+		// 카트에 상품을 추가합니다.
+		if(this.carts.containsKey(pnum)) { // 이미 카트에 품목이 있는 경우
+			int newQty = this.carts.get(pnum) + qty ;
+			this.carts.put(pnum, newQty) ;
 		}else {
-			this.carts.put(pnum, qty);
+			this.carts.put(pnum, qty) ;
 		}
 	}
 
-	public void editCart(int pnum, int qty) {
-		// 카트 내의 상품 수량을 변경합니다.(overwrite)
-		this.carts.put(pnum, qty);
+	public void EditCart(int pnum, int qty) {
+		// 카트 내의 상품 수량을 변경합니다.(덮어 쓰기_overwrite)
+		this.carts.put(pnum, qty) ;
 	}
 
-	public void deleteCart(int pnum) {
-		// 해당 상품 목록을 Cart에서 제거합니다.
-		this.carts.remove(pnum);
+	public void DeleteCart(int pnum) {
+		// 해당 상품 목록을 Cart 품목에서 제거합니다.
+		this.carts.remove(pnum) ;
 	}
 
-	public void removeAllCart(int pnum, int qty) {
-		// 카트에 들어있는 모든 품목 제거.(결제시 사용할 예정)
+	public void RemoveAllCart() {
+		// 카트에 들어 있는 모든 품목을 제거합니다.(결제시 사용할 예정)
 		this.carts.clear();
 	}
 
-	public Map<Integer, Integer> getAllCartList() {
+	public Map<Integer, Integer> GetAllCartList() {
 		// 카트 내의 모든 품목들을 반환합니다.
-		
-		return this.carts;
+		return this.carts ;
 	}
-	
-	
 }
