@@ -12,7 +12,7 @@ public class BoardDao extends SuperDao{
 	public int UpdateEmoticon(int no, String columnName) throws Exception {
 		String sql = " update boards set " + columnName + "=" + columnName + " + 1  " ;
 		sql += " where no = ? " ;
-		PreparedStatement pstmt = null ;
+		PreparedStatement pstmt = null ; // 자바에서 SQL 쿼리를 실행할 때 사용하는 클래스. 변형, 리턴값 출력
 		
 		int cnt = -1 ;
 		conn = super.getConnection() ;
