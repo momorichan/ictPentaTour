@@ -186,7 +186,12 @@ body{
 									<li><a class="dropdown-item" href="<%=notWithFormTag%>tourInsert">투어 등록</a></li>
 								</c:if>							
 							</ul>
-						</li>	
+						</li>
+						
+					<li class="nav-item">
+						<a class="nav-link" href="<%=notWithFormTag%>airHome" role="button">항공</a>
+					</li>
+					
 					</div>
 					<div class="login-div">
 						<c:if test="${whologin == '0'}">
