@@ -22,7 +22,7 @@
 </c:if>
 
 <%
-	// appName : 애플리케이션 이름(프로젝트 이름_Teacher)
+	// appName : 애플리케이션 이름(프로젝트 이름_Student)
 	String appName = request.getContextPath();
 	String mappingName = "/Shopping" ;  // in FrontController.java file
 	

@@ -18,7 +18,7 @@ public class BoardDao extends SuperDao{
 		conn = super.getConnection() ;
 		conn.setAutoCommit(false);  
 		pstmt = conn.prepareStatement(sql) ;
-		pstmt.setInt(1, no);
+		pstmt.setInt(1, no);		
 		
 		cnt = pstmt.executeUpdate() ;
 		
