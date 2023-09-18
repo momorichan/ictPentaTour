@@ -47,10 +47,10 @@ String notWithFormTag = appName + mappingName + "?command=";
 <style type="text/css">
 .navbar {
 	margin-bottom: 20px;
-	position: fixed;
+	position: fixed !important;
 	top:0px;
-	width:100%;
-	z-index: 999;
+	width:100% !important;
+	z-index: 999 !important;
 }
 
 .alert-danger {
@@ -58,58 +58,62 @@ String notWithFormTag = appName + mappingName + "?command=";
 	margin-right: 100px;
 }
 .nav-link.login {
-	color: aqua;
+	color: aqua !important;
 }
 
 .nav-link.logout {
-	color : red;
-	opacity: 90%;
+	color : red !important;
+	opacity: 90% !important;
 }
 
-.nav-link.create {
-	color : white;
+.nav-link{
+	color : white !important;
 }
 
 .logout {
-	color : red;
+	color : red !important;
 	opacity: 90%;
 }
 .login {
-	color : aqua;
-	opacity: 100%;
-}
-.create {
-	color : white;
+	color : aqua !important;
+	opacity: 100% !important;
 }
 
 .navbar-text {
-	text-decoration-line : none;
-	color: white;
-	padding-top : 0.5rem;
+	text-decoration-line : none !important;
+	color: white !important;
+	padding-top : 0.5rem !important;
 }
 body{
-	padding-top:56px;
+	padding-top:56px !important;
 }
 .container{
 	margin-left:auto;
 	margin-right:auto;
 }
 .dropdown-div {
-	width:50%;
+	width:800%;
 	display: flex;
 	position: absolute;
 	left:0;
 	right:0;
 	margin-left:auto;
 	margin-right:auto;
-	padding-left:0px;
-	padding-right:0px;
+	padding-left:600px;
+	padding-right:600px;
 	justify-content: center;
-	clear:left;
+	clear: both;
 }
 .login-div{
 	display:flex;
-	width:200px;
+	width:220px;
+	clear: both;
+}
+.navbar-nav{
+	width:220px;
+}
+.dropdown{
+	margin-right:15px;
 }
 </style>
 </head>
