@@ -9,52 +9,52 @@ public class Rentalcar {
 	private String endDate; // 반납일
 	private int price; // 대여료, 가격
 	private String passengers;// 차량의 최대 탑승인원
-	String getRcid() {
+	public String getRcid() {
 		return rcid;
 	}
-	void setRcid(String rcid) {
+	public void setRcid(String rcid) {
 		this.rcid = rcid;
 	}
-	String getCarType() {
+	public String getCarType() {
 		return carType;
 	}
-	void setCarType(String carType) {
+	public void setCarType(String carType) {
 		this.carType = carType;
 	}
-	String getStartLocation() {
+	public String getStartLocation() {
 		return startLocation;
 	}
-	void setStartLocation(String startLocation) {
+	public void setStartLocation(String startLocation) {
 		this.startLocation = startLocation;
 	}
-	String getEndLocation() {
+	public String getEndLocation() {
 		return endLocation;
 	}
-	void setEndLocation(String endLocation) {
+	public void setEndLocation(String endLocation) {
 		this.endLocation = endLocation;
 	}
-	String getStartDate() {
+	public String getStartDate() {
 		return startDate;
 	}
-	void setStartDate(String startDate) {
+	public void setStartDate(String startDate) {
 		this.startDate = startDate;
 	}
-	String getEndDate() {
+	public String getEndDate() {
 		return endDate;
 	}
-	void setEndDate(String endDate) {
+	public void setEndDate(String endDate) {
 		this.endDate = endDate;
 	}
-	int getPrice() {
+	public int getPrice() {
 		return price;
 	}
-	void setPrice(int price) {
+	public void setPrice(int price) {
 		this.price = price;
 	}
-	String getPassengers() {
+	public String getPassengers() {
 		return passengers;
 	}
-	void setPassengers(String passengers) {
+	public void setPassengers(String passengers) {
 		this.passengers = passengers;
 	}
 	public Rentalcar(String rcid, String carType, String startLocation, String endLocation, String startDate,
@@ -69,17 +69,19 @@ public class Rentalcar {
 		this.price = price;
 		this.passengers = passengers;
 	}
-	public Rentalcar() {
-		super();
-		// TODO Auto-generated constructor stub
-	}
 	@Override
 	public String toString() {
 		return "Rentalcar [rcid=" + rcid + ", carType=" + carType + ", startLocation=" + startLocation
 				+ ", endLocation=" + endLocation + ", startDate=" + startDate + ", endDate=" + endDate + ", price="
 				+ price + ", passengers=" + passengers + "]";
 	}
-
+	public Rentalcar() {
+		super();
+		// TODO Auto-generated constructor stub
+	}
+	
+	
+		
 	
 
 }
