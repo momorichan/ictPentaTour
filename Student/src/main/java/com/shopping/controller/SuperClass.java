@@ -83,7 +83,7 @@ public class SuperClass implements SuperController{
 		//todoCommand : todoList.txt 파일에 명시된 커맨드 이름
 		//command 이름을 사용하여 FullNane 웹 주소 형식으로 반환해줍니다.
 		String appName = this.request.getContextPath();
-		String mappingName = "/Shopping"; 
+		String mappingName = "/Shopping";
 
 		String text = appName + mappingName + "?command=" + todoCommand;
 		return text;
