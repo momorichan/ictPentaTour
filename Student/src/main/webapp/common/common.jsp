@@ -5,7 +5,6 @@
 <%@ include file="../common/bootstrap5.jsp"%>
 <%
 String appName = request.getContextPath();
-out.print(appName);
 String mappingName = "/Shopping"; //in FrontController.java file
 
 //form 태그에서 사용할 변수
@@ -96,15 +95,21 @@ body{
 	margin-right:auto;
 }
 .dropdown-div {
-	width:100%;
+	width:50%;
 	display: flex;
 	position: absolute;
+	left:0;
+	right:0;
 	margin-left:auto;
-	padding-right:72px;
+	margin-right:auto;
+	padding-left:0px;
+	padding-right:0px;
 	justify-content: center;
+	clear:left;
 }
 .login-div{
-	display: flex;
+	display:flex;
+	width:200px;
 }
 </style>
 </head>
@@ -117,6 +122,20 @@ body{
 			</button>
 			<div class="collapse navbar-collapse" id="collapsibleNavbar">
 				<ul class="navbar-nav">
+					<div class="login-div">
+						<c:if test="${whologin == '0'}">
+							<li class="nav-item"><a class="nav-link login" href="<%=notWithFormTag%>meLogin">로그인</a></li>
+							<li><a class="nav-link create" href="<%=notWithFormTag%>meInsert">회원 가입</a></li>
+						</c:if>
+						<c:if test="${whologin == '1'}">
+							<a class="navbar-text">${sessionScope.loginfo.id}(일반 유저)</a>
+							<li class="nav-item"><a class="nav-link logout" href="<%=notWithFormTag%>meLogout">로그 아웃</a></li>
+						</c:if>
+						<c:if test="${whologin == '2'}">
+							<a class="navbar-text">${sessionScope.loginfo.id}(관리자)</a>
+							<li class="nav-item"><a class="nav-link logout" href="<%=notWithFormTag%>meLogout">로그 아웃</a></li>
+						</c:if>
+					</div>
 					<div class="dropdown-div">
 						<li class="nav-item dropdown"><a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown">회원</a>
 							<ul class="dropdown-menu">
@@ -187,20 +206,6 @@ body{
 								</c:if>							
 							</ul>
 						</li>	
-					</div>
-					<div class="login-div">
-						<c:if test="${whologin == '0'}">
-							<li class="nav-item"><a class="nav-link login" href="<%=notWithFormTag%>meLogin">로그인</a></li>
-							<li><a class="nav-link create" href="<%=notWithFormTag%>meInsert">회원 가입</a></li>
-						</c:if>
-						<c:if test="${whologin == '1'}">
-							<a class="navbar-text">${sessionScope.loginfo.id}(일반 유저)</a>
-							<li class="nav-item"><a class="nav-link logout" href="<%=notWithFormTag%>meLogout">로그 아웃</a></li>
-						</c:if>
-						<c:if test="${whologin == '2'}">
-							<a class="navbar-text">${sessionScope.loginfo.id}(관리자)</a>
-							<li class="nav-item"><a class="nav-link logout" href="<%=notWithFormTag%>meLogout">로그 아웃</a></li>
-						</c:if>
 					</div>
 				</ul>
 			</div>
