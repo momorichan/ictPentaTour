@@ -5,6 +5,7 @@
 <%@ include file="../common/bootstrap5.jsp"%>
 <%
 String appName = request.getContextPath();
+out.print(appName);
 String mappingName = "/Shopping"; //in FrontController.java file
 
 //form 태그에서 사용할 변수

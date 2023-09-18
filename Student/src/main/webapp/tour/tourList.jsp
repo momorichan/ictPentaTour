@@ -172,7 +172,7 @@ function deleteCheck(toid){
 							<td>
 								<div class = "card" style = "width : 19rem" >
 									<a href="<%=notWithFormTag%>tourDetail&toid=${bean.toid}" class="removeUnderLine">
-										<img class = "card-img-top" alt="${bean.timage01 }" src="/Student/upload/${bean.timage01 }">
+										<img class = "card-img-top" alt="${bean.timage01}" src="/Student/upload/${bean.timage01 }">
 										<div class = "card-body">
 											<p>${bean.location }
 											<h5 class = "card-title">${bean.tname}</h5>

@@ -94,7 +94,7 @@ function deleteCheck(toid){
     .slide-div{
 		justify-content: center;
  		display: flex;
- 		width:92%;
+ 		width:1106px;
  		height:220px;
 		margin-left:auto;
 		margin-right:auto;
@@ -104,15 +104,15 @@ function deleteCheck(toid){
 	}
 	.slide-image-div{
 		width: 100%;
-		height: auto;
+		height: 220px;
 		margin:0 0;
 		overflow:hidden;
 		display: block;
 		border-radius: 10px;
 	}
 	.d-block{
-		height:220px;
-		border-radius: 10px;
+ 		height:220px; 
+ 		border-radius: 10px; 
 	}
 	body{
 		width:100%;
@@ -145,10 +145,10 @@ function deleteCheck(toid){
 					<div class="carousel-inner">
 						<c:forEach var="bean" items="${requestScope.eventlists }">
 						<div class="carousel-item active">
-							<div slide-image>
+							<div class="slide-image">
 								<img src="/Student/upload/${bean.timage01}" alt="${bean.timage01}" class="d-block" style="width: 100%">
 							</div>
-							<div slide-caption>
+							<div class="slide-caption">
 								
 							</div>
 						</div>
