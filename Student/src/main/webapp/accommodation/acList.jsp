@@ -93,13 +93,13 @@
 				<td>
 					<div class="card" style="width:19rem;">
 						<a href="<%=notWithFormTag%>acDetail&acid=${bean.acid}${requestScope.pageInfo.flowParameter}" class="removeUnderLine">
-							<img class="card-img-top" alt="${bean.name}" src="${pageContext.request.contextPath}/upload/${bean.image}" >
+							<img class="card-img-top" alt="${bean.name}" src="${pageContext.request.contextPath}/upload/${bean.image01}" >
 							<div class="card-body"> 
 								<h5 class="card-title">${bean.name}</h5> 
 								<p class="card-text">
 									<span id="totalprice">
 									<fmt:formatNumber>
-										${bean.price}
+										${bean.guests}
 									</fmt:formatNumber>
 									</span>
 								</p>

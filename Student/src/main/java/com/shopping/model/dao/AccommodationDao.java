@@ -60,9 +60,11 @@ public class AccommodationDao extends SuperDao {
 		String mode = pageInfo.getMode();
 		String keyword = pageInfo.getKeyword();
 
-		String sql = " select ACID, ROOM, ROOMINFO, NAME, DESCRIPTION, CHECKIN, CHECKOUT, PRICE, BREAKFAST, REVIEW, RATING, ROOMTYPE, GUESTS, image";
-		sql += " from (select ACID, ROOM, ROOMINFO, NAME, DESCRIPTION, CHECKIN, CHECKOUT, PRICE, BREAKFAST, REVIEW, RATING, ROOMTYPE, GUESTS, image , rank() over(order by ACID asc) as ranking";
-		sql += " from accommodation";
+		String column = " ACID, ADDRESS, NAME, DESCRIPTION, CHECKIN, CHECKOUT, GUESTS, image01, image02, image03";
+		
+		String sql = " select " + column;
+		sql += " from ( select " + column + ", rank() over(order by ACID asc) as ranking";
+		sql += " from accommodation ";
 
 		if (mode == null || mode.equals("all")) {// 전체 모드인 경우
 
@@ -70,7 +72,7 @@ public class AccommodationDao extends SuperDao {
 			sql += " where " + mode + " like '%" + keyword + "%'";
 		}
 
-		sql += ")";
+		sql += " ) ";
 		sql += " where ranking between ? and ?";
 		conn = super.getConncetion();
 
@@ -103,20 +105,16 @@ public class AccommodationDao extends SuperDao {
 		accommodation bean = new accommodation();
 		
 		bean.setAcid(rs.getInt("acid"));
-		bean.setPrice(rs.getInt("price"));
-		bean.setRating(rs.getInt("rating"));
 		bean.setGuests(rs.getInt("guests"));
 		
-		bean.setRoom(rs.getString("room"));
-		bean.setRoominfo(rs.getString("roominfo"));
 		bean.setName(rs.getString("name"));
+		bean.setAddress(rs.getString("address"));
 		bean.setDescription(rs.getString("description"));
 		bean.setCheckin(rs.getString("checkin"));
 		bean.setCheckout(rs.getString("checkout"));
-		bean.setBreakfast(rs.getString("breakfast"));
-		bean.setReview(rs.getString("review"));
-		bean.setRoomtype(rs.getString("roomtype"));
-		bean.setImage(rs.getString("image"));
+		bean.setImage01(rs.getString("image01"));
+		bean.setImage02(rs.getString("image02"));
+		bean.setImage03(rs.getString("image03"));
 		return bean;
 	}
 }
