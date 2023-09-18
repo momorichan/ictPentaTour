@@ -146,7 +146,7 @@ function deleteCheck(toid){
 						<c:forEach var="bean" items="${requestScope.eventlists }">
 						<div class="carousel-item active">
 							<div slide-image>
-								<img src="/Student/upload/${bean.timage01}" alt="${bean.timage01}" class="d-block" style="width: 100%" src="<with">
+								<img src="/Student/upload/${bean.timage01}" alt="${bean.timage01}" class="d-block" style="width: 100%">
 							</div>
 							<div slide-caption>
 								
