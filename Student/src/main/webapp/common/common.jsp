@@ -40,7 +40,7 @@ String notWithFormTag = appName + mappingName + "?command=";
 <title>Insert title here</title>
 <!-- 이 파일은 모든 문서에서 공용으로 참조 할 파일입니다. -->
 <!-- 자바 관련 변수 및 패키지 임포트, 네비게이션 바, jstl 등등-->
-<script src="/Student/js/sweetalert.min.js"></script>
+<script src="/Student/js/sweetalert.js"></script>
 <script type="text/javascript">
 
 </script>
@@ -51,6 +51,10 @@ String notWithFormTag = appName + mappingName + "?command=";
 	top:0px !important;
 	width:100% !important;
 	z-index: 999 !important;
+}
+.navbar-brand {
+	position: relative;
+	z-index: 998;
 }
 
 .alert-danger {
@@ -95,6 +99,8 @@ String notWithFormTag = appName + mappingName + "?command=";
 }
 body{
 	padding-top:56px !important;
+	justify-content: center;
+    display: flex;
 }
 .container{
 	margin-left:auto;
@@ -108,15 +114,14 @@ body{
 	right:0 !important;
 	margin-left: auto !important;
 	margin-right: auto !important;
-	
-	padding-left: 600px !important;
-	padding-right: 600px !important;
+	padding-left: 640px !important;
+	padding-right: 640px !important;
 	justify-content: center !important;
 	clear: both !important;
 }
 .login-div{
 	display:flex;
-	width:220px;
+	width:250px;
 	clear: both;
 }
 .navbar-nav{
@@ -124,6 +129,39 @@ body{
 }
 .dropdown{
 	margin-right:15px;
+}
+.side-bar {
+	width:180px;
+	height:500px;
+	background-color: aqua;
+	position:sticky;
+	top: 300px;
+	z-index: 0;
+}
+.side-bar-empty {
+	z-index: 0;
+	width:1300px;
+	height:100%;
+	margin-right: auto;
+	margin-left:auto;
+}
+.side-bar-div {
+	z-index: 0;
+	width:1700px;
+	height:100%;
+	display: flex;
+	justify-content: center;
+	position:fixed;
+	margin-left:auto;
+	margin-right:auto;
+}
+.side-bar-out {
+	width:180px;
+	height:500px;
+	background-color: aqua;
+	position:relative;
+	z-index: 0;
+	margin-top:10%;
 }
 </style>
 </head>
@@ -225,6 +263,17 @@ body{
 			</div>
 		</div>
 	</nav>
+	<div class="side-bar-div">
+		<div class="side-bar-empty">
+		</div>
+		<div class="side-bar-out">
+		  	<div class="side-bar">
+		  		<div class="side-bar-inner">
+		  			
+		  		</div>
+		  	</div>
+	  	</div>
+  	</div>
 	<c:if test="${not empty sessionScope.alertMessage}">
 		<div class="alert alert-danger alert-dismissible fade show">
 	    	<button type="button" class="btn-close" data-bs-dismiss="alert"></button>
