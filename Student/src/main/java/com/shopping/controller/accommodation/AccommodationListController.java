@@ -6,8 +6,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import com.shopping.controller.SuperClass;
-import com.shopping.model.bean.accommodation;
-import com.shopping.model.dao.AccommodationDao;
+import com.shopping.model.bean.AcRoomPrice;
+import com.shopping.model.dao.AcRoomPriceDao;
 import com.shopping.utility.Paging;
 
 public class AccommodationListController extends SuperClass {
@@ -21,16 +21,16 @@ public class AccommodationListController extends SuperClass {
 		String mode = request.getParameter("mode");
 		String keyword = request.getParameter("keyword");
 
-		AccommodationDao dao = new AccommodationDao();
+		AcRoomPriceDao ardao = new AcRoomPriceDao();
 		try {
-			int totalCount = dao.getTotalRecordCount(mode, keyword);
+			int totalCount = ardao.getTotalRecordCount(mode, keyword);
 			String url = super.getUrlInfomation("acList");
 			boolean isGrid = true;
 
 			Paging pageInfo = new Paging(pageNumber, pageSize, totalCount, url, mode, keyword, isGrid);
 
-			List<accommodation> lists = dao.selectAll(pageInfo);
-
+			List<AcRoomPrice> lists = ardao.selectAll(pageInfo);
+			
 			
 			request.setAttribute("datalist", lists);
 			request.setAttribute("pageInfo", pageInfo);

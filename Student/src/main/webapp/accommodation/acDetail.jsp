@@ -22,10 +22,11 @@
 </head>
 <body>
 	<div class="container">
-		<h2>게시물 목록</h2>
-		<p>사용자들이 게시한 목록을 보여 주는 페이지</p>
+		<h2 align="center">숙소 이름</h2>
+		<p align="center">숙소 설명</p>
 		<table class="table table-hover">
 			<thead>
+			<tr align="center">편의시설</tr>
 			</thead>
 			<tbody>
 				<c:forEach var="bean" items="${requestScope.lists}">

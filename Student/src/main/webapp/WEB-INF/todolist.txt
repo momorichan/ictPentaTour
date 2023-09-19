@@ -46,6 +46,7 @@ acInsert=com.shopping.controller.accommodation.AccommodationInsertController
 acDetail=com.shopping.controller.accommodation.AccommodationDetailController
 #Room section
 roDetail=com.shopping.controller.room.RoomDetailController
+roPrice=com.shopping.controller.room.RoomPriceController
 #tour section
 tourHome=com.shopping.controller.tour.TourHomeController
 tourList=com.shopping.controller.tour.TourListController

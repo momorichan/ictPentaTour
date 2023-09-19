@@ -17,7 +17,7 @@
 		#updateAnchor, #deleteAnchor{opacity:0.8;}   
 		.mode, .keyword, .col{margin: auto;}  
 		.form-control-sm{border: 1px solid Gainsboro;}
-		#totalprice {	color: red;	font-size: 20px;	 font-weight: bolder;}
+		#minprice {	color: black;	font-size: 18px;	 font-weight: bolder;}
 </style>
 <script type="text/javascript">
       $(document).ready(function(){
@@ -93,14 +93,13 @@
 				<td>
 					<div class="card" style="width:19rem;">
 						<a href="<%=notWithFormTag%>acDetail&acid=${bean.acid}${requestScope.pageInfo.flowParameter}" class="removeUnderLine">
-							<img class="card-img-top" alt="${bean.name}" src="${pageContext.request.contextPath}/upload/${bean.image01}" >
+							<img class="card-img-top" alt="${bean.name}" src="${pageContext.request.contextPath}/upload/${bean.image}" >
 							<div class="card-body"> 
 								<h5 class="card-title">${bean.name}</h5> 
 								<p class="card-text">
-								 가격 : 
-									<span id="totalprice">
-									<fmt:formatNumber>
-										${bean.guests} <%-- 이 숙소의 최저가 방의 가격을 나타내게 추가할 예정 --%>
+									<span id="minprice">
+									<fmt:formatNumber value="${bean.minprice}">
+										 <%-- 이 숙소의 최저가 방의 가격을 나타내게 추가할 예정 --%>
 									</fmt:formatNumber>
 									~
 									</span>

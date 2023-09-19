@@ -30,7 +30,7 @@ public class MallDao extends SuperDao {
 
 		pstmt = conn.prepareStatement(sql);
 
-		pstmt.setString(1, payer.getId());
+		pstmt.setString(1, payer.getMeid());
 
 		cnt = pstmt.executeUpdate();
 		if (pstmt != null) {pstmt.close();}			
@@ -92,7 +92,7 @@ public class MallDao extends SuperDao {
 		pstmt = conn.prepareStatement(sql);
 
 		pstmt.setInt(1, totalPoint);//적립할 포인트
-		pstmt.setString(2, payer.getId()); //회원 아이디
+		pstmt.setString(2, payer.getMeid()); //회원 아이디
 
 		cnt = pstmt.executeUpdate();
 		if (pstmt != null) {pstmt.close();}	

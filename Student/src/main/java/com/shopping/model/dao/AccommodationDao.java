@@ -61,6 +61,7 @@ public class AccommodationDao extends SuperDao {
 		String mode = pageInfo.getMode();
 		String keyword = pageInfo.getKeyword();
 
+		
 		String column = " ACID, ADDRESS, NAME, DESCRIPTION, CHECKIN, CHECKOUT, GUESTS, image01, image02, image03";
 		
 		String sql = " select " + column;
@@ -116,6 +117,9 @@ public class AccommodationDao extends SuperDao {
 		bean.setImage01(rs.getString("image01"));
 		bean.setImage02(rs.getString("image02"));
 		bean.setImage03(rs.getString("image03"));
+		
+		
+
 		return bean;
 	}
 
