@@ -46,16 +46,16 @@ String notWithFormTag = appName + mappingName + "?command=";
 </script>
 <style type="text/css">
 .navbar {
-	margin-bottom: 20px;
+	margin-bottom: 20px !important;
 	position: fixed !important;
-	top:0px;
+	top:0px !important;
 	width:100% !important;
 	z-index: 999 !important;
 }
 
 .alert-danger {
-	margin-left: 20px;
-	margin-right: 100px;
+	margin-left: auto;
+	margin-right: auto;
 }
 .nav-link.login {
 	color: aqua !important;
@@ -92,7 +92,7 @@ body{
 	margin-right:auto;
 }
 .dropdown-div {
-	width:800%;
+	width:800px;
 	display: flex;
 	position: absolute;
 	left:0;
