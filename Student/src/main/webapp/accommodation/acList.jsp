@@ -97,10 +97,12 @@
 							<div class="card-body"> 
 								<h5 class="card-title">${bean.name}</h5> 
 								<p class="card-text">
+								 가격 : 
 									<span id="totalprice">
 									<fmt:formatNumber>
-										${bean.guests}
+										${bean.guests} <%-- 이 숙소의 최저가 방의 가격을 나타내게 추가할 예정 --%>
 									</fmt:formatNumber>
+									~
 									</span>
 								</p>
 							<c:if test="${whologin == 2}">

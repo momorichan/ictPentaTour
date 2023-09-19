@@ -2,7 +2,6 @@
 <%@ page import="com.shopping.model.bean.Member"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ page import="java.util.*"%>
-<%@ include file="../common/bootstrap5.jsp"%>
 <%
 String appName = request.getContextPath();
 String mappingName = "/Shopping"; //in FrontController.java file
@@ -40,7 +39,7 @@ String notWithFormTag = appName + mappingName + "?command=";
 <title>Insert title here</title>
 <!-- 이 파일은 모든 문서에서 공용으로 참조 할 파일입니다. -->
 <!-- 자바 관련 변수 및 패키지 임포트, 네비게이션 바, jstl 등등-->
-<script src="/Student/js/sweetalert.min.js"></script>
+<script src="${pageContext.request.contextPath}/js/sweetalert.min.js"></script>
 <script type="text/javascript">
 
 </script>

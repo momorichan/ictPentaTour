@@ -43,7 +43,9 @@ acList=com.shopping.controller.accommodation.AccommodationListController
 acInsert=com.shopping.controller.accommodation.AccommodationInsertController
 #acUpdate=com.shopping.controller.accommodation.AccommodationUpdateController
 #acDelete=com.shopping.controller.accommodation.AccommodationDeleteController
-#acDetail=com.shopping.controller.accommodation.AccommodationDetailController
+acDetail=com.shopping.controller.accommodation.AccommodationDetailController
+#Room section
+roDetail=com.shopping.controller.room.RoomDetailController
 #tour section
 tourHome=com.shopping.controller.tour.TourHomeController
 tourList=com.shopping.controller.tour.TourListController

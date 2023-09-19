@@ -5,6 +5,7 @@ import java.sql.ResultSet;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.shopping.model.bean.Room;
 import com.shopping.model.bean.accommodation;
 import com.shopping.utility.Paging;
 
@@ -117,4 +118,67 @@ public class AccommodationDao extends SuperDao {
 		bean.setImage03(rs.getString("image03"));
 		return bean;
 	}
+
+	public List<Room> getDataByPk(Integer acid) throws Exception{
+		List<Room> lists = new ArrayList<>();
+		RoomDao roomdao = new RoomDao();
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		
+		String sql = " select * from rooms where acid = ?" ;
+
+		conn = super.getConncetion();
+
+		pstmt = conn.prepareStatement(sql);
+
+		pstmt.setInt(1, acid);
+
+		rs = pstmt.executeQuery();
+
+		while (rs.next()) {
+			lists.add(roomdao.getBeanData(rs));
+		}
+
+		if (rs != null) {
+			rs.close();
+		}
+		if (pstmt != null) {
+			pstmt.close();
+		}
+		if (conn != null) {
+			conn.close();
+		}
+
+		return lists;
+	}
+
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+
 }
