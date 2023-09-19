@@ -44,7 +44,12 @@ String notWithFormTag = appName + mappingName + "?command=";
 <script type="text/javascript">
 
 </script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Black+Han+Sans&display=swap" rel="stylesheet">
 <style type="text/css">
+@import url(//fonts.googleapis.com/earlyaccess/jejugothic.css);
+@import url(//fonts.googleapis.com/earlyaccess/kopubbatang.css);
 .navbar {
 	margin-bottom: 20px !important;
 	position: fixed !important;
@@ -53,8 +58,9 @@ String notWithFormTag = appName + mappingName + "?command=";
 	z-index: 999 !important;
 }
 .navbar-brand {
-	position: relative;
-	z-index: 998;
+	position: relative !important;
+	z-index: 998 !important;
+	font-family: 'Jeju Gothic', sans-serif !important;
 }
 
 .alert-danger {
@@ -68,10 +74,12 @@ String notWithFormTag = appName + mappingName + "?command=";
 .nav-link.logout {
 	color : red !important;
 	opacity: 90% !important;
+	
 }
 
 .nav-link{
 	color : white !important;
+	font-family: 'Jeju Gothic', sans-serif !important;
 }
 
 .logout {
@@ -79,17 +87,20 @@ String notWithFormTag = appName + mappingName + "?command=";
 	opacity: 90%;
 	z-index: 998;
 	position: relative;
+	font-family: 'Jeju Gothic', sans-serif !important;
 }
 .login {
 	color : aqua !important;
 	opacity: 100% !important;
 	z-index: 998;
 	position: relative;
+	font-family: 'Jeju Gothic', sans-serif !important;
 }
 .create {
 	color : white !important;
 	z-index: 998;
 	position: relative;
+	font-family: 'Jeju Gothic', sans-serif !important;
 }
 
 .navbar-text {
@@ -114,14 +125,14 @@ body{
 	right:0 !important;
 	margin-left: auto !important;
 	margin-right: auto !important;
-	padding-left: 640px !important;
-	padding-right: 640px !important;
+	padding-left: 670px !important;
+	padding-right: 670px !important;
 	justify-content: center !important;
 	clear: both !important;
 }
 .login-div{
 	display:flex;
-	width:250px;
+	width:280px;
 	clear: both;
 }
 .navbar-nav{
@@ -163,12 +174,25 @@ body{
 	z-index: 0;
 	margin-top:10%;
 }
+.dropdown-menu {
+	background-color:rgb(33,37,41) !important;
+	margin-top:7px !important;
+}
+.dropdown-item {
+	color: white !important;
+	font-family: 'Jeju Gothic', sans-serif !important;
+	padding-left:9px;
+	padding-right:2px;
+}
+.dropdown-item:hover {
+	background-color: rgb(53,53,53) !important;
+}
 </style>
 </head>
 <body>
 	<nav class="navbar navbar-expand-sm bg-dark navbar-dark">
 		<div class="container-fluid">
-			<a class="navbar-brand" href="/Student/common/home.jsp">쇼핑몰</a>
+			<a class="navbar-brand" href="/Student/common/home.jsp">ICTPentaTour</a>
 			<button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#collapsibleNavbar">
 				<span class="navbar-toggler-icon"></span>
 			</button>
@@ -269,7 +293,7 @@ body{
 		<div class="side-bar-out">
 		  	<div class="side-bar">
 		  		<div class="side-bar-inner">
-		  			
+		  			<button type="button" class="btn btn-primary">test</button>
 		  		</div>
 		  	</div>
 	  	</div>
