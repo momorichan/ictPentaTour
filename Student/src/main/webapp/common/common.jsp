@@ -173,7 +173,7 @@ body{
 		                  	<ul class="dropdown-menu">          
 		                    	<li>
 			                       <a class="dropdown-item" href="<%=notWithFormTag%>maList">
-			                          카트 내역 보기aa
+			                          카트 내역 보기
 			                       </a>
 			                    </li>
 			                    <li>
