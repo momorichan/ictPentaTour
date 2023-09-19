@@ -5,6 +5,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import com.shopping.model.bean.FlyManager;
 import com.shopping.model.bean.Member;
 import com.shopping.model.mall.CartManager;
 
@@ -16,6 +17,7 @@ public class SuperClass implements SuperController{
 
 	protected Member loginfo = null; //로그인 여부를 파악하는 변수
 	protected CartManager mycart = null; //내 카트 
+	protected FlyManager myfly = null;
 	
 	public void youNeededLogin() {
 		//미로그인시 로그인 페이지로 이동
@@ -32,6 +34,7 @@ public class SuperClass implements SuperController{
 		
 		this.loginfo = (Member)session.getAttribute("loginfo");
 		this.mycart = (CartManager)session.getAttribute("mycart");
+		this.myfly = (FlyManager)session.getAttribute("myfly");
 		if(mycart == null) {mycart = new CartManager();}
 	}
 
@@ -43,6 +46,7 @@ public class SuperClass implements SuperController{
 
 		this.loginfo = (Member)session.getAttribute("loginfo");
 		this.mycart = (CartManager)session.getAttribute("mycart");
+		this.myfly = (FlyManager)session.getAttribute("myfly");
 		if(mycart == null) {mycart = new CartManager();}
 	}
 

@@ -1,12 +1,13 @@
 package com.shopping.controller.air;
 
+
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import com.shopping.controller.SuperClass;
-import com.shopping.model.bean.Airline;
+
 import com.shopping.model.bean.Flight;
-import com.shopping.model.dao.AirDao;
+
 import com.shopping.model.dao.FlyDao;
 
 public class AirInsertController extends SuperClass{
@@ -18,12 +19,11 @@ public class AirInsertController extends SuperClass{
 		super.doGet(request, response);
 		
 		
+		
 		int flid = Integer.parseInt(request.getParameter("flid"));
-		
-		
-		
-		
 
+		request.setAttribute("flids", flid);
+				
 		super.gotopage("air/airInsert.jsp");
 	}
 	
@@ -33,12 +33,18 @@ public class AirInsertController extends SuperClass{
 		// TODO Auto-generated method stub
 		super.doPost(request, response);
 		
-		Flight bean = new Flight();
+		System.out.println("regid :" + request.getParameter("regid"));
+		System.out.println("flid :" + request.getParameter("flid"));
+		System.out.println("seat :" + request.getParameter("seat"));
+		System.out.println("stopover :" + request.getParameter("stopover"));
+		System.out.println("passengers :" + request.getParameter("passengers"));
+		System.out.println("price :" + request.getParameter("price"));
+
 		
+		Flight bean = new Flight();
 		
 		bean.setRegid(Integer.parseInt(request.getParameter("regid")));
 		bean.setFlid(Integer.parseInt(request.getParameter("flid")));
-		bean.setFname( request.getParameter("fname"));
 		bean.setSeat( request.getParameter("seat"));
 		bean.setStopover( request.getParameter("stopover"));
 		bean.setPassengers( Integer.parseInt(request.getParameter("passengers")));
@@ -55,6 +61,11 @@ public class AirInsertController extends SuperClass{
 			}
 			else
 			{
+				int flid = Integer.parseInt(request.getParameter("flid"));
+				int regid = Integer.parseInt(request.getParameter("regid"));
+				super.myfly.addFly(flid, regid);
+				super.session.setAttribute("myfly", myfly);
+				
 				super.gotopage("air/airInsertCheck.jsp");
 			}
 		}

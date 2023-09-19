@@ -87,34 +87,13 @@
 		// 삭제 버튼 클릭 
 		// on 메소드는 선택된 요소에 이벤트 핸들러 함수를 연결시켜주는 기능을 합니다.
 		// cnum 이라는 속성을 개발자가 지정해두었습니다.
-		$(document).on('click','.delete_btn',function(){
-			
-			if(confirm('선택하신 항목을 삭제하시겠습니까?'))
-			{	
-				$.ajax({
-					url:'<%=notWithFormTag%>cmDelete', 
-					data:'cnum=' + $(this).attr('cnum'),
-					type:'get', 
-					dataType:'json',
-					success:function(result, status){
-							console.log(result);
-							console.log(status) ;
-							getListComment();
-						}
-					});
-				}
-			});
-		
 
-		
-		
 		$(document).ready(function(){
 			
 		
 		});
 		
 		$(document).on('click','.reserve_btn',function(){
-			
 			$.ajax({
 				url:'<%=notWithFormTag%>airInsert', 
 				data:'flid=' + '${requestScope.bean.flid}',
@@ -122,13 +101,11 @@
 				dataType:'json',
 				success:function(result, status){
 						console.log(result);
-						console.log(status) ;
+						console.log(status);
 					}
 				});
 			
-			
-			
-			location.href = '<%=notWithFormTag%>airInsert&flid=';
+			location.href = '<%=notWithFormTag%>airInsert&flid=${requestScope.bean.flid}';
 			
 		});
 		
@@ -171,7 +148,7 @@
 		</table>
 		<div id="menubutton" align="center">
 		
-			<button type="button" class="btn reserve_btn btn-primary">
+			<button type="button" class="btn reserve_btn btn-primary" value="${requestScope.bean.flid}">
 				예약
 			</button>
 		

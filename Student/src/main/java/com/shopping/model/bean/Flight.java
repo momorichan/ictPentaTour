@@ -5,7 +5,6 @@ public class Flight {
 	
 	private int regid;
 	private int flid;
-	private String fname;
 	private String seat;
 	private String stopover;
 	private int passengers;
@@ -21,7 +20,6 @@ public class Flight {
 		super();
 		this.regid = regid;
 		this.flid = flid;
-		this.fname = fname;
 		this.seat = seat;
 		this.stopover = stopover;
 		this.passengers = passengers;
@@ -29,7 +27,7 @@ public class Flight {
 	}
 	@Override
 	public String toString() {
-		return "Flight [regid=" + regid + ", flid=" + flid + ", fname=" + fname + ", seat=" + seat + ", stopover="
+		return "Flight [regid=" + regid + ", flid=" + flid + ", seat=" + seat + ", stopover="
 				+ stopover + ", passengers=" + passengers + ", price=" + price + "]";
 	}
 	public int getRegid() {
@@ -44,12 +42,7 @@ public class Flight {
 	public void setFlid(int flid) {
 		this.flid = flid;
 	}
-	public String getFname() {
-		return fname;
-	}
-	public void setFname(String fname) {
-		this.fname = fname;
-	}
+
 	public String getSeat() {
 		return seat;
 	}

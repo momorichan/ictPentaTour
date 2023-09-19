@@ -188,7 +188,6 @@ public class AirDao extends SuperDao{
 		bean.setDetime(rs.getString("detime"));
 		bean.setArtime(rs.getString("artime"));
 
-		
 		return bean;
 	}
 
