@@ -61,10 +61,7 @@ public class AirInsertController extends SuperClass{
 			}
 			else
 			{
-				int flid = Integer.parseInt(request.getParameter("flid"));
-				int regid = Integer.parseInt(request.getParameter("regid"));
-				super.myfly.addFly(flid, regid);
-				super.session.setAttribute("myfly", myfly);
+				request.setAttribute("fly", bean);
 				
 				super.gotopage("air/airInsertCheck.jsp");
 			}

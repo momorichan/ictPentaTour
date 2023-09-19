@@ -4,18 +4,10 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class FlyManager {
+
+	Map<Integer, Integer> booking = new HashMap<Integer, Integer>();
 	
-	
-	Map<Integer, Integer> booking = null;
-	
-	public FlyManager()
-	{
-		this.booking = new HashMap<Integer, Integer>();
-	}
-	
-	
-	public int getReserveList(){return booking.size();}
-	
+	public int getReserveList(){return booking.size();}	
 	
 	public void addFly(int flid, int regid)
 	{
