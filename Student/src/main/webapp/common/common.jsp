@@ -112,6 +112,8 @@ body{
 	padding-top:56px !important;
 	justify-content: center;
     display: flex;
+    position: relative !important;
+    z-index: 999 !important;
 }
 .container{
 	margin-left:auto;
@@ -125,14 +127,14 @@ body{
 	right:0 !important;
 	margin-left: auto !important;
 	margin-right: auto !important;
-	padding-left: 670px !important;
-	padding-right: 670px !important;
+	padding-left: 720px !important;
+	padding-right: 720px !important;
 	justify-content: center !important;
 	clear: both !important;
 }
 .login-div{
 	display:flex;
-	width:280px;
+	width:330px;
 	clear: both;
 }
 .navbar-nav{
@@ -145,9 +147,10 @@ body{
 	width:180px;
 	height:500px;
 	background-color: aqua;
-	position:sticky;
+	position:fixed;
 	top: 300px;
-	z-index: 0;
+	right: 300px;
+	z-index: 999 !important;
 }
 .side-bar-empty {
 	z-index: 0;
@@ -287,17 +290,6 @@ body{
 			</div>
 		</div>
 	</nav>
-	<div class="side-bar-div">
-		<div class="side-bar-empty">
-		</div>
-		<div class="side-bar-out">
-		  	<div class="side-bar">
-		  		<div class="side-bar-inner">
-		  			<button type="button" class="btn btn-primary">test</button>
-		  		</div>
-		  	</div>
-	  	</div>
-  	</div>
 	<c:if test="${not empty sessionScope.alertMessage}">
 		<div class="alert alert-danger alert-dismissible fade show">
 	    	<button type="button" class="btn-close" data-bs-dismiss="alert"></button>
@@ -306,4 +298,15 @@ body{
 	  	<c:remove var="alertMessage" scope="session"/>
   	</c:if>
 </body>
+<!-- 	<div class="side-bar-div"> -->
+<!-- 		<div class="side-bar-empty"> -->
+<!-- 		</div> -->
+<!-- 		<div class="side-bar-out"> -->
+		  	<div class="side-bar">
+		  		<div class="side-bar-inner">
+		  			<button type="button" class="btn btn-primary">test</button>
+		  		</div>
+		  	</div>
+<!-- 	  	</div> -->
+<!--   	</div> -->
 </html>
