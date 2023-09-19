@@ -1,81 +1,32 @@
 package com.shopping.model.bean;
 
 public class Member {
-	private String id ;
-	private String name ;
+	private String meid ;
 	private String password;
+	private String name ;
 	private String gender ;
 	private String birth ; // 날짜 형식
-	private String marriage ;
-	private Integer salary ;
+	private String phone;
 	private String address ;
-	private String manager ;
-	private Integer mpoint ;
-
-	// 취미는 차후 데이터 베이스에서 반영 하지 않을 것임
-	private String hobby ;	
-	
-	
-	public String getHobby() {
-		return hobby;
+	private String role ;
+	private Integer status ;
+	public String getMeid() {
+		return meid;
 	}
-
-	public void setHobby(String hobby) {
-		this.hobby = hobby;
-	}
-
-	public Member(String id, String name, String password, String gender, String birth, String marriage, Integer salary,
-			String address, String manager, String hobby) {
-		super();
-		this.id = id;
-		this.name = name;
-		this.password = password;
-		this.gender = gender;
-		this.birth = birth;
-		this.marriage = marriage;
-		this.salary = salary;
-		this.address = address;
-		this.manager = manager;
-		this.hobby = hobby;
-	}
-
-	public Member() {
-	
-	}
-	
-
-	@Override
-	public String toString() {
-		return "Member [id=" + id + ", name=" + name + ", password=" + password + ", gender=" + gender + ", birth="
-				+ birth + ", marriage=" + marriage + ", salary=" + salary + ", address=" + address + ", manager="
-				+ manager + ", mpoint=" + mpoint + ", hobby=" + hobby + "]";
-	}
-
-	public Integer getMpoint() {
-		return mpoint;
-	}
-
-	public void setMpoint(Integer mpoint) {
-		this.mpoint = mpoint;
-	}
-
-	public String getId() {
-		return id;
-	}
-	public void setId(String id) {
-		this.id = id;
-	}
-	public String getName() {
-		return name;
-	}
-	public void setName(String name) {
-		this.name = name;
+	public void setMeid(String meid) {
+		this.meid = meid;
 	}
 	public String getPassword() {
 		return password;
 	}
 	public void setPassword(String password) {
 		this.password = password;
+	}
+	public String getName() {
+		return name;
+	}
+	public void setName(String name) {
+		this.name = name;
 	}
 	public String getGender() {
 		return gender;
@@ -89,17 +40,11 @@ public class Member {
 	public void setBirth(String birth) {
 		this.birth = birth;
 	}
-	public String getMarriage() {
-		return marriage;
+	public String getPhone() {
+		return phone;
 	}
-	public void setMarriage(String marriage) {
-		this.marriage = marriage;
-	}
-	public Integer getSalary() {
-		return salary;
-	}
-	public void setSalary(Integer salary) {
-		this.salary = salary;
+	public void setPhone(String phone) {
+		this.phone = phone;
 	}
 	public String getAddress() {
 		return address;
@@ -107,12 +52,24 @@ public class Member {
 	public void setAddress(String address) {
 		this.address = address;
 	}
-	public String getManager() {
-		return manager;
+	public String getRole() {
+		return role;
 	}
-	public void setManager(String manager) {
-		this.manager = manager;
+	public void setRole(String role) {
+		this.role = role;
 	}
+	public Integer getStatus() {
+		return status;
+	}
+	public void setStatus(Integer status) {
+		this.status = status;
+	}
+	@Override
+	public String toString() {
+		return "Member [meid=" + meid + ", password=" + password + ", name=" + name + ", gender=" + gender + ", birth="
+				+ birth + ", phone=" + phone + ", address=" + address + ", role=" + role + ", status=" + status + "]";
+	}
+
 	
 	
 }

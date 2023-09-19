@@ -87,7 +87,7 @@
 						<td>${bean.id}</td>
 						
 						<td>
-							<a href="<%=notWithFormTag%>meDetail&id=${bean.id}">
+							<a href="<%=notWithFormTag%>meDetail&meid=${bean.meid}">
 								${bean.name}
 							</a>
 						</td>
