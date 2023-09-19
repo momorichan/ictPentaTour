@@ -2,7 +2,6 @@
     pageEncoding="UTF-8"%>
     
 <%@ include file="/common/common.jsp" %>
-<%@ include file="/common/bootstrap5.jsp" %>
     
 <!DOCTYPE html>
 <html>
@@ -43,7 +42,7 @@
 			<div class="bottom_button">
 				<!-- contextual class : btn-primary, btn-info, btn-danger -->
 				<button type="submit" class="btn btn-primary">로그인</button> 
-				<a type="button" href="meInsertForm.jsp" class="btn btn-info">회원 가입</a>
+				<a type="button" href="<%=notWithFormTag%>meInsert" class="btn btn-info">회원 가입</a>
 			</div>				
 		</form>
 	</div>

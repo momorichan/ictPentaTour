@@ -1,7 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 
-<%@ include file="./../common/bootstrap5.jsp" %>
 <%@ include file="./../common/common.jsp" %>
 <!DOCTYPE html>
 <html>
@@ -68,7 +67,7 @@
 												name="keyword" id="keyword" placeholder="키워드 입력">
 											<button type="submit" class="btn btn-warning form-control-sm" onclick="">검색</button>
 											<button type="button" class="btn btn-warning form-control-sm" onclick="searchAll();">전체 검색</button>
-											<button type="button" class="btn btn-info form-control-sm"  onclick="writeForm();">글 쓰기</button>
+											
 											<span class="label label-default">${requestScope.pageInfo.pagingStatus}</span>
 										</div>
 									</div>
@@ -110,7 +109,8 @@
 	    										href="<%=notWithFormTag%>prUpdate&pnum=${bean.pnum}${requestScope.pageInfo.flowParameter}">
 		    									수정
 		    								</a>		    								
-	    									<a id="deleteAnchor" class="btn btn-info" href="#">
+	    									<a id="deleteAnchor" class="btn btn-info" 
+	    										href="<%=notWithFormTag%>prDelete&pnum=${bean.pnum}${requestScope.pageInfo.flowParameter}">
 		    									삭제
 		    								</a>		    								
 	    								</div>		    							

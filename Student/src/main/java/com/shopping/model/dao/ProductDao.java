@@ -7,9 +7,47 @@ import java.util.List;
 
 import com.shopping.model.bean.Product;
 import com.shopping.model.mall.CartItem;
+import com.shopping.utility.MyUtility;
 import com.shopping.utility.Paging;
 
 public class ProductDao extends SuperDao{
+	public int DeleteData(int pnum)throws Exception {
+		// 상품 번호를 이용하여 해당 상품을 삭제합니다.
+		String sql = "";
+		PreparedStatement pstmt = null;
+		int cnt = -1;
+		
+		Product bean =  this.GetDataByPk(pnum);
+		
+		conn = super.getConnection();
+		conn.setAutoCommit(false); 
+		
+		
+		String remark = MyUtility.getCurrentTime() + "(상품이름: " + bean.getName() + " )" + "(상품 번호 : " + pnum + "번) 상품이 삭제 되었습니다." ;
+		
+		// step01: 주문 상세 테이블의 비고(remark) 컬럼에 삭제 히스토리 남기기
+		sql = " update orderdetails set remark = ? where pnum = ? ";
+		pstmt = conn.prepareStatement(sql);
+		pstmt.setString(1, remark);
+		pstmt.setInt(2, pnum); //13번째 줄 매개변수 pnum.
+		
+		cnt = pstmt.executeUpdate();
+		if(pstmt != null) {pstmt.close();}
+
+		
+		// step02: 상품 테이블에서 해당 상품 번호와 관련된 행 삭제하기
+		System.out.println("삭제구문");
+		sql = " delete from products where pnum = ? ";
+		pstmt = conn.prepareStatement(sql);
+		pstmt.setInt(1, pnum);		
+		
+		conn.commit();
+		
+		if(pstmt != null) {pstmt.close();}
+		if(conn != null) {conn.close();}
+		
+		return cnt;
+	}	
 	public int GetMileagePoint(Integer pnum) throws Exception {
 		// 해당 상품 번호에 대한 적립 포인트를 구해 줍니다.
 		int point = 0 ;
@@ -147,7 +185,7 @@ public class ProductDao extends SuperDao{
 		return lists;
 	}		
 	
-	
+	//패스
 	public int InsertData(Product bean) throws Exception {
 		// 기입한 상품 정보를 이용하여 데이터 베이스에 추가합니다.
 		System.out.println("상품 등록 빈 :\n" + bean);		
@@ -180,6 +218,7 @@ public class ProductDao extends SuperDao{
 		return cnt;
 	}	
 	
+	//필요없음
 	public Product getDataByPk02(int pnum) {
 		// 해당 상품 번호에 맞는 상품 Bean을 반환합니다.
 		if(pnum == 1) {
@@ -193,7 +232,8 @@ public class ProductDao extends SuperDao{
 					"bread", "탁 쏩니다", 5, "2023/10/10") ;
 		}		
 	}
-	
+
+	//필요없음
 	public Product getDataByPk(int pnum) {
 		Product bean = new Product(pnum, "콜라", "갑을 상회", "coffee01.png", null, null, 10, 1000, 
 				"bread", "탁 쏩니다", 5, "2023/10/10");
@@ -201,6 +241,8 @@ public class ProductDao extends SuperDao{
 		return bean;
 	}
 	
+
+	//  필요없음
 	public List<Product> getDataList(){
 		List<Product> lists = new ArrayList<Product>();
 		
@@ -326,13 +368,6 @@ public class ProductDao extends SuperDao{
 		
 		return cnt;
 	}
-
-
-
-
-
-
-
 
 
 }

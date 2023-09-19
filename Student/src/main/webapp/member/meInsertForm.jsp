@@ -1,7 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
     
-<%@ include file="./../common/bootstrap5.jsp" %>
 <%@ include file="./../common/common.jsp" %>
     
 <!DOCTYPE html>
@@ -15,10 +14,10 @@
   	  		$('#birth').datepicker({dateFormat: "yy/mm/dd"});   	  	 	
   		});
   		
+  		
   		function validCheck(){/* form validation check */
   			var id = $('#id').val();
-  			alert(id.length);
-  			
+  			  			
   			if(id.length < 4 || id.length > 10){
   				swal('아이디는 4자리 이상 10자리 이하로 입력해 주세요.');
   				$('#id').focus();
@@ -68,6 +67,7 @@
   				return false ;
   			}   			
   		}
+  		
   	</script>
   	<style type="text/css">
   		/* box model에 대한 공부가 필요합니다. */

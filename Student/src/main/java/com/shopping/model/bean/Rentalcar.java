@@ -9,6 +9,7 @@ public class Rentalcar {
 	private String endDate; // 반납일
 	private int price; // 대여료, 가격
 	private String passengers;// 차량의 최대 탑승인원
+	
 	public String getRcid() {
 		return rcid;
 	}

@@ -40,94 +40,76 @@ String notWithFormTag = appName + mappingName + "?command=";
 <title>Insert title here</title>
 <!-- 이 파일은 모든 문서에서 공용으로 참조 할 파일입니다. -->
 <!-- 자바 관련 변수 및 패키지 임포트, 네비게이션 바, jstl 등등-->
-<script src="/Student/js/sweetalert.js"></script>
+<script src="/Student/js/sweetalert.min.js"></script>
 <script type="text/javascript">
 
 </script>
 <style type="text/css">
-.navbar-brand{
-	position: relative;
-	z-index: 998;
-}
 .navbar {
-	margin-bottom: 20px !important;
+	margin-bottom: 20px;
 	position: fixed !important;
-	top:0px !important;
-	width:100% !important;
-	z-index: 999 !important;
+	top:0px;
+	width:100%;
+	z-index: 999;
 }
 
 .alert-danger {
-	margin-left: auto;
-	margin-right: auto;
+	margin-left: 20px;
+	margin-right: 100px;
 }
 .nav-link.login {
-	color: aqua !important;
+	color: aqua;
 }
 
 .nav-link.logout {
-	color : red !important;
-	opacity: 90% !important;
+	color : red;
+	opacity: 90%;
 }
 
-.nav-link{
-	color : white !important;
+.nav-link.create {
+	color : white;
 }
 
 .logout {
-	color : red !important;
+	color : red;
 	opacity: 90%;
-	z-index: 998;
-	position: relative;
 }
 .login {
-	color : aqua !important;
-	opacity: 100% !important;
-	z-index: 998;
-	position: relative;
+	color : aqua;
+	opacity: 100%;
 }
 .create {
-	color : white !important;
-	z-index: 998;
-	position: relative;
+	color : white;
 }
 
 .navbar-text {
-	text-decoration-line : none !important;
-	color: white !important;
-	padding-top : 0.5rem !important;
+	text-decoration-line : none;
+	color: white;
+	padding-top : 0.5rem;
 }
 body{
-	padding-top:56px !important;
+	padding-top:56px;
 }
 .container{
 	margin-left:auto;
 	margin-right:auto;
 }
 .dropdown-div {
-	width:800px !important;
-	display: flex !important;
-	position: absolute !important;
-	left:0 !important;
-	right:0 !important;
-	margin-left: auto !important;
-	margin-right: auto !important;
-	
-	padding-left: 600px !important;
-	padding-right: 600px !important;
-	justify-content: center !important;
-	clear: both !important;
+	width:50%;
+	display: flex;
+	position: absolute;
+	left:0;
+	right:0;
+	margin-left:auto;
+	margin-right:auto;
+	padding-left:0px;
+	padding-right:0px;
+	justify-content: center;
+	clear:left;
 }
 .login-div{
 	display:flex;
 	width:220px;
-	clear: both;
-}
-.navbar-nav{
-	width:220px;
-}
-.dropdown{
-	margin-right:15px;
 }
 </style>
 </head>
@@ -148,6 +130,7 @@ body{
 						<c:if test="${whologin == '1'}">
 							<a class="navbar-text">${sessionScope.loginfo.id}(일반 유저)</a>
 							<li class="nav-item"><a class="nav-link logout" href="<%=notWithFormTag%>meLogout">로그 아웃</a></li>
+							
 						</c:if>
 						<c:if test="${whologin == '2'}">
 							<a class="navbar-text">${sessionScope.loginfo.id}(관리자)</a>
@@ -161,8 +144,8 @@ body{
 								</c:if>
 								<c:if test="${whologin != '0'}">
 									<li><a class="dropdown-item" href="<%=notWithFormTag%>meDetail&id=${sessionScope.loginfo.id}">상세 보기</a></li>
+									<li><a class="dropdown-item" href="<%=notWithFormTag%>meDelete&id=${sessionScope.loginfo.id}">탈퇴하기</a></li>
 									<li><a class="dropdown-item" href="/Student/member/meUpdateForm01.jsp">정보 수정</a></li>
-									<li><a class="dropdown-item" href="#">탈퇴하기</a></li>
 								</c:if>
 								<c:if test="${whologin == '2'}">
 									<li><a class="dropdown-item" href="<%=notWithFormTag%>meList">목록 보기</a></li>
@@ -185,7 +168,7 @@ body{
 								<li><a class="dropdown-item" href="<%=notWithFormTag%>prList">목록 보기</a></li>
 							</ul>
 						</li>
-						                 <!-- 쇼핑몰 section -->
+						<!-- 쇼핑몰 section -->
 		                <li class="nav-item dropdown">
 		                	<a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown">쇼핑몰</a>
 		                  	<ul class="dropdown-menu">          
