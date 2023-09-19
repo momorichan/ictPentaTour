@@ -73,10 +73,19 @@ String notWithFormTag = appName + mappingName + "?command=";
 .logout {
 	color : red !important;
 	opacity: 90%;
+	z-index: 998;
+	position: relative;
 }
 .login {
 	color : aqua !important;
 	opacity: 100% !important;
+	z-index: 998;
+	position: relative;
+}
+.create {
+	color : white !important;
+	z-index: 998;
+	position: relative;
 }
 
 .navbar-text {
@@ -92,17 +101,18 @@ body{
 	margin-right:auto;
 }
 .dropdown-div {
-	width:800px;
-	display: flex;
-	position: absolute;
-	left:0;
-	right:0;
-	margin-left:auto;
-	margin-right:auto;
-	padding-left:600px;
-	padding-right:600px;
-	justify-content: center;
-	clear: both;
+	width:800px !important;
+	display: flex !important;
+	position: absolute !important;
+	left:0 !important;
+	right:0 !important;
+	margin-left: auto !important;
+	margin-right: auto !important;
+	
+	padding-left: 600px !important;
+	padding-right: 600px !important;
+	justify-content: center !important;
+	clear: both !important;
 }
 .login-div{
 	display:flex;
