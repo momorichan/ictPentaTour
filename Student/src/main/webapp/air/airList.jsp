@@ -21,10 +21,15 @@
 		  return new bootstrap.Popover(popoverTriggerEl)
 	});
 		
+	
+	});
+		
 	function moveList()
 	{
 		location.href = '<%=notWithFormTag%>airList&mode=all&keyword=';
 	}
+	
+	
 	
 	
 	</script>
@@ -39,11 +44,12 @@
 		<table class="table table-striped">
 			<thead>
 				<tr>
-					<th>항공편</th>
-					<th>출발지</th>
-					<th>도착지</th>					
-					<th>출발시간</th>
-					<th>도착시간</th>		
+					<th align="center">항공편</th>
+					<th align="center">항공사</th>
+					<th align="center">출발지</th>
+					<th align="center">도착지</th>					
+					<th align="center">출발 시간</th>
+					<th align="center">도착 시간</th>	
 				</tr>
 			</thead>
 			<tbody>
@@ -86,16 +92,15 @@
 				</tr>
 
 				<c:forEach var="bean" items="${requestScope.datalist}"> 
-					<tr>
-						<td>${bean.flid}</td>
-						<td>
-						<a href="<%=notWithFormTag%>airDetail&flid=${bean.flid}">${bean.depart}</a>
-						</td>
+					<tr onclick="location.href='<%=notWithFormTag%>airDetail&flid=${bean.flid}'" style="cursor: pointer;"
+					 onmouseover="style.background='blue'">
+						<td align="left">${bean.flid}</td>
+						<td align="left">${bean.fname}</td>
+						<td align="left" class="deptime">${bean.depart}</td>
 						
-						<td>${bean.arrive}</td>
-						<td>${bean.detime}</td>
-						<td>${bean.artime}</td>
-										
+						<td align="left" class="arrtime">${bean.arrive}</td>
+						<td align="left">${bean.detime}</td>
+						<td align="left">${bean.artime}</td>					
 				</tr>
 				</c:forEach>			 
 			</tbody>

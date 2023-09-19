@@ -113,8 +113,8 @@ public class AirDao extends SuperDao{
 		
 		ResultSet rs = null;
 
-		String sql =" select flid,depart,arrive,detime,artime";
-		sql += " from (select flid,depart,arrive,detime,artime, rank() over(order by flid asc) as ranking ";
+		String sql =" select flid,fname,depart,arrive,detime,artime";
+		sql += " from (select flid,fname,depart,arrive,detime,artime, rank() over(order by flid asc) as ranking ";
 		sql += " from airline ";
 		
 		if(pageInfo.getKeyword() == null || pageInfo.getKeyword().equals("all") ) 
@@ -182,6 +182,7 @@ public class AirDao extends SuperDao{
 		
 
 		bean.setFlid(rs.getInt("flid"));
+		bean.setFname(rs.getString("fname"));
 		bean.setDepart(rs.getString("depart"));
 		bean.setArrive(rs.getString("arrive"));
 		bean.setDetime(rs.getString("detime"));
@@ -257,8 +258,8 @@ public class AirDao extends SuperDao{
 				
 				ResultSet rs = null;
 
-				String sql =" select flid,depart,arrive,detime,artime";
-				sql += " from (select flid,depart,arrive,detime,artime, rank() over(order by flid asc) as ranking ";
+				String sql =" select flid,fname,depart,arrive,detime,artime";
+				sql += " from (select flid,fname,depart,arrive,detime,artime, rank() over(order by flid asc) as ranking ";
 				sql += " from airline ";
 				
 				String mode = pageInfo.getMode() ;
@@ -297,6 +298,32 @@ public class AirDao extends SuperDao{
 				if(conn != null) {conn.close();}
 				
 				return lists;
+	}
+
+	public Airline getDataByBean(Integer flid)  throws Exception
+	{
+		String sql = " select * from airline ";
+		sql += " where flid = ? ";
+		
+		ResultSet rs = null;
+		PreparedStatement pstmt = null;
+		conn = super.getConncetion();
+		pstmt = conn.prepareStatement(sql);
+		pstmt.setInt(1, flid);
+		rs = pstmt.executeQuery();		
+		
+		Airline bean = null;
+		if(rs.next())
+		{
+			bean = this.getBeanData(rs);
+		}
+		
+		if(rs != null) {rs.close();}
+		if(pstmt != null) {pstmt.close();}
+		if(conn != null) {conn.close();}
+		
+		
+		return bean;
 	}
 
 }

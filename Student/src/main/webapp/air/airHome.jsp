@@ -1,5 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="EUC-KR"%>
+	pageEncoding="UTF-8"%>
 
 
 <%@ include file="./../common/bootstrap5.jsp"%>
@@ -129,14 +129,14 @@ div [class^="col-"] {
 
 						var maxPurchaseSize = 10;
 
-						// ¹öÆ° Å¬¸¯ ½Ã
+						// ë²„íŠ¼ í´ë¦­ ì‹œ
 						$('.plus').click(function() {
 							var qty = $('#qty').val();
 							if (qty == maxPurchaseSize) {
-								alert('ÃÖ´ë10¸í');
+								alert('ìµœëŒ€10ëª…');
 								return;
 							}
-							// Number °´Ã¼´Â Integer.parseInt() ¿Í µ¿ÀÏÇÑ È¿°ú 
+							// Number ê°ì²´ëŠ” Integer.parseInt() ì™€ ë™ì¼í•œ íš¨ê³¼ 
 							var newQty = Number(qty) + 1;
 							if (qty == '') {
 								$('#qty').val('1');
@@ -148,10 +148,10 @@ div [class^="col-"] {
 						$('.minus').click(function() {
 							var qty = $('#qty').val();
 							if (qty == '0') {
-								alert('ÃÖ¼ÒÀÎ¿ø0¸í');
+								alert('ìµœì†Œì¸ì›0ëª…');
 								return;
 							}
-							// Number °´Ã¼´Â Integer.parseInt() ¿Í µ¿ÀÏÇÑ È¿°ú 
+							// Number ê°ì²´ëŠ” Integer.parseInt() ì™€ ë™ì¼í•œ íš¨ê³¼ 
 							var newQty = Number(qty) - 1;
 							if (qty == '') {
 								$('#qty').val('');
@@ -163,14 +163,14 @@ div [class^="col-"] {
 
 						//------------------------------------------------------------
 
-						// ¹öÆ° Å¬¸¯ ½Ã
+						// ë²„íŠ¼ í´ë¦­ ì‹œ
 						$('.cplus').click(function() {
 							var qty = $('#cqty').val();
 							if (qty == maxPurchaseSize) {
-								alert('ÃÖ´ë10¸í');
+								alert('ìµœëŒ€10ëª…');
 								return;
 							}
-							// Number °´Ã¼´Â Integer.parseInt() ¿Í µ¿ÀÏÇÑ È¿°ú 
+							// Number ê°ì²´ëŠ” Integer.parseInt() ì™€ ë™ì¼í•œ íš¨ê³¼ 
 							var newQty = Number(qty) + 1;
 							if (qty == '') {
 								$('#cqty').val('1');
@@ -182,10 +182,10 @@ div [class^="col-"] {
 						$('.cminus').click(function() {
 							var qty = $('#cqty').val();
 							if (qty == '0') {
-								alert('ÃÖ¼ÒÀÎ¿ø0¸í');
+								alert('ìµœì†Œì¸ì›0ëª…');
 								return;
 							}
-							// Number °´Ã¼´Â Integer.parseInt() ¿Í µ¿ÀÏÇÑ È¿°ú 
+							// Number ê°ì²´ëŠ” Integer.parseInt() ì™€ ë™ì¼í•œ íš¨ê³¼ 
 							var newQty = Number(qty) - 1;
 							if (qty == '') {
 								$('#cqty').val('');
@@ -234,8 +234,8 @@ div [class^="col-"] {
 		<input type="radio" id="checkinfo" name="show" value="3" onchange="setDisplay()"/>
 
 		<div class="tab" align="center">
-			<label for="roundway">¿Õº¹</label> <label for="oneway">Æíµµ</label> <label
-				for="checkinfo">Ã¼Å©ÀÎ</label>
+			<label for="roundway">ì™•ë³µ</label> <label for="oneway">í¸ë„</label> <label
+				for="checkinfo">ì²´í¬ì¸</label>
 		</div>
 
 		<div class="tripA">
@@ -248,11 +248,11 @@ div [class^="col-"] {
 								<h3>From</h3>
 								<input class="form-control" type="hidden" id="mode" name="mode" value="depart"> 
 									<select class="city1" id="keyword" name="keyword">
-									<option value="all" selected="selected">Ãâ¹ßÁö
-									<option value="±èÆ÷">±èÆ÷
-									<option value="ÀÏº»">ÀÏº»
-									<option value="Áß±¹">Áß±¹
-									<option value="´ë¸¸">´ë¸¸
+									<option value="all" selected="selected">ì¶œë°œì§€
+									<option value="ê¹€í¬">ê¹€í¬
+									<option value="ì¼ë³¸">ì¼ë³¸
+									<option value="ì¤‘êµ­">ì¤‘êµ­
+									<option value="ëŒ€ë§Œ">ëŒ€ë§Œ
 								</select>
 							</div>
 
@@ -260,48 +260,48 @@ div [class^="col-"] {
 								<h3>To</h3>
 								<input class="form-control" type="hidden" id="mode2" name="mode2"value="arrive"> 
 								<select class="city2" id="keyword2" name="keyword2">
-									<option value="all" selected="selected">µµÂøÁö
-									<option value="ÀÏº»">ÀÏº»
-									<option value="´ë¸¸">´ë¸¸
-									<option value="Áß±¹">Áß±¹
-									<option value="±¡">±¡
+									<option value="all" selected="selected">ë„ì°©ì§€
+									<option value="ì¼ë³¸">ì¼ë³¸
+									<option value="ëŒ€ë§Œ">ëŒ€ë§Œ
+									<option value="ì¤‘êµ­">ì¤‘êµ­
+									<option value="ê´Œ">ê´Œ
 									</option>
 								</select>
 							</div>
 
 							<div class="departday">
-								<h3>°¡´Â ³¯</h3>
+								<h3>ê°€ëŠ” ë‚ </h3>
 								<input class="departdate" type="date" id="departuretime"
 									name="departuretime">
 							</div>
 
 							<div class="arriveday">
-								<h3>¿À´Â ³¯</h3>
+								<h3>ì˜¤ëŠ” ë‚ </h3>
 								<input class="arrivedate" type="date" id="arrivaltime"
 									name="arrivaltime">
 							</div>
 
 							<div class="people">
-								<h3>¼ºÀÎ</h3>
+								<h3>ì„±ì¸</h3>
 								<ul class="pagination">
 									<li class="people-man"><a class="page-link minus" href="#">-</a></li>
 
 									<li class="people-man"><a class="page-link" href="#">
 											<input type="text" name="qty" id="qty" value="0"
-											data-bs-trigger="hover" data-bs-toggle="popover" title="ÀÎ¿ø¼ö">
+											data-bs-trigger="hover" data-bs-toggle="popover" title="ì¸ì›ìˆ˜">
 									</a></li>
 
 									<li class="people-man"><a class="page-link plus" href="#">+</a></li>
 								</ul>
 
-								<h3>¾Æµ¿</h3>
+								<h3>ì•„ë™</h3>
 								<ul class="pagination">
 									<li class="people-child"><a class="page-link cminus"
 										href="#">-</a></li>
 
 									<li class="people-child"><a class="page-link" href="#">
 											<input type="text" name="cqty" id="cqty" value="0"
-											data-bs-trigger="hover" data-bs-toggle="popover" title="ÀÎ¿ø¼ö">
+											data-bs-trigger="hover" data-bs-toggle="popover" title="ì¸ì›ìˆ˜">
 									</a></li>
 
 									<li class="people-child"><a class="page-link cplus"
@@ -313,7 +313,7 @@ div [class^="col-"] {
 
 						</div>
 						<div class="find">
-							<button type="submit" class="search_btn btn-primary">°Ë»ö</button>
+							<button type="submit" class="search_btn btn-primary">ê²€ìƒ‰</button>
 						</div>
 					</form>
 				</div>
@@ -327,11 +327,11 @@ div [class^="col-"] {
 						<input type="hidden" name="command" value="airCheck">
 						<div class="search justify-content-center">
 							<div class="from">
-								<h3>¿¹¾à¹øÈ£</h3>
-								<input class="form-control" type="text" id="regid" name="regid" placeholder="¿¹¾à¹øÈ£"> 
+								<h3>ì˜ˆì•½ë²ˆí˜¸</h3>
+								<input class="form-control" type="text" id="regid" name="regid" placeholder="ì˜ˆì•½ë²ˆí˜¸"> 
 							</div>
 						<div class="find_checkin">
-							<button type="submit" class="search_btn btn-primary">Á¶È¸</button>
+							<button type="submit" class="search_btn btn-primary">ì¡°íšŒ</button>
 						</div>
 							
 						</div>
@@ -351,12 +351,12 @@ div [class^="col-"] {
 						<h4 class="card-title text-right">
 							<i class="material-icons"></i>
 						</h4>
-						<a href="<%=notWithFormTag%>airList&mode=depart&keyword=all&mode2=arrive&keyword2=ÀÏº»"> <img
+						<a href="<%=notWithFormTag%>airList&mode=depart&keyword=all&mode2=arrive&keyword2=ì¼ë³¸"> <img
 							src="https://image.hanatour.com/usr/cms/resize/400_0/2022/09/05/10000/4d34420c-7d47-4835-becf-f04454a99d20.jpeg"
 							alt="Photo of sunset">
 						</a>
-						<h5 class="card-title mt-3 mb-3">ÀÏº»</h5>
-						<p class="card-text">¿À»çÄ«</p>
+						<h5 class="card-title mt-3 mb-3">ì¼ë³¸</h5>
+						<p class="card-text">ì˜¤ì‚¬ì¹´</p>
 					</div>
 				</div>
 				<div class="col-md-3 col-sm-6">
@@ -364,11 +364,11 @@ div [class^="col-"] {
 						<h4 class="card-title text-right">
 							<i class="material-icons"></i>
 						</h4>
-						<a href="<%=notWithFormTag%>airList&mode=depart&keyword=all&mode2=arrive&keyword2=Áß±¹"> <img
+						<a href="<%=notWithFormTag%>airList&mode=depart&keyword=all&mode2=arrive&keyword2=ì¤‘êµ­"> <img
 							src="https://image.hanatour.com/usr/cms/resize/400_0/2023/04/06/10000/49738def-cc04-494b-a597-d86128ef9a38.jpg"
 							alt="Photo of sunset">
 						</a>
-						<h5 class="card-title  mt-3 mb-3">Áß±¹</h5>
+						<h5 class="card-title  mt-3 mb-3">ì¤‘êµ­</h5>
 						<p class="card-text">This is a company that builds websites,
 							web .</p>
 					</div>
@@ -378,11 +378,11 @@ div [class^="col-"] {
 						<h4 class="card-title text-right">
 							<i class="material-icons"></i>
 						</h4>
-						<a href="<%=notWithFormTag%>airList&mode=depart&keyword=all&mode2=arrive&keyword2=´ë¸¸"> <img
+						<a href="<%=notWithFormTag%>airList&mode=depart&keyword=all&mode2=arrive&keyword2=ëŒ€ë§Œ"> <img
 							src="https://image.hanatour.com/usr/cms/resize/400_0/2019/07/04/10000/a895c128-729e-448b-a9f2-ba66e6ce3503.jpg"
 							alt="Photo of sunset">
 						</a>
-						<h5 class="card-title  mt-3 mb-3">´ë¸¸</h5>
+						<h5 class="card-title  mt-3 mb-3">ëŒ€ë§Œ</h5>
 						<p class="card-text">This is a company that builds websites,
 							web apps and e-commerce solutions.</p>
 					</div>
@@ -392,11 +392,11 @@ div [class^="col-"] {
 						<h4 class="card-title text-right">
 							<i class="material-icons"></i>
 						</h4>
-						<a href="<%=notWithFormTag%>airList&mode=depart&keyword=all&mode2=arrive&keyword2=±¡"> <img
+						<a href="<%=notWithFormTag%>airList&mode=depart&keyword=all&mode2=arrive&keyword2=ê´Œ"> <img
 							src="https://image.hanatour.com/usr/cms/resize/400_0/2022/10/12/10000/2a3c5702-2f0e-4438-934e-0ce5e696deb7.jpg"
 							alt="Photo of sunset">
 						</a>
-						<h5 class="card-title  mt-3 mb-3">±¡</h5>
+						<h5 class="card-title  mt-3 mb-3">ê´Œ</h5>
 						<p class="card-text">This is a company that builds websites,
 							web apps and e-commerce solutions.</p>
 					</div>

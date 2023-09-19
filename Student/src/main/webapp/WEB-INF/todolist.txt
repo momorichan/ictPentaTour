@@ -54,3 +54,4 @@ airHome=com.shopping.controller.air.AirHomeController
 airList=com.shopping.controller.air.AirListController
 airDetail=com.shopping.controller.air.AirDetailController
 airCheck=com.shopping.controller.air.AirCheckController
+airInsert=com.shopping.controller.air.AirInsertController

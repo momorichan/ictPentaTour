@@ -105,117 +105,34 @@
 				}
 			});
 		
-		<%-- function getListComment(){
-			$('#comment_list').empty();			
-			/* $.ajax() 함수를 이용하여 데이터 보여 주기 */
+
+		
+		
+		$(document).ready(function(){
+			
+		
+		});
+		
+		$(document).on('click','.reserve_btn',function(){
+			
 			$.ajax({
-				url:'<%=notWithFormTag%>cmList', 
+				url:'<%=notWithFormTag%>airInsert', 
 				data:'flid=' + '${requestScope.bean.flid}',
 				type:'get', 
 				dataType:'json',
 				success:function(result, status){
-					/* console.log('result는 넘어온 데이터 결과 값') ; */
-					/* console.log(result) ; */
-					
-					$.each(result, function(idx){ /* idx는 색인 번호 */
-						var cnum = result[idx].cnum ;
-						var id = result[idx].id ;
-						var content = result[idx].content ;
-						var regdate = result[idx].regdate ;
-						addNewItem(cnum, id, content, regdate);
-					})
-				},
-				error:function(result, status){
-					console.log(result) ;
-					console.log(status) ;
-				}
-			});
-		} --%>
-		
-		function addNewItem(cnum, id, content, regdate){
-			/* 댓글 1개를 추가해주는 함수입니다. */
-			var litag = $('<li>') ; /* 댓글의 외곽 li 태그  */
-			litag.addClass('commentItem') ;
-			
-			var ptag = $('<p>') ; /* 작성자 정보가 들어갈 태그  */
-			ptag.addClass('id') ;
-
-			var spantag = $('<span>') ; /* 작성자 이름이 들어갈 태그  */
-			spantag.addClass('name') ;
-			spantag.html(id + "님") ;
-			
-			var spandate = $('<span>') ;  /* 작성 일자가 들어갈 태그  */
-			spandate.html("&nbsp;&nbsp;/&nbsp;&nbsp;" + regdate + '&nbsp;') ;
-			
-			/* 로그인한 사람이 작성한 댓글이면 삭제 가능 */
-			if(id == '${sessionScope.loginfo.id}'){ 
-				var inputtag = $('<input>') ; /* 삭제 버튼 */
-				var attrlist = {'id':id, 'type':'button', 'value':'삭제', 'class':'btn btn-xs btn-outline-primary', 'cnum':cnum};
-				inputtag.attr(attrlist);
-				inputtag.addClass('delete_btn');
-			}else{
-				var inputtag = '' ;
-			}
-			
-			var content_p = $('<p>') ; /* 작성한 댓글 내용 */
-			content_p.html(content) ; 
-			
-			/* 조립하기(compose up) */
-			ptag.append(spantag).append(spandate).append(inputtag);
-			litag.append(ptag).append(content_p) ; 
-			
-			$('#comment_list').append(litag) ;
-		}
-	
-		function aaa(){
-			/* 댓글 입력 없이 전송 버튼을 누른 경우 */
-			if(!$('#content').val()){
-				alert('댓글을 입력해 주셔야 합니다.');
-				$('#content').focus() ;
-				return false ;
-			}
-			
-			/* post 방식으로 데이터를 전송합니다. */
-			var URL = '<%=notWithFormTag%>cmInsert' ;
-			var parameters = $('#comment_form').serialize() ;
-			$.post(URL, parameters, function(data){
-				$('#content').val('');
-				getListComment(); /* 목록 갱신하기 */
-				
-			}).fail(function(){
-				alert('댓글 작성에 실패하였습니다.');
-				return false ;
-			});
-			return true ;
-		}
-		
-		$(document).ready(function(){
-			getListComment();
-			
-			/* 사용자가 댓글을 입력하고, 전송 버튼을 눌렀습니다. */
-			$('#comment_form').submit(function(){				
-				/* 댓글 입력 없이 전송 버튼을 누른 경우 */
-				if(!$('#content').val()){
-					alert('댓글을 입력해 주셔야 합니다.');
-					$('#content').focus() ;
-					return false ;
-				}
-				
-				/* post 방식으로 데이터를 전송합니다. */
-				var URL = '<%=notWithFormTag%>cmInsert' ;
-				var parameters = $('#comment_form').serialize() ;
-				$.post(URL, parameters, function(data){
-					alert('bbbbb');
-					getListComment(); /* 목록 갱신하기 */
-					$('#content').val('');					
-					
-				}).fail(function(){
-					alert('댓글 작성에 실패하였습니다.');
-					return false ;
+						console.log(result);
+						console.log(status) ;
+					}
 				});
-				return true ;
-			});
+			
+			
+			
+			location.href = '<%=notWithFormTag%>airInsert&flid=';
+			
 		});
+		
+		
 	</script>	
 </head>
 <body>
@@ -228,6 +145,12 @@
 					<td align="center">항공편</td>
 					<td>${requestScope.bean.flid}</td>
 				</tr>
+				
+				<tr>
+					<td align="center">항공사</td>
+					<td>${requestScope.bean.fname}</td>
+				</tr>
+				
 				<tr>
 					<td align="center">출발지</td>
 					<td>${requestScope.bean.depart}</td>
@@ -248,7 +171,7 @@
 		</table>
 		<div id="menubutton" align="center">
 		
-			<button type="button" class="btn btn-primary" onclick="">
+			<button type="button" class="btn reserve_btn btn-primary">
 				예약
 			</button>
 		

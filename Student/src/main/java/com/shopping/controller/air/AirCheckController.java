@@ -16,20 +16,14 @@ public class AirCheckController extends SuperClass{
 		super.doGet(request, response);
 	
 		
-//		if(super.loginfo == null)
-//		{
-//			super.youNeededLogin();
-//			return;
-//		}
+		
+		
 		
 		try
 		{
 			
-			
-			
-			
-		
-			super.gotopage("air/airReserve.jsp");	
+	
+			super.gotopage("air/airCheck.jsp");	
 		}
 		catch(Exception e)
 		{
