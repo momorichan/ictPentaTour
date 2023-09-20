@@ -37,6 +37,8 @@ String notWithFormTag = appName + mappingName + "?command=";
 <html>
 <head>
 <meta charset="UTF-8">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+<link rel="stylesheet" href="./../css/footer2.css" />
 <title>Insert title here</title>
 <!-- 이 파일은 모든 문서에서 공용으로 참조 할 파일입니다. -->
 <!-- 자바 관련 변수 및 패키지 임포트, 네비게이션 바, jstl 등등-->
@@ -110,12 +112,15 @@ String notWithFormTag = appName + mappingName + "?command=";
 .side-bar-inner.sideon {
 	position: relative;
 	display:flex;
+	flex-direction:column;
 	visibility:visible;
 	background-color: gray;
 	width:180px;
 	height:500px;
 	z-index: 998;
 	pointer-events:all;
+	border-radius: 10px 10px 10px 10px;
+	
 }
 .side-bar.sideon {
 	width:0px;
@@ -124,6 +129,8 @@ String notWithFormTag = appName + mappingName + "?command=";
 	top: 300px;
 	z-index: 998 !important;
     transform:translate(-300px,0);
+    border-radius: 10px 10px 10px 10px;
+    
 }
 .side-bar {
 	width:0px;
@@ -151,6 +158,7 @@ String notWithFormTag = appName + mappingName + "?command=";
 	position:fixed;
 	margin-left:auto;
 	margin-right:auto;
+	border-radius: 10px 10px 10px 10px;
 }
 .side-bar-out {
 	width:180px;
@@ -160,12 +168,32 @@ String notWithFormTag = appName + mappingName + "?command=";
 	z-index: 0;
 	margin-top:10%;
 }
+.simple-login {
+	width:100%;
+	position:absolute;
+}
+.simple-login-a {
+	width:25%;
+	position:relative;
+}
+.simple-login-div {
+	width:100%;
+	height:20%;
+	top:80%;
+	position: absolute;
+	padding:10px 20px 10px 20px;
+	display:flex;
+	float:left;
+	justify-content: space-between;
+	
+}
 .navbar {
 	margin-bottom: 20px !important;
 	position: fixed !important;
 	top:0px !important;
 	width:100% !important;
 	z-index: 999 !important;
+	background-color: black !important;
 }
 .navbar-brand {
 	position: relative !important;
@@ -282,11 +310,11 @@ body{
 							<li><a class="nav-link create" href="<%=notWithFormTag%>meInsert">회원 가입</a></li>
 						</c:if>
 						<c:if test="${whologin == '1'}">
-							<a class="navbar-text">${sessionScope.loginfo.id}(일반 유저)</a>
+							<a class="navbar-text">${sessionScope.loginfo.meid}(일반 유저)</a>
 							<li class="nav-item"><a class="nav-link logout" href="<%=notWithFormTag%>meLogout">로그 아웃</a></li>
 						</c:if>
 						<c:if test="${whologin == '2'}">
-							<a class="navbar-text">${sessionScope.loginfo.id}(관리자)</a>
+							<a class="navbar-text">${sessionScope.loginfo.meid}(관리자)</a>
 							<li class="nav-item"><a class="nav-link logout" href="<%=notWithFormTag%>meLogout">로그 아웃</a></li>
 						</c:if>
 					</div>
@@ -296,7 +324,7 @@ body{
 								<c:if test="${whologin == '0'}">
 								</c:if>
 								<c:if test="${whologin != '0'}">
-									<li><a class="dropdown-item" href="<%=notWithFormTag%>meDetail&id=${sessionScope.loginfo.id}">상세 보기</a></li>
+									<li><a class="dropdown-item" href="<%=notWithFormTag%>meDetail&meid=${sessionScope.loginfo.meid}">상세 보기</a></li>
 									<li><a class="dropdown-item" href="/Student/member/meUpdateForm01.jsp">정보 수정</a></li>
 									<li><a class="dropdown-item" href="#">탈퇴하기</a></li>
 								</c:if>
@@ -373,6 +401,17 @@ body{
 	  	<c:remove var="alertMessage" scope="session"/>
   	</c:if>
 </body>
+<!--  footer -->
+<div id="container" class="copyright" style="width: 100%; z-index: 1; bottom:0; position: fixed;">
+	<ul class="icons">
+		<li><a href="#" class="icon fa-twitter"><span class="label">Twitter</span></a></li>
+		<li><a href="#" class="icon fa-facebook"><span class="label">Facebook</span></a></li>
+		<li><a href="#" class="icon fa-instagram"><span class="label">Instagram</span></a></li>
+		<li><a href="#" class="icon fa-solid fa-envelope"><span class="label">Email</span></a></li>
+		<li><a href="https://github.com/momorichan/ictPentaTour" class="icon fa-brands fa-square-github"><span class="label">GitHub</span></a></li><br>
+		<li>Made with <a href="https://naver.com/">5조</a></li>
+	</ul>
+</div>
 <!-- 	<div class="side-bar-div"> -->
 <!-- 		<div class="side-bar-empty"> -->
 <!-- 		</div> -->
@@ -383,6 +422,10 @@ body{
 		  		</div>
 		  		<div class="side-bar-inner">
 		  			<button type="button" class="side-bar-off-btn" onclick="toggleSideOff()">X</button>
+		  			<div class="simple-login-div">
+			  			<a class="simple-login-a google-login"><img class="simple-login" src="/Student/upload/google.png"></a>
+			  			<a class="simple-login-a kakao-login"><img class="simple-login" src="/Student/upload/kakao.png"></a>
+		  			</div>
 		  		</div>
 		  	</div>
 <!-- 	  	</div> -->
