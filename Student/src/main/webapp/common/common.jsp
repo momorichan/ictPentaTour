@@ -354,7 +354,7 @@ body{
 						<li class="nav-item dropdown">
 						<a	class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown">투어</a>
 							<ul class="dropdown-menu">
-								<li><a class="dropdown-item" href="<%=notWithFormTag%>tourHome">투어홈</a></li>
+								<li><a class="dropdown-item" href="<%=notWithFormTag%>tourHome">투어 홈</a></li>
 								<c:if test="${whologin == 2}">
 									<li><a class="dropdown-item" href="<%=notWithFormTag%>tourInsert">투어 등록</a></li>
 								</c:if>							
