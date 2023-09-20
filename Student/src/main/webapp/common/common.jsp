@@ -25,10 +25,10 @@ String notWithFormTag = appName + mappingName + "?command=";
 %>
 <c:set var="whologin" value="0"/>
 <c:if test="${not empty sessionScope.loginfo}">
-	<c:if test="${sessionScope.loginfo.id == 'admin'}">
+	<c:if test="${sessionScope.loginfo.meid == 'admin'}">
 		<c:set var="whologin" value="2"/>
 	</c:if>
-	<c:if test="${sessionScope.loginfo.id != 'admin'}">
+	<c:if test="${sessionScope.loginfo.meid != 'admin'}">
 		<c:set var="whologin" value="1"/>
 	</c:if>
 </c:if>
