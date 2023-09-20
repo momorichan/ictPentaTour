@@ -58,7 +58,7 @@
 										<div class="col-sm-12">
 											<select class="form-control-sm" id="mode" name="mode">
 												<option value="all" selected="selected">--- 선택해 주세요 ---
-												<option value="name">상품명
+												<option value="name" >상품명
 												<option value="company">제조 회사
 												<option value="category">카테고리
 												<option value="contents">상품 설명

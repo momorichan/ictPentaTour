@@ -12,8 +12,8 @@ import com.shopping.utility.Paging;
 
 public class RentalcarDao extends SuperDao{
 	
-	public Rentalcar GetDataByPk(Integer pnum) throws Exception {
-		// 렌트카 번호를 이용하여 해당 상품에 대한 Bean 객체를 반환해 줍니다.
+	public Rentalcar GetDataByPk(String rcid) throws Exception {
+		// 렌트카 번호(String)를 이용하여 해당 상품에 대한 Bean 객체를 반환해 줍니다.
 		PreparedStatement pstmt = null ;
 		ResultSet rs = null ;		
 		String sql = " select * from rentalcar ";
@@ -21,7 +21,7 @@ public class RentalcarDao extends SuperDao{
 		
 		conn = super.getConnection();		
 		pstmt = conn.prepareStatement(sql) ;
-		pstmt.setInt(1, pnum); 
+		pstmt.setString(1, rcid); 
 		
 		rs = pstmt.executeQuery() ;
 		
@@ -44,9 +44,9 @@ public class RentalcarDao extends SuperDao{
 		PreparedStatement pstmt = null ;
 		ResultSet rs = null ;
 		
-		// 무엇을 기준으로 렌트카 노출할지 결정.
-		String sql = " select rcid, carType, company, startLocation, endLocation, startDate, endDate, price, passengers";
-		sql += " from (select rcid, carType, company, startLocation, endLocation, startDate, endDate, price, passengers, rank() over(order by pnum desc) as ranking";
+		// 가격이 저렴한 순으로 ranking
+		String sql = " select rcid, carType, startLocation, endLocation, startDate, endDate, price, passengers";
+		sql += " from (select rcid, carType, startLocation, endLocation, startDate, endDate, price, passengers, rank() over(order by price asc) as ranking";
 		sql += " from rentalcar ";
 		
 		String mode = pageInfo.getMode() ;
@@ -80,12 +80,12 @@ public class RentalcarDao extends SuperDao{
 		
 		return lists;
 	}
-	// 수정필요
+	// 가격 저렴한 순서
 	public List<Rentalcar> selectAll() throws Exception{
 		PreparedStatement pstmt = null ;
 		ResultSet rs = null ;
 		
-		String sql = " select * from rentalcar where rownum <= 6 order by pnum "; // 수정 yet
+		String sql = " select * from rentalcar where rownum <= 6 order by price "; // 
 		
 		conn = super.getConnection();
 		pstmt = conn.prepareStatement(sql) ;

@@ -61,7 +61,7 @@ public class MemberLoginController extends SuperClass{
 				}
 				super.session.setAttribute("mycart", mycart);
 				
-				// 홈 화면으로 이동합니다. 차후 상품 목록 페이지로 갈 예정			
+				// 로그인 성공 시, 홈 화면으로 이동합니다. 차후 상품 목록 페이지로 갈 예정			
 				//new HomeController().doGet(request, response) ;
 				new ProductListController().doGet(request, response);
 			} catch (Exception e) {

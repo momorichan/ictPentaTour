@@ -31,7 +31,7 @@
 		});	
 	</script>
 	
-	<!--  datepicker 날짜선택 -->
+	<!-- <!--  datepicker 날짜선택 -->
 	<script type="text/javascript">
 		
 		$(function() {
@@ -55,12 +55,21 @@
 					function(ev, picker) {
 						$(this).val('');
 					});
-			$('#fullpage').fullpage({
-				slideNavigation: true,
-				responsiveWidth: 1024;
-			autoScrolling: true
-			});			
+						
 		});	
+	</script> -->
+	<script>
+	/* datetimepicker */
+	$(function() {
+	  $('input[name="datetimes"]').daterangepicker({
+	    timePicker: true,
+	    startDate: moment().startOf('hour'),
+	    endDate: moment().startOf('hour').add(32, 'hour'),
+	    locale: {
+	      format: 'M/DD hh:mm A'
+	    }
+	  });
+	});
 	</script>
 	
 	
@@ -111,14 +120,21 @@
 		  
 		  function closeKeywords() {
 			   /* keywords.style.display = "none" */
-			   name.style.display = "none" 
-			   keywords.innerHTML = ""
+			   recommendBox.classList.style.display = "none";
+			   /* keywords.innerHTML = "" */
 			}
 	      if(e.key === "Escape") {
 	        	closeKeywords()
    		  }
 		});	
 	</script>
+<!-- 	<script type="text/javascript">
+	$(function){
+		const startLocation = docu 
+		$("#startLocation").val('${requestScope.pageInfo.keyword}');
+		
+	}
+	</script> -->
 	
 	
 

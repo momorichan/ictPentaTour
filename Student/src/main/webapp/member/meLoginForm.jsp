@@ -18,6 +18,10 @@
 	</script>
 	<style type="text/css">
 		.bottom_button{margin-top: 5px;} /* 버튼과 입력 양식 약간 간격 띄우기 */
+		.btnn{
+			position: relative;
+			z-index: 999;
+		}
 	</style>
 </head>
 <body>
@@ -41,7 +45,7 @@
 			</div>
 			<div class="bottom_button">
 				<!-- contextual class : btn-primary, btn-info, btn-danger -->
-				<button type="submit" class="btn btn-primary">로그인</button> 
+				<button type="submit" class="btn btn-primary btnn">로그인</button> 
 				<a type="button" href="<%=notWithFormTag%>meInsert" class="btn btn-info">회원 가입</a>
 			</div>				
 		</form>

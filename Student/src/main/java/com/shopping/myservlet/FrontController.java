@@ -38,6 +38,7 @@ public class FrontController extends HttpServlet {
 	// imageUploadWebPath 변수 : 실제 이미지가 업로드 되는 경로
 	private String imageUploadWebPath ; 
 
+	
 	protected void doProcess(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		request.setCharacterEncoding("UTF-8"); // 한글 깨짐 방지
 		

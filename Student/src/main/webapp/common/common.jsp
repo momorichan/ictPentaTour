@@ -2,7 +2,7 @@
 <%@ page import="com.shopping.model.bean.Member"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ page import="java.util.*"%>
-<%@ include file="./../common/bootstrap5.jsp"%>
+<%@ include file="../common/bootstrap5.jsp"%>
 <%
 String appName = request.getContextPath();
 String mappingName = "/Shopping"; //in FrontController.java file
@@ -44,17 +44,23 @@ String notWithFormTag = appName + mappingName + "?command=";
 <script type="text/javascript">
 
 </script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Black+Han+Sans&display=swap" rel="stylesheet">
 <style type="text/css">
-.navbar-brand{
-	position: relative;
-	z-index: 998;
-}
+@import url(//fonts.googleapis.com/earlyaccess/jejugothic.css);
+@import url(//fonts.googleapis.com/earlyaccess/kopubbatang.css);
 .navbar {
 	margin-bottom: 20px !important;
 	position: fixed !important;
 	top:0px !important;
 	width:100% !important;
 	z-index: 999 !important;
+}
+.navbar-brand {
+	position: relative !important;
+	z-index: 998 !important;
+	font-family: 'Jeju Gothic', sans-serif !important;
 }
 
 .alert-danger {
@@ -68,10 +74,12 @@ String notWithFormTag = appName + mappingName + "?command=";
 .nav-link.logout {
 	color : red !important;
 	opacity: 90% !important;
+	
 }
 
 .nav-link{
 	color : white !important;
+	font-family: 'Jeju Gothic', sans-serif !important;
 }
 
 .logout {
@@ -79,17 +87,20 @@ String notWithFormTag = appName + mappingName + "?command=";
 	opacity: 90%;
 	z-index: 998;
 	position: relative;
+	font-family: 'Jeju Gothic', sans-serif !important;
 }
 .login {
 	color : aqua !important;
 	opacity: 100% !important;
 	z-index: 998;
 	position: relative;
+	font-family: 'Jeju Gothic', sans-serif !important;
 }
 .create {
 	color : white !important;
 	z-index: 998;
 	position: relative;
+	font-family: 'Jeju Gothic', sans-serif !important;
 }
 
 .navbar-text {
@@ -99,6 +110,10 @@ String notWithFormTag = appName + mappingName + "?command=";
 }
 body{
 	padding-top:56px !important;
+	justify-content: center;
+    display: flex;
+    position: relative !important;
+    z-index: 999 !important;
 }
 .container{
 	margin-left:auto;
@@ -112,15 +127,14 @@ body{
 	right:0 !important;
 	margin-left: auto !important;
 	margin-right: auto !important;
-	
-	padding-left: 600px !important;
-	padding-right: 600px !important;
+	padding-left: 720px !important;
+	padding-right: 720px !important;
 	justify-content: center !important;
 	clear: both !important;
 }
 .login-div{
 	display:flex;
-	width:220px;
+	width:330px;
 	clear: both;
 }
 .navbar-nav{
@@ -129,12 +143,59 @@ body{
 .dropdown{
 	margin-right:15px;
 }
+.side-bar {
+	width:180px;
+	height:500px;
+	background-color: aqua;
+	position:fixed;
+	top: 300px;
+	right: 300px;
+	z-index: 999 !important;
+}
+.side-bar-empty {
+	z-index: 0;
+	width:1300px;
+	height:100%;
+	margin-right: auto;
+	margin-left:auto;
+}
+.side-bar-div {
+	z-index: 0;
+	width:1700px;
+	height:100%;
+	display: flex;
+	justify-content: center;
+	position:fixed;
+	margin-left:auto;
+	margin-right:auto;
+}
+.side-bar-out {
+	width:180px;
+	height:500px;
+	background-color: aqua;
+	position:relative;
+	z-index: 0;
+	margin-top:10%;
+}
+.dropdown-menu {
+	background-color:rgb(33,37,41) !important;
+	margin-top:7px !important;
+}
+.dropdown-item {
+	color: white !important;
+	font-family: 'Jeju Gothic', sans-serif !important;
+	padding-left:9px;
+	padding-right:2px;
+}
+.dropdown-item:hover {
+	background-color: rgb(53,53,53) !important;
+}
 </style>
 </head>
 <body>
 	<nav class="navbar navbar-expand-sm bg-dark navbar-dark">
 		<div class="container-fluid">
-			<a class="navbar-brand" href="/Student/common/home.jsp">쇼핑몰</a>
+			<a class="navbar-brand" href="/Student/common/home.jsp">ICTPentaTour</a>
 			<button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#collapsibleNavbar">
 				<span class="navbar-toggler-icon"></span>
 			</button>
@@ -223,6 +284,15 @@ body{
 									<li><a class="dropdown-item" href="<%=notWithFormTag%>tourInsert">투어 등록</a></li>
 								</c:if>							
 							</ul>
+						</li>
+						<li class="nav-item dropdown">
+						<a	class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown">렌트카</a>
+							<ul class="dropdown-menu">
+								<li><a class="dropdown-item" href="<%=notWithFormTag%>rcList">렌트카</a></li>
+								<c:if test="${whologin == 2}">
+									
+								</c:if>							
+							</ul>
 						</li>	
 					</div>
 				</ul>
@@ -237,4 +307,15 @@ body{
 	  	<c:remove var="alertMessage" scope="session"/>
   	</c:if>
 </body>
+<!-- 	<div class="side-bar-div"> -->
+<!-- 		<div class="side-bar-empty"> -->
+<!-- 		</div> -->
+<!-- 		<div class="side-bar-out"> -->
+<!-- 		  	<div class="side-bar">
+		  		<div class="side-bar-inner">
+		  			<button type="button" class="btn btn-primary">test</button>
+		  		</div>
+		  	</div> -->
+<!-- 	  	</div> -->
+<!--   	</div> -->
 </html>

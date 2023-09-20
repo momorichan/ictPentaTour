@@ -1,14 +1,14 @@
-<%@ page language="java" contentType="text/html; charset=EUC-KR"
+<%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ include file="./../common/common.jsp" %>
 <%@ include file="./../common/bootstrap5.jsp" %>    
 <!DOCTYPE html>
 <html>
-<head>
+<head>	  
 	<meta charset="UTF-8">
 	<title>rcList</title>
 	<script type="text/javascript">
-	$(document).ready(function(){
+	$(document).ready(function(){		
 		// Initialize popoveer
 		var popoverTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="popover"]'))
 		var popoverList = popoverTriggerList.map(function (popoverTriggerEl) {
@@ -21,10 +21,37 @@
 				optionList[i].selected = true ;
 			}	
 		}
-		
-		$('#keyword').val('${requestScope.pageInfo.keyword}');			
+		$('#keyword').val('${requestScope.pageInfo.keyword}');		
 	});
-	</script>	
+	</script>
+	
+	<!-- datetimepicker  -->
+	<script>
+		$(function() {
+			$('input[name="daterange"]').daterangepicker(
+					{
+						autoUpdateInput : false,
+						opens : 'left'
+					},
+					function(start, end, label) {
+						console.log("A new date selection was made: "
+								+ start.format('YYYY/MM/DD') + ' to '
+								+ end.format('YYYY/MM/DD'));
+					});
+		});
+	</script>
+   
+   
+   
+   
+	
+	<script type="text/javascript" src="https://cdn.jsdelivr.net/jquery/latest/jquery.min.js"></script>
+	<script type="text/javascript" src="https://cdn.jsdelivr.net/momentjs/latest/moment.min.js"></script>
+	<script type="text/javascript" src="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.min.js"></script>
+	<link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.css" />
+	
+
+		
 	<style type="text/css">
 		.container{margin-top: 10px;}
 		/* table 셀의 수평 가운데 정렬 */
@@ -46,7 +73,7 @@
 			</thead>
 			<tbody>
 				<%-- from "rentalcar_column_size" in settings.txt file --%>
-				<c:set var="colsu" value="${applicationScope.map['product_list_column_size']}"/>
+				<c:set var="colsu" value="${applicationScope.map['rentalcar_list_column_size']}"/>
 				
 				<tr>
 					<td colspan="${colsu}" align="center">
@@ -54,21 +81,33 @@
 							<div class="col-sm-1"></div>
 							<div class="col-sm-10">					
 								<form name="myform" action="<%=withFormTag%>" method="get">
-									<input type="hidden" name="command" value="prList">
+									<input type="hidden" name="command" value="rcList">
 									<div class="row">
 										<div class="col-sm-12">
 											<select class="form-control-sm" id="mode" name="mode">
-												<option value="all" selected="selected">--- 선택해 주세요 ---
-												<option value="name">상품명
-												<option value="company">제조 회사
-												<option value="category">카테고리
-												<option value="contents">상품 설명
+												<option value="all" selected="selected">--픽업 장소---
+												<option value="startLocation">서울
+												<option value="startLocation">대전
+												<option value="startLocation">대구
+												<option value="startLocation">울산
+												<option value="startLocation">부산
+												<option value="startLocation">제주
 											</select>
-											<input class="form-control-sm" type="text" 
-												name="keyword" id="keyword" placeholder="키워드 입력">
+											<select class="form-control-sm" id="mode" name="mode">
+												<option value="all" selected="selected">--반납 장소--
+												<option value="endLocation">서울
+												<option value="endLocation">대전
+												<option value="endLocation">대구
+												<option value="endLocation">울산
+												<option value="endLocation">부산
+												<option value="endLocation">제주												
+											</select>
+											<!-- <input class="form-control-sm" type="text" 
+												name="keyword" id="keyword" placeholder="키워드 입력" /> -->											
+											<input class="form-control-sm" type="text" name="daterange"  placeholder="📅픽업일"/>
+											<!-- <input class="form-control-sm" type="text" name="daterange"  placeholder="📅반납일"/> -->
 											<button type="submit" class="btn btn-warning form-control-sm" onclick="">검색</button>
-											<button type="button" class="btn btn-warning form-control-sm" onclick="searchAll();">전체 검색</button>
-											<button type="button" class="btn btn-info form-control-sm"  onclick="writeForm();">글 쓰기</button>
+											<button type="button" class="btn btn-warning form-control-sm" onclick="searchAll();">전체 검색</button>											
 											<span class="label label-default">${requestScope.pageInfo.pagingStatus}</span>
 										</div>
 									</div>
@@ -85,7 +124,7 @@
 						<tr>
 					</c:if>				 
 					<td> 
-						<div class="card" style="width:19rem;">
+						<div class="card" style="width:19rem;"><!-- prDeta -->
 							<a class="removeUnderLine"  href="<%=notWithFormTag%>prDetail&pnum=${bean.pnum}${requestScope.pageInfo.flowParameter}">
 								<img class="card-img-top" alt="${bean.name}" src="upload/${bean.image01}">
 								<div class="card-body"> 

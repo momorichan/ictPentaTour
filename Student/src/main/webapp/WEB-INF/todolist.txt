@@ -57,6 +57,8 @@ vwExam05=com.shopping.controller.view.View05Controller
 #airDetail=com.shopping.controller.air.AirDetailController
 #airCheck=com.shopping.controller.air.AirCheckController
 # rentalcar section
-#rcList=com.shopping.controller.rentalcar.RentalcarListController
-#rcHome=com.shopping.controller.rentalcar.RentalcarHController
-
+rcList=com.shopping.controller.rentalcar.RentalcarListController
+rcDetail=com.shopping.controller.product.RentalcarDetailController
+#rcInsert=com.shopping.controller.product.RentalcarInsertController
+#rcUpdate=com.shopping.controller.product.RentalcarUpdateController
+#rcDelete=com.shopping.controller.product.RentalcarDeleteController
