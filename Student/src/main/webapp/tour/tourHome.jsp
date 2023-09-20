@@ -33,7 +33,7 @@ function deleteCheck(toid){
 <link href="../css/jquery-picZoomer.css">
 <style type="text/css">
 	.card-img-top{
-		width: 302px;
+		width: 300px;
 		height: 250px;	
 	}
 	/* table 셀의 수평 가운데 정렬 */
@@ -144,9 +144,9 @@ function deleteCheck(toid){
 					</div>
 					<div class="carousel-inner">
 						<c:forEach var="bean" items="${requestScope.eventlists }">
-						<div class="carousel-item active">
-							<div class="slide-image">
-								<img src="/Student/upload/${bean.timage01}" alt="${bean.timage01}" class="d-block" style="width: 100%">
+						<div class="carousel-item">
+							<div class="slide-image active">
+								<img src="/Student/upload/${bean.timage01}" alt="${bean.timage01}" class="d-block" style="width:100%">
 							</div>
 							<div class="slide-caption">
 								

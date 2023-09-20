@@ -39,83 +39,162 @@ String notWithFormTag = appName + mappingName + "?command=";
 <title>Insert title here</title>
 <!-- 이 파일은 모든 문서에서 공용으로 참조 할 파일입니다. -->
 <!-- 자바 관련 변수 및 패키지 임포트, 네비게이션 바, jstl 등등-->
-<script src="${pageContext.request.contextPath}/js/sweetalert.min.js"></script>
+<script src="/Student/js/sweetalert.js"></script>
 <script type="text/javascript">
 
 </script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Black+Han+Sans&display=swap" rel="stylesheet">
 <style type="text/css">
+@import url(//fonts.googleapis.com/earlyaccess/jejugothic.css);
+@import url(//fonts.googleapis.com/earlyaccess/kopubbatang.css);
 .navbar {
-	margin-bottom: 20px;
-	position: fixed;
-	top:0px;
-	width:100%;
-	z-index: 999;
+	margin-bottom: 20px !important;
+	position: fixed !important;
+	top:0px !important;
+	width:100% !important;
+	z-index: 999 !important;
+}
+.navbar-brand {
+	position: relative !important;
+	z-index: 998 !important;
+	font-family: 'Jeju Gothic', sans-serif !important;
 }
 
 .alert-danger {
-	margin-left: 20px;
-	margin-right: 100px;
+	margin-left: auto;
+	margin-right: auto;
 }
 .nav-link.login {
-	color: aqua;
+	color: aqua !important;
 }
 
 .nav-link.logout {
-	color : red;
-	opacity: 90%;
+	color : red !important;
+	opacity: 90% !important;
+	
 }
 
-.nav-link.create {
-	color : white;
+.nav-link{
+	color : white !important;
+	font-family: 'Jeju Gothic', sans-serif !important;
 }
 
 .logout {
-	color : red;
+	color : red !important;
 	opacity: 90%;
+	z-index: 998;
+	position: relative;
+	font-family: 'Jeju Gothic', sans-serif !important;
 }
 .login {
-	color : aqua;
-	opacity: 100%;
+	color : aqua !important;
+	opacity: 100% !important;
+	z-index: 998;
+	position: relative;
+	font-family: 'Jeju Gothic', sans-serif !important;
 }
 .create {
-	color : white;
+	color : white !important;
+	z-index: 998;
+	position: relative;
+	font-family: 'Jeju Gothic', sans-serif !important;
 }
 
 .navbar-text {
-	text-decoration-line : none;
-	color: white;
-	padding-top : 0.5rem;
+	text-decoration-line : none !important;
+	color: white !important;
+	padding-top : 0.5rem !important;
 }
 body{
-	padding-top:56px;
+	padding-top:56px !important;
+	justify-content: center;
+    display: flex;
+    position: relative !important;
+    z-index: 999 !important;
 }
 .container{
 	margin-left:auto;
 	margin-right:auto;
 }
 .dropdown-div {
-	width:50%;
-	display: flex;
-	position: absolute;
-	left:0;
-	right:0;
-	margin-left:auto;
-	margin-right:auto;
-	padding-left:0px;
-	padding-right:0px;
-	justify-content: center;
-	clear:left;
+	width:800px !important;
+	display: flex !important;
+	position: absolute !important;
+	left:0 !important;
+	right:0 !important;
+	margin-left: auto !important;
+	margin-right: auto !important;
+	padding-left: 720px !important;
+	padding-right: 720px !important;
+	justify-content: center !important;
+	clear: both !important;
 }
 .login-div{
 	display:flex;
-	width:200px;
+	width:330px;
+	clear: both;
+}
+.navbar-nav{
+	width:220px;
+}
+.dropdown{
+	margin-right:15px;
+}
+.side-bar {
+	width:180px;
+	height:500px;
+	background-color: aqua;
+	position:fixed;
+	top: 300px;
+	right: 300px;
+	z-index: 999 !important;
+}
+.side-bar-empty {
+	z-index: 0;
+	width:1300px;
+	height:100%;
+	margin-right: auto;
+	margin-left:auto;
+}
+.side-bar-div {
+	z-index: 0;
+	width:1700px;
+	height:100%;
+	display: flex;
+	justify-content: center;
+	position:fixed;
+	margin-left:auto;
+	margin-right:auto;
+}
+.side-bar-out {
+	width:180px;
+	height:500px;
+	background-color: aqua;
+	position:relative;
+	z-index: 0;
+	margin-top:10%;
+}
+.dropdown-menu {
+	background-color:rgb(33,37,41) !important;
+	margin-top:7px !important;
+}
+.dropdown-item {
+	color: white !important;
+	font-family: 'Jeju Gothic', sans-serif !important;
+	padding-left:9px;
+	padding-right:2px;
+}
+.dropdown-item:hover {
+	background-color: rgb(53,53,53) !important;
 }
 </style>
 </head>
 <body>
 	<nav class="navbar navbar-expand-sm bg-dark navbar-dark">
 		<div class="container-fluid">
-			<a class="navbar-brand" href="/Student/common/home.jsp">쇼핑몰</a>
+			<a class="navbar-brand" href="/Student/common/home.jsp">ICTPentaTour</a>
 			<button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#collapsibleNavbar">
 				<span class="navbar-toggler-icon"></span>
 			</button>
@@ -127,11 +206,11 @@ body{
 							<li><a class="nav-link create" href="<%=notWithFormTag%>meInsert">회원 가입</a></li>
 						</c:if>
 						<c:if test="${whologin == '1'}">
-							<a class="navbar-text">${sessionScope.loginfo.meid}(일반 유저)</a>
+							<a class="navbar-text">${sessionScope.loginfo.id}(일반 유저)</a>
 							<li class="nav-item"><a class="nav-link logout" href="<%=notWithFormTag%>meLogout">로그 아웃</a></li>
 						</c:if>
 						<c:if test="${whologin == '2'}">
-							<a class="navbar-text">${sessionScope.loginfo.meid}(관리자)</a>
+							<a class="navbar-text">${sessionScope.loginfo.id}(관리자)</a>
 							<li class="nav-item"><a class="nav-link logout" href="<%=notWithFormTag%>meLogout">로그 아웃</a></li>
 						</c:if>
 					</div>
@@ -218,4 +297,15 @@ body{
 	  	<c:remove var="alertMessage" scope="session"/>
   	</c:if>
 </body>
+<!-- 	<div class="side-bar-div"> -->
+<!-- 		<div class="side-bar-empty"> -->
+<!-- 		</div> -->
+<!-- 		<div class="side-bar-out"> -->
+		  	<div class="side-bar">
+		  		<div class="side-bar-inner">
+		  			<button type="button" class="btn btn-primary">test</button>
+		  		</div>
+		  	</div>
+<!-- 	  	</div> -->
+<!--   	</div> -->
 </html>
