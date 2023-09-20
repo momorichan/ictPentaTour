@@ -121,12 +121,12 @@ div [class^="col-"] {
 		$('#keyword').val('${requestScope.pageInfo.keyword}');
 
 		var myOptionList = $('#mode option');
-		for (var i = 0; i < myOptionList.length; i++) {
+		
+		for (var i = 0; i < myOptionList.length; i++) 
+		{
 			if (myOptionList[i].value == '${requestScope.pageInfo.mode}')
 				myOptionList[i].selected = true;
 		}
-
-
 	});
 
 	function setDisplay() {
@@ -144,6 +144,10 @@ div [class^="col-"] {
 			$('.tripB').hide();
 		}
 	}
+	
+	var today = new Date();
+	today.setDate(today.getDate() + 7);
+	
 </script>
 
 </head>
@@ -171,13 +175,12 @@ div [class^="col-"] {
 							<div class="from">
 								<h3>From</h3>
 								<input class="form-control" type="hidden" id="mode" name="mode"
-									value="depart"> <select class="city1" id="keyword"
-									name="keyword">
+									value="depart"> <select id="keyword" name="keyword">
 									<option value="all" selected="selected">출발지
 									<option value="김포">김포
 									<option value="일본">일본
 									<option value="중국">중국
-									<option value="대만">대만
+									<option value="대만">대만</option>
 								</select>
 							</div>
 
@@ -197,13 +200,13 @@ div [class^="col-"] {
 							<div class="departday">
 								<h3>가는 날</h3>
 								<input class="departdate" type="date" id="departuretime"
-									name="departuretime">
+									name="departuretime" min="2023-09-20">
 							</div>
 
 							<div class="arriveday">
 								<h3>오는 날</h3>
 								<input class="arrivedate" type="date" id="arrivaltime"
-									name="arrivaltime">
+									name="arrivaltime" min="2023-09-20">
 							</div>
 
 

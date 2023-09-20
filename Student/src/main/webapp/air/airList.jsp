@@ -16,17 +16,21 @@
 	
 	<script type="text/javascript">
 	$(document).ready(function(){
-		var popoverTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="popover"]'))
-		var popoverList = popoverTriggerList.map(function (popoverTriggerEl) {
-		  return new bootstrap.Popover(popoverTriggerEl)
-	});
+		
 		
 	
+		
+		
 	});
 		
 	function moveList()
 	{
 		location.href = '<%=notWithFormTag%>airList&mode=all&keyword=';
+	}
+	
+	function goHome()
+	{
+		location.href = '<%=notWithFormTag%>airHome';
 	}
 	
 	
@@ -100,115 +104,18 @@
 						
 						<td align="left" class="arrtime">${bean.arrive}</td>
 						<td align="left">${bean.detime}</td>
-						<td align="left">${bean.artime}</td>					
+						<td align="left">${bean.artime}</td>			
 				</tr>
 				</c:forEach>			 
 			</tbody>
 		</table>
-	</div>	 
-	
-	
-	
-	
-	<%-- <div class="main" align="center">
-  <input type="radio" id="roundway" name="show" value="1" checked/>
-  <input type="radio" id="oneway" name="show" value="2" />
-  <input type="radio" id="checkinfo" name="show" value="3" />
-  
-  <div class="tab" align="center">
-    <label for="roundway">왕복</label>
-    <label for="oneway">편도</label>
-    <label for="checkinfo">체크인</label>
-  </div>
-
-    <div class="tripA">
-      <div class="container">
-					<div>
-						<form name="" action="<%=withFormTag%>" method="get">
-						<input type="hidden" name="command" value="AviList">
-							<div class="search justify-content-center">
-								<div class="from">
-								<h3>From</h3>
-								<input class="city1" placeholder="출발지" type="text" id="depart" name="depart">		
-								</div>
-								<div class="to">
-									<h3>To</h3>
-									<input class="city2" placeholder="도착지" type="text" id="arrive" name="arrive">		
-								</div>
-								
-								<div class="depart">
-									<h3>가는 날</h3>
-									<input class="departdate" type="date" id="departdate" name="departdate">	
-								</div>
-						
-								<div class="arrive">
-									<h3>오는 날</h3>
-									<input class="arrivedate" type="date" id="arrivedate" name="arrivedate">	
-								</div>
-								
-					<div class="people">
-									<h3>성인</h3>
-						<ul class="pagination">
-						<li class="people-man"><a class="page-link minus" href="#">-</a></li>
-						  
-						 <li class="people-man">
-						 	 <a class="page-link" href="#">
-							  	<input type="text" name="qty" id="qty" value="0"
-							  	data-bs-trigger="hover" data-bs-toggle="popover" title="인원수">
-						  	</a>
-						  </li>
-						  
-						  <li class="people-man"><a class="page-link plus" href="#">+</a></li>
-						  </ul>
-						  	  	
-						  	<h3>아동</h3>
-						<ul class="pagination">
-						<li class="people-child"><a class="page-link cminus" href="#">-</a></li>
-						  
-						 <li class="people-child">
-						 	 <a class="page-link" href="#">
-							  	<input type="text" name="cqty" id="cqty" value="0"
-							  	data-bs-trigger="hover" data-bs-toggle="popover" title="인원수">
-						  	</a>
-						  </li>
-						  
-						  <li class="people-child"><a class="page-link cplus" href="#">+</a></li>
-						  </ul>
-							</div>
-							</div>
-							
-							
-							
-							
-							
-							
-							
-							
-							
-							<div class="find">
-								<button type="submit" class="search_btn btn-primary">검색</button>
-								<button type="submit" class="search_btn btn-primary">전체보기</button>
-							</div>
-							
-							
-						</form>
-					</div>	
-			</div>
-    </div>
-    
-    <div class="tripB">
-    	<div class="container">
-    	
-    		
-    	
-    	</div>
-    
-    </div>
-  --%>
-    
-    
-
-
-
+		
+		
+	</div>
+	<div align="center">
+		<button type="button" class="btn btn-primary" onclick="goHome();">
+				홈으로
+			</button>
+	</div>
 </body>
 </html>
