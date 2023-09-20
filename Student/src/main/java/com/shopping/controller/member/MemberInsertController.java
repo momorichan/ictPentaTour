@@ -3,7 +3,6 @@ package com.shopping.controller.member;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import com.shopping.controller.HomeController;
 import com.shopping.controller.SuperClass;
 import com.shopping.model.bean.Member;
 import com.shopping.model.dao.MemberDao;
@@ -25,16 +24,16 @@ public class MemberInsertController extends SuperClass{
 		
 		Member bean = new Member();
 		
-		bean.setId(request.getParameter("id"));
-		bean.setName(request.getParameter("name"));
+		bean.setMeid(request.getParameter("meid"));
 		bean.setPassword(request.getParameter("password"));
+		bean.setName(request.getParameter("name"));
 		bean.setGender(request.getParameter("gender"));
 		bean.setBirth(request.getParameter("birth"));
-		bean.setMarriage(request.getParameter("marriage"));
+		bean.setPhone(request.getParameter("phone"));
 		bean.setAddress(request.getParameter("address"));
-		bean.setManager(request.getParameter("manager"));
+		bean.setRole(request.getParameter("role"));
 		
-		bean.setSalary(Integer.parseInt(request.getParameter("salary")));
+		bean.setStatus(Integer.parseInt(request.getParameter("salary")));
 		
 		MemberDao dao = new MemberDao();
 		

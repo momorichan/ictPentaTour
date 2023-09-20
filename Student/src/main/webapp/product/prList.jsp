@@ -87,7 +87,7 @@
 				<td>
 					<div class="card" style="width:19rem;">
 						<a href="<%=notWithFormTag%>prDetail&pnum=${bean.pnum}${requestScope.pageInfo.flowParameter}" class="removeUnderLine">
-							<img class="card-img-top" alt="${bean.name}" src="${pageContext.request.contextPath}/upload/${bean.image01}" >
+							<img class="card-img-top" alt="${bean.name}" src="/upload/${bean.image01}" >
 							<div class="card-body"> 
 								<h5 class="card-title">${bean.name}</h5> 
 								<p class="card-text">

@@ -10,7 +10,7 @@ import com.shopping.utility.Paging;
 
 public class MemberDao extends SuperDao{
 	
-	public Member getDataByPk(String id, String password) throws Exception{
+	public Member getDataByPk(String meid, String password) throws Exception{
 		Member bean = null;
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
@@ -18,12 +18,12 @@ public class MemberDao extends SuperDao{
 		// ?를 placehoder라고 합니다. 치환되어야 할 영역		
 		
 		String sql = "select * from members ";
-		sql += "where id = ? and password = ?";
+		sql += "where meid = ? and password = ?";
 
 		conn = super.getConncetion();//단계2
 		pstmt = conn.prepareStatement(sql); //단계3
 		
-		pstmt.setString(1, id);
+		pstmt.setString(1, meid);
 		pstmt.setString(2, password);
 		
 		rs = pstmt.executeQuery();//단계4-1
@@ -46,16 +46,15 @@ public class MemberDao extends SuperDao{
 		//ResultSet의 데이터를 읽어서 Bean에 기록한 다음, 반환해 줍니다.
 		Member bean = new Member();
 		
-		bean.setId(rs.getString("id"));
-		bean.setName(rs.getString("name"));
+		bean.setMeid(rs.getString("meid"));
 		bean.setPassword(rs.getString("password"));
+		bean.setName(rs.getString("name"));
 		bean.setGender(rs.getString("gender"));
 		bean.setBirth(String.valueOf(rs.getDate("birth")));
-		bean.setMarriage(rs.getString("marriage"));
-		bean.setSalary(rs.getInt("salary"));
+		bean.setPhone(rs.getString("phone"));
 		bean.setAddress(rs.getString("address"));
-		bean.setManager(rs.getString("manager"));
-		bean.setMpoint(rs.getInt("mpoint"));
+		bean.setRole(rs.getString("role"));
+		bean.setStatus(Integer.parseInt(rs.getString("status")));
 
 		return bean;
 	}
@@ -66,8 +65,8 @@ public class MemberDao extends SuperDao{
 		int cnt = -1;
 
 		// ?를 placehoder라고 합니다. 치환되어야 할 영역		
-		String sql = " insert into members(id, name, password, gender, birth, marriage, salary, address, manager, mpoint)";
-		sql += " values(?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+		String sql = " insert into members(meid, password, name, gender, birth, phone, address, role, status)";
+		sql += " values(?, ?, ?, ?, ?, ?, ?, ?, ?)";
 		PreparedStatement pstmt = null;
 		
 		conn = super.getConncetion();//단계2
@@ -75,16 +74,15 @@ public class MemberDao extends SuperDao{
 		
 		pstmt = conn.prepareStatement(sql); //단계3
 		
-		pstmt.setString(1, bean.getId());
-		pstmt.setString(2, bean.getName());
-		pstmt.setString(3, bean.getPassword());
+		pstmt.setString(1, bean.getMeid());
+		pstmt.setString(2, bean.getPassword());
+		pstmt.setString(3, bean.getName());
 		pstmt.setString(4, bean.getGender());
 		pstmt.setString(5, bean.getBirth());
-		pstmt.setString(6, bean.getMarriage());
-		pstmt.setInt(7, bean.getSalary());
-		pstmt.setString(8, bean.getAddress());
-		pstmt.setString(9, bean.getManager());
-		pstmt.setInt(10, bean.getMpoint());
+		pstmt.setString(6, bean.getPhone());
+		pstmt.setString(7, bean.getAddress());
+		pstmt.setString(8, bean.getRole());
+		pstmt.setInt(9, bean.getStatus());
 		
 		cnt = pstmt.executeUpdate();//단계4-1
 		conn.commit();
@@ -96,18 +94,18 @@ public class MemberDao extends SuperDao{
 		return cnt;
 	}
 
-	public Member getDataByPrimaryKey(String id) throws Exception{
+	public Member getDataByPrimaryKey(String meid) throws Exception{
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
 		Member bean = null;
 		
 		String sql = " select * from members";
-		sql += " where id = ?";
+		sql += " where meid = ?";
 		
 		conn = super.getConncetion();
 		pstmt = conn.prepareStatement(sql); 
 		
-		pstmt.setString(1, id);
+		pstmt.setString(1, meid);
 		
 		rs = pstmt.executeQuery();
 		
@@ -132,8 +130,8 @@ public class MemberDao extends SuperDao{
 		String mode = pageInfo.getMode();
 		String keyword = pageInfo.getKeyword();
 		
-		String sql = " select ID, NAME, PASSWORD, GENDER, BIRTH, MARRIAGE, SALARY, ADDRESS, MANAGER, mpoint";
-		sql += " from (select ID, NAME, PASSWORD, GENDER, BIRTH, MARRIAGE, SALARY, ADDRESS, MANAGER, mpoint, rank() over(order by id asc) as ranking";
+		String sql = " select meid, password, name, gender, birth, phone, address, role, status";
+		sql += " from (select meid, password, name, gender, birth, phone, address, role, status, rank() over(order by meid asc) as ranking";
 		sql += 		 " from members";
 		
 		if(mode==null||mode.equals("all")) {//전체 모드인 경우

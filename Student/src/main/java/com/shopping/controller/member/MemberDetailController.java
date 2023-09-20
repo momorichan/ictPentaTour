@@ -12,14 +12,14 @@ public class MemberDetailController extends SuperClass{
 	public void doGet(HttpServletRequest request, HttpServletResponse response) throws Exception {
 		super.doGet(request, response);
 		
-		String id = request.getParameter("id");
+		String meid = request.getParameter("meid");
 		
 		MemberDao dao = new MemberDao();
 		
 		Member bean = null;
 		
 		try {
-			bean = dao.getDataByPrimaryKey(id);
+			bean = dao.getDataByPrimaryKey(meid);
 			
 			if(bean == null) {
 				super.setAlertMessage("잘못된 회원 정보입니다.");

@@ -26,8 +26,8 @@
 		<form action="<%=withFormTag%>" method="post">
 			<input type="hidden" name="command" value="meLogin">
 			<div>
-				<label for="id" class="form-label">아이디 :</label> 
-				<input type="text" class="form-control" id="id" name="id" value="admin"
+				<label for="meid" class="form-label">아이디 :</label> 
+				<input type="text" class="form-control" id="meid" name="meid" value="admin"
 					placeholder="아이디를 입력해 주세요."
 					data-bs-toggle="tooltip" title="아이디는 3글자 이상 10글자 이하이어야 합니다."
 					data-bs-placement="top">

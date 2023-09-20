@@ -2,7 +2,6 @@
 <%@ page import="com.shopping.model.bean.Member"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ page import="java.util.*"%>
-<%@ include file="../common/bootstrap5.jsp"%>
 <%
 String appName = request.getContextPath();
 String mappingName = "/Shopping"; //in FrontController.java file
@@ -25,10 +24,10 @@ String notWithFormTag = appName + mappingName + "?command=";
 %>
 <c:set var="whologin" value="0"/>
 <c:if test="${not empty sessionScope.loginfo}">
-	<c:if test="${sessionScope.loginfo.id == 'admin'}">
+	<c:if test="${sessionScope.loginfo.meid == 'admin'}">
 		<c:set var="whologin" value="2"/>
 	</c:if>
-	<c:if test="${sessionScope.loginfo.id != 'admin'}">
+	<c:if test="${sessionScope.loginfo.meid != 'admin'}">
 		<c:set var="whologin" value="1"/>
 	</c:if>
 </c:if>
@@ -221,7 +220,7 @@ body{
 								<c:if test="${whologin == '0'}">
 								</c:if>
 								<c:if test="${whologin != '0'}">
-									<li><a class="dropdown-item" href="<%=notWithFormTag%>meDetail&id=${sessionScope.loginfo.id}">상세 보기</a></li>
+									<li><a class="dropdown-item" href="<%=notWithFormTag%>meDetail&meid=${sessionScope.loginfo.meid}">상세 보기</a></li>
 									<li><a class="dropdown-item" href="/Student/member/meUpdateForm01.jsp">정보 수정</a></li>
 									<li><a class="dropdown-item" href="#">탈퇴하기</a></li>
 								</c:if>

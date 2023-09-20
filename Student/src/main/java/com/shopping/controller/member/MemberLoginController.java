@@ -20,15 +20,15 @@ public class MemberLoginController extends SuperClass{
 	public void doPost(HttpServletRequest request, HttpServletResponse response) throws Exception {
 		super.doPost(request, response);
 		
-		String id = request.getParameter("id");
+		String meid = request.getParameter("meid");
 		String password = request.getParameter("password");
-		System.out.println(id +"/"+ password);
+		System.out.println(meid +"/"+ password);
 		
 		MemberDao dao = new MemberDao();
 		Member bean = null;
 		
 		try {
-			bean = dao.getDataByPk(id, password);
+			bean = dao.getDataByPk(meid, password);
 
 		} catch (Exception e) {
 			e.printStackTrace();
