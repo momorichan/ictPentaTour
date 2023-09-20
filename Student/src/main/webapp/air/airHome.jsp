@@ -3,7 +3,7 @@
 
 
 <%@ include file="./../common/bootstrap5.jsp"%>
-<%@ include file="./../common/common.jsp" %>    
+<%@ include file="./../common/common.jsp"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -115,113 +115,35 @@ div [class^="col-"] {
 
 <script type="text/javascript">
 	$(document).ready(function() {
-		
+
+		$('.tripB').hide();
+
+		$('#keyword').val('${requestScope.pageInfo.keyword}');
+
+		var myOptionList = $('#mode option');
+		for (var i = 0; i < myOptionList.length; i++) {
+			if (myOptionList[i].value == '${requestScope.pageInfo.mode}')
+				myOptionList[i].selected = true;
+		}
+
+
+	});
+
+	function setDisplay() {
+		if ($('input:radio[id=oneway]').is(':checked')) {
+			$('.arriveday').hide();
+		} else {
+			$('.arriveday').show();
+		}
+
+		if ($('input:radio[id=checkinfo]').is(':checked')) {
+			$('.tripA').hide();
+			$('.tripB').show();
+		} else {
+			$('.tripA').show();
 			$('.tripB').hide();
-		
-		
-			$('#keyword').val('${requestScope.pageInfo.keyword}');
-
-						var myOptionList = $('#mode option');
-						for (var i = 0; i < myOptionList.length; i++) {
-							if (myOptionList[i].value == '${requestScope.pageInfo.mode}')
-								myOptionList[i].selected = true;
-						}
-
-						var maxPurchaseSize = 10;
-
-						// 버튼 클릭 시
-						$('.plus').click(function() {
-							var qty = $('#qty').val();
-							if (qty == maxPurchaseSize) {
-								alert('최대10명');
-								return;
-							}
-							// Number 객체는 Integer.parseInt() 와 동일한 효과 
-							var newQty = Number(qty) + 1;
-							if (qty == '') {
-								$('#qty').val('1');
-							} else {
-								$('#qty').val(newQty);
-							}
-						});
-
-						$('.minus').click(function() {
-							var qty = $('#qty').val();
-							if (qty == '0') {
-								alert('최소인원0명');
-								return;
-							}
-							// Number 객체는 Integer.parseInt() 와 동일한 효과 
-							var newQty = Number(qty) - 1;
-							if (qty == '') {
-								$('#qty').val('');
-								$('#qty').val('0');
-							} else {
-								$('#qty').val(newQty);
-							}
-						});
-
-						//------------------------------------------------------------
-
-						// 버튼 클릭 시
-						$('.cplus').click(function() {
-							var qty = $('#cqty').val();
-							if (qty == maxPurchaseSize) {
-								alert('최대10명');
-								return;
-							}
-							// Number 객체는 Integer.parseInt() 와 동일한 효과 
-							var newQty = Number(qty) + 1;
-							if (qty == '') {
-								$('#cqty').val('1');
-							} else {
-								$('#cqty').val(newQty);
-							}
-						});
-
-						$('.cminus').click(function() {
-							var qty = $('#cqty').val();
-							if (qty == '0') {
-								alert('최소인원0명');
-								return;
-							}
-							// Number 객체는 Integer.parseInt() 와 동일한 효과 
-							var newQty = Number(qty) - 1;
-							if (qty == '') {
-								$('#cqty').val('');
-								$('#cqty').val('0');
-							} else {
-								$('#cqty').val(newQty);
-							}
-						});
-		
-					});
-	
-	
-	
-	
-	function setDisplay(){
-	    if($('input:radio[id=oneway]').is(':checked')){
-	        $('.arriveday').hide();
-	    }else{
-	        $('.arriveday').show();
-	    }
-	    
-	    
-	    if($('input:radio[id=checkinfo]').is(':checked'))
-	    {
-	    	$('.tripA').hide();	
-	    	$('.tripB').show();	
-	    }
-	    else
-	    {
-	    	$('.tripA').show();	
-	    	$('.tripB').hide();	
-	    }
+		}
 	}
-		
-	
-	
 </script>
 
 </head>
@@ -229,9 +151,11 @@ div [class^="col-"] {
 
 
 	<div class="main" align="center">
-		<input type="radio" id="roundway" name="show" value="1" checked="checked" onchange="setDisplay()"/> 
-		<input type="radio" id="oneway" name="show" value="2" onchange="setDisplay()" /> 
-		<input type="radio" id="checkinfo" name="show" value="3" onchange="setDisplay()"/>
+		<input type="radio" id="roundway" name="show" value="1"
+			checked="checked" onchange="setDisplay()" /> <input type="radio"
+			id="oneway" name="show" value="2" onchange="setDisplay()" /> <input
+			type="radio" id="checkinfo" name="show" value="3"
+			onchange="setDisplay()" />
 
 		<div class="tab" align="center">
 			<label for="roundway">왕복</label> <label for="oneway">편도</label> <label
@@ -246,8 +170,9 @@ div [class^="col-"] {
 						<div class="search justify-content-center">
 							<div class="from">
 								<h3>From</h3>
-								<input class="form-control" type="hidden" id="mode" name="mode" value="depart"> 
-									<select class="city1" id="keyword" name="keyword">
+								<input class="form-control" type="hidden" id="mode" name="mode"
+									value="depart"> <select class="city1" id="keyword"
+									name="keyword">
 									<option value="all" selected="selected">출발지
 									<option value="김포">김포
 									<option value="일본">일본
@@ -258,14 +183,14 @@ div [class^="col-"] {
 
 							<div class="to">
 								<h3>To</h3>
-								<input class="form-control" type="hidden" id="mode2" name="mode2"value="arrive"> 
-								<select class="city2" id="keyword2" name="keyword2">
+								<input class="form-control" type="hidden" id="mode2"
+									name="mode2" value="arrive"> <select class="city2"
+									id="keyword2" name="keyword2">
 									<option value="all" selected="selected">도착지
 									<option value="일본">일본
 									<option value="대만">대만
 									<option value="중국">중국
-									<option value="괌">괌
-									</option>
+									<option value="괌">괌</option>
 								</select>
 							</div>
 
@@ -281,35 +206,6 @@ div [class^="col-"] {
 									name="arrivaltime">
 							</div>
 
-							<div class="people">
-								<h3>성인</h3>
-								<ul class="pagination">
-									<li class="people-man"><a class="page-link minus" href="#">-</a></li>
-
-									<li class="people-man"><a class="page-link" href="#">
-											<input type="text" name="qty" id="qty" value="0"
-											data-bs-trigger="hover" data-bs-toggle="popover" title="인원수">
-									</a></li>
-
-									<li class="people-man"><a class="page-link plus" href="#">+</a></li>
-								</ul>
-
-								<h3>아동</h3>
-								<ul class="pagination">
-									<li class="people-child"><a class="page-link cminus"
-										href="#">-</a></li>
-
-									<li class="people-child"><a class="page-link" href="#">
-											<input type="text" name="cqty" id="cqty" value="0"
-											data-bs-trigger="hover" data-bs-toggle="popover" title="인원수">
-									</a></li>
-
-									<li class="people-child"><a class="page-link cplus"
-										href="#">+</a></li>
-								</ul>
-
-
-							</div>
 
 						</div>
 						<div class="find">
@@ -321,26 +217,27 @@ div [class^="col-"] {
 		</div>
 
 		<div class="tripB">
-				<div class="container">
+			<div class="container">
 				<div>
 					<form name="" action="<%=withFormTag%>" method="get">
 						<input type="hidden" name="command" value="airCheck">
 						<div class="search justify-content-center">
 							<div class="from">
 								<h3>예약번호</h3>
-								<input class="form-control" type="text" id="regid" name="regid" placeholder="예약번호"> 
+								<input class="form-control" type="text" id="regid" name="regid"
+									placeholder="예약번호">
 							</div>
-						<div class="find_checkin">
-							<button type="submit" class="search_btn btn-primary">조회</button>
+							<div class="find_checkin">
+								<button type="submit" class="search_btn btn-primary">조회</button>
+							</div>
+
 						</div>
-							
-						</div>
-						
+
 					</form>
 				</div>
 			</div>
-				
-		
+
+
 		</div>
 
 
@@ -351,7 +248,9 @@ div [class^="col-"] {
 						<h4 class="card-title text-right">
 							<i class="material-icons"></i>
 						</h4>
-						<a href="<%=notWithFormTag%>airList&mode=depart&keyword=all&mode2=arrive&keyword2=일본"> <img
+						<a
+							href="<%=notWithFormTag%>airList&mode=depart&keyword=all&mode2=arrive&keyword2=일본">
+							<img
 							src="https://image.hanatour.com/usr/cms/resize/400_0/2022/09/05/10000/4d34420c-7d47-4835-becf-f04454a99d20.jpeg"
 							alt="Photo of sunset">
 						</a>
@@ -364,7 +263,9 @@ div [class^="col-"] {
 						<h4 class="card-title text-right">
 							<i class="material-icons"></i>
 						</h4>
-						<a href="<%=notWithFormTag%>airList&mode=depart&keyword=all&mode2=arrive&keyword2=중국"> <img
+						<a
+							href="<%=notWithFormTag%>airList&mode=depart&keyword=all&mode2=arrive&keyword2=중국">
+							<img
 							src="https://image.hanatour.com/usr/cms/resize/400_0/2023/04/06/10000/49738def-cc04-494b-a597-d86128ef9a38.jpg"
 							alt="Photo of sunset">
 						</a>
@@ -378,7 +279,9 @@ div [class^="col-"] {
 						<h4 class="card-title text-right">
 							<i class="material-icons"></i>
 						</h4>
-						<a href="<%=notWithFormTag%>airList&mode=depart&keyword=all&mode2=arrive&keyword2=대만"> <img
+						<a
+							href="<%=notWithFormTag%>airList&mode=depart&keyword=all&mode2=arrive&keyword2=대만">
+							<img
 							src="https://image.hanatour.com/usr/cms/resize/400_0/2019/07/04/10000/a895c128-729e-448b-a9f2-ba66e6ce3503.jpg"
 							alt="Photo of sunset">
 						</a>
@@ -392,7 +295,9 @@ div [class^="col-"] {
 						<h4 class="card-title text-right">
 							<i class="material-icons"></i>
 						</h4>
-						<a href="<%=notWithFormTag%>airList&mode=depart&keyword=all&mode2=arrive&keyword2=괌"> <img
+						<a
+							href="<%=notWithFormTag%>airList&mode=depart&keyword=all&mode2=arrive&keyword2=괌">
+							<img
 							src="https://image.hanatour.com/usr/cms/resize/400_0/2022/10/12/10000/2a3c5702-2f0e-4438-934e-0ce5e696deb7.jpg"
 							alt="Photo of sunset">
 						</a>

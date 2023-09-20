@@ -25,6 +25,11 @@
 <link rel="stylesheet" href="${pageContext.request.contextPath}/css/style.css">
 <script src="${pageContext.request.contextPath}/js/script.js"></script> --%>
 
+<style type="text/css">
+
+	#boardNo{display: none;visibility: hidden;}
+</style>
+
 </head>
 <body>	
 	<div class="container">
@@ -33,19 +38,17 @@
 
 		<form action="<%=withFormTag%>" method="post">
 			<input type="hidden" name="command" value="airInsert">
-			<div id="flyid" class="input-group">
-				<span class="input-group-text col-md-2">예약번호</span> 
-				<input id="fakeregid" name="fakeregid" type="number" 
-				class="form-control" disabled="disabled" placeholder="12345">
-				<input type="hidden" id="regid" name="regid" value="12345">		
+			<div id = "boardNo" class="input-group">
+				<span class="input-group-text col-md-2">예약 번호</span> 
+				<input id="regid" name="regid" type="number" class="form-control" placeholder="">
 			</div>
 			
 			
 			<div id="flyid" class="input-group">
 				<span class="input-group-text col-md-2">항공편 번호</span>
 				<input id="fakeflid" name="fakeflid" type="number" class="form-control"	
-				placeholder="${requestScope.flids}" disabled>
-				<input type="hidden" id="flid" name="flid" value="${requestScope.flids}">
+				placeholder="${requestScope.flids.flid}" disabled>
+				<input type="hidden" id="flid" name="flid" value="${requestScope.flids.flid}">
 			</div>
 			
 			<div class="input-group">

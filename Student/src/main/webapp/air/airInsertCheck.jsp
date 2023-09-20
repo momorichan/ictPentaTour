@@ -108,6 +108,13 @@
 		<table class="table">
 			<thead></thead>
 			<tbody>
+			<tr>
+				<td align="center">예약번호</td>
+				<td>${requestScope.fly.regid}</td>
+			</tr>
+			
+			
+			
 				<tr>
 					<td align="center">항공편</td>
 					<td>${requestScope.fly.flid}</td>
@@ -115,14 +122,47 @@
 				
 				<tr>
 					<td align="center">항공사</td>
-					<td>${requestScope.fly.seat}</td>
+					<td>${requestScope.beans.fname}</td>
 				</tr>
 				
 				<tr>
 					<td align="center">출발지</td>
+					<td>${requestScope.beans.depart}</td>
+				</tr>
+				
+				<tr>
+					<td align="center">도착지</td>
+					<td>${requestScope.beans.arrive}</td>
+				</tr>
+				
+				<tr>
+					<td align="center">좌석</td>
+					<td>${requestScope.fly.seat}</td>
+				</tr>
+				
+				<tr>
+					<td align="center">경유지</td>
 					<td>${requestScope.fly.stopover}</td>
 				</tr>
-
+				
+				
+				<tr>
+					<td align="center">출발 시간</td>
+					<td>${requestScope.beans.detime}</td>
+				</tr>
+				
+				
+				<tr>
+					<td align="center">도착 시간</td>
+					<td>${requestScope.beans.artime}</td>
+				</tr>
+				
+				
+				<tr>
+					<td align="center">총 가격</td>
+					<td><fmt:formatNumber value="${requestScope.fly.price}" pattern="###,###원"> </fmt:formatNumber>
+					</td>
+				</tr>
 			</tbody>
 		</table>
 		<div id="menubutton" align="center">

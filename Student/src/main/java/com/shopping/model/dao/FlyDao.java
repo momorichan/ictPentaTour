@@ -65,6 +65,7 @@ public class FlyDao extends SuperDao{
 	{
 		Flight bean = new Flight();
 		
+		bean.setRegid(rs.getInt("regid"));
 		bean.setFlid(rs.getInt("flid"));
 		bean.setPassengers(rs.getInt("passengers"));
 		bean.setPrice(rs.getInt("price"));
@@ -72,6 +73,59 @@ public class FlyDao extends SuperDao{
 		bean.setSeat(rs.getString("seat"));
 		bean.setStopover(rs.getString("stopover"));
 
+		return bean;
+	}
+
+	public Flight getDataByFly(int flid)   throws Exception 
+	{
+
+		String sql = " select * from flight ";
+		sql += " where flid = ? ";
+		
+		ResultSet rs = null;
+		PreparedStatement pstmt = null;
+		conn = super.getConncetion();
+		pstmt = conn.prepareStatement(sql);
+		pstmt.setInt(1, flid);
+		rs = pstmt.executeQuery();		
+		
+		Flight bean = null;
+		if(rs.next())
+		{
+			bean = this.getBeanData(rs);
+		}
+		
+		if(rs != null) {rs.close();}
+		if(pstmt != null) {pstmt.close();}
+		if(conn != null) {conn.close();}
+		
+		return bean;
+	}
+
+	public Flight getDataByRegid(int regid) throws Exception 
+	{
+		
+		
+		String sql = " select * from flight ";
+		sql += " where regid = ? ";
+		
+		ResultSet rs = null;
+		PreparedStatement pstmt = null;
+		conn = super.getConncetion();
+		pstmt = conn.prepareStatement(sql);
+		pstmt.setInt(1, regid);
+		rs = pstmt.executeQuery();		
+		
+		Flight bean = null;
+		if(rs.next())
+		{
+			bean = this.getBeanData(rs);
+		}
+		
+		if(rs != null) {rs.close();}
+		if(pstmt != null) {pstmt.close();}
+		if(conn != null) {conn.close();}
+		
 		return bean;
 	}
 	
