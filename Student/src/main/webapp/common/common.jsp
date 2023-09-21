@@ -56,9 +56,9 @@ String notWithFormTag = appName + mappingName + "?command=";
 	
 	function checkToggle(){
 		if(togglecheck == "on"){
-			$("#side-bar-toggle, .side-bar, .side-bar-inner").addClass("sideon");
+			$("#side-bar-toggle, .side-bar, .side-bar-inner, html, body, .copyright, .navbar").addClass("sideon");
 		}else{
-			$("#side-bar-toggle, .side-bar, .side-bar-inner").removeClass("sideon");
+			$("#side-bar-toggle, .side-bar, .side-bar-inner, html, body, .copyright, .navbar").removeClass("sideon");
 		}
 	}
 	$(function(){
@@ -75,16 +75,21 @@ String notWithFormTag = appName + mappingName + "?command=";
 @import url(//fonts.googleapis.com/earlyaccess/jejugothic.css);
 @import url(//fonts.googleapis.com/earlyaccess/kopubbatang.css);
 #side-bar-toggle .side-bar-on-btn {
+	position:absolute;
+	top:10px;
 	display:block;
 	width:50px; 
 	height:30px; 
 	border-radius:5px 5px 5px 5px;
 	color:black;
-	background-color: white;
+	background-color: black;
 	padding-top:1px;
 	padding-bottom:1px;
 	font-size: 14px;
 	text-align: center;
+	border: none;
+	transform:translate(0px,0);
+    transition:transform 300ms;
 }
 #side-bar-toggle.sideon .side-bar-on-btn {
 	display: none;
@@ -93,6 +98,8 @@ String notWithFormTag = appName + mappingName + "?command=";
 	display: none;
 }
 .side-bar-inner.sideon .side-bar-off-btn {
+	position:absolute;
+	top:7px;
 	display:block;
 	width:40px; 
 	height:27px; 
@@ -105,73 +112,57 @@ String notWithFormTag = appName + mappingName + "?command=";
 	padding-bottom:1px;
 	font-size: 14px;
 	text-align: center;
-	margin-left:78%;
+	margin-right:78%;
 	border-style: none;
-}
-.side-bar-inner {
-	display:flex;
-	visibility:hidden;
-	pointer-events:none;
-	position: relative;
+	transform:translate(0px,0);
+    transition:transform 300ms;
+    font-size: 25px;
+    font-weight: bolder;
 }
 .side-bar-inner.sideon {
 	position: relative;
 	display:flex;
 	flex-direction:column;
-	visibility:visible;
 	background-color: black;
-	width:180px;
-	height:500px;
-	z-index: 998;
+	width:200px;
+	height:948px;
+	z-index: 999;
 	pointer-events:all;
-	border-radius: 10px 10px 10px 10px;
-	
+	border-radius: 0px 0px 0px 0px;
+	transform:translate(0px,0);
+	transition:transform 300ms ease 0ms;
+}
+.side-bar-inner {
+	width:200px;
+	height:948px;
+	display:flex;
+	right:-50px;
+	background-color: black;
+	pointer-events:none;
+	position: relative;
+	transform:translate(0,0);
+    transition:transform 300ms;
 }
 .side-bar.sideon {
 	width:0px;
 	height:0px;
 	position:fixed;
-	top: 300px;
-	z-index: 998 !important;
-    transform:translate(-300px,0);
+	top: 0px;
+	z-index: 999 !important;
     border-radius: 10px 10px 10px 10px;
+    transform:translate(-200px,0);
+    transition:transform 300ms;
     
 }
 .side-bar {
 	width:0px;
 	height:0px;
 	position:fixed;
-	top: 300px;
+	top: 0px;
 	right: 50px;
-	z-index: 998 !important;
-    transform:translate(0,0);
-    transition:transform 300ms cubic-bezier(0.4, 0, 0.2, 1);
-}
-.side-bar-empty {
-	z-index: 0;
-	width:1300px;
-	height:100%;
-	margin-right: auto;
-	margin-left:auto;
-}
-.side-bar-div {
-	z-index: 0;
-	width:1700px;
-	height:100%;
-	display: flex;
-	justify-content: center;
-	position:fixed;
-	margin-left:auto;
-	margin-right:auto;
-	border-radius: 10px 10px 10px 10px;
-}
-.side-bar-out {
-	width:180px;
-	height:500px;
-	background-color: aqua;
-	position:relative;
-	z-index: 0;
-	margin-top:10%;
+	z-index: 999 !important;
+    transform:translate(0px,0);
+    transition:transform 300ms;
 }
 .simple-login {
 	width:100%;
@@ -197,13 +188,19 @@ String notWithFormTag = appName + mappingName + "?command=";
 	float:left;
 	justify-content: space-between;
 }
+.side-bar-icon {
+	width:80%;
+	filter:invert(1);
+}
 .navbar {
 	margin-bottom: 20px !important;
 	position: fixed !important;
 	top:0px !important;
-	width:100% !important;
+	width:calc(100% + 200px) !important;
 	z-index: 999 !important;
 	background-color: black !important;
+	padding-right:100px;
+	padding-left:100px;
 }
 .navbar-brand {
 	position: relative !important;
@@ -267,6 +264,8 @@ body{
     display: flex;
     position: relative !important;
     z-index: 999 !important;
+    min-width: 70% !important;
+    transition:width 300ms;
 }
 .container{
 	margin-left:auto;
@@ -338,10 +337,43 @@ body{
 	bottom:150px;
 	z-index: 997;
 }
+body.sideon, .navbar.sideon, .copyright.sideon{
+	width:calc(100% - 200px) !important;
+	padding-right:0;
+	padding-left:0;
+	transition:width 300ms;
+}
+.dummy-navbar{
+	height:56px !important;
+	background-color: black !important;
+	width:120% !important;
+	position: fixed !important;
+	top:0 !important;
+	z-index: -999 !important;
+}
+.dummy-copyright{
+	height:85.61px !important;
+	background-color: black !important;
+	width:120% !important;
+	position: fixed !important;
+	bottom:0 !important;
+	z-index: -999 !important;
+}
+
 </style>
 </head>
 <body>
 	<div id="top"></div>
+	<c:if test="${not empty sessionScope.alertMessage}">
+		<div class="alert alert-danger alert-dismissible fade show">
+	    	<button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+	    	<strong></strong> ${sessionScope.alertMessage}
+	  	</div>
+	  	<c:remove var="alertMessage" scope="session"/>
+  	</c:if>
+</body>
+<!--  footer -->
+	<div class="dummy-navbar"></div>
 	<nav class="navbar navbar-expand-sm bg-dark navbar-dark" id="navbar">
 		<div class="container-fluid">
 			<a class="navbar-brand" href="/Student/common/home.jsp">ICTPentaTour</a>
@@ -454,15 +486,7 @@ body{
 			</div>
 		</div>
 	</nav>
-	<c:if test="${not empty sessionScope.alertMessage}">
-		<div class="alert alert-danger alert-dismissible fade show">
-	    	<button type="button" class="btn-close" data-bs-dismiss="alert"></button>
-	    	<strong></strong> ${sessionScope.alertMessage}
-	  	</div>
-	  	<c:remove var="alertMessage" scope="session"/>
-  	</c:if>
-</body>
-<!--  footer -->
+<div class="dummy-copyright"></div>
 <div id="container" class="copyright" style="width: 100%; z-index: 1; bottom:0; position: fixed;">
 	<ul class="icons">
 		<li><a href="#" class="icon fa-twitter"><span class="label">Twitter</span></a></li>
@@ -475,7 +499,7 @@ body{
 </div>
 <div class="side-bar">
 	<div id="side-bar-toggle" class="">
-		<button type="button" class="side-bar-on-btn" onclick="toggleSideOn()">ON</button>
+		<button type="button" class="side-bar-on-btn" onclick="toggleSideOn()"><img class="side-bar-icon" src="/Student/upload/sidebar.png"></button>
 	</div>
 	<div class="side-bar-inner">
 		<button type="button" class="side-bar-off-btn" onclick="toggleSideOff()">X</button>
