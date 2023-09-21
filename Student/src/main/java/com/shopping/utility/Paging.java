@@ -99,6 +99,11 @@ public class Paging {
 		this.pagingHtml = this.getMakePagingHtml() ;
 	}
 
+	public Paging(String pageNumber2, String pageSize2, int totalCount2, String endDate2,
+			String mode2, String keyword2, boolean isGrid) {
+
+	}
+
 
 	private String getMakePagingHtml() {
 		String html = "" ;		

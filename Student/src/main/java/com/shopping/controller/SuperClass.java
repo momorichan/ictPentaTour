@@ -7,7 +7,6 @@ import javax.servlet.http.HttpSession;
 
 import com.shopping.model.bean.Member;
 import com.shopping.model.mall.CartManager;
-import com.shopping.utility.Paging_bak;
 
 // 하위 컨트롤러 들이 공통적으로 사용하는 기능들을 여기에 명시합니다.
 public class SuperClass implements SuperController{

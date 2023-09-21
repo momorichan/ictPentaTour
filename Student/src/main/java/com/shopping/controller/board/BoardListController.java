@@ -8,7 +8,7 @@ import javax.servlet.http.HttpServletResponse;
 import com.shopping.controller.SuperClass;
 import com.shopping.model.bean.Board;
 import com.shopping.model.dao.BoardDao;
-import com.shopping.utility.Paging_bak;
+import com.shopping.utility.Paging;
 
 public class BoardListController extends SuperClass{
 	@Override
@@ -26,7 +26,7 @@ public class BoardListController extends SuperClass{
 			int totalCount = dao.GetTotalRecordCount(mode, keyword); // 수정 예정
 			String url = super.getUrlInfomation("boList") ;
 			boolean isGrid = false ;
-			Paging_bak pageInfo = new Paging_bak(pageNumber, pageSize, totalCount, url, mode, keyword, isGrid);
+			Paging pageInfo = new Paging(pageNumber, pageSize, totalCount, url, mode, keyword, isGrid);
 			
 			List<Board> lists = dao.selectAll(pageInfo);
 			

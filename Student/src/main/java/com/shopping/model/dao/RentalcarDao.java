@@ -7,7 +7,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import com.shopping.model.bean.Rentalcar;
-import com.shopping.utility.Paging_bak;
+import com.shopping.utility.Paging;
 
 public class RentalcarDao extends SuperDao{
 	
@@ -38,7 +38,7 @@ public class RentalcarDao extends SuperDao{
 	}	
 	
 	// 렌트카 리스트,페이징 둘다 수정해야함
-	public List<Rentalcar> selectAll(Paging_bak pageInfo) throws Exception{
+	public List<Rentalcar> selectAll(Paging pageInfo) throws Exception{
 		// TopN 구문을 사용하여 페이징 처리된 게시물 목록을 반환합니다.
 		PreparedStatement pstmt = null ;
 		ResultSet rs = null ;
@@ -59,15 +59,13 @@ public class RentalcarDao extends SuperDao{
 		String startDate = pageInfo.getStartDate();
 		String endDate = pageInfo.getEndDate();
 		
-		if(startLocation != null || startLocation.equals("all")) {
-			if(startLocation.equalsIgnoreCase("all")) {				
+		if(startLocation != null || endLocation != null || startDate != null || endDate != null) {
+			if(startLocation.equals("all")) {				
 				System.out.println("대여 지점을 선택해주세요.");				
 			}else {
 				sql += " where startLocation = (" + startLocation + ")";
 			}			
-		}else if(end){
-			
-		}
+		}	
 		sql += ") ";
 		sql += " where ranking between ? and ?";
 		
@@ -77,6 +75,7 @@ public class RentalcarDao extends SuperDao{
 		pstmt.setInt(1, pageInfo.getBeginRow());
 		pstmt.setInt(2, pageInfo.getEndRow());
 		
+				
 		rs = pstmt.executeQuery() ;
 		
 		List<Rentalcar> lists = new ArrayList<Rentalcar>();

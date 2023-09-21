@@ -68,14 +68,61 @@
 z
 		});
 	</script>
-	<style type="text/css">
-
-	</style>
+	<script type="text/javascript">
+		$(function(){ // validation check, form tag
+			
+			
+		});
+	</script>
 </head>
 <body>
 	<div class="container">
 		<h2>렌트카</h2>
-		<p>렌트카 예약 페이지 입니다.</p>	
+		<p>렌트카 예약 페이지 입니다.</p>
+		<div class="row">			
+				<div class="col">
+					<form name="myform" action="<%=withFormTag%>" method="get">
+						<input type="hidden" name="command" value="rcList">
+						<div class="row">
+							<div class="col">
+								<select class="form-control-sm" id="startLocation"
+									name="startLocation">
+									<option value="all" selected="selected">--대여 장소---
+									<option value="Seoul">서울
+									<option value="Daejeon">대전
+									<option value="Daegu">대구
+									<option value="Busan">부산
+									<option value="Jeju">제주
+								</select> <select class="form-control-sm" id="endLocation"
+									name="endLocation">
+									<option value="all" selected="selected">--반납 장소--
+									<option value="Seoul">서울
+									<option value="Daejeon">대전
+									<option value="Daegu">대구
+									<option value="Busan">부산
+									<option value="Jeju">제주
+								</select>
+								<!-- <input class="form-control-sm" type="text" name="keyword"
+												id="keyword" placeholder="키워드 입력"> -->
+								<input class="form-control-sm" type="text" name="keyword"
+									id="datepicker" placeholder="날짜를 선택하세요.">
+
+
+								<button type="submit" class="btn btn-warning form-control-sm"
+									onclick="">검색</button>
+								<!-- <button type="button" class="btn btn-warning form-control-sm"
+												onclick="searchAll();">전체 검색</button> -->
+
+								<span class="label label-default">${requestScope.pageInfo.pagingStatus}</span>
+							</div>
+						</div>
+					</form>
+				</div>
+				<div class="col-sm-1"></div>			
+		</div>
+
+
+
 		<table class="table table-striped">
 			<thead>
 				<tr>
@@ -90,47 +137,7 @@ z
 			<tbody>
 				<tr>
 					<td colspan="6" align="center">
-						<div class="row">
-							<div class="col-sm-1"></div>
-							<div class="col-sm-10">
-								<form name="myform" action="<%=withFormTag%>" method="get">
-									<input type="hidden" name="command" value="rcList">
-									<div class="row">
-										<div class="col-sm-12">
-											<select class="form-control-sm" id="startLocation" name="startLocation">
-												<option value="all" selected="selected">--대여 장소---												
-												<option value="Seoul">서울
-												<option value="Daejeon">대전
-												<option value="Daegu">대구
-												<option value="Busan">부산												
-												<option value="Jeju">제주
-											</select> 
-											<select class="form-control-sm" id="endLocation" name="endLocation">
-												<option value="all" selected="selected">--반납 장소--
-												<option value="Seoul">서울
-												<option value="Daejeon">대전
-												<option value="Daegu">대구
-												<option value="Busan">부산												
-												<option value="Jeju">제주
-											</select> 
-											<!-- <input class="form-control-sm" type="text" name="keyword"
-												id="keyword" placeholder="키워드 입력"> -->
-											<input class="form-control-sm" type="text" name="keyword"
-											id="datepicker" placeholder="날짜를 선택하세요.">
-											
-												
-											<button type="submit" class="btn btn-warning form-control-sm"
-												onclick="">검색</button>
-											<!-- <button type="button" class="btn btn-warning form-control-sm"
-												onclick="searchAll();">전체 검색</button> -->
-											
-											<span class="label label-default">${requestScope.pageInfo.pagingStatus}</span>
-										</div>
-									</div>
-								</form>
-							</div>
-							<div class="col-sm-1"></div>
-						</div>
+						
 					</td>
 				</tr>
 				<c:forEach var="bean" items="${requestScope.datalist}"> 
@@ -141,8 +148,6 @@ z
 					<td>${bean.endLocation}</td>
 					<td>${bean.price}</td>
 					<td>${bean.passengers}</td>												
-					
-					
 					<td>
 						<c:if test="${sessionScope.loginfo.id==bean.id}">
 							<a href="<%=notWithFormTag%>rcUpdate&no=${bean.rcid}${requestScope.pageInfo.flowParameter}">

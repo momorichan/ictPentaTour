@@ -1,6 +1,6 @@
 package com.shopping.utility;
 
-public class Paging_bak {
+public class Paging_backup{
 	// 페이징을 위한 클래스
 	private int totalCount = 0 ; // 테이블에 들어 있는 총 행의 개수
 	private int totalPage = 0 ; // 전체 페이지 수
@@ -23,7 +23,7 @@ public class Paging_bak {
 	
 	private String flowParameter = "" ; // 페이지 이동시 같이 수반되는 파라미터 리스트
 	
-	public Paging_bak(String _pageNumber, String _pageSize, int totalCount, String url, String mode, String keyword, boolean isGrid) {
+	public Paging_backup(String _pageNumber, String _pageSize, int totalCount, String url, String mode, String keyword, boolean isGrid) {
 		if(_pageNumber==null || _pageNumber.equals("null") || _pageNumber.equals("")) {
 			_pageNumber = "1";
 		}

@@ -6,7 +6,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import com.shopping.model.bean.Board;
-import com.shopping.utility.Paging_bak; 
+import com.shopping.utility.Paging; 
 
 public class BoardDao extends SuperDao{
 	public int UpdateEmoticon(int no, String columnName) throws Exception {
@@ -173,7 +173,7 @@ public class BoardDao extends SuperDao{
 		return bean;
 	}	
 	
-	public List<Board> selectAll(Paging_bak pageInfo) throws Exception{
+	public List<Board> selectAll(Paging pageInfo) throws Exception{
 		// TopN 구문을 사용하여 페이징 처리된 게시물 목록을 반환합니다.
 		PreparedStatement pstmt = null ;
 		ResultSet rs = null ;

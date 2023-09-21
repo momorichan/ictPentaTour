@@ -8,7 +8,7 @@ import javax.servlet.http.HttpServletResponse;
 import com.shopping.controller.SuperClass;
 import com.shopping.model.bean.Rentalcar;
 import com.shopping.model.dao.RentalcarDao;
-import com.shopping.utility.Paging_bak;
+import com.shopping.utility.Paging;
 
 public class RentalcarListController extends SuperClass{
 	@Override
@@ -21,25 +21,25 @@ public class RentalcarListController extends SuperClass{
 		
 		
 		/* 렌트카 페이징 */
-		String startDate = request.getParameter("startDate");
-		String endDate = request.getParameter("endDate");
 		String startLocation = request.getParameter("startLocation");
 		String endLocation = request.getParameter("endLocation");
+		String startDate = request.getParameter("startDate");
+		String endDate = request.getParameter("endDate");
 		
 		RentalcarDao dao = new RentalcarDao();
 		
 		
 		try {			
 			int totalCount = 0;
-			Paging_bak pageInfo = null;
+			Paging pageInfo = null;
 			boolean isGrid = false;
 			
 			if(startDate == "" || startDate == null) {
 				totalCount = dao.GetTotalRecordCount(mode, keyword);				
-				pageInfo = new Paging_bak(pageNumber, pageSize, totalCount, endDate, mode, keyword, isGrid);
+				pageInfo = new Paging (pageNumber, pageSize, totalCount, endDate, mode, keyword, isGrid);
 			}else {
 				totalCount = dao.GetTotalRecordCount(mode, keyword, startDate, endDate);
-				pageInfo = new Paging_bak(pageNumber, pageSize, startDate, totalCount, endDate, mode, keyword, isGrid);
+				pageInfo = new Paging(pageNumber, pageSize, startDate, totalCount, endDate, mode, keyword, isGrid);
 			
 				
 			}			
