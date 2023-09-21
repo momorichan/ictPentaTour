@@ -2,8 +2,6 @@
 	pageEncoding="UTF-8"%>
 
 <%@ include file="./../common/common.jsp"%>
-<%@ include file="./../common/bootstrap5.jsp"%>
-
 <!DOCTYPE html>
 <html>
 <head>
@@ -33,15 +31,15 @@
             width: 41.6%; /* 가로 공간의 41.6% 차지 */
             padding:0px;
         }
-		.p1 {
+.p1 {
 	float: left;
     width: 48%;
+    height: 225px;
     display: block;
     margin-bottom: 3px;
     margin-left: 1px;
-    margin-right: 1px;
+    margin-right: 3px;
 }
-
 .p2 {
     float: left;
     width: 32%;
@@ -49,14 +47,59 @@
     margin-left: 1px;
     margin-right: 1px;
 }
-.img-size{
+img {
+   width:100%;
+   height:100%;
 }
-</style>
 
+
+</style>
+<script type="text/javascript">
+
+function getListComment(roid){
+	$('#roomDetail').empty();
+	//$.ajax() 함수를 이용하여 데이터 보여주기 
+	$.ajax({
+		url:'<%=notWithFormTag%>roDetail', 
+		data:'roid=' + roid, 
+		type:'get', 
+		dataType:'json', 
+		success:function(result){
+			showRoom(result);
+		}
+	});
+
+}
+
+function showRoom(result){
+	
+	var divtag = $('<div>');
+	divtag.addClass('container');
+	
+	var htag = $('<h2>');
+	htag.html(result[0].room);
+	
+	var ptag = $('<p>');
+	ptag.html(result[0].roominfo);//방 설명
+	
+	//조립하기(compose up)
+	divtag.append(htag);
+	divtag.append(ptag);
+	$('#roomDetail').append(divtag);
+}
+
+$(document).ready(function(){
+    $('td[data-bs-toggle="modal"]').on('click', function() {
+        var roid = $(this).data('roid'); // 클릭된 td의 data-roid 속성 가져오기
+        getListComment(roid); // 가져온 roid 값을 사용하여 함수 호출
+    });
+
+});
+</script>
 </head>
 <body>
 	<div class="container">
-	<div class="left-div img-size">
+	<div class="left-div">
 		<span class="p1"><img src="${pageContext.request.contextPath}/upload/${requestScope.randomimage.get(1)}" style="width:100%; title="" data-src="" alt=""></span>
 		<span class="p1"><img src="${pageContext.request.contextPath}/upload/${requestScope.randomimage.get(2)}" style="width:100%; title="" data-src="" alt=""></span>
 		<span class="p2"><img src="${pageContext.request.contextPath}/upload/${requestScope.randomimage.get(3)}" style="width:100%; title="" data-src="" alt=""></span>
@@ -66,31 +109,29 @@
 	<div class="right-div">
 		<table class="table table-borderless">
 			<thead>
-				<td class="col-lg-7">
-				asdsad
-				</td>
-				
-				<td class="col-lg-5">
+				<tr>
+				<td >
 					<h2 align="right">${requestScope.acbean.name}</h2>
 					<p align="right">${requestScope.acbean.description}</p>
 				</td>
+				</tr>
 			</thead>
 		</table>
 	</div>
 		
 
-		<table class="table table-borderless">
+		<table class="table">
 
 			<tbody>
 				<c:forEach var="bean" items="${requestScope.roomlists}">
 					<tr>
-						<td><a href="<%=notWithFormTag%>roDetail&roid=${bean.roid}">
-								${bean.room} </a></td>
-						<td>조식 ${bean.breakfast}</td>
-						<td>1박<br>
+						<td class="col-6" data-bs-toggle="modal" data-bs-target="#myModal" data-roid="${bean.roid}" data-zxc="zxc">
+								${bean.room}</td>
+						<td class="col-3">조식 ${bean.breakfast}</td>
+						<td class="col-1">1박<br>
 						<fmt:formatNumber value="${bean.price}"></fmt:formatNumber>원
 						</td>
-						<td><a href="#" class="btn btn-primary">예약하기</a></td>
+						<td class="col-2"><a href="#" class="btn btn-primary">예약하기</a></td>
 					</tr>
 				</c:forEach>
 				
@@ -103,6 +144,30 @@
 				</tr>
 			</tbody>
 		</table>
-	</div>
+		
+<!-- The Modal -->
+<div class="modal fade" id="myModal">
+  <div class="modal-dialog modal-dialog-centered modal-lg">
+    <div class="modal-content">
+
+      <!-- Modal Header -->
+      <div class="modal-header">
+        <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+      </div>
+
+      <!-- Modal body -->
+      <div class="modal-body" id="roomDetail">
+        
+      </div>
+
+      <!-- Modal footer -->
+      <div class="modal-footer">
+        <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Close</button>
+      </div>
+
+    </div>
+  </div>
+</div>
+		</div>
 </body>
 </html>
