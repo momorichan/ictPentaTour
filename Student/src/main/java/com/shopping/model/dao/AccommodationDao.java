@@ -156,6 +156,38 @@ public class AccommodationDao extends SuperDao {
 		return lists;
 	}
 
+	public accommodation getBeanData(Integer acid) throws Exception{
+		accommodation bean = new accommodation();
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		
+		String sql = " select * from accommodation where acid = ?" ;
+
+		conn = super.getConncetion();
+
+		pstmt = conn.prepareStatement(sql);
+
+		pstmt.setInt(1, acid);
+
+		rs = pstmt.executeQuery();
+
+		if (rs.next()) {
+			bean = getBeanData(rs);
+		}
+
+		if (rs != null) {
+			rs.close();
+		}
+		if (pstmt != null) {
+			pstmt.close();
+		}
+		if (conn != null) {
+			conn.close();
+		}
+
+		return bean;
+	}
+
 	
 	
 	

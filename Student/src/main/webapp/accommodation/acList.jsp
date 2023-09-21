@@ -98,10 +98,7 @@
 								<h5 class="card-title">${bean.name}</h5> 
 								<p class="card-text">
 									<span id="minprice">
-									<fmt:formatNumber value="${bean.minprice}">
-										 <%-- 이 숙소의 최저가 방의 가격을 나타내게 추가할 예정 --%>
-									</fmt:formatNumber>
-									~
+									<fmt:formatNumber value="${bean.minprice}" ></fmt:formatNumber>원~
 									</span>
 								</p>
 							<c:if test="${whologin == 2}">

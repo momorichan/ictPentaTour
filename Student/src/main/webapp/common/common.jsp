@@ -2,6 +2,7 @@
 <%@ page import="com.shopping.model.bean.Member"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ page import="java.util.*"%>
+<%@ include file="../common/bootstrap5.jsp"%>
 <%
 String appName = request.getContextPath();
 String mappingName = "/Shopping"; //in FrontController.java file
@@ -41,14 +42,124 @@ String notWithFormTag = appName + mappingName + "?command=";
 <!-- 자바 관련 변수 및 패키지 임포트, 네비게이션 바, jstl 등등-->
 <script src="/Student/js/sweetalert.js"></script>
 <script type="text/javascript">
-
+	var togglecheck = "";
+	function toggleSideOn(){
+		togglecheck = "on";
+		checkToggle();
+	}
+	
+	function toggleSideOff(){
+		togglecheck = "";
+		checkToggle();
+	}
+	
+	function checkToggle(){
+		if(togglecheck == "on"){
+			$("#side-bar-toggle, .side-bar, .side-bar-inner").addClass("sideon");
+		}else{
+			$("#side-bar-toggle, .side-bar, .side-bar-inner").removeClass("sideon");
+		}
+	}
 </script>
 <link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="preconnect" href="https://fonts.gstatic.com">
 <link href="https://fonts.googleapis.com/css2?family=Black+Han+Sans&display=swap" rel="stylesheet">
 <style type="text/css">
 @import url(//fonts.googleapis.com/earlyaccess/jejugothic.css);
 @import url(//fonts.googleapis.com/earlyaccess/kopubbatang.css);
+#side-bar-toggle .side-bar-on-btn {
+	display:block;
+	width:50px; 
+	height:30px; 
+	border-radius:5px 5px 5px 5px;
+	color:black;
+	background-color: white;
+	padding-top:1px;
+	padding-bottom:1px;
+	font-size: 14px;
+	text-align: center;
+}
+#side-bar-toggle.sideon .side-bar-on-btn {
+	display: none;
+}
+.side-bar-off-btn {
+	display: none;
+}
+.side-bar-inner.sideon .side-bar-off-btn {
+	display:block;
+	width:40px; 
+	height:27px; 
+	border-radius:5px 5px 5px 5px; 
+	background:#4cadcc; 
+	text-align:center; 
+	background-color: grey;
+	color:white;
+	padding-top:1px;
+	padding-bottom:1px;
+	font-size: 14px;
+	text-align: center;
+	margin-left:78%;
+	border-style: none;
+}
+.side-bar-inner {
+	display:flex;
+	visibility:hidden;
+	pointer-events:none;
+	position: relative;
+}
+.side-bar-inner.sideon {
+	position: relative;
+	display:flex;
+	visibility:visible;
+	background-color: gray;
+	width:180px;
+	height:500px;
+	z-index: 998;
+	pointer-events:all;
+}
+.side-bar.sideon {
+	width:0px;
+	height:0px;
+	position:fixed;
+	top: 300px;
+	z-index: 998 !important;
+    transform:translate(-300px,0);
+}
+.side-bar {
+	width:0px;
+	height:0px;
+	position:fixed;
+	top: 300px;
+	right: 50px;
+	z-index: 998 !important;
+    transform:translate(0,0);
+    transition:transform 300ms cubic-bezier(0.4, 0, 0.2, 1);
+}
+.side-bar-empty {
+	z-index: 0;
+	width:1300px;
+	height:100%;
+	margin-right: auto;
+	margin-left:auto;
+}
+.side-bar-div {
+	z-index: 0;
+	width:1700px;
+	height:100%;
+	display: flex;
+	justify-content: center;
+	position:fixed;
+	margin-left:auto;
+	margin-right:auto;
+}
+.side-bar-out {
+	width:180px;
+	height:500px;
+	background-color: aqua;
+	position:relative;
+	z-index: 0;
+	margin-top:10%;
+}
 .navbar {
 	margin-bottom: 20px !important;
 	position: fixed !important;
@@ -73,7 +184,6 @@ String notWithFormTag = appName + mappingName + "?command=";
 .nav-link.logout {
 	color : red !important;
 	opacity: 90% !important;
-	
 }
 
 .nav-link{
@@ -142,40 +252,6 @@ body{
 .dropdown{
 	margin-right:15px;
 }
-.side-bar {
-	width:180px;
-	height:500px;
-	background-color: aqua;
-	position:fixed;
-	top: 300px;
-	right: 300px;
-	z-index: 999 !important;
-}
-.side-bar-empty {
-	z-index: 0;
-	width:1300px;
-	height:100%;
-	margin-right: auto;
-	margin-left:auto;
-}
-.side-bar-div {
-	z-index: 0;
-	width:1700px;
-	height:100%;
-	display: flex;
-	justify-content: center;
-	position:fixed;
-	margin-left:auto;
-	margin-right:auto;
-}
-.side-bar-out {
-	width:180px;
-	height:500px;
-	background-color: aqua;
-	position:relative;
-	z-index: 0;
-	margin-top:10%;
-}
 .dropdown-menu {
 	background-color:rgb(33,37,41) !important;
 	margin-top:7px !important;
@@ -206,11 +282,11 @@ body{
 							<li><a class="nav-link create" href="<%=notWithFormTag%>meInsert">회원 가입</a></li>
 						</c:if>
 						<c:if test="${whologin == '1'}">
-							<a class="navbar-text">${sessionScope.loginfo.id}(일반 유저)</a>
+							<a class="navbar-text">${sessionScope.loginfo.meid}(일반 유저)</a>
 							<li class="nav-item"><a class="nav-link logout" href="<%=notWithFormTag%>meLogout">로그 아웃</a></li>
 						</c:if>
 						<c:if test="${whologin == '2'}">
-							<a class="navbar-text">${sessionScope.loginfo.id}(관리자)</a>
+							<a class="navbar-text">${sessionScope.loginfo.meid}(관리자)</a>
 							<li class="nav-item"><a class="nav-link logout" href="<%=notWithFormTag%>meLogout">로그 아웃</a></li>
 						</c:if>
 					</div>
@@ -278,7 +354,7 @@ body{
 						<li class="nav-item dropdown">
 						<a	class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown">투어</a>
 							<ul class="dropdown-menu">
-								<li><a class="dropdown-item" href="<%=notWithFormTag%>tourHome">투어홈</a></li>
+								<li><a class="dropdown-item" href="<%=notWithFormTag%>tourHome">투어 홈</a></li>
 								<c:if test="${whologin == 2}">
 									<li><a class="dropdown-item" href="<%=notWithFormTag%>tourInsert">투어 등록</a></li>
 								</c:if>							
@@ -302,8 +378,11 @@ body{
 <!-- 		</div> -->
 <!-- 		<div class="side-bar-out"> -->
 		  	<div class="side-bar">
+		  		<div id="side-bar-toggle" class="">
+		  			<button type="button" class="side-bar-on-btn" onclick="toggleSideOn()">ON</button>
+		  		</div>
 		  		<div class="side-bar-inner">
-		  			<button type="button" class="btn btn-primary">test</button>
+		  			<button type="button" class="side-bar-off-btn" onclick="toggleSideOff()">X</button>
 		  		</div>
 		  	</div>
 <!-- 	  	</div> -->

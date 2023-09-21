@@ -20,7 +20,9 @@ public class RoomDao extends SuperDao{
 		bean.setRoom(rs.getString("room"));
 		bean.setRoominfo(rs.getString("roominfo"));
 		bean.setRoomtype(rs.getString("roomtype"));
-		
+		bean.setImage01(rs.getString("image01"));
+		bean.setImage02(rs.getString("image02"));
+		bean.setImage03(rs.getString("image03"));
 		return bean;
 	}
 
@@ -54,6 +56,68 @@ public class RoomDao extends SuperDao{
 		}
 
 		return bean;
+	}
+
+	public List<Room> getDataByFk(Integer acid) throws Exception{
+		//외래키 acid로 모든 방 정보를 반환
+		List<Room> lists = new ArrayList<Room>();
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		
+		String sql = " select * from rooms where acid = ?" ;
+
+		conn = super.getConncetion();
+
+		pstmt = conn.prepareStatement(sql);
+
+		pstmt.setInt(1, acid);
+
+		rs = pstmt.executeQuery();
+
+		while (rs.next()) {
+			lists.add(getBeanData(rs));
+		}
+
+		if (rs != null) {
+			rs.close();
+		}
+		if (pstmt != null) {
+			pstmt.close();
+		}
+		if (conn != null) {
+			conn.close();
+		}
+
+		return lists;
+	}
+
+	public List<String> randomImage() throws Exception{
+		List<String> lists = new ArrayList<String>();
+		
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		
+		String sql = " select image01 from (select * from rooms order by DBMS_RANDOM.RANDOM) where rownum <= 5" ;
+
+		conn = super.getConncetion();
+		pstmt = conn.prepareStatement(sql);
+		rs = pstmt.executeQuery();
+
+		while (rs.next()) {
+			lists.add(rs.getString("image01"));
+		}
+
+		if (rs != null) {
+			rs.close();
+		}
+		if (pstmt != null) {
+			pstmt.close();
+		}
+		if (conn != null) {
+			conn.close();
+		}
+		
+		return lists;
 	}
 	
 }

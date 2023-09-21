@@ -10,6 +10,10 @@ public class Room {
 	private String roominfo;
 	private String roomtype;
 	private String breakfast;
+	private String image01;
+	private String image02;
+	private String image03;
+	
 	public int getRoid() {
 		return roid;
 	}
@@ -58,12 +62,31 @@ public class Room {
 	public void setBreakfast(String breakfast) {
 		this.breakfast = breakfast;
 	}
+	public String getImage01() {
+		return image01;
+	}
+	public void setImage01(String image01) {
+		this.image01 = image01;
+	}
+	public String getImage02() {
+		return image02;
+	}
+	public void setImage02(String image02) {
+		this.image02 = image02;
+	}
+	public String getImage03() {
+		return image03;
+	}
+	public void setImage03(String image03) {
+		this.image03 = image03;
+	}
 	@Override
 	public String toString() {
 		return "Room [roid=" + roid + ", acid=" + acid + ", price=" + price + ", guests=" + guests + ", room=" + room
-				+ ", roominfo=" + roominfo + ", roomtype=" + roomtype + ", breakfast=" + breakfast + "]";
+				+ ", roominfo=" + roominfo + ", roomtype=" + roomtype + ", breakfast=" + breakfast + ", image01="
+				+ image01 + ", image02=" + image02 + ", image03=" + image03 + "]";
 	}
-	public Room() {}
+
 	
 	
 	
