@@ -56,3 +56,4 @@ airDetail=com.shopping.controller.air.AirDetailController
 airCheck=com.shopping.controller.air.AirCheckController
 airInsert=com.shopping.controller.air.AirInsertController
 airInsertCheck=com.shopping.controller.air.AirInsertCheckController
+airCancel=com.shopping.controller.air.AirCancelController

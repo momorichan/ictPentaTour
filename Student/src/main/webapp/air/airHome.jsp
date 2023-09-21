@@ -145,8 +145,6 @@ div [class^="col-"] {
 		}
 	}
 	
-	var today = new Date();
-	today.setDate(today.getDate() + 7);
 	
 </script>
 
@@ -199,14 +197,16 @@ div [class^="col-"] {
 
 							<div class="departday">
 								<h3>가는 날</h3>
-								<input class="departdate" type="date" id="departuretime"
-									name="departuretime" min="2023-09-20">
+								<input type="hidden" id="mode3" name="mode3" value="detime">
+								<input class="departdate" type="date" id="keyword3"
+									name="keyword3" min="2023-09-20">
 							</div>
 
 							<div class="arriveday">
 								<h3>오는 날</h3>
-								<input class="arrivedate" type="date" id="arrivaltime"
-									name="arrivaltime" min="2023-09-20">
+								<input type="hidden" id="mode4" name="mode4" value="artime">
+								<input class="arrivedate" type="date" id="keyword4"
+									name="keyword4" min="2023-09-20">
 							</div>
 
 
@@ -227,7 +227,7 @@ div [class^="col-"] {
 						<div class="search justify-content-center">
 							<div class="from">
 								<h3>예약번호</h3>
-								<input class="form-control" type="text" id="regid" name="regid"
+								<input class="form-control" type="number" id="regid" name="regid"
 									placeholder="예약번호">
 							</div>
 							<div class="find_checkin">

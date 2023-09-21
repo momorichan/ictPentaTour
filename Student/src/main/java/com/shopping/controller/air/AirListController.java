@@ -3,6 +3,7 @@ package com.shopping.controller.air;
 import com.shopping.controller.SuperClass;
 
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
@@ -28,25 +29,35 @@ public class AirListController extends SuperClass{
 		String mode2 = request.getParameter("mode2");
 		String keyword2 = request.getParameter("keyword2");
 		
-
+		String mode3 = request.getParameter("mode3");
+		String keyword3 =  request.getParameter("keyword3");
+		
+		String mode4 = request.getParameter("mode4");
+		String keyword4 =  request.getParameter("keyword4");
+		
+		
+		System.out.println(mode3 + "=" + keyword3);
+		System.out.println(mode4 + "=" + keyword4);
+		
 		AirDao dao = new AirDao();
 
 		int totalCount = 0;
 		
 		try
 		{
+			boolean isGrid = false; // 상품목록이 아니기때문에 false
+			String url = super.getUrlInfomation("airList");
+			
 			if(keyword2 == "all" || keyword2 == null)
 			{
+				
 				totalCount = dao.GetTotalRecordCount(mode,keyword); // 수정 예정
 			}
 			else
-			{
+			{	
 				totalCount = dao.GetTotalRecordCount(mode,keyword,mode2,keyword2);
 			}
 			
-			
-			String url = super.getUrlInfomation("airList");
-			boolean isGrid = false; // 상품목록이 아니기때문에 false
 			
 			Paging pageInfo = null; 
 			
@@ -60,6 +71,9 @@ public class AirListController extends SuperClass{
 			}
 			
 			
+			
+
+			
 			List<Airline> list = new ArrayList<Airline>();
 			
 			if(keyword2 == "all" || keyword2 == null)
@@ -70,6 +84,7 @@ public class AirListController extends SuperClass{
 			{
 				list = dao.selectAll(pageInfo);
 			}
+			
 		
 			/* List<Board> list2 = dao.selectOne(pageInfo); */
 			

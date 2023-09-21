@@ -3,6 +3,8 @@ package com.shopping.model.dao;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import com.shopping.model.bean.Flight;
+import com.shopping.model.bean.Product;
+import com.shopping.utility.MyUtility;
 
 public class FlyDao extends SuperDao{
 
@@ -127,6 +129,33 @@ public class FlyDao extends SuperDao{
 		if(conn != null) {conn.close();}
 		
 		return bean;
+	}
+
+	public int deleteFly(int regid) throws Exception 
+	{
+		// 상품 번호를 이용하여 해당 상품을 삭제합니다.
+		int cnt = -1;
+		String sql = "";
+		
+		PreparedStatement pstmt = null;
+		
+		conn = super.getConncetion();
+		conn.setAutoCommit(false);
+		
+		// step 02 : 상품 테이블에서 해당 상품 번호와 관련된 행 삭제하기
+		sql = " delete from flight where regid = ? ";
+		pstmt = conn.prepareStatement(sql);
+		pstmt.setInt(1, regid);
+		cnt = pstmt.executeUpdate();
+	
+		
+		conn.commit();
+		
+		
+		if(pstmt != null) {pstmt.close();}
+		if(conn != null) {conn.close();}
+		
+		return cnt;
 	}
 	
 	

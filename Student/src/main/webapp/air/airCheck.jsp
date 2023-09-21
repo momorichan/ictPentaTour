@@ -26,6 +26,11 @@
 		location.href = '<%=notWithFormTag%>airList&mode=all&keyword=';
 	}
 	
+	function cancel()
+	{
+		location.href='<%=notWithFormTag%>airCancel';
+	}
+	
 	
 	</script>
 
@@ -58,7 +63,8 @@
 					<td>${requestScope.air.detime}</td>
 					<td>${requestScope.air.artime}</td>
 					<td>${requestScope.bean.price}</td>
-					<td><button type="button" class="btn cancel_btn btn-primary">예약취소</button></td>
+					<td align="center" valign="middle"><a
+							href="<%=notWithFormTag%>airCancel&regid=${bean.regid}">예약취소</a></td>
 					</tr>
 			</tbody>
 		</table>
