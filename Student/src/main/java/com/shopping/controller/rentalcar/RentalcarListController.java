@@ -18,18 +18,49 @@ public class RentalcarListController extends SuperClass{
 		String pageSize = request.getParameter("pageSize") ;
 		String mode = request.getParameter("mode") ;
 		String keyword = request.getParameter("keyword") ;
-
+		
+		
+		// 9.20 렌트카 날짜
+		String startDate = request.getParameter("startDate");
+		String endDate = request.getParameter("endDate");
+		
+		
 		RentalcarDao dao = new RentalcarDao();
+		
+		
 		try {
-			int totalCount = dao.GetTotalRecordCount(mode, keyword); 
-			String url = super.getUrlInfomation("rcList") ;
-			boolean isGrid = true ;
-			Paging pageInfo = new Paging(pageNumber, pageSize, totalCount, url, mode, keyword, isGrid);
-				
-			List<Rentalcar> lists = dao.selectAll(pageInfo);
 			
-			request.setAttribute("pageInfo", pageInfo);			
+			int totalCount = 0;
+			Paging pageInfo = null;
+			boolean isGrid = false;
+			
+			if(startDate == "" || startDate == null) {
+				totalCount = dao.GetTotalRecordCount(mode, keyword);				
+				pageInfo = new Paging(pageNumber, pageSize, totalCount, endDate, mode, keyword, isGrid);
+			}else {
+				totalCount = dao.GetTotalRecordCount(mode, keyword, startDate, endDate);
+				pageInfo = new Paging(pageNumber, pageSize, startDate, totalCount, endDate, mode, keyword, isGrid);
+			
+				
+			}			
+					
+			List<Rentalcar> lists = dao.selectAll(pageInfo);
+			super.gotoPage("pageInfo", pageInfo);
+			
+			String url = super.getUrlInfomation("rcList") ;
+			
+			
+			/*
+			 * Paging pageInfo = new Paging(pageNumber, pageSize, totalCount, url, mode,
+			 * keyword, isGrid);
+			 */
+			
+			
+			
 			request.setAttribute("datalist", lists);
+
+			// 페이징 관련 정보를 바인딩
+			request.setAttribute("pageInfo", pageInfo);			
 			super.gotoPage("rentalcar/rcList.jsp");
 			
 		} catch (Exception e) {

@@ -122,14 +122,15 @@ public class RentalcarDao extends SuperDao{
 		return bean;
 	}
 	public int GetTotalRecordCount(String mode, String keyword) throws Exception {
-		System.out.print("검색할 필드명 : " + mode);
+		System.out.print("픽업날짜 : " + mode);
 		System.out.println(", 검색할 키워드 : " + keyword);
 		
 		// 테이블의 총 행개수를 구합니다.
 		String sql = " select count(*) as cnt from rentalcar " ;
 		if(mode == null || mode.equals("all") ) {			
 		}else { // 전체 모드가 아니면
-			sql += " where " + mode + " like '%" + keyword + "%'" ;
+			/* sql += " where " + mode + " like '%" + keyword + "%'" ; */
+			sql += " where startLocation " + mode + " like '%" + keyword + "%'" ;
 		}		
 		
 		PreparedStatement pstmt = null ;
@@ -175,6 +176,11 @@ public class RentalcarDao extends SuperDao{
 		if(conn!=null) {conn.close();}
 		
 		return cnt;
+	}
+
+	public int GetTotalRecordCount(String mode, String keyword, String startDate, String endDate) {
+		// TODO Auto-generated method stub
+		return 0;
 	}
 	
 
