@@ -75,12 +75,6 @@
 					>
 			</div>
 			
-			<div class="input-group">
-				<span class="input-group-text col-md-2">가격</span> <input
-					id="fprice" name="fprice" type="number" class="form-control"
-					placeholder="150000" disabled>
-					<input id="price" name="price" value="150000" type="hidden">
-			</div>
 			
 			
 			<div id="buttonset" class="input-group">

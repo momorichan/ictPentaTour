@@ -147,19 +147,12 @@ public class FlyDao extends SuperDao{
 		pstmt = conn.prepareStatement(sql);
 		pstmt.setInt(1, regid);
 		cnt = pstmt.executeUpdate();
-	
 		
 		conn.commit();
-		
 		
 		if(pstmt != null) {pstmt.close();}
 		if(conn != null) {conn.close();}
 		
 		return cnt;
 	}
-	
-	
-	
-	
-
 }

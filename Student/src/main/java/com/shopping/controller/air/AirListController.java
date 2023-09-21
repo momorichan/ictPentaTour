@@ -34,14 +34,11 @@ public class AirListController extends SuperClass{
 		
 		String mode4 = request.getParameter("mode4");
 		String keyword4 =  request.getParameter("keyword4");
-		
-		
-		System.out.println(mode3 + "=" + keyword3);
-		System.out.println(mode4 + "=" + keyword4);
-		
+				
 		AirDao dao = new AirDao();
 
 		int totalCount = 0;
+		
 		
 		try
 		{
@@ -51,11 +48,26 @@ public class AirListController extends SuperClass{
 			if(keyword2 == "all" || keyword2 == null)
 			{
 				
-				totalCount = dao.GetTotalRecordCount(mode,keyword); // 수정 예정
+				if(keyword3 == null || keyword3.equals(""))
+				{
+					totalCount = dao.GetTotalRecordCount(mode,keyword); // 수정 예정
+				}
+				else
+				{
+					totalCount = dao.GetTotalRecordCountDate(mode,keyword,mode3,keyword3);
+				}
 			}
 			else
 			{	
-				totalCount = dao.GetTotalRecordCount(mode,keyword,mode2,keyword2);
+				if(keyword3 == null || keyword3.equals(""))
+				{
+					totalCount = dao.GetTotalRecordCount(mode,keyword,mode2,keyword2);
+				}
+				else
+				{
+					totalCount = dao.GetTotalRecordCountDate2(mode,keyword,mode2,keyword2,mode3,keyword3);
+				}
+				
 			}
 			
 			
@@ -63,26 +75,56 @@ public class AirListController extends SuperClass{
 			
 			if(keyword2 == "all" || keyword2 == null)
 			{
-				pageInfo = new Paging(pageNumber, pageSize, totalCount, url, mode, keyword,isGrid);
+				
+				if(keyword3 == null || keyword3.equals(""))
+				{
+					pageInfo = new Paging(pageNumber, pageSize, totalCount, url, mode, keyword,isGrid);
+				}
+				else
+				{
+					pageInfo = new Paging(pageNumber, pageSize, totalCount, url, mode, keyword,mode3,keyword3,isGrid);
+				}
 			}
 			else
 			{
-				pageInfo = new Paging(pageNumber, pageSize, totalCount, url, mode, keyword, mode2, keyword2,isGrid);
-			}
-			
-			
-			
 
+				if(keyword3 == null || keyword3.equals(""))
+				{
+					pageInfo = new Paging(pageNumber, pageSize, totalCount, url, mode, keyword, mode2, keyword2,isGrid);
+				}
+				else
+				{
+					pageInfo = new Paging(pageNumber, pageSize, totalCount, url, mode, keyword,mode2,keyword2,mode3,keyword3,isGrid);
+				}
+			}
 			
 			List<Airline> list = new ArrayList<Airline>();
 			
 			if(keyword2 == "all" || keyword2 == null)
 			{
-				list = dao.selectA(pageInfo);
+				
+				
+				if(keyword3 == null || keyword3.equals(""))
+				{
+					list = dao.selectA(pageInfo);
+				}
+				else
+				{
+					list = dao.selectB(pageInfo);
+				}
 			}
 			else
 			{
-				list = dao.selectAll(pageInfo);
+				
+				if(keyword3 == null || keyword3.equals(""))
+				{
+					list = dao.selectAll(pageInfo);
+				}
+				else
+				{
+					list = dao.selectAllb(pageInfo);
+				}
+				
 			}
 			
 		

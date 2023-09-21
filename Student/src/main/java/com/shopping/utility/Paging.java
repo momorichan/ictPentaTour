@@ -39,6 +39,142 @@ public class Paging {
 	
 	
 	
+	public Paging(String _pageNumber, String _pageSize, int totalCount, String url, String mode, String keyword, String mode2 , String keyword2, String mode3 , String keyword3, String mode4 , String keyword4, boolean isGrid) {
+
+		
+		if(_pageNumber == null || _pageNumber.equals("null") || _pageNumber.equals(""))
+		{
+			_pageNumber = "1";
+		}
+		this.pageNumber = Integer.parseInt(_pageNumber);
+		
+		
+		// isGrid == true 이면 상품 목록 보기, false 면 일반 형식(회원,게시물 목록 등등)
+		if(_pageSize == null || _pageSize.equals("null") || _pageSize.equals(""))
+		{
+			if(isGrid == true)
+			{
+				_pageSize = "6"; // 2행3열의 격자 구조
+			}
+			else
+			{
+				_pageSize = "10";
+			}
+		}
+		this.pageSize = Integer.parseInt(_pageSize);
+	
+		this.totalCount = totalCount;
+		this.url = url;
+		
+		// "all" 이면 전체검색
+		this.mode = mode == null ? "all" : mode;
+		this.keyword = keyword == null ? "" : keyword;
+	
+		this.mode2 = mode2 == null ? "" : mode2;
+		this.keyword2 = keyword2 == null ? "" : keyword2;
+		
+		this.mode3 = mode3 == null ? "" : mode3;
+		this.keyword3 = keyword3 == null ? "" : keyword3;
+		
+		this.mode4 = mode4 == null ? "" : mode4;
+		this.keyword4 = keyword4 == null ? "" : keyword4;
+		
+		double _totalPage = Math.ceil((double)totalCount / pageSize);
+		
+		totalPage=(int)_totalPage;
+		beginRow= (pageNumber-1) * pageSize +1;
+		
+		endRow= pageNumber * pageSize;
+		if(endRow > this.totalCount)
+			endRow = this.totalCount;
+		
+		beginPage= (pageNumber - 1)/ this.pageCount * this.pageCount + 1;
+		endPage= beginPage + this.pageCount - 1;
+		
+		if(endPage > totalPage)
+			endPage = totalPage;
+		
+		this.pagingStatus = "총 "+this.totalCount+ "건[" + pageNumber+"/"+totalPage+ "]";
+		
+		this.pageCategory = "null";
+		
+		this.flowParameter = "";
+		this.flowParameter += "&pageNumber=" + pageNumber;
+		this.flowParameter += "&pageSize=" + pageSize;
+		this.flowParameter += "&mode=" + mode;
+		this.flowParameter += "&keyword=" + keyword;
+		
+		this.pagingHtml = this.getMakePageHtml();
+	 
+	}
+	
+	public Paging(String _pageNumber, String _pageSize, int totalCount, String url, String mode, String keyword, String mode2 , String keyword2, String mode3 , String keyword3, boolean isGrid) 
+	{
+
+		
+		if(_pageNumber == null || _pageNumber.equals("null") || _pageNumber.equals(""))
+		{
+			_pageNumber = "1";
+		}
+		this.pageNumber = Integer.parseInt(_pageNumber);
+		
+		
+		// isGrid == true 이면 상품 목록 보기, false 면 일반 형식(회원,게시물 목록 등등)
+		if(_pageSize == null || _pageSize.equals("null") || _pageSize.equals(""))
+		{
+			if(isGrid == true)
+			{
+				_pageSize = "6"; // 2행3열의 격자 구조
+			}
+			else
+			{
+				_pageSize = "10";
+			}
+		}
+		this.pageSize = Integer.parseInt(_pageSize);
+	
+		this.totalCount = totalCount;
+		this.url = url;
+		
+		// "all" 이면 전체검색
+		this.mode = mode == null ? "all" : mode;
+		this.keyword = keyword == null ? "" : keyword;
+	
+		this.mode2 = mode2 == null ? "" : mode2;
+		this.keyword2 = keyword2 == null ? "" : keyword2;
+		
+		this.mode3 = mode3 == null ? "" : mode3;
+		this.keyword3 = keyword3 == null ? "" : keyword3;
+		
+		double _totalPage = Math.ceil((double)totalCount / pageSize);
+		
+		totalPage=(int)_totalPage;
+		beginRow= (pageNumber-1) * pageSize +1;
+		
+		endRow= pageNumber * pageSize;
+		if(endRow > this.totalCount)
+			endRow = this.totalCount;
+		
+		beginPage= (pageNumber - 1)/ this.pageCount * this.pageCount + 1;
+		endPage= beginPage + this.pageCount - 1;
+		
+		if(endPage > totalPage)
+			endPage = totalPage;
+		
+		this.pagingStatus = "총 "+this.totalCount+ "건[" + pageNumber+"/"+totalPage+ "]";
+		
+		this.pageCategory = "null";
+		
+		this.flowParameter = "";
+		this.flowParameter += "&pageNumber=" + pageNumber;
+		this.flowParameter += "&pageSize=" + pageSize;
+		this.flowParameter += "&mode=" + mode;
+		this.flowParameter += "&keyword=" + keyword;
+		
+		this.pagingHtml = this.getMakePageHtml();
+	 
+	}
+	
 	public Paging(String _pageNumber, String _pageSize, int totalCount, String url, String mode, String keyword, String mode2 , String keyword2, boolean isGrid) {
 
 		
@@ -73,11 +209,6 @@ public class Paging {
 		this.mode2 = mode2 == null ? "" : mode2;
 		this.keyword2 = keyword2 == null ? "" : keyword2;
 		
-		this.mode3 = mode2 == null ? "" : mode2;
-		this.keyword3 = keyword2 == null ? "" : keyword2;
-		
-		this.mode4 = mode2 == null ? "" : mode2;
-		this.keyword4 = keyword2 == null ? "" : keyword2;
 		
 		double _totalPage = Math.ceil((double)totalCount / pageSize);
 		
@@ -260,6 +391,38 @@ public class Paging {
 	}
 
 
+
+	public String getMode3() {
+		return mode3;
+	}
+
+	public void setMode3(String mode3) {
+		this.mode3 = mode3;
+	}
+
+	public String getKeyword3() {
+		return keyword3;
+	}
+
+	public void setKeyword3(String keyword3) {
+		this.keyword3 = keyword3;
+	}
+
+	public String getMode4() {
+		return mode4;
+	}
+
+	public void setMode4(String mode4) {
+		this.mode4 = mode4;
+	}
+
+	public String getKeyword4() {
+		return keyword4;
+	}
+
+	public void setKeyword4(String keyword4) {
+		this.keyword4 = keyword4;
+	}
 
 	public int getTotalPage() {
 		return totalPage;
