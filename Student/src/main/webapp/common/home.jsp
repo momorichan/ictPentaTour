@@ -8,47 +8,31 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <style type="text/css">
-.navbar {
-	margin-bottom: 20px;
-	position: fixed;
-	top:0px;
-	width:100%;
-	z-index: 2;
-}
-.nav-link.login {
-	color: aqua;
-}
-
-.nav-link.logout {
-	color : red;
-	opacity: 90%;
-}
-
-.nav-link.create {
-	color : white;
-}
-
-.navbar-text {
-	text-decoration-line : none;
-	color: white;
-	padding-top : 0.5rem;
-}
 .active{
 	width:100%;
-	height:auto;
-	position: block;
+	max-height: 806px;
+	max-width:1224px;
+	position: relative;
 }
 .carousel {
 	width:100%;
-	height:auto;
+	max-height:806px;
+	max-width:1224px;
 	position: relative;
 	display: block;
 }
 .carousel-inner {
 	width:100%;
-	height:auto;
+	max-width:1224px;
+	max-height:806px;
 	position: relative;
 	display: block;
+}
+.d-block {
+	max-height:806px;
+}
+body {
+	background-color: black;
 }
 </style>
 </head>

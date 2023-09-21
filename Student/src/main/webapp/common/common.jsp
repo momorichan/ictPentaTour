@@ -279,8 +279,8 @@ body{
 	right:0 !important;
 	margin-left: auto !important;
 	margin-right: auto !important;
-	padding-left: 720px !important;
-	padding-right: 720px !important;
+	padding-left: 820px !important;
+	padding-right: 820px !important;
 	justify-content: center !important;
 	clear: both !important;
 }
@@ -319,24 +319,6 @@ body{
 	z-index: 998 !important;
 }
 
-.arrow {
-    position: absolute;
-    left: 0; 
-    top: 0; 
-    filter:grayscale(100%);
-    content: '';
-    width: 25px; /* 사이즈 */
-    height: 25px; /* 사이즈 */
-    border-top: 5px solid #000; /* 선 두께 */
-    border-right: 5px solid #000; /* 선 두께 */
-    transform: rotate(-45deg); /* 각도 */
-}
-.top-btn-div{
-	position:fixed;
-	right:75px;
-	bottom:150px;
-	z-index: 997;
-}
 body.sideon, .navbar.sideon, .copyright.sideon{
 	width:calc(100% - 200px) !important;
 	padding-right:0;
@@ -359,7 +341,42 @@ body.sideon, .navbar.sideon, .copyright.sideon{
 	bottom:0 !important;
 	z-index: -999 !important;
 }
-
+.top-btn-div{
+	position:fixed;
+	right:25px;
+	bottom:100px;
+	z-index: 997;
+	display: flex;
+	flex-direction: column;
+}
+.arrow {
+    position: relative;
+    left: 0; 
+    top: 0; 
+    filter:grayscale(100%);
+    content: '';
+    width: 25px; /* 사이즈 */
+    height: 25px; /* 사이즈 */
+    border-top: 5px solid #000; /* 선 두께 */
+    border-right: 5px solid #000; /* 선 두께 */
+    transform: rotate(-45deg); /* 각도 */
+}
+.kakao {
+	position:relative;
+	width:50px;
+	height:50px;
+}
+.naver {
+	position:relative;
+	width:50px;
+	height:50px;
+}
+.top-btn {
+	display: flex;
+	position: relative;
+	margin-top:10px;
+	justify-content: center;
+}
 </style>
 </head>
 <body>
@@ -497,19 +514,21 @@ body.sideon, .navbar.sideon, .copyright.sideon{
 		<li>Made with <a href="https://naver.com/">5조</a></li>
 	</ul>
 </div>
-<div class="side-bar">
-	<div id="side-bar-toggle" class="">
-		<button type="button" class="side-bar-on-btn" onclick="toggleSideOn()"><img class="side-bar-icon" src="/Student/upload/sidebar.png"></button>
-	</div>
-	<div class="side-bar-inner">
-		<button type="button" class="side-bar-off-btn" onclick="toggleSideOff()">X</button>
-		<div class="simple-login-div">
-			<a class="simple-login-a google-login" href=""><img class="simple-login" src="/Student/upload/google.png"></a>
-			<a class="simple-login-a kakao-login" href=""><img class="simple-login" src="/Student/upload/kakao.png"></a>
-		</div>
-	</div>
-</div>
+<!-- <div class="side-bar"> -->
+<!-- 	<div id="side-bar-toggle" class=""> -->
+<!-- 		<button type="button" class="side-bar-on-btn" onclick="toggleSideOn()"><img class="side-bar-icon" src="/Student/upload/sidebar.png"></button> -->
+<!-- 	</div> -->
+<!-- 	<div class="side-bar-inner"> -->
+<!-- 		<button type="button" class="side-bar-off-btn" onclick="toggleSideOff()">X</button> -->
+<!-- 		<div class="simple-login-div"> -->
+<!-- 			<a class="simple-login-a google-login" href=""><img class="simple-login" src="/Student/upload/google.png"></a> -->
+<!-- 			<a class="simple-login-a kakao-login" href=""><img class="simple-login" src="/Student/upload/kakao.png"></a> -->
+<!-- 		</div> -->
+<!-- 	</div> -->
+<!-- </div> -->
 <div class="top-btn-div">
+	<a class="kakao-button" href="https://open.kakao.com/o/gY9q37Ef" target='_blank'><img class="side-button kakao" src="/Student/upload/kakao_chat.png"></a>
+	<a class="naver-mail-button" href=""><img class="side-button naver" src="/Student/upload/naver_mail.png"></a>
 	<a class="top-btn" href=""><span class="arrow"></span></a>
 </div>
 </html>
