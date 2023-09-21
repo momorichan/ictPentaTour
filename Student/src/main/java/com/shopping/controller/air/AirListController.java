@@ -39,7 +39,6 @@ public class AirListController extends SuperClass{
 
 		int totalCount = 0;
 		
-		
 		try
 		{
 			boolean isGrid = false; // 상품목록이 아니기때문에 false
@@ -47,26 +46,60 @@ public class AirListController extends SuperClass{
 			
 			if(keyword2 == "all" || keyword2 == null)
 			{
-				
+				// 2 x
 				if(keyword3 == null || keyword3.equals(""))
 				{
-					totalCount = dao.GetTotalRecordCount(mode,keyword); // 수정 예정
+					
+					if(keyword4 == null || keyword4.equals(""))
+					{
+						totalCount = dao.GetTotalRecordCount(mode,keyword); // 수정 예정
+					}
+					else
+					{
+						totalCount = dao.GetTotalRecordCountDate2(mode,keyword,mode4,keyword4); // 수정 예정
+					}
 				}
 				else
 				{
-					totalCount = dao.GetTotalRecordCountDate(mode,keyword,mode3,keyword3);
+					if(keyword4 == null || keyword4.equals(""))
+					{
+						totalCount = dao.GetTotalRecordCountDate2(mode,keyword,mode3,keyword3);
+					}
+					else
+					{
+						totalCount = dao.GetTotalRecordCountDate2x3o4o(mode,keyword,mode3,keyword3,mode4,keyword4); // 수정 예정
+					}
+					
 				}
+				// 2x --
 			}
 			else
 			{	
+				// 2 o
 				if(keyword3 == null || keyword3.equals(""))
 				{
-					totalCount = dao.GetTotalRecordCount(mode,keyword,mode2,keyword2);
+					if(keyword4 == null || keyword4.equals(""))
+					{
+						totalCount = dao.GetTotalRecordCount(mode,keyword,mode2,keyword2);
+					}
+					else
+					{
+						totalCount = dao.GetTotalRecordCount2o3x4o(mode,keyword,mode2,keyword2,mode4,keyword4);
+					}
+					
 				}
 				else
 				{
-					totalCount = dao.GetTotalRecordCountDate2(mode,keyword,mode2,keyword2,mode3,keyword3);
+					if(keyword4 == null || keyword4.equals(""))
+					{
+						totalCount = dao.GetTotalRecordCountDate2(mode,keyword,mode2,keyword2,mode3,keyword3);
+					}
+					else
+					{
+						totalCount = dao.GetTotalRecordCountDate2o3o4o(mode,keyword,mode2,keyword2,mode3,keyword3,mode4,keyword4);
+					}
 				}
+				// 2o
 				
 			}
 			
@@ -75,54 +108,127 @@ public class AirListController extends SuperClass{
 			
 			if(keyword2 == "all" || keyword2 == null)
 			{
-				
+				// 2 x
 				if(keyword3 == null || keyword3.equals(""))
 				{
-					pageInfo = new Paging(pageNumber, pageSize, totalCount, url, mode, keyword,isGrid);
+					if(keyword4 == null || keyword4.equals(""))
+					{
+						// 2x3x4x
+						pageInfo = new Paging(pageNumber, pageSize, totalCount, url, mode, keyword,isGrid);
+					}
+					else
+					{
+						// 2x3x4o
+						pageInfo = new Paging(pageNumber, pageSize, totalCount, url, mode, keyword, mode4 , keyword4,isGrid);
+					}		
 				}
 				else
 				{
-					pageInfo = new Paging(pageNumber, pageSize, totalCount, url, mode, keyword,mode3,keyword3,isGrid);
+					if(keyword4 == null || keyword4.equals(""))
+					{
+						// 2x3o4x
+						pageInfo = new Paging(pageNumber, pageSize, totalCount, url, mode, keyword,mode3,keyword3,isGrid);
+					}
+					else
+					{
+						// 2x3o4o
+						pageInfo = new Paging(pageNumber, pageSize, totalCount, url, mode, keyword, mode3,keyword3, mode4 , keyword4,isGrid);
+					}	
 				}
+				// 2 x---
 			}
 			else
 			{
-
+				// 2 o
 				if(keyword3 == null || keyword3.equals(""))
 				{
-					pageInfo = new Paging(pageNumber, pageSize, totalCount, url, mode, keyword, mode2, keyword2,isGrid);
+					if(keyword4 == null || keyword4.equals(""))
+					{
+						// 2o 3x 4x
+						pageInfo = new Paging(pageNumber, pageSize, totalCount, url, mode, keyword, mode2, keyword2,isGrid);
+					}
+					else
+					{
+						// 2o 3x 4o
+						pageInfo = new Paging(pageNumber, pageSize, totalCount, url, mode, keyword, mode2, keyword2 ,mode4,keyword4,isGrid);
+					}	
 				}
 				else
 				{
-					pageInfo = new Paging(pageNumber, pageSize, totalCount, url, mode, keyword,mode2,keyword2,mode3,keyword3,isGrid);
+					// 2o 3o 
+					
+					if(keyword4 == null || keyword4.equals(""))
+					{
+						// 2o 3o 4x
+						pageInfo = new Paging(pageNumber, pageSize, totalCount, url, mode, keyword,mode2,keyword2,mode3,keyword3,isGrid);
+					}
+					else
+					{
+						// 2o 3o 4o
+						pageInfo = new Paging(pageNumber, pageSize, totalCount, url, mode, keyword,mode2,keyword2,mode3,keyword3,mode4,keyword4,isGrid);
+					}	
 				}
+				// 2 p
 			}
 			
 			List<Airline> list = new ArrayList<Airline>();
 			
 			if(keyword2 == "all" || keyword2 == null)
 			{
-				
-				
 				if(keyword3 == null || keyword3.equals(""))
 				{
-					list = dao.selectA(pageInfo);
+					if(keyword4 == null || keyword4.equals(""))
+					{
+						list = dao.selectA(pageInfo);
+					}
+					else
+					{
+						// 2x 3x 4o
+						list = dao.selectB(pageInfo);
+					}
 				}
 				else
 				{
-					list = dao.selectB(pageInfo);
+					// 2x 3o 
+					if(keyword4 == null || keyword4.equals(""))
+					{
+						// 2x 3o 4x
+						list = dao.selectB(pageInfo);
+					}
+					else
+					{
+						// 2x 3o 4o
+						list = dao.selectAandB(pageInfo);
+					}
 				}
 			}
 			else
 			{
-				
+				// 2 o 
 				if(keyword3 == null || keyword3.equals(""))
 				{
-					list = dao.selectAll(pageInfo);
+					
+					if(keyword4 == null || keyword4.equals(""))
+					{
+						list = dao.selectAll(pageInfo);
+					}
+					else
+					{
+						list = dao.selectAllb(pageInfo);
+					}
 				}
 				else
 				{
-					list = dao.selectAllb(pageInfo);
+					// 3o
+					if(keyword4 == null || keyword4.equals(""))
+					{
+						list = dao.selectAllb(pageInfo);
+					}
+					else
+					{
+						list = dao.selectAllList(pageInfo);
+					}
+					
 				}
 				
 			}
