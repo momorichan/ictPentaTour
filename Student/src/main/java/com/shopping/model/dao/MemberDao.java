@@ -7,7 +7,7 @@ import java.util.List;
 
 import com.shopping.model.bean.Member;
 import com.shopping.utility.MyUtility;
-import com.shopping.utility.Paging;
+import com.shopping.utility.Paging_bak;
 
 public class MemberDao extends SuperDao{
 	public int deleteData(String id)throws Exception {
@@ -49,7 +49,7 @@ public class MemberDao extends SuperDao{
 		
 		return cnt;
 	}
-	public List<Member> selectAll(Paging pageInfo) throws Exception{
+	public List<Member> selectAll(Paging_bak pageInfo) throws Exception{
 		// TopN 구문을 사용하여 페이징 처리된 게시물 목록을 반환합니다.
 		PreparedStatement pstmt = null ;
 		ResultSet rs = null ;

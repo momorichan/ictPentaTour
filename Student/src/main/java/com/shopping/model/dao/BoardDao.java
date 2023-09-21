@@ -6,19 +6,19 @@ import java.util.ArrayList;
 import java.util.List;
 
 import com.shopping.model.bean.Board;
-import com.shopping.utility.Paging; 
+import com.shopping.utility.Paging_bak; 
 
 public class BoardDao extends SuperDao{
 	public int UpdateEmoticon(int no, String columnName) throws Exception {
 		String sql = " update boards set " + columnName + "=" + columnName + " + 1  " ;
 		sql += " where no = ? " ;
-		PreparedStatement pstmt = null ; // 자바에서 SQL 쿼리를 실행할 때 사용하는 클래스. 변형, 리턴값 출력
+		PreparedStatement pstmt = null ;
 		
 		int cnt = -1 ;
 		conn = super.getConnection() ;
 		conn.setAutoCommit(false);  
 		pstmt = conn.prepareStatement(sql) ;
-		pstmt.setInt(1, no);		
+		pstmt.setInt(1, no);
 		
 		cnt = pstmt.executeUpdate() ;
 		
@@ -173,7 +173,7 @@ public class BoardDao extends SuperDao{
 		return bean;
 	}	
 	
-	public List<Board> selectAll(Paging pageInfo) throws Exception{
+	public List<Board> selectAll(Paging_bak pageInfo) throws Exception{
 		// TopN 구문을 사용하여 페이징 처리된 게시물 목록을 반환합니다.
 		PreparedStatement pstmt = null ;
 		ResultSet rs = null ;

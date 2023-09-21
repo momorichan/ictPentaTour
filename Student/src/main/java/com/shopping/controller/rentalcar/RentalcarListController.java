@@ -8,7 +8,7 @@ import javax.servlet.http.HttpServletResponse;
 import com.shopping.controller.SuperClass;
 import com.shopping.model.bean.Rentalcar;
 import com.shopping.model.dao.RentalcarDao;
-import com.shopping.utility.Paging;
+import com.shopping.utility.Paging_bak;
 
 public class RentalcarListController extends SuperClass{
 	@Override
@@ -20,32 +20,32 @@ public class RentalcarListController extends SuperClass{
 		String keyword = request.getParameter("keyword") ;
 		
 		
-		// 9.20 렌트카 날짜
+		/* 렌트카 페이징 */
 		String startDate = request.getParameter("startDate");
 		String endDate = request.getParameter("endDate");
-		
+		String startLocation = request.getParameter("startLocation");
+		String endLocation = request.getParameter("endLocation");
 		
 		RentalcarDao dao = new RentalcarDao();
 		
 		
-		try {
-			
+		try {			
 			int totalCount = 0;
-			Paging pageInfo = null;
+			Paging_bak pageInfo = null;
 			boolean isGrid = false;
 			
 			if(startDate == "" || startDate == null) {
 				totalCount = dao.GetTotalRecordCount(mode, keyword);				
-				pageInfo = new Paging(pageNumber, pageSize, totalCount, endDate, mode, keyword, isGrid);
+				pageInfo = new Paging_bak(pageNumber, pageSize, totalCount, endDate, mode, keyword, isGrid);
 			}else {
 				totalCount = dao.GetTotalRecordCount(mode, keyword, startDate, endDate);
-				pageInfo = new Paging(pageNumber, pageSize, startDate, totalCount, endDate, mode, keyword, isGrid);
+				pageInfo = new Paging_bak(pageNumber, pageSize, startDate, totalCount, endDate, mode, keyword, isGrid);
 			
 				
 			}			
 					
 			List<Rentalcar> lists = dao.selectAll(pageInfo);
-			super.gotoPage("pageInfo", pageInfo);
+			
 			
 			String url = super.getUrlInfomation("rcList") ;
 			

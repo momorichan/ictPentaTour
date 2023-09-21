@@ -6,9 +6,8 @@ import java.sql.ResultSet;
 import java.util.ArrayList;
 import java.util.List;
 
-import com.shopping.model.bean.Product;
 import com.shopping.model.bean.Rentalcar;
-import com.shopping.utility.Paging;
+import com.shopping.utility.Paging_bak;
 
 public class RentalcarDao extends SuperDao{
 	
@@ -39,7 +38,7 @@ public class RentalcarDao extends SuperDao{
 	}	
 	
 	// 렌트카 리스트,페이징 둘다 수정해야함
-	public List<Rentalcar> selectAll(Paging pageInfo) throws Exception{
+	public List<Rentalcar> selectAll(Paging_bak pageInfo) throws Exception{
 		// TopN 구문을 사용하여 페이징 처리된 게시물 목록을 반환합니다.
 		PreparedStatement pstmt = null ;
 		ResultSet rs = null ;
@@ -48,15 +47,27 @@ public class RentalcarDao extends SuperDao{
 		String sql = " select rcid, carType, startLocation, endLocation, startDate, endDate, price, passengers";
 		sql += " from (select rcid, carType, startLocation, endLocation, startDate, endDate, price, passengers, rank() over(order by price asc) as ranking";
 		sql += " from rentalcar ";
+
+		/*
+		 * String mode = pageInfo.getMode() ; String keyword = pageInfo.getKeyword() ;
+		 * if(mode == null || mode.equals("all") ) { }else { // 전체 모드가 아니면 sql +=
+		 * " where " + mode + " like '%" + keyword + "%'" ; }
+		 */
+
+		String startLocation = pageInfo.getStartLocation();
+		String endLocation = pageInfo.getEndLocation();
+		String startDate = pageInfo.getStartDate();
+		String endDate = pageInfo.getEndDate();
 		
-		String mode = pageInfo.getMode() ;
-		String keyword = pageInfo.getKeyword() ; 
-		
-		if(mode == null || mode.equals("all") ) {			
-		}else { // 전체 모드가 아니면
-			sql += " where " + mode + " like '%" + keyword + "%'" ;
+		if(startLocation != null || startLocation.equals("all")) {
+			if(startLocation.equalsIgnoreCase("all")) {				
+				System.out.println("대여 지점을 선택해주세요.");				
+			}else {
+				sql += " where startLocation = (" + startLocation + ")";
+			}			
+		}else if(end){
+			
 		}
-		
 		sql += ") ";
 		sql += " where ranking between ? and ?";
 		
@@ -121,6 +132,7 @@ public class RentalcarDao extends SuperDao{
 		
 		return bean;
 	}
+	
 	public int GetTotalRecordCount(String mode, String keyword) throws Exception {
 		System.out.print("픽업날짜 : " + mode);
 		System.out.println(", 검색할 키워드 : " + keyword);
@@ -178,7 +190,7 @@ public class RentalcarDao extends SuperDao{
 		return cnt;
 	}
 
-	public int GetTotalRecordCount(String mode, String keyword, String startDate, String endDate) {
+	public int GetTotalRecordCount(String startLocation, String endLocation, String startDate, String endDate) {
 		// TODO Auto-generated method stub
 		return 0;
 	}

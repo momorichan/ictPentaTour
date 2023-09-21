@@ -55,8 +55,8 @@ public class Paging {
 		this.keyword = keyword==null ? "" : keyword ;
 		
 		/* 렌트카 장소 페이징 */
-		if(startLocation == null) {
-			if(endLocation == null) {
+		if(this.startLocation == null) {
+			if(this.endLocation == null) {
 				this.startLocation = "all";				
 				this.endLocation = "all";
 			}else {
@@ -70,8 +70,10 @@ public class Paging {
 				this.endLocation = endLocation;
 			}			
 		}
+		this.startDate = startDate == null ? "" : startDate;
+		this.endDate = endDate == null ? "" : endDate;
+		/* 여기까지 렌트카 */
 		
-		if(startDate == null)
 				
 		double _totalPage = Math.ceil((double)totalCount/pageSize) ;
 		totalPage = (int)_totalPage ;
@@ -96,17 +98,6 @@ public class Paging {
 		
 		this.pagingHtml = this.getMakePagingHtml() ;
 	}
-	
-	/* 렌트카 날짜 페이징 */
-	public Paging(String pageNumber, String pageSize, String startDate, int totalCount, String endDate,
-			String mode, String keyword, boolean isGrid) {
-		/* 대여 시작일이 널값 이거나 공백이면 */
-		if(startDate == null || startDate.trim().equals("")) {
-			
-		}
-
-	}
-
 
 
 	private String getMakePagingHtml() {
@@ -341,10 +332,10 @@ public class Paging {
 		imsi += "pagingStatus=" + pagingStatus  + "<br/>";
 		imsi += "mode=" + mode  + "<br/>";
 		imsi += "keyword=" + keyword  + "<br/>";
-		
-		imsi += "startDate=" + startDate + "<br/>";
-		imsi += "endDate=" + endDate + "<br/>";
-		
+		/*
+		 * imsi += "startDate=" + startDate + "<br/>"; imsi += "endDate=" + endDate +
+		 * "<br/>";
+		 */		
 		imsi += "flowParameter=" + flowParameter  + "<br/>";
 		imsi += "<br/><br/>";
 		imsi += "pagingHtml=" + pagingHtml  + "<br/>";		

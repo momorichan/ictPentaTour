@@ -8,7 +8,7 @@ import java.util.List;
 import com.shopping.model.bean.Product;
 import com.shopping.model.mall.CartItem;
 import com.shopping.utility.MyUtility;
-import com.shopping.utility.Paging;
+import com.shopping.utility.Paging_bak;
 
 public class ProductDao extends SuperDao{
 	public int DeleteData(int pnum)throws Exception {
@@ -144,7 +144,7 @@ public class ProductDao extends SuperDao{
 		return bean;
 	}	
 	
-	public List<Product> selectAll(Paging pageInfo) throws Exception{
+	public List<Product> selectAll(Paging_bak pageInfo) throws Exception{
 		// TopN 구문을 사용하여 페이징 처리된 게시물 목록을 반환합니다.
 		PreparedStatement pstmt = null ;
 		ResultSet rs = null ;
@@ -169,6 +169,9 @@ public class ProductDao extends SuperDao{
 		pstmt = conn.prepareStatement(sql) ;
 		pstmt.setInt(1, pageInfo.getBeginRow());
 		pstmt.setInt(2, pageInfo.getEndRow());
+		System.out.println("!!!!!!!!:= "+sql);
+		System.out.println("비긴로우: "+pageInfo.getBeginRow());
+		System.out.println("엔드로우: "+pageInfo.getEndRow());
 		
 		rs = pstmt.executeQuery() ;
 		
