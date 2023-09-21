@@ -62,6 +62,12 @@ String notWithFormTag = appName + mappingName + "?command=";
 			$("#side-bar-toggle, .side-bar, .side-bar-inner").removeClass("sideon");
 		}
 	}
+	$(function(){
+		  $('.top-btn').on('click',function(e){
+		      e.preventDefault();
+		      $('html,body').animate({scrollTop:0},0);
+		  });
+		});
 </script>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com">
@@ -91,10 +97,10 @@ String notWithFormTag = appName + mappingName + "?command=";
 	display:block;
 	width:40px; 
 	height:27px; 
-	border-radius:5px 5px 5px 5px; 
+	border-radius:10px 10px 10px 10px; 
 	background:#4cadcc; 
 	text-align:center; 
-	background-color: grey;
+	background-color: black;
 	color:white;
 	padding-top:1px;
 	padding-bottom:1px;
@@ -114,7 +120,7 @@ String notWithFormTag = appName + mappingName + "?command=";
 	display:flex;
 	flex-direction:column;
 	visibility:visible;
-	background-color: gray;
+	background-color: black;
 	width:180px;
 	height:500px;
 	z-index: 998;
@@ -175,6 +181,12 @@ String notWithFormTag = appName + mappingName + "?command=";
 .simple-login-a {
 	width:25%;
 	position:relative;
+	filter:grayscale(100%);
+}
+.simple-login-a:hover {
+	width:25%;
+	position:relative;
+	filter:grayscale(100%);
 }
 .simple-login-div {
 	width:100%;
@@ -185,7 +197,6 @@ String notWithFormTag = appName + mappingName + "?command=";
 	display:flex;
 	float:left;
 	justify-content: space-between;
-	
 }
 .navbar {
 	margin-bottom: 20px !important;
@@ -218,7 +229,12 @@ String notWithFormTag = appName + mappingName + "?command=";
 	color : white !important;
 	font-family: 'Jeju Gothic', sans-serif !important;
 }
-
+.non-dropdown{
+	color : white !important;
+	z-index: 998;
+	position: relative;
+	font-family: 'Jeju Gothic', sans-serif !important;
+}
 .logout {
 	color : red !important;
 	opacity: 90%;
@@ -247,6 +263,7 @@ String notWithFormTag = appName + mappingName + "?command=";
 }
 body{
 	padding-top:56px !important;
+	padding-bottom:120px !important;
 	justify-content: center;
     display: flex;
     position: relative !important;
@@ -293,10 +310,40 @@ body{
 .dropdown-item:hover {
 	background-color: rgb(53,53,53) !important;
 }
+#top{
+	position:relative; 
+	display:none; 
+	pointer-events:none; 
+	top:0%
+}
+.copyright{
+	padding-bottom: 0px;
+	z-index: 998 !important;
+}
+
+.arrow {
+    position: absolute;
+    left: 0; 
+    top: 0; 
+    filter:grayscale(100%);
+    content: '';
+    width: 25px; /* 사이즈 */
+    height: 25px; /* 사이즈 */
+    border-top: 5px solid #000; /* 선 두께 */
+    border-right: 5px solid #000; /* 선 두께 */
+    transform: rotate(-45deg); /* 각도 */
+}
+.top-btn-div{
+	position:fixed;
+	right:75px;
+	bottom:150px;
+	z-index: 997;
+}
 </style>
 </head>
 <body>
-	<nav class="navbar navbar-expand-sm bg-dark navbar-dark">
+	<div id="top"></div>
+	<nav class="navbar navbar-expand-sm bg-dark navbar-dark" id="navbar">
 		<div class="container-fluid">
 			<a class="navbar-brand" href="/Student/common/home.jsp">ICTPentaTour</a>
 			<button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#collapsibleNavbar">
@@ -371,7 +418,13 @@ body{
 							</ul>
 						</li>
 						<li class="nav-item dropdown">
-						<a	class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown">숙박 보기</a>
+							<a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown">항공</a>
+							<ul class="dropdown-menu">
+								<li><a class="dropdown-item" href="<%=notWithFormTag%>airHome">목록보기</a></li>
+							</ul>
+						</li>
+						<li class="nav-item dropdown">
+							<a	class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown">숙박</a>
 							<ul class="dropdown-menu">
 								<li><a class="dropdown-item" href="<%=notWithFormTag%>acList">목록보기</a></li>
 								<c:if test="${whologin == 2}">
@@ -385,6 +438,15 @@ body{
 								<li><a class="dropdown-item" href="<%=notWithFormTag%>tourHome">투어 홈</a></li>
 								<c:if test="${whologin == 2}">
 									<li><a class="dropdown-item" href="<%=notWithFormTag%>tourInsert">투어 등록</a></li>
+								</c:if>							
+							</ul>
+						</li>
+						<li class="nav-item dropdown">
+						<a	class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown">렌트카</a>
+							<ul class="dropdown-menu">
+								<li><a class="dropdown-item" href="<%=notWithFormTag%>rcList">렌트카</a></li>
+								<c:if test="${whologin == 2}">
+									
 								</c:if>							
 							</ul>
 						</li>	
@@ -412,22 +474,19 @@ body{
 		<li>Made with <a href="https://naver.com/">5조</a></li>
 	</ul>
 </div>
-<!-- 	<div class="side-bar-div"> -->
-<!-- 		<div class="side-bar-empty"> -->
-<!-- 		</div> -->
-<!-- 		<div class="side-bar-out"> -->
-		  	<div class="side-bar">
-		  		<div id="side-bar-toggle" class="">
-		  			<button type="button" class="side-bar-on-btn" onclick="toggleSideOn()">ON</button>
-		  		</div>
-		  		<div class="side-bar-inner">
-		  			<button type="button" class="side-bar-off-btn" onclick="toggleSideOff()">X</button>
-		  			<div class="simple-login-div">
-			  			<a class="simple-login-a google-login"><img class="simple-login" src="/Student/upload/google.png"></a>
-			  			<a class="simple-login-a kakao-login"><img class="simple-login" src="/Student/upload/kakao.png"></a>
-		  			</div>
-		  		</div>
-		  	</div>
-<!-- 	  	</div> -->
-<!--   	</div> -->
+<div class="side-bar">
+	<div id="side-bar-toggle" class="">
+		<button type="button" class="side-bar-on-btn" onclick="toggleSideOn()">ON</button>
+	</div>
+	<div class="side-bar-inner">
+		<button type="button" class="side-bar-off-btn" onclick="toggleSideOff()">X</button>
+		<div class="simple-login-div">
+			<a class="simple-login-a google-login" href=""><img class="simple-login" src="/Student/upload/google.png"></a>
+			<a class="simple-login-a kakao-login" href=""><img class="simple-login" src="/Student/upload/kakao.png"></a>
+		</div>
+	</div>
+</div>
+<div class="top-btn-div">
+	<a class="top-btn" href=""><span class="arrow"></span></a>
+</div>
 </html>
