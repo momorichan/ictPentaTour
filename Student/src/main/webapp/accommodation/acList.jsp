@@ -84,7 +84,7 @@
           		</div>
 			</td>
 			</tr>
-				<c:set var="colsu" value="${applicationScope.settingMap['accommodation_list_column_size']}"/>
+				<c:set var="colsu" value="${applicationScope.map['accommodation_list_column_size']}"/>
 				<c:forEach var="bean" items="${requestScope.datalist}" varStatus="status">
 				<c:if test="${status.index%colsu==0}">
 					<tr>
