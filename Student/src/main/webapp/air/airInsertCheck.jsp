@@ -157,6 +157,10 @@
 					<td>${requestScope.beans.artime}</td>
 				</tr>
 				
+				<tr>
+					<td align="center">총 인원수</td>
+					<td>${requestScope.fly.passengers}</td>
+				</tr>
 				
 				<tr>
 					<td align="center">총 가격</td>

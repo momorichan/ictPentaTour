@@ -52,7 +52,7 @@ public class AirInsertController extends SuperClass{
 		bean.setSeat( request.getParameter("seat"));
 		bean.setStopover( request.getParameter("stopover"));
 		bean.setPassengers( Integer.parseInt(request.getParameter("passengers")));
-		bean.setPrice(Integer.parseInt(request.getParameter("price")) * Integer.parseInt(request.getParameter("passengers")));
+		bean.setPrice(Integer.parseInt(request.getParameter("price")));
 		
 		int cnt = -1;
 		try

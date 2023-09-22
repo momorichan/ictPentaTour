@@ -24,7 +24,7 @@ public class FlyDao extends SuperDao{
 		pstmt.setString(2, bean.getSeat());
 		pstmt.setString(3, bean.getStopover());
 		pstmt.setInt(4, bean.getPassengers());
-		pstmt.setInt(5, bean.getPrice());
+		pstmt.setInt(5, bean.getPrice() * bean.getPassengers());
 		
 		cnt = pstmt.executeUpdate();
 		conn.commit();

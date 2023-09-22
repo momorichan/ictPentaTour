@@ -62,7 +62,7 @@
 					<td>${requestScope.air.arrive}</td>
 					<td>${requestScope.air.detime}</td>
 					<td>${requestScope.air.artime}</td>
-					<td>${requestScope.bean.price}</td>
+					<td><fmt:formatNumber value="${requestScope.bean.price}" pattern="###,###원"> </fmt:formatNumber></td>
 					<td align="center" valign="middle"><a
 							href="<%=notWithFormTag%>airCancel&regid=${bean.regid}">예약취소</a></td>
 					</tr>
