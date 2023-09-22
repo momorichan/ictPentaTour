@@ -47,6 +47,9 @@ acList=com.shopping.controller.accommodation.AccommodationListController
 acDetail=com.shopping.controller.accommodation.AccommodationDetailController
 #Room section
 roDetail=com.shopping.controller.room.RoomDetailController
+roReservation=com.shopping.controller.room.RoomReservationController
+#amenities section
+amList=com.shopping.controller.amenities.AmenitiesListController
 #tour section
 tourHome=com.shopping.controller.tour.TourHomeController
 tourList=com.shopping.controller.tour.TourListController

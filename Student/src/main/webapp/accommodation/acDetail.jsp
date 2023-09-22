@@ -56,7 +56,7 @@ img {
 </style>
 <script type="text/javascript">
 
-function getListComment(roid){
+function getRoomDetail(roid){
 	$('#roomDetail').empty();
 	//$.ajax() 함수를 이용하여 데이터 보여주기 
 	$.ajax({
@@ -67,33 +67,32 @@ function getListComment(roid){
 			dataType : 'html',
 			success : function(result) {
 				$('#roomDetail').html(result);
-				//showRoom(result);
 			}
 		});
-
 	}
-
-	function showRoom(result) {
-
-		var divtag = $('<div>');
-		divtag.addClass('container');
-
-		var htag = $('<h2>');
-		htag.html(result.room);
-
-		var ptag = $('<p>');
-		ptag.html(result.roominfo);//방 설명
-
-		//조립하기(compose up)
-		divtag.append(htag);
-		divtag.append(ptag);
-		$('#roomDetail').append(divtag);
+	
+function getAmenities(){
+	$('#amList').empty();
+	//$.ajax() 함수를 이용하여 데이터 보여주기 
+	$.ajax({
+		url:'<%=notWithFormTag%>
+	amList',
+			data : 'acid=' + '${requestScope.acbean.acid}',
+			type : 'get',
+			//dataType:'json', 
+			dataType : 'html',
+			success : function(result) {
+				$('#amList').html(result);
+			}
+		});
 	}
 
 	$(document).ready(function() {
+
+		getAmenities();
 		$('td[data-bs-toggle="modal"]').on('click', function() {
 			var roid = $(this).data('roid'); // 클릭된 td의 data-roid 속성 가져오기
-			getListComment(roid); // 가져온 roid 값을 사용하여 함수 호출
+			getRoomDetail(roid); // 가져온 roid 값을 사용하여 함수 호출
 		});
 
 	});
@@ -120,26 +119,29 @@ function getListComment(roid){
 					<tr>
 						<td>
 							<h2 align="right">${requestScope.acbean.name}</h2>
+							${requestScope.acbean.acid}
 							<p align="right">${requestScope.acbean.description}</p>
 						</td>
 					</tr>
 					<tr>
-						<td>
-							리뷰 정보
-						</td>
+						<td>리뷰 정보</td>
 					</tr>
 					<tr>
-						<td>
-							최저가 정보
-						</td>
+						<td>최저가 정보</td>
 					</tr>
 				</thead>
 			</table>
 		</div>
-		<table class="table">
-			
-		</table>
-
+		<div>
+			<table class="table">
+				<tbody>
+					<tr>
+						<td>숙소 정보</td>
+						<td align="right">날짜 및 인원</td>
+					</tr>
+				</tbody>
+			</table>
+		</div>
 		<table class="table">
 
 			<tbody>
@@ -151,18 +153,14 @@ function getListComment(roid){
 						<td class="col-1">1박<br> <fmt:formatNumber
 								value="${bean.price}"></fmt:formatNumber>원
 						</td>
-						<td class="col-2"><a href="#" class="btn btn-primary">예약하기</a></td>
+						<td class="col-2"><a href="<%=notWithFormTag%>roReservation"
+							class="btn btn-primary">예약하기</a></td>
 					</tr>
 				</c:forEach>
 
 			</tbody>
 		</table>
-		<table class="table table-borderless">
-			<tbody>
-				<tr>
-					<td align="center">편의시설</td>
-				</tr>
-			</tbody>
+		<table class="table table-borderless" id="amList">
 		</table>
 
 		<!-- The Modal -->
@@ -171,6 +169,5 @@ function getListComment(roid){
 				<div class="modal-content" id="roomDetail"></div>
 			</div>
 		</div>
-	</div>
 </body>
 </html>
