@@ -111,6 +111,108 @@ div [class^="col-"] {
 	{
 	transform: scale3d(1, 1, 1);
 }
+
+.form_radio_btn {
+			width: 47%;
+			height : 45px;
+    		border: 1px solid #EAE7E7;
+    		border-radius: 10px;
+		}
+		.form_radio_btn input[type=radio] {
+			display: none;
+		}
+		.form_radio_btn label {
+			display: block;
+    		border-radius: 10px;
+   			margin: 0 auto;
+    		text-align: center;
+    		height: -webkit-fill-available;
+    		line-height: 45px;
+		}
+		.form_radio_btn input[type=radio]:checked + label {
+			background: #184DA0;
+			color: #fff;
+		}
+		 
+		/* Hover */
+		.form_radio_btn label:hover {
+			color: #666;
+		}
+		 
+		/* Disabled */
+		.form_radio_btn input[type=radio] + label {
+			background: #F9FAFC;
+			color: #666;
+		}
+		
+		
+		
+input[type='date'] {
+  border: none; 
+  position: relative; 
+  width: 100%;
+  padding: 10px;
+  background: url(../../../assets/Calendar.svg) no-repeat right 10px center /
+  35px auto;
+  background-color: white;
+  box-shadow: 2px 2px 7px rgba(0, 0, 0, 0.2);
+  border-radius: 8px;
+  text-align: center;
+  font-size: 100%;
+  margin-bottom: 20px;
+}
+
+select {
+  border: none; 
+  position: relative; 
+  width: 100%;
+  padding: 10px;
+  background: url(../../../assets/Calendar.svg) no-repeat right 10px center /
+  35px auto;
+  background-color: white;
+  box-shadow: 2px 2px 7px rgba(0, 0, 0, 0.2);
+  border-radius: 8px;
+  text-align: center;
+  font-size: 100%;
+  margin-bottom: 20px;
+}
+
+input[type='date']::-webkit-calendar-picker-indicator {
+  position: absolute; 
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  background: transparent; 
+  color: transparent;
+  cursor: pointer;
+}
+
+// type이 date인 input의 placeholder를 커스텀하기 위한 선택자
+// 기본적으로 type date인 input은 placeholder가 먹히지 않기 때문이다!
+input[type='date']::before 
+{
+  content: attr(placeholder);
+  width: 100%;
+  height: 100%;
+}
+
+from::before 
+{
+  content: attr(placeholder);
+  width: 100%;
+  height: 100%;
+}
+
+// input에 어떠한 유효값이 입력된 상태인지 확인하는 선택자
+// 날짜를 선택하면 유효값이 입력된다.
+// 이 속성을 활용하고자 한다면 반드시 태그에 required 속성을 달아줘야한다.
+input[type='date']:valid::before {
+  display: none; }
+  
+  from:valid::before {
+  display: none; }
+		
 </style>
 
 <script type="text/javascript">
@@ -135,6 +237,10 @@ div [class^="col-"] {
 	}
 	
 	
+	
+	
+	
+	
 </script>
 
 </head>
@@ -142,27 +248,26 @@ div [class^="col-"] {
 
 
 	<div class="main" align="center">
-		<input type="radio" id="roundway" name="show" value="1"
-			checked="checked" onchange="setDisplay()" /> <input type="radio"
-			id="oneway" name="show" value="2" onchange="setDisplay()" /> <input
-			type="radio" id="checkinfo" name="show" value="3"
-			onchange="setDisplay()" />
-
-		<div class="tab" align="center">
-			<label for="roundway">왕복</label> <label for="oneway">편도</label> <label
-				for="checkinfo">체크인</label>
+		<div class="form_radio_btn row-vh d-flex flex-row justify-content-center">
+		<input type="radio" id="roundway" name="show" value="1" checked="checked" onchange="setDisplay()"/>
+		<label class="form_radio_btn label" for="roundway">왕복</label>
+		
+		<input type="radio" id="oneway" name="show" value="2" onchange="setDisplay()"/>
+		<label class="form_radio_btn label" for="oneway">편도</label>
+		
+		<input type="radio" id="checkinfo" name="show" value="3" onchange="setDisplay()"/>
+		<label class="form_radio_btn label" for="checkinfo">체크인</label>
 		</div>
 		
-
 		<div class="tripA">
 			<div class="container">
 				<div>
-					<form name="" action="<%=withFormTag%>" method="get">
+					<form action="<%=withFormTag%>" method="get">
 						<input type="hidden" name="command" value="airList">
 						<div class="search justify-content-center">
 							<div class="from">
 								<h3>From</h3>
-								<input class="form-control" type="hidden" id="mode" name="mode"
+								<input class="form-control " type="hidden" id="mode" name="mode"
 									value="depart"> <select id="keyword" name="keyword">
 									<option value="all" selected="selected">출발지
 									<option value="김포">김포
@@ -189,8 +294,8 @@ div [class^="col-"] {
 							<div class="departday">
 								<h3>가는 날</h3>
 								<input type="hidden" id="mode3" name="mode3" value="detime">
-								<input class="departdate" type="date" id="keyword3"
-									name="keyword3">
+								<input class="departdate" type="date" id="keyword3" 
+									name="keyword3" placeholder="날짜를 선택해주세요">
 							</div>
 
 							<div class="arriveday">
