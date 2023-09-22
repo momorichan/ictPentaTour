@@ -146,8 +146,38 @@ div [class^="col-"] {
 		}
 		
 		
+button
+{
+	border : none;		
+	background: #184DA0;
+	color: white;
+}
+		
+body
+{	
+	font-family: 'Dongle';	
+}
+		
 		
 input[type='date'] {
+color : white;
+  border: none; 
+  position: relative; 
+  width: 100%;
+  padding: 10px;
+  background: url(../../../assets/Calendar.svg) no-repeat right 10px center /
+  35px auto;
+  background-color: #184DA0;
+  box-shadow: 2px 2px 7px rgba(0, 0, 0, 0.2);
+  border-radius: 8px;
+  text-align: center;
+  font-size: 100%;
+  margin-bottom: 20px;
+  margin-left: 10px;
+}
+
+input[type='number'] {
+  color : #184DA0;
   border: none; 
   position: relative; 
   width: 100%;
@@ -155,6 +185,24 @@ input[type='date'] {
   background: url(../../../assets/Calendar.svg) no-repeat right 10px center /
   35px auto;
   background-color: white;
+  box-shadow: 2px 2px 7px rgba(0, 0, 0, 0.2);
+  border-radius: 8px;
+  text-align: center;
+  font-size: 100%;
+  margin-bottom: 20px;
+  margin-left: 10px;
+}
+
+
+select {
+ color : white;
+  border: none; 
+  position: relative; 
+  width: 100%;
+  padding: 10px;
+  background: url(../../../assets/Calendar.svg) no-repeat right 10px center /
+  35px auto;
+  background-color: #184DA0;
   box-shadow: 2px 2px 7px rgba(0, 0, 0, 0.2);
   border-radius: 8px;
   text-align: center;
@@ -162,19 +210,9 @@ input[type='date'] {
   margin-bottom: 20px;
 }
 
-select {
-  border: none; 
-  position: relative; 
-  width: 100%;
-  padding: 10px;
-  background: url(../../../assets/Calendar.svg) no-repeat right 10px center /
-  35px auto;
-  background-color: white;
-  box-shadow: 2px 2px 7px rgba(0, 0, 0, 0.2);
-  border-radius: 8px;
-  text-align: center;
-  font-size: 100%;
-  margin-bottom: 20px;
+input[placeholder='예약번호']
+{
+	color:white;
 }
 
 input[type='date']::-webkit-calendar-picker-indicator {
@@ -325,7 +363,7 @@ input[type='date']:valid::before {
 							<div class="from">
 								<h3>예약번호</h3>
 								<input class="form-control" type="number" id="regid" name="regid"
-									placeholder="예약번호">
+									placeholder="번호를 입력해주세요">
 							</div>
 						</div>
 						<div class="find_checkin">
