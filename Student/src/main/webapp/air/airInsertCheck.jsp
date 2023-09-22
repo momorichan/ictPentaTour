@@ -104,7 +104,7 @@
 </head>
 <body>
 	<div class="container">
-		<h2>[${requestScope.fly.regid}]번 예약 정보</h2>
+		<h2>${requestScope.fly.regid}번 예약 정보</h2>
 		<table class="table">
 			<thead></thead>
 			<tbody>
@@ -157,10 +157,11 @@
 					<td>${requestScope.beans.artime}</td>
 				</tr>
 				
-				<tr>
-					<td align="center">총 인원수</td>
+					<tr>
+					<td align="center">인원수</td>
 					<td>${requestScope.fly.passengers}</td>
 				</tr>
+				
 				
 				<tr>
 					<td align="center">총 가격</td>

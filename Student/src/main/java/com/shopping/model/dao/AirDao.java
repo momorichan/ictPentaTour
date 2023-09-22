@@ -813,7 +813,6 @@ public class AirDao extends SuperDao {
 				detime[i] = detime[i].substring(2);
 			}
 		}
-
 		String sql = " select count(*) as cnt from airline";
 
 		if (keyword == null || keyword.equals("all")) 

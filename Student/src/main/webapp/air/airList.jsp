@@ -98,7 +98,6 @@
 			                           <button type="button" class="btn btn-warning form-control-sm" onclick="moveList();">전체 검색</button>
 			                        </div>
 			                         <div class="col">            
-		                      ${requestScope.pageInfo.pagingStatus}
 		                   </div>     
 		                </div>
                   </form>                     

@@ -173,7 +173,6 @@ color : white;
   text-align: center;
   font-size: 100%;
   margin-bottom: 20px;
-  margin-left: 10px;
 }
 
 input[type='number'] {
@@ -190,7 +189,6 @@ input[type='number'] {
   text-align: center;
   font-size: 100%;
   margin-bottom: 20px;
-  margin-left: 10px;
 }
 
 
