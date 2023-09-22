@@ -49,3 +49,9 @@ tourHome=com.shopping.controller.tour.TourHomeController
 tourList=com.shopping.controller.tour.TourListController
 tourDetail=com.shopping.controller.tour.TourDetailController
 tourInsert=com.shopping.controller.tour.TourInsertController
+#review section
+rvList=com.shopping.controller.review.ReviewListController
+rvInsert=com.shopping.controller.review.ReivewInsertController
+#rvDelete=com.shopping.controller.review.ReviewDeleteController
+#rvDetail=com.shopping.controller.review.ReviewDetailController
+#rvUpdate=com.shopping.controller.mall.ReviewUpdateController

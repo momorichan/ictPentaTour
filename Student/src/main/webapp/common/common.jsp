@@ -151,12 +151,12 @@ body{
 								</c:if>
 							</ul>
 						</li>
-						<li class="nav-item dropdown"><a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown">게시물</a>
+						<li class="nav-item dropdown"><a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown">리뷰</a>
 							<ul class="dropdown-menu">
 								<c:if test="${whologin == '1' || whologin == '2'}">
-									<li><a class="dropdown-item" href="<%=notWithFormTag%>boInsert">게시물 등록</a></li>
+									<li><a class="dropdown-item" href="<%=notWithFormTag%>rvInsert">리뷰 등록</a></li>
 								</c:if>
-								<li><a class="dropdown-item" href="<%=notWithFormTag%>boList">목록 보기</a></li>
+								<li><a class="dropdown-item" href="<%=notWithFormTag%>rvList">리뷰 보기</a></li>
 							</ul>
 						</li>
 						<li class="nav-item dropdown"><a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown">상품</a>
