@@ -10,15 +10,15 @@
 %>
 <%
 	request.setCharacterEncoding("UTF-8");
-	String id = request.getParameter("id");
+	String meid = request.getParameter("meid");
 	String password = request.getParameter("password");
 	
 	boolean isLogin = false;//false면 로그인 실패(기본값)
 	
-	boolean isIdExist = memberList.containsKey(id); //id 존재 여부
+	boolean isIdExist = memberList.containsKey(meid); //id 존재 여부
 	
 	if(isIdExist){ //아이디 존재하는 경우
-		String dbpassword = memberList.get(id);
+		String dbpassword = memberList.get(meid);
 		if(password.equals(dbpassword)){
 			isLogin = true;
 		}else{
@@ -31,11 +31,11 @@
 	String message = "";
 	if(isLogin){
 		Member mem = new Member();
-		mem.setId(id);
+		mem.setMeid(meid);
 		mem.setPassword(password);
 		
 		session.setAttribute("loginfo",mem);
-		message = "로그인 성공(" + id + ")";
+		message = "로그인 성공(" + meid + ")";
 		
 		// sandRedirect():리다이렉션 방식으로 페이지 전환
 		response.sendRedirect("./../product/prList02.jsp");

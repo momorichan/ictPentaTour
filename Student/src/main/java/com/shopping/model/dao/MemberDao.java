@@ -10,7 +10,7 @@ import com.shopping.utility.Paging;
 
 public class MemberDao extends SuperDao{
 	
-	public Member getDataByPk(String id, String password) throws Exception{
+	public Member getDataByPk(String meid, String password) throws Exception{
 		Member bean = null;
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
@@ -18,12 +18,12 @@ public class MemberDao extends SuperDao{
 		// ?를 placehoder라고 합니다. 치환되어야 할 영역		
 		
 		String sql = "select * from members ";
-		sql += "where id = ? and password = ?";
+		sql += "where memeid = ? and password = ?";
 
 		conn = super.getConncetion();//단계2
 		pstmt = conn.prepareStatement(sql); //단계3
 		
-		pstmt.setString(1, id);
+		pstmt.setString(1, meid);
 		pstmt.setString(2, password);
 		
 		rs = pstmt.executeQuery();//단계4-1
@@ -46,7 +46,7 @@ public class MemberDao extends SuperDao{
 		//ResultSet의 데이터를 읽어서 Bean에 기록한 다음, 반환해 줍니다.
 		Member bean = new Member();
 		
-		bean.setId(rs.getString("id"));
+		bean.setMeid(rs.getString("meid"));
 		bean.setName(rs.getString("name"));
 		bean.setPassword(rs.getString("password"));
 		bean.setGender(rs.getString("gender"));
@@ -66,7 +66,7 @@ public class MemberDao extends SuperDao{
 		int cnt = -1;
 
 		// ?를 placehoder라고 합니다. 치환되어야 할 영역		
-		String sql = " insert into members(id, name, password, gender, birth, marriage, salary, address, manager, mpoint)";
+		String sql = " insert into members(memeid, name, password, gender, birth, marriage, salary, address, manager, mpoint)";
 		sql += " values(?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
 		PreparedStatement pstmt = null;
 		
@@ -75,7 +75,7 @@ public class MemberDao extends SuperDao{
 		
 		pstmt = conn.prepareStatement(sql); //단계3
 		
-		pstmt.setString(1, bean.getId());
+		pstmt.setString(1, bean.getMeid());
 		pstmt.setString(2, bean.getName());
 		pstmt.setString(3, bean.getPassword());
 		pstmt.setString(4, bean.getGender());
@@ -96,18 +96,18 @@ public class MemberDao extends SuperDao{
 		return cnt;
 	}
 
-	public Member getDataByPrimaryKey(String id) throws Exception{
+	public Member getDataByPrimaryKey(String meid) throws Exception{
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
 		Member bean = null;
 		
 		String sql = " select * from members";
-		sql += " where id = ?";
+		sql += " where meid = ?";
 		
 		conn = super.getConncetion();
 		pstmt = conn.prepareStatement(sql); 
 		
-		pstmt.setString(1, id);
+		pstmt.setString(1, meid);
 		
 		rs = pstmt.executeQuery();
 		
@@ -132,8 +132,8 @@ public class MemberDao extends SuperDao{
 		String mode = pageInfo.getMode();
 		String keyword = pageInfo.getKeyword();
 		
-		String sql = " select ID, NAME, PASSWORD, GENDER, BIRTH, MARRIAGE, SALARY, ADDRESS, MANAGER, mpoint";
-		sql += " from (select ID, NAME, PASSWORD, GENDER, BIRTH, MARRIAGE, SALARY, ADDRESS, MANAGER, mpoint, rank() over(order by id asc) as ranking";
+		String sql = " select meid, NAME, PASSWORD, GENDER, BIRTH, MARRIAGE, SALARY, ADDRESS, MANAGER, mpoint";
+		sql += " from (select meid, NAME, PASSWORD, GENDER, BIRTH, MARRIAGE, SALARY, ADDRESS, MANAGER, mpoint, rank() over(order by meid asc) as ranking";
 		sql += 		 " from members";
 		
 		if(mode==null||mode.equals("all")) {//전체 모드인 경우

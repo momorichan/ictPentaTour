@@ -1,5 +1,6 @@
 package com.shopping.controller.tour;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
@@ -28,7 +29,7 @@ public class TourListController extends SuperClass{
 			String url = super.getUrlInfomation("tourList");
 			boolean isGrid = true;
 			Paging pageInfo = new Paging(pageNumber, pageSize, totalCount, url, mode, keyword, isGrid);
-			List<Tour> lists = null;
+			List<Tour> lists = new ArrayList<>();
 			totalCount = dao.GetTotalRecordCount(pageInfo.getMode(), pageInfo.getKeyword());
 			pageInfo = new Paging(pageNumber, pageSize, totalCount, url, mode, keyword, isGrid);
 			lists = dao.selectAll(pageInfo);
@@ -42,7 +43,6 @@ public class TourListController extends SuperClass{
 			request.setAttribute("selecttname", selecttname);
 			request.setAttribute("selectlocation", selectlocation);
 
-			
 			super.gotopage("tour/tourList.jsp");
 		} catch (Exception e) {
 			e.printStackTrace();

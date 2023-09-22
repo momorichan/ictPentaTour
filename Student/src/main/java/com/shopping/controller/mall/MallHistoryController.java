@@ -23,7 +23,7 @@ public class MallHistoryController extends SuperClass {
 		MallDao dao = new MallDao();
 
 		try {
-			List<Order> orderList = dao.getHistory(super.loginfo.getId());
+			List<Order> orderList = dao.getHistory(super.loginfo.getMeid());
 			if(orderList.size() == 0) {
 				super.setAlertMessage("주문 이력이 없습니다.");
 				new ProductListController().doGet(request, response);

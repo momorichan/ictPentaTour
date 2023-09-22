@@ -32,7 +32,7 @@
 	max-height:806px;
 }
 body {
-	background-color: black;
+	background-color: white;
 }
 </style>
 </head>

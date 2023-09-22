@@ -1,7 +1,7 @@
 package com.shopping.model.bean;
 
 public class Member {
-	private String id ;
+	private String meid ;
 	private String name ;
 	private String password;
 	private String gender ;
@@ -24,10 +24,10 @@ public class Member {
 		this.hobby = hobby;
 	}
 
-	public Member(String id, String name, String password, String gender, String birth, String marriage, Integer salary,
+	public Member(String meid, String name, String password, String gender, String birth, String marriage, Integer salary,
 			String address, String manager, String hobby) {
 		super();
-		this.id = id;
+		this.meid = meid;
 		this.name = name;
 		this.password = password;
 		this.gender = gender;
@@ -46,7 +46,7 @@ public class Member {
 
 	@Override
 	public String toString() {
-		return "Member [id=" + id + ", name=" + name + ", password=" + password + ", gender=" + gender + ", birth="
+		return "Member [meid=" + meid + ", name=" + name + ", password=" + password + ", gender=" + gender + ", birth="
 				+ birth + ", marriage=" + marriage + ", salary=" + salary + ", address=" + address + ", manager="
 				+ manager + ", mpoint=" + mpoint + ", hobby=" + hobby + "]";
 	}
@@ -59,11 +59,11 @@ public class Member {
 		this.mpoint = mpoint;
 	}
 
-	public String getId() {
-		return id;
+	public String getMeid() {
+		return meid;
 	}
-	public void setId(String id) {
-		this.id = id;
+	public void setMeid(String meid) {
+		this.meid = meid;
 	}
 	public String getName() {
 		return name;

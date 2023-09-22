@@ -2,7 +2,6 @@
     pageEncoding="UTF-8"%>
     
 <%@ include file="./../common/common.jsp" %>
-<%@ include file="./../common/bootstrap5.jsp" %>
     
 <!DOCTYPE html>
 <html>
@@ -17,6 +16,8 @@
 			});		
 		});
 	</script>
+	<style type="text/css">
+	</style>
 </head>
 <body>
 	<br/>

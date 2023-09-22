@@ -12,7 +12,7 @@ public class MemberDetailController extends SuperClass{
 	public void doGet(HttpServletRequest request, HttpServletResponse response) throws Exception {
 		super.doGet(request, response);
 		
-		String id = request.getParameter("id");
+		String id = request.getParameter("meid");
 		
 		MemberDao dao = new MemberDao();
 		

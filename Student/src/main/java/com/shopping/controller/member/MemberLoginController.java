@@ -20,7 +20,7 @@ public class MemberLoginController extends SuperClass{
 	public void doPost(HttpServletRequest request, HttpServletResponse response) throws Exception {
 		super.doPost(request, response);
 		
-		String id = request.getParameter("id");
+		String id = request.getParameter("meid");
 		String password = request.getParameter("password");
 		System.out.println(id +"/"+ password);
 		

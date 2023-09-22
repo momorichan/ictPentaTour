@@ -46,13 +46,13 @@ public class TourDao extends SuperDao {
 
 		if (pageInfo.getKeyword() == null || pageInfo.getKeyword() == "") {
 			sql = " select toid, location, tname, TPRICE, TUSEDATE, TEXDATE, TAGE, TCONTENT, TFREEAGE, TIMAGE01, TIMAGE02, TIMAGE03\r\n"
-				+ "from (select toid, location, tname, TPRICE, TUSEDATE, TEXDATE, TAGE, TCONTENT, TFREEAGE, TIMAGE01, TIMAGE02, TIMAGE03, rank() over(order by toid asc) as ranking\r\n"
+				+ "from (select toid, location, tname, TPRICE, TUSEDATE, TEXDATE, TAGE, TCONTENT, TFREEAGE, TIMAGE01, TIMAGE02, TIMAGE03, rank() over(order by toid desc) as ranking\r\n"
 				+ "from tour)\r\n" + " where ranking between ? and ?";
 		}
 
 		else {
 			sql = " select toid, location, tname, TPRICE, TUSEDATE, TEXDATE, TAGE, TCONTENT, TFREEAGE, TIMAGE01, TIMAGE02, TIMAGE03\r\n"
-				+ "from (select toid, location, tname, TPRICE, TUSEDATE, TEXDATE, TAGE, TCONTENT, TFREEAGE, TIMAGE01, TIMAGE02, TIMAGE03, rank() over(order by toid asc) as ranking\r\n"
+				+ "from (select toid, location, tname, TPRICE, TUSEDATE, TEXDATE, TAGE, TCONTENT, TFREEAGE, TIMAGE01, TIMAGE02, TIMAGE03, rank() over(order by toid desc) as ranking\r\n"
 				+ "from tour where " + pageInfo.getMode() + " like '%" + pageInfo.getKeyword() + "%')\r\n"
 				+ "where ranking between ? and ?";
 		}

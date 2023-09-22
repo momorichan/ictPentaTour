@@ -49,3 +49,4 @@ tourHome=com.shopping.controller.tour.TourHomeController
 tourList=com.shopping.controller.tour.TourListController
 tourDetail=com.shopping.controller.tour.TourDetailController
 tourInsert=com.shopping.controller.tour.TourInsertController
+tourImage=com.shopping.controller.tour.TourImageUploadController
