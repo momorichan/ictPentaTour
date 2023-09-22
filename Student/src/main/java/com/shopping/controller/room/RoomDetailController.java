@@ -21,23 +21,7 @@ public class RoomDetailController extends SuperClass{
 		try {
 			Room room = dao.getDataByPk(roid);
 			
-			JSONArray jsArr = new JSONArray();
-			JSONObject obj = new JSONObject();
-			obj.put("roid",room.getRoid());
-			obj.put("acid", room.getAcid());
-			obj.put("price", room.getPrice());
-			obj.put("guests", room.getGuests());
-			obj.put("room", room.getRoom());
-			obj.put("roominfo", room.getRoominfo());
-			obj.put("roomtype", room.getRoomtype());
-			obj.put("breakfast", room.getBreakfast());
-			obj.put("image01", room.getImage01());
-			obj.put("image02", room.getImage02());
-			obj.put("image03", room.getImage03());
-			jsArr.add(obj);
-			
-			request.setAttribute("jsArr", jsArr);
-			System.out.println("jsArr: " + jsArr.toString());
+			request.setAttribute("room", room);
 			super.gotopage("room/roDetail.jsp");
 		} catch (Exception e) {
 			e.printStackTrace();

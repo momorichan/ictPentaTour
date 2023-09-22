@@ -91,20 +91,25 @@ public class RoomDao extends SuperDao{
 		return lists;
 	}
 
-	public List<String> randomImage() throws Exception{
-		List<String> lists = new ArrayList<String>();
+	public List<String> randomImage(Integer acid) throws Exception{
+List<String> lists = new ArrayList<String>();
 		
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
 		
-		String sql = " select image01 from (select * from rooms order by DBMS_RANDOM.RANDOM) where rownum <= 5" ;
+		String sql = " select image01, image02, image03 from (select * from rooms where acid = ? order by DBMS_RANDOM.RANDOM) where rownum <= 5" ;
 
 		conn = super.getConnection();
 		pstmt = conn.prepareStatement(sql);
+		
+		pstmt.setInt(1, acid);
+		
 		rs = pstmt.executeQuery();
 
 		while (rs.next()) {
 			lists.add(rs.getString("image01"));
+			lists.add(rs.getString("image02"));
+			lists.add(rs.getString("image03"));
 		}
 
 		if (rs != null) {
