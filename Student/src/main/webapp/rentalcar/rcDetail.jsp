@@ -85,7 +85,7 @@
 		$(document).on('click', '.delete_btn', function(){
 			if(confirm('선택하신 항목을 삭제하시겠습니까?')){
 				$.ajax({
-					url:'<%=notWithFormTag%>cmDelete', 
+					url:'<%=notWithFormTag%>rcDelete', 
 					data:'cnum=' + $(this).attr('cnum') ,
 					type:'get', 
 					dataType:'text',
@@ -196,32 +196,39 @@
 </head>
 <body>
 	<div class="container">
-		<h2>[${requestScope.bean.no}]번 게시물 정보</h2>
+		<h2>[${requestScope.bean.no}]번 렌터카 정보 </h2>
 		<table class="table">
 			<thead></thead>
 			<tbody>
 				<tr>
-					<td align="center">번호</td>
-					<td>${requestScope.bean.no}</td>
+					<td align="center">렌터카 번호</td>
+					<td>${requestScope.bean.rcid}</td>
 				</tr>
 				<tr>
-					<td align="center">작성자</td>
-					<td>${requestScope.bean.id}</td>
+					<td align="center">차 종류</td>
+					<td>${requestScope.bean.carType}</td>
 				</tr>
 				<tr>
-					<td align="center">글제목</td>
-					<td>${requestScope.bean.subject}</td>
+					<td align="center">대여 장소</td>
+					<td>${requestScope.bean.startLocation}</td>
 				</tr>
 				<tr>
-					<td align="center">글내용</td>
-					<td>${requestScope.bean.content}</td>
+					<td align="center">반납 장소</td>
+					<td>${requestScope.bean.endLocation}</td>
 				</tr>
 				<tr>
-					<td align="center">조회수</td>
-					<td>${requestScope.bean.readhit}</td>
+					<td align="center">대여료</td>
+					<td>${requestScope.bean.price}</td>
+				</tr>
+				<tr>
+					<td align="center">탑승인원</td>
+					<td>${requestScope.bean.passengers}</td>
 				</tr>
 			</tbody>
 		</table>
+		
+		<!-- 댓글 삭제 ? -->
+		
 		<div id="backButton">
 			<button type="button" class="btn btn-primary" onclick="history.back();">
 				돌아 가기 
@@ -237,6 +244,7 @@
 				${bean.hates}
 			</a>				
 		</div>
+		 
 		<div>
 			<%-- 댓글 영역(Comment Zone) --%>
 			<ul id="comment_list">

@@ -115,7 +115,6 @@ public class RentalcarDao extends SuperDao{
 		return lists;
 	}
 
-	
 	private Rentalcar getBeanData(ResultSet rs) throws Exception{
 		// R
 		Rentalcar bean = new Rentalcar();
@@ -132,9 +131,179 @@ public class RentalcarDao extends SuperDao{
 		return bean;
 	}
 	
+	/* 렌터카 검색 카운터 3*/
+	public int GetTotalRecordCountRentDate1(String date) throws Exception {
+		System.out.println("날짜: "+ date);
+		
+		
+		// 테이블의 총 행개수를 구합니다.
+		String sql = " select count(*) as cnt from rentalcar " ;
+		if(startLocation == null || startLocation.equals("all") ) {			
+			if(endLocation == null || endLocation.equals("all")) {
+				
+			}else {
+				sql += " where endLocation " + endLocation;
+			}
+		}else { // 전체 모드가 아니면			
+			sql += " where startLocation " + startLocation ;
+		}		
+		
+		PreparedStatement pstmt = null ;
+		ResultSet rs = null ;
+		
+		conn = super.getConnection() ;
+		pstmt = conn.prepareStatement(sql) ;
+		
+		rs = pstmt.executeQuery() ; 
+		
+		int cnt = -1 ;
+		
+		if(rs.next()) {
+			cnt = rs.getInt("cnt") ;
+		}
+		
+		if(rs!=null) {rs.close();}
+		if(pstmt!=null) {pstmt.close();}
+		if(conn!=null) {conn.close();}
+		
+		return cnt;
+	}
+	/* 렌터카 검색 장소 카운터 2*/
+	public int GetTotalRecordCountRentLocation2(String startLocation, String endLocation) throws Exception {
+		System.out.println("대여 장소: "+ startLocation);
+		System.out.println("반납 장소: "+ endLocation);
+		
+		// 테이블의 총 행개수를 구합니다.
+		String sql = " select count(*) as cnt from rentalcar " ;
+		if(startLocation == null || startLocation.equals("all") ) {			
+			if(endLocation == null || endLocation.equals("all")) {
+				
+			}else {
+				sql += " where endLocation " + endLocation;
+			}
+		}else { // 전체 모드가 아니면			
+			sql += " where startLocation " + startLocation ;
+		}		
+		
+		PreparedStatement pstmt = null ;
+		ResultSet rs = null ;
+		
+		conn = super.getConnection() ;
+		pstmt = conn.prepareStatement(sql) ;
+		
+		rs = pstmt.executeQuery() ; 
+		
+		int cnt = -1 ;
+		
+		if(rs.next()) {
+			cnt = rs.getInt("cnt") ;
+		}
+		
+		if(rs!=null) {rs.close();}
+		if(pstmt!=null) {pstmt.close();}
+		if(conn!=null) {conn.close();}
+		
+		return cnt;
+	}
+	/* 렌터카 검색 장소 카운터 1*/
+	public int GetTotalRecordCountRentLocation(String startLocation) throws Exception {
+		System.out.println("대여 장소만 클릭함");
+		System.out.println("대여 장소: "+ startLocation);
+		
+		
+		// 테이블의 총 행개수를 구합니다.
+		String sql = " select count(*) as cnt from rentalcar " ;
+		if(startLocation == null || startLocation.equals("all") ) {			
+		}else { // 전체 모드가 아니면			
+			sql += " where startLocation " + startLocation ;
+		}		
+		
+		PreparedStatement pstmt = null ;
+		ResultSet rs = null ;
+		
+		conn = super.getConnection() ;
+		pstmt = conn.prepareStatement(sql) ;
+		
+		rs = pstmt.executeQuery() ; 
+		
+		int cnt = -1 ;
+		
+		if(rs.next()) {
+			cnt = rs.getInt("cnt") ;
+		}
+		
+		if(rs!=null) {rs.close();}
+		if(pstmt!=null) {pstmt.close();}
+		if(conn!=null) {conn.close();}
+		
+		return cnt;
+	}
+	
+	 
+	public int GetTotalRecordCount() throws Exception {
+		// 테이블의 총 행개수를 구합니다.
+		String sql = " select count(*) as cnt from rentalcar " ;
+		
+		PreparedStatement pstmt = null ;
+		ResultSet rs = null ;
+		
+		conn = super.getConnection() ;
+		pstmt = conn.prepareStatement(sql) ;
+		
+		rs = pstmt.executeQuery() ; 
+		
+		int cnt = -1 ;
+		
+		if(rs.next()) {
+			cnt = rs.getInt("cnt") ;
+		}
+		
+		if(rs!=null) {rs.close();}
+		if(pstmt!=null) {pstmt.close();}
+		if(conn!=null) {conn.close();}
+		
+		return cnt;
+	}
+	
+	
+//	mode, keyword
 	public int GetTotalRecordCount(String mode, String keyword) throws Exception {
-		System.out.print("픽업날짜 : " + mode);
+		System.out.print("검색할 필드명 : " + mode);
 		System.out.println(", 검색할 키워드 : " + keyword);
+		
+		// 테이블의 총 행개수를 구합니다.
+		String sql = " select count(*) as cnt from rentalcar " ;
+		if(mode == null || mode.equals("all") ) {			
+		}else { // 전체 모드가 아니면
+			sql += " where " + mode + " like '%" + keyword + "%'" ;
+		}
+		
+		PreparedStatement pstmt = null ;
+		ResultSet rs = null ;
+		
+		conn = super.getConnection() ;
+		pstmt = conn.prepareStatement(sql) ;
+		
+		rs = pstmt.executeQuery() ; 
+		
+		int cnt = -1 ;
+		
+		if(rs.next()) {
+			cnt = rs.getInt("cnt") ;
+		}
+		
+		if(rs!=null) {rs.close();}
+		if(pstmt!=null) {pstmt.close();}
+		if(conn!=null) {conn.close();}
+		
+		return cnt;
+	}
+	
+	
+
+	public int GetTotalRecordCount(String startLocation, String endLocation, String startDate, String endDate) {
+		System.out.print("대여 장소 : " + startLocation);
+		System.out.println(", 반납 장소 : " + endLocation);
 		
 		// 테이블의 총 행개수를 구합니다.
 		String sql = " select count(*) as cnt from rentalcar " ;
@@ -163,34 +332,6 @@ public class RentalcarDao extends SuperDao{
 		if(conn!=null) {conn.close();}
 		
 		return cnt;
-	}
-	public int GetTotalRecordCount() throws Exception {
-		// 테이블의 총 행개수를 구합니다.
-		String sql = " select count(*) as cnt from rentalcar " ;
-		
-		PreparedStatement pstmt = null ;
-		ResultSet rs = null ;
-		
-		conn = super.getConnection() ;
-		pstmt = conn.prepareStatement(sql) ;
-		
-		rs = pstmt.executeQuery() ; 
-		
-		int cnt = -1 ;
-		
-		if(rs.next()) {
-			cnt = rs.getInt("cnt") ;
-		}
-		
-		if(rs!=null) {rs.close();}
-		if(pstmt!=null) {pstmt.close();}
-		if(conn!=null) {conn.close();}
-		
-		return cnt;
-	}
-
-	public int GetTotalRecordCount(String startLocation, String endLocation, String startDate, String endDate) {
-		// TODO Auto-generated method stub
 		return 0;
 	}
 	

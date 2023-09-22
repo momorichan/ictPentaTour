@@ -127,7 +127,7 @@ public class ProductDao extends SuperDao{
 		
 		conn = super.getConnection();		
 		pstmt = conn.prepareStatement(sql) ;
-		pstmt.setInt(1, pnum); 
+		pstmt.setInt(1, pnum);
 		
 		rs = pstmt.executeQuery() ;
 		
@@ -169,9 +169,11 @@ public class ProductDao extends SuperDao{
 		pstmt = conn.prepareStatement(sql) ;
 		pstmt.setInt(1, pageInfo.getBeginRow());
 		pstmt.setInt(2, pageInfo.getEndRow());
-		System.out.println("!!!!!!!!:= "+sql);
-		System.out.println("비긴로우: "+pageInfo.getBeginRow());
-		System.out.println("엔드로우: "+pageInfo.getEndRow());
+		
+//		오류 체크
+		System.out.println("SQL:= "+sql);
+		System.out.println("getBeginRow: "+pageInfo.getBeginRow());
+		System.out.println("getEndRow: "+pageInfo.getEndRow());
 		
 		rs = pstmt.executeQuery() ;
 		
@@ -220,58 +222,6 @@ public class ProductDao extends SuperDao{
 		if(conn!=null){conn.close();}		
 		return cnt;
 	}	
-	
-	//필요없음
-	public Product getDataByPk02(int pnum) {
-		// 해당 상품 번호에 맞는 상품 Bean을 반환합니다.
-		if(pnum == 1) {
-			return new Product(1, "콜라", "갑을 상회", "brioche_01.png", "americano01.png", "coffee01.png", 10, 1000, 
-					"bread", "이 상품은 매우 시원하고, 맛있습니다.", 5, "2023/10/10");	
-		}else if(pnum == 2) {
-			return new Product(2, "사이다", "갑을 상회", "ciabatta_01.png", "americano01.png", null, 10, 2000, 
-					"bread", "탁 쏩니다", 5, "2023/10/10") ;	
-		}else {
-			return new Product(3, "환타", "갑을 상회", "coffee01.png", null, null, 10, 3000, 
-					"bread", "탁 쏩니다", 5, "2023/10/10") ;
-		}		
-	}
-
-	//필요없음
-	public Product getDataByPk(int pnum) {
-		Product bean = new Product(pnum, "콜라", "갑을 상회", "coffee01.png", null, null, 10, 1000, 
-				"bread", "탁 쏩니다", 5, "2023/10/10");
-		
-		return bean;
-	}
-	
-
-	//  필요없음
-	public List<Product> getDataList(){
-		List<Product> lists = new ArrayList<Product>();
-		
-		lists.add(new Product(1, "콜라", "갑을 상회", "brioche_01.png", "americano01.png", "coffee01.png", 10, 1000, 
-				"bread", "이 상품은 매우 시원하고, 맛있습니다.", 5, "2023/10/10"));
-		
-		lists.add(new Product(2, "사이다", "갑을 상회", "ciabatta_01.png", "americano01.png", null, 10, 2000, 
-				"bread", "탁 쏩니다", 5, "2023/10/10"));
-		
-		lists.add(new Product(3, "환타", "갑을 상회", "coffee01.png", null, null, 10, 3000, 
-				"bread", "탁 쏩니다", 5, "2023/10/10"));
-		
-		lists.add(new Product(4, "이프로", "갑을 상회", "coffee01.png", null, null, 10, 1000, 
-				"bread", "탁 쏩니다", 5, "2023/10/10"));
-		
-		lists.add(new Product(5, "콜라", "갑을 상회", "coffee01.png", null, null, 10, 1000, 
-				"bread", "탁 쏩니다", 5, "2023/10/10"));
-		
-		lists.add(new Product(6, "콜라", "갑을 상회", "coffee01.png", null, null, 10, 1000, 
-				"bread", "탁 쏩니다", 5, "2023/10/10"));
-
-		lists.add(new Product(7, "콜라", "갑을 상회", "coffee01.png", null, null, 10, 1000, 
-				"bread", "탁 쏩니다", 5, "2023/10/10"));
-		
-		return lists ;
-	}
 
 	private Product getBeanData(ResultSet rs) throws Exception{
 		// ResultSet의 데이터를 읽어서 Bean에 기록한 다음, 반환해 줍니다.

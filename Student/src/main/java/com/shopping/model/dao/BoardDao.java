@@ -203,6 +203,11 @@ public class BoardDao extends SuperDao{
 		pstmt.setInt(1, pageInfo.getBeginRow());
 		pstmt.setInt(2, pageInfo.getEndRow());
 		
+//		오류 체크
+		System.out.println("SQL:= "+sql);
+		System.out.println("getBeginRow: "+pageInfo.getBeginRow());
+		System.out.println("getEndRow: "+pageInfo.getEndRow());
+		
 		rs = pstmt.executeQuery() ;
 		
 		List<Board> lists = new ArrayList<Board>();
