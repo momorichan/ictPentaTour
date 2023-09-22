@@ -1,9 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<<<<<<< HEAD
-<%@ include file="./../common/bootstrap5.jsp" %>
-=======
->>>>>>> branch 'master' of https://github.com/momorichan/ictPentaTour.git
 <%@ include file="./../common/common.jsp" %>
 
 <!DOCTYPE html>
@@ -11,41 +7,35 @@
 <head>
 	<meta charset="UTF-8">
 	<title>Insert title here</title>
-<<<<<<< HEAD
 <script type="text/javascript">
-=======
-	<script type="text/javascript">
->>>>>>> branch 'master' of https://github.com/momorichan/ictPentaTour.git
-		$(document).ready(function(){
-			var optionList = $('#mode option');
-			for(var i=0 ; i<optionList.length ; i++){
-				if(optionList[i].value == '${requestScope.pageInfo.mode}'){
-					optionList[i].selected = true ;
-				}	
-			}
-			
-			$('#keyword').val('${requestScope.pageInfo.keyword}');
-			
-			$("#mode").change(function(){				 
-				  if($(this).val() != 'all'){
-					  $('#keyword').attr('disabled', false);
-				  }else{
-					  $('#keyword').val('');
-					  $('#keyword').attr('disabled', true);
-				  }
-			});			
-		});
-		
-		function searchAll(){ /* 전체 검색 */
-			location.href = '<%=notWithFormTag%>boList';
+	$(document).ready(function(){
+		var optionList = $('#mode option');
+		for(var i=0 ; i<optionList.length ; i++){
+			if(optionList[i].value == '${requestScope.pageInfo.mode}'){
+				optionList[i].selected = true ;
+			}	
 		}
 		
-		function writeForm(){ /* 글쓰기 */
-			location.href = '<%=notWithFormTag%>boInsert';
-		}
+		$('#keyword').val('${requestScope.pageInfo.keyword}');
 		
-	</script>
-<<<<<<< HEAD
+		$("#mode").change(function(){				 
+			  if($(this).val() != 'all'){
+				  $('#keyword').attr('disabled', false);
+			  }else{
+				  $('#keyword').val('');
+				  $('#keyword').attr('disabled', true);
+			  }
+		});			
+	});
+	
+	function searchAll(){ /* 전체 검색 */
+		location.href = '<%=notWithFormTag%>boList';
+	}
+	
+	function writeForm(){ /* 글쓰기 */
+		location.href = '<%=notWithFormTag%>boInsert';
+	}
+</script>
 <style type="text/css">
 .container {
 	margin-top: 10px;
@@ -75,27 +65,15 @@
 	transform: translate(-50%, -50%);
 }
 </style>
-=======
-	<style type="text/css">
-		.container{margin-top: 10px;}
-		.rounded-pill{opacity: 0.7;}
-		.mode, .keyword, .col{margin: auto;}
-		.form-control-sm{border:1px solid Gainsboro;} 
-	</style>
->>>>>>> branch 'master' of https://github.com/momorichan/ictPentaTour.git
 </head>
 <body>
-<<<<<<< HEAD
 	<div class="container">	
 	<div class = "boList_image">
 	 	<img alt="사진 어디감" src="/Student/image/bolist_image01.png" height="300px;" width="100%;">
 	 		 <h1 class="boList_image_text" style="font-size:50px">여행 후기</h1>
 	 		 </div>
-=======
-	<div class="container">
 		<h2>게시물 목록</h2>
 		<p>사용자들이 게시한 게시물 목록을 보여 주는 페이지입니다.</p>	
->>>>>>> branch 'master' of https://github.com/momorichan/ictPentaTour.git
 		<table class="table table-striped">
 			<thead>
 				<tr>

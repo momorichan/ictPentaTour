@@ -52,9 +52,6 @@ tourHome=com.shopping.controller.tour.TourHomeController
 tourList=com.shopping.controller.tour.TourListController
 tourDetail=com.shopping.controller.tour.TourDetailController
 tourInsert=com.shopping.controller.tour.TourInsertController
-<<<<<<< HEAD
-tourImage=com.shopping.controller.tour.TourImageUploadController
-=======
 #air section
 #airHome=com.shopping.controller.air.AirHomeController
 #airList=com.shopping.controller.air.AirListController
@@ -66,4 +63,3 @@ tourImage=com.shopping.controller.tour.TourImageUploadController
 #rcInsert=com.shopping.controller.product.RentalcarInsertController
 #rcUpdate=com.shopping.controller.product.RentalcarUpdateController
 #rcDelete=com.shopping.controller.product.RentalcarDeleteController
->>>>>>> branch 'master' of https://github.com/momorichan/ictPentaTour.git

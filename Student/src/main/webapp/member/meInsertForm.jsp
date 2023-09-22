@@ -2,11 +2,6 @@
     pageEncoding="UTF-8"%>
     
 <%@ include file="./../common/common.jsp" %>
-<<<<<<< HEAD
-
-=======
-    
->>>>>>> branch 'master' of https://github.com/momorichan/ictPentaTour.git
 <!DOCTYPE html>
 <html>
 <head>
@@ -146,13 +141,8 @@
 				<input class="form-control" type="text" id="manager" name="manager">				
 			</div>			
 			<div id="buttonset" class="input-group">
-<<<<<<< HEAD
 				<button type="submit" class="btn btn-primary rounded" onclick="return validChack();">
 				등록
-=======
-				<button type="submit" class="btn btn-primary" onclick="return validCheck();"> 
-					등록
->>>>>>> branch 'master' of https://github.com/momorichan/ictPentaTour.git
 				</button>
 				&nbsp;&nbsp;&nbsp;
 				<button type="reset" class="btn btn-primary rounded">초기화</button>				
