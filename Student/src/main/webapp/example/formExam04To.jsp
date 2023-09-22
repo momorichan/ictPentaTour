@@ -1,25 +1,41 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
-<%
+    pageEncoding="UTF-8"%>    
+<% 
+	// 한글 깨짐 방지, 반드시 가장 상단에 명시할 것.
 	request.setCharacterEncoding("UTF-8");
-	String name = request.getParameter("name");
-	Integer age = Integer.parseInt(request.getParameter("age"));
-	String image = request.getParameter("image");
-	String money = request.getParameter("money");
-	String gender = request.getParameter("gender");
-	String[] hobbies = request.getParameterValues("hobby");
-	String job = request.getParameter("job");
-	String comment = request.getParameter("comment");
+%>
+<%	
+	String name = request.getParameter("name") ;
+	int age = Integer.parseInt(request.getParameter("age"));
+	String image = request.getParameter("image") ; 	
+	int money = Integer.parseInt(request.getParameter("money"));
 	
-	String hobby = "";
-	if(hobbies == null){
-		hobby = "";
-	}else{
-		for(int i = 0; i<hobbies.length;i++){
-			hobby += hobbies[i] + ", ";
-		}
-		hobby = hobby.substring(0, hobby.length()-2);
+	String _gender = request.getParameter("gender") ;
+	String gender = "" ; 
+	
+	switch(_gender){
+		case "1":
+			gender = "남자";
+			break ;
+		case "2":
+			gender = "여자";
+			break ;			
 	}
+		
+	String[] hobbies = request.getParameterValues("hobby");
+	
+	String hobby = "" ;
+	if(hobbies == null){
+		hobby = "" ; 
+		
+	}else{
+		for(int i=0 ; i< hobbies.length; i++){
+			hobby += hobbies[i] + "," ; 
+		}
+		hobby = hobby.substring(0, hobby.length() - 1);	
+	}
+	
+	String job = request.getParameter("job") ;	
 %>
 <!DOCTYPE html>
 <html>
@@ -28,25 +44,39 @@
 <title>Insert title here</title>
 </head>
 <body>
-	이름 : <%=name%><br>
-	나이 : <%=age%><br>
-	이미지 : <%=image%><br>
-	숨김 : <%=money%><br>
-	성별 : <%=gender%><br>
-	취미 : <%=hobby%><br>
-	직업 : <%=job%><br>
-	코멘트 : <%=comment%><br>
-	이름 : ${param.name}<br>
-	나이 : ${param.age}<br>
-	이미지 : ${param.image}<br>
-	숨김 : ${param.money}<br>
-	성별 : ${param.gender}<br>
-	취미 : 
-	${paramValues.hobby[0]}
-	${paramValues.hobby[1]}
-	${paramValues.hobby[2]}
-	<br>
-	직업 : ${param.job}<br>
-	코멘트 : ${param.comment}<br>
+	<table border="1">
+		<tr>
+			<td>이름</td>
+			<td><%=name%></td>
+		</tr>
+		<tr>
+			<td>나이</td>
+			<td><%=age%></td>
+		</tr>
+		<tr>
+			<td>이미지</td>
+			<td><%=image%></td>
+		</tr>
+		<tr>
+			<td>숨김 파라미터</td>
+			<td><%=money%></td>
+		</tr>
+		<tr>
+			<td>성별</td>
+			<td><%=gender%></td>
+		</tr>
+		<tr>
+			<td>취미</td>
+			<td><%=hobby%></td>
+		</tr>
+		<tr>
+			<td>직업</td>
+			<td><%=job%></td>
+		</tr>
+		<tr>
+			<td>코멘트</td>
+			<td><%=request.getParameter("comment")%></td>
+		</tr>
+	</table>
 </body>
 </html>

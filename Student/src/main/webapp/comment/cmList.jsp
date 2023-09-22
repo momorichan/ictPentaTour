@@ -3,6 +3,6 @@
     pageEncoding="UTF-8"%>
 <%-- JSONArray에 대한 내용을 출력합니다. --%>
 <%
-	JSONArray jsArr = (JSONArray)request.getAttribute("jsArr");
+	JSONArray jsArr = (JSONArray)request.getAttribute("jsArr");	
 %>
 <%=jsArr.toString()%>

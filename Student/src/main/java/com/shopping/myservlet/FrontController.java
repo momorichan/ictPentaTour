@@ -16,7 +16,6 @@ import com.oreilly.servlet.MultipartRequest;
 import com.shopping.controller.SuperController;
 import com.shopping.utility.MyUtility;
 
-
 @WebServlet(
 		urlPatterns = { "/Shopping" }, 
 		initParams = { 
@@ -25,104 +24,115 @@ import com.shopping.utility.MyUtility;
 		})
 public class FrontController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
+	
+	// 초기화 파라미터 관련 변수
+	private String txtSetting = null ;
+	private String todolist = null ;
+	
+	// map for setting.txt file
+	private Map<String, String> settingMap = null ;
+
+	// map for todolist.txt file
+	private Map<String, SuperController> todolistMap = null ;
+	
+	// imageUploadWebPath 변수 : 실제 이미지가 업로드 되는 경로
+	private String imageUploadWebPath ; 
 
 	
-	//초기화 파라미터 관련 변수
-	private String txtSetting = null;
-	private String todolist = null;
-
-	//map for setting.txt file
-	private Map<String,String> settingMap = null; 
-	
-	//map for todolist.txt file
-	private Map<String,SuperController> todolistMap = null; 
-	
-	//imageUploadWebPath 변수 : 실제 이미지가 업로드 되는 경로
-	private String imageUploadWebPath = null;
-	
-    public FrontController() {}
-
-
-	public void init(ServletConfig config) throws ServletException {
-		this.txtSetting = config.getInitParameter("txtSetting");
-		this.todolist = config.getInitParameter("todolist");
-		System.out.println("txtSetting is [" + this.txtSetting + "]");
-		System.out.println("todolist is [" + this.todolist + "]");
-		
-		ServletContext application = config.getServletContext();
-		
-		String txtSettingFile = application.getRealPath(txtSetting);
-		String todolistFile = application.getRealPath(todolist);
-		System.out.println("txtSettingFile is [" + txtSettingFile + "]");
-		System.out.println("todolistFile is [" + todolistFile + "]");
-		
-		settingMap = MyUtility.getSettingMap(txtSettingFile);
-		todolistMap = MyUtility.getTodolistMap(todolistFile);
-		System.out.println("setting file element size = [" + settingMap.size() + "]");
-		System.out.println("todolist file element size = [" + todolistMap.size() + "]");
-		
-		application.setAttribute("settingMap", this.settingMap);
-		application.setAttribute("todolistMap", this.todolistMap);
-		
-		//in setting.txt 파일 내의 uploadPath=upload 항목 참조 요망
-		//이미지 업로드 경로를 변수에 저장합니다. 
-		String tempPath = settingMap.get("uploadPath");
-		if(tempPath==null) {tempPath = "image";}
-		
-		imageUploadWebPath = application.getRealPath(tempPath);
-		System.out.println("imageUploadWebPath is [" + imageUploadWebPath + "]");
-	}
-
 	protected void doProcess(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		request.setCharacterEncoding("UTF-8");//한글 깨짐 방지
+		request.setCharacterEncoding("UTF-8"); // 한글 깨짐 방지
 		
-		//command Parameter : 컨트롤러 분기를 위한 핵심 파라미터
-		String command = request.getParameter("command");
-
+		// command Parameter : 컨트롤러 분기를 위한 핵심 파라미터 
+		String command = request.getParameter("command") ;
+		
 		if(command == null) {
 			System.out.println("file upload event invoked");
 			
-			MultipartRequest mr = MyUtility.getMultipartRequest(request,imageUploadWebPath);
+			MultipartRequest mr 
+				= MyUtility.getMultipartRequest(request, imageUploadWebPath);
 			
-			if(mr != null) {
-				command = mr.getParameter("command");
+			if(mr!=null) {
+				command = mr.getParameter("command") ;
 				
 				if(command.equals("prUpdate")) {
-					MyUtility.deleteOldImageFile(imageUploadWebPath, mr);
+					MyUtility.deleteOldImageFile(imageUploadWebPath, mr);	
 				}
+			
 				// file upload object binding in request scope.
-				request.setAttribute("mr", mr);
-			}else {
+				request.setAttribute("mr", mr); // 승급
+			}else{
 				System.out.println("MultipartRequest object is null");
 			}
 		}
 		
 		System.out.println("command is [" + command + "]");
-
-		SuperController controller = this.todolistMap.get(command);
 		
-		if(controller != null) {
-			String method = request.getMethod();
+		SuperController controller = this.todolistMap.get(command) ;
+		
+		if (controller != null) {
+			String method = request.getMethod() ;
+		
 			try {
 				if(method.equalsIgnoreCase("get")) {
 					System.out.println(this.getClass() + " get method called");
 					controller.doGet(request, response);
+					
 				}else {
 					System.out.println(this.getClass() + " post method called");
 					controller.doPost(request, response);
-				}
+				}				
 			} catch (Exception e) {
 				e.printStackTrace();
-			}
+			}			
+
 		}else {
 			System.out.println("request command is not found");
 		}
-	}
-	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		doProcess(request,response);
-	}
-	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		doProcess(request,response);
+		
+		
+	}	
+	
+	public void init(ServletConfig config) throws ServletException {
+		this.txtSetting = config.getInitParameter("txtSetting");
+		System.out.println("txtSetting is [" + this.txtSetting + "]");
+		
+		this.todolist = config.getInitParameter("todolist");
+		System.out.println("todolist is [" + this.todolist + "]"); 	
+		
+		ServletContext application = config.getServletContext() ;
+		
+		String txtSettingFile = application.getRealPath(txtSetting);
+		System.out.println("txtSettingFile is [" + txtSettingFile + "]");
+		
+		String todolistFile = application.getRealPath(todolist);
+		System.out.println("todolistFile is [" + todolistFile + "]");
+		
+		this.settingMap = MyUtility.getSettingMap(txtSettingFile);
+		System.out.println("setting file element size = [" + settingMap.size() + "]");
+		
+		application.setAttribute("map", this.settingMap);
+		
+		// in setting.txt 파일 내의 uploadPath=upload 항목 참조 요망
+		// 이미지 업로드 경로를 변수에 저장합니다.
+		String imsiPath = settingMap.get("uploadPath");
+		if(imsiPath==null) {imsiPath = "image";}
+		
+		imageUploadWebPath = application.getRealPath(imsiPath);
+		System.out.println("imageUploadWebPath is [" + imageUploadWebPath + "]");
+				
+		this.todolistMap = MyUtility.getTodolistMap(todolistFile);
+		System.out.println("todolist file element size = [" + todolistMap.size() + "]");
 	}
 
+	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		this.doProcess(request, response);
+	}
+	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		this.doProcess(request, response);
+	}
+	public FrontController() {}
 }
+
+
+
+

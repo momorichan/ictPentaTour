@@ -33,7 +33,7 @@ public class RoomDao extends SuperDao{
 		
 		String sql = " select * from rooms where roid = ?" ;
 
-		conn = super.getConncetion();
+		conn = super.getConnection();
 
 		pstmt = conn.prepareStatement(sql);
 
@@ -66,7 +66,7 @@ public class RoomDao extends SuperDao{
 		
 		String sql = " select * from rooms where acid = ?" ;
 
-		conn = super.getConncetion();
+		conn = super.getConnection();
 
 		pstmt = conn.prepareStatement(sql);
 
@@ -99,7 +99,7 @@ public class RoomDao extends SuperDao{
 		
 		String sql = " select image01 from (select * from rooms order by DBMS_RANDOM.RANDOM) where rownum <= 5" ;
 
-		conn = super.getConncetion();
+		conn = super.getConnection();
 		pstmt = conn.prepareStatement(sql);
 		rs = pstmt.executeQuery();
 

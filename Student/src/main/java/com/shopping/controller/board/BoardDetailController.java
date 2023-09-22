@@ -13,7 +13,7 @@ public class BoardDetailController extends SuperClass {
 		super.doGet(request, response);
 		
 		
-		String no = request.getParameter("no");
+		Integer no = Integer.parseInt(request.getParameter("no"));
 		BoardDao dao = new BoardDao();
 		Board bean = null;
 		

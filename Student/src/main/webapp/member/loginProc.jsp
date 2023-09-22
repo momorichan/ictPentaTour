@@ -31,7 +31,7 @@
 	String message = "";
 	if(isLogin){
 		Member mem = new Member();
-		mem.getMeid(id);
+		mem.setMeid(id);
 		mem.setPassword(password);
 		
 		session.setAttribute("loginfo",mem);

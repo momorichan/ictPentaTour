@@ -10,8 +10,8 @@ public class CartItem {
 	private String image01 ; // 대표 이미지 
 	private int point ; // 적립 포인트
 	
+	
 	public CartItem() {	}
-		
 	public CartItem(int pnum, String pname, int qty, int price, String image01, int point) {
 		this.pnum = pnum;
 		this.pname = pname;
@@ -23,9 +23,10 @@ public class CartItem {
 
 	@Override
 	public String toString() {
-		return "CartItem [pnum=" + pnum + ", pname=" + pname + ", qty=" + qty + ", price=" + price
-				+ ", image01=" + image01 + ", point=" + point + "]";
+		return "CartItem [pnum=" + pnum + ", pname=" + pname + ", qty=" + qty + ", price=" + price + ", image01="
+				+ image01 + ", point=" + point + "]";
 	}
+
 	public String getId() {
 		return id;
 	}

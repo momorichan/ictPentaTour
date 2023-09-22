@@ -16,7 +16,7 @@ public class TourDao extends SuperDao {
 
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
-		conn = super.getConncetion();
+		conn = super.getConnection();
 
 		pstmt = conn.prepareStatement(sql);
 
@@ -57,7 +57,7 @@ public class TourDao extends SuperDao {
 				+ "where ranking between ? and ?";
 		}
 
-		conn = super.getConncetion();
+		conn = super.getConnection();
 		pstmt = conn.prepareStatement(sql);
 		
 		pstmt.setInt(1, pageInfo.getBeginRow());
@@ -107,7 +107,7 @@ public class TourDao extends SuperDao {
 
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
-		conn = super.getConncetion();
+		conn = super.getConnection();
 
 		pstmt = conn.prepareStatement(sql);
 
@@ -133,7 +133,7 @@ public class TourDao extends SuperDao {
 		int cnt = -1;
 		String sql = " insert into tour values(seqtour.nextval, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
 
-		conn = super.getConncetion();
+		conn = super.getConnection();
 		conn.setAutoCommit(false);
 		PreparedStatement pstmt = conn.prepareStatement(sql);
 
@@ -170,7 +170,7 @@ public class TourDao extends SuperDao {
 
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
-		conn = super.getConncetion();
+		conn = super.getConnection();
 
 		pstmt = conn.prepareStatement(sql);
 
@@ -199,7 +199,7 @@ public class TourDao extends SuperDao {
 			sql = " select toid, location, tname, TPRICE, TUSEDATE, TEXDATE, TAGE, TCONTENT, TFREEAGE, TIMAGE01, TIMAGE02, TIMAGE03\r\n"
 				+ "from tour";
 
-		conn = super.getConncetion();
+		conn = super.getConnection();
 		pstmt = conn.prepareStatement(sql);
 		
 		rs = pstmt.executeQuery();

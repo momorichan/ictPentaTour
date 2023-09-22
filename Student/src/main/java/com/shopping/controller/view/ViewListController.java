@@ -8,8 +8,8 @@ import com.shopping.controller.SuperClass;
 public class ViewListController extends SuperClass{
 	@Override
 	public void doGet(HttpServletRequest request, HttpServletResponse response) throws Exception {
-		//데이터 보기 페이지로 이동
+		// 데이터 보기 페이지로 이동합니다.
 		super.doGet(request, response);
-		super.gotopage("view/vwList.jsp");
+		super.gotoPage("view/ViewList.jsp"); 
 	}
 }

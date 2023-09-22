@@ -27,7 +27,7 @@ public class AccommodationDao extends SuperDao {
 			sql += " where " + mode + " like '%" + keyword + "%'";
 		}
 
-		conn = getConncetion();
+		conn = getConnection();
 		pstmt = conn.prepareStatement(sql);
 
 		rs = pstmt.executeQuery();
@@ -76,7 +76,7 @@ public class AccommodationDao extends SuperDao {
 
 		sql += " ) ";
 		sql += " where ranking between ? and ?";
-		conn = super.getConncetion();
+		conn = super.getConnection();
 
 		pstmt = conn.prepareStatement(sql);
 
@@ -131,7 +131,7 @@ public class AccommodationDao extends SuperDao {
 		
 		String sql = " select * from rooms where acid = ?" ;
 
-		conn = super.getConncetion();
+		conn = super.getConnection();
 
 		pstmt = conn.prepareStatement(sql);
 
@@ -163,7 +163,7 @@ public class AccommodationDao extends SuperDao {
 		
 		String sql = " select * from accommodation where acid = ?" ;
 
-		conn = super.getConncetion();
+		conn = super.getConnection();
 
 		pstmt = conn.prepareStatement(sql);
 

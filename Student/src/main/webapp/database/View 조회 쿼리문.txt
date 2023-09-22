@@ -1,0 +1,32 @@
+select m.name, b.subject, b.content, b.regdate
+from members m inner join boards b 
+on m.id = b.id
+order by m.name ;
+
+select m.name, count(*) as cnt
+from members m inner join boards b 
+on m.id = b.id
+group by m.name
+order by m.name ; 
+
+select m.name mname, p.name pname, o.orderdate, od.qty, p.price, od.qty * p.price as amount
+from ((members m inner join orders o
+on m.id=o.id) inner join orderdetails od
+on o.oid=od.oid) inner join products p
+on od.pnum=p.pnum
+order by p.name desc, m.name asc ;
+
+
+select m.id, sum(od.qty * p.price) as sumtotal 
+from ((members m inner join orders o
+on m.id=o.id) inner join orderdetails od
+on o.oid=od.oid) inner join products p
+on od.pnum=p.pnum
+group by m.id ;
+
+
+select m.id, count(o.id) as cnt 
+from members m left outer join orders o
+on m.id=o.id 
+group by m.id
+order by cnt desc, m.id asc ;

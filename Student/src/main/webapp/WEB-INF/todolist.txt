@@ -1,4 +1,3 @@
-#####
 # 구현해야 할 목록들입니다.
 home=com.shopping.controller.HomeController
 # member section
@@ -7,6 +6,7 @@ meLogout=com.shopping.controller.member.MemberLogoutController
 meInsert=com.shopping.controller.member.MemberInsertController
 meList=com.shopping.controller.member.MemberListController
 meDetail=com.shopping.controller.member.MemberDetailController
+meDelete=com.shopping.controller.member.MemberDeleteController
 # board section
 boInsert=com.shopping.controller.board.BoardInsertController
 boList=com.shopping.controller.board.BoardListController
@@ -19,6 +19,7 @@ prList=com.shopping.controller.product.ProductListController
 prInsert=com.shopping.controller.product.ProductInsertController
 prUpdate=com.shopping.controller.product.ProductUpdateController
 prDetail=com.shopping.controller.product.ProductDetailController
+prDelete=com.shopping.controller.product.ProductDeleteController
 # comment section
 cmList=com.shopping.controller.comment.CommentListController
 cmInsert=com.shopping.controller.comment.CommentInsertController
@@ -39,16 +40,26 @@ vwExam03=com.shopping.controller.view.View03Controller
 vwExam04=com.shopping.controller.view.View04Controller
 vwExam05=com.shopping.controller.view.View05Controller
 #accommodation section
-acList=com.shopping.controller.accommodation.AccommodationListController
-acInsert=com.shopping.controller.accommodation.AccommodationInsertController
+#acList=com.shopping.controller.accommodation.AccommodationListController
+#acInsert=com.shopping.controller.accommodation.AccommodationInsertController
 #acUpdate=com.shopping.controller.accommodation.AccommodationUpdateController
 #acDelete=com.shopping.controller.accommodation.AccommodationDeleteController
 acDetail=com.shopping.controller.accommodation.AccommodationDetailController
 #Room section
 roDetail=com.shopping.controller.room.RoomDetailController
-roPrice=com.shopping.controller.room.RoomPriceController
 #tour section
 tourHome=com.shopping.controller.tour.TourHomeController
 tourList=com.shopping.controller.tour.TourListController
 tourDetail=com.shopping.controller.tour.TourDetailController
 tourInsert=com.shopping.controller.tour.TourInsertController
+#air section
+#airHome=com.shopping.controller.air.AirHomeController
+#airList=com.shopping.controller.air.AirListController
+#airDetail=com.shopping.controller.air.AirDetailController
+#airCheck=com.shopping.controller.air.AirCheckController
+#rentalcar section
+rcList=com.shopping.controller.rentalcar.RentalcarListController
+rcDetail=com.shopping.controller.rentalcar.RentalcarDetailController
+#rcInsert=com.shopping.controller.product.RentalcarInsertController
+#rcUpdate=com.shopping.controller.product.RentalcarUpdateController
+#rcDelete=com.shopping.controller.product.RentalcarDeleteController

@@ -26,7 +26,7 @@ public class AcRoomPriceDao extends SuperDao{
 			sql += " where " + mode + " like '%" + keyword + "%'";
 		}
 
-		conn = getConncetion();
+		conn = getConnection();
 		pstmt = conn.prepareStatement(sql);
 
 		rs = pstmt.executeQuery();
@@ -78,7 +78,7 @@ public class AcRoomPriceDao extends SuperDao{
 				+ " select ranked.acid, ranked.name, ranked.address, ranked.image, ranked.minprice "
 				+ " from ranked where ranking between ? and ? ";
 		
-		conn = super.getConncetion();
+		conn = super.getConnection();
 
 		pstmt = conn.prepareStatement(sql);
 

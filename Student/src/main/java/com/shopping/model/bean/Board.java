@@ -1,92 +1,91 @@
 package com.shopping.model.bean;
 
 public class Board {
-	private Integer no;
+	private int no;
 	private String id ;
 	private String password;
 	private String subject ;
 	private String content ; 
-	private Integer readhit;	
+	private int readhit;	
 	private String regdate;// 날짜 형식
-
-
-	//댓글 관련 변수
-	private Integer depth;//글의 깊이
-	private Integer groupno;//그룹 번호
-	private Integer orderno;//순서 번호
 	
-	private Integer likes;
-	private Integer hates;
+	// 차후 reply(답글)와 관련된 변수  
+	private int depth ; // 글의 깊이	
+	private int groupno ; // 그룹 번호
+	private int orderno ; // 순서 번호
 	
+	private int likes ; // 좋아요
+	private int hates ; // 싫어요	
+		
+	@Override
+	public String toString() {
+		return "Board [no=" + no + ", id=" + id + ", password=" + password + ", subject=" + subject + ", content="
+				+ content + ", readhit=" + readhit + ", regdate=" + regdate + ", depth=" + depth + ", groupno="
+				+ groupno + ", orderno=" + orderno + ", likes=" + likes + ", hates=" + hates + "]";
+	}
+
+	public int getLikes() {
+		return likes;
+	}
+
+	public void setLikes(int likes) {
+		this.likes = likes;
+	}
+
+	public int getHates() {
+		return hates;
+	}
+
+	public void setHates(int hates) {
+		this.hates = hates;
+	}
+
+	public int getGroupno() {
+		return groupno;
+	}
+
+	public void setGroupno(int groupno) {
+		this.groupno = groupno;
+	}
+
+	public int getOrderno() {
+		return orderno;
+	}
+
+	public void setOrderno(int orderno) {
+		this.orderno = orderno;
+	}
+
+	public int getDepth() {
+		return depth;
+	}
+
+	public void setDepth(int depth) {
+		this.depth = depth;
+	}
+
 	public Board() {
 		// TODO Auto-generated constructor stub
 	}
 	
-	
-
-
-
-
-
-
-
-
-	@Override
-	public String toString() {
-		return "Board [no=" + no + ", id=" + id + ", password=" + password + ", subject=" + subject + ", content="
-				+ content + ", readhit=" + readhit + ", regdate=" + regdate + ", likes=" + likes + ", hates=" + hates
-				+ ", depth=" + depth + ", groupno=" + groupno + ", orderno=" + orderno + "]";
+	public Board(int no, String id, String password, String subject, String content, int readhit,
+			String regdate, int depth) {
+		super();
+		this.no = no;
+		this.id = id;
+		this.password = password;
+		this.subject = subject;
+		this.content = content;
+		this.readhit = readhit;
+		this.regdate = regdate;
+		this.depth = depth;
 	}
 
 
-
-
-
-
-
-
-
-
-	public Integer getLikes() {
-		return likes;
-	}
-
-	public void setLikes(Integer likes) {
-		this.likes = likes;
-	}
-
-	public Integer getHates() {
-		return hates;
-	}
-
-	public void setHates(Integer hates) {
-		this.hates = hates;
-	}
-
-	public Integer getGroupno() {
-		return groupno;
-	}
-
-
-	public void setGroupno(Integer groupno) {
-		this.groupno = groupno;
-	}
-
-
-	public Integer getOrderno() {
-		return orderno;
-	}
-
-
-	public void setOrderno(Integer orderno) {
-		this.orderno = orderno;
-	}
-
-
-	public Integer getNo() {
+	public int getNo() {
 		return no;
 	}
-	public void setNo(Integer no) {
+	public void setNo(int no) {
 		this.no = no;
 	}
 	public String getId() {
@@ -113,10 +112,10 @@ public class Board {
 	public void setContent(String content) {
 		this.content = content;
 	}
-	public Integer getReadhit() {
+	public int getReadhit() {
 		return readhit;
 	}
-	public void setReadhit(Integer readhit) {
+	public void setReadhit(int readhit) {
 		this.readhit = readhit;
 	}
 	public String getRegdate() {
@@ -126,10 +125,5 @@ public class Board {
 		this.regdate = regdate;
 	}
 	
-	public Integer getDepth() {
-		return depth;
-	}
-	public void setDepth(Integer depth) {
-		this.depth = depth;
-	}
+	
 }

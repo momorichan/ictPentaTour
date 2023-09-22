@@ -8,6 +8,8 @@ import java.util.Map;
 
 import com.shopping.model.bean.Member;
 import com.shopping.model.bean.Order;
+import com.shopping.model.bean.WishList;
+import com.shopping.model.mall.CartItem;
 
 public class MallDao extends SuperDao {
 
@@ -21,7 +23,7 @@ public class MallDao extends SuperDao {
 
 		String sql = "";
 
-		conn = super.getConncetion();
+		conn = super.getConnection();
 		conn.setAutoCommit(false);
 
 		// step01 : 주문 테이블에 매출 1건 입력
@@ -114,7 +116,7 @@ public class MallDao extends SuperDao {
 		String sql = " select * from orders ";
 		sql += " where id = ? order by orderdate desc ";
 		
-		conn = super.getConncetion();
+		conn = super.getConnection();
 		pstmt = conn.prepareStatement(sql);
 		
 		pstmt.setString(1, id);
@@ -143,5 +145,138 @@ public class MallDao extends SuperDao {
 		return bean;
 	}
 
+	public Order getDetailHistory(int oid) throws Exception{
+		//해당 송장 번호에 대한 주문 정보 반환
+		Order bean = null;
+		
+		String sql = " select * from orders where oid = ? ";
+		
+		conn = super.getConnection();
+		PreparedStatement pstmt = conn.prepareStatement(sql);
+		
+		pstmt.setInt(1, oid);
+		
+		ResultSet rs = pstmt.executeQuery();
+		
+		if(rs.next()) {
+			bean = makeOrderBean(rs);
+		}
+		
+		if (rs != null) {rs.close();}
+		if (pstmt != null) {pstmt.close();}	
+		if (conn != null) {conn.close();}
+		
+		
+		return bean;
+	}
 
+	public List<CartItem> showDetail(int oid) throws Exception{
+		//송장 번호에 대한 상세 내역을 컬렉션 형태로 반환
+		List<CartItem> lists = new ArrayList<CartItem>();
+		
+		String sql = 
+				" select p.pnum, p.name pname, od.qty, p.price, p.point, p.image01 "
+				+ " from (orders o inner join orderdetails od "
+				+ " on o.oid = od.oid) inner join products p "
+				+ " on od.pnum = p.pnum and o.oid = ? "
+				+ " order by od.odid desc ";
+		
+		conn = super.getConnection();
+		PreparedStatement pstmt = conn.prepareStatement(sql);
+		
+		pstmt.setInt(1, oid);
+		
+		ResultSet rs = pstmt.executeQuery();
+		
+		while(rs.next()) {
+			lists.add(this.makeCartItemBean(rs));
+		}
+		
+		if (rs != null) {rs.close();}
+		if (pstmt != null) {pstmt.close();}	
+		if (conn != null) {conn.close();}
+		
+		return lists;
+	}
+
+	private CartItem makeCartItemBean(ResultSet rs) throws Exception{
+		CartItem item = new CartItem();
+		item.setPnum(rs.getInt("pnum"));
+		item.setQty(rs.getInt("qty"));
+		item.setPrice(rs.getInt("price"));
+		item.setPoint(rs.getInt("point"));
+		item.setPname(rs.getString("pname"));
+		item.setImage01(rs.getString("image01"));
+		return item;
+	}
+
+	public void insertWishList(String id, Map<Integer, Integer> wishList) throws Exception{
+		//로그인 한 사람의 찜 목록을 데이터 베이스에 추가
+		int cnt = -1;
+		
+		String sql = "";
+		conn = super.getConnection();
+		PreparedStatement pstmt = null;
+		conn.setAutoCommit(false);
+		
+		//step 01 : 과거 나의 찜 정보가 있으면 삭제
+		sql = " delete from wishlist where id = ?";
+		pstmt = conn.prepareStatement(sql);
+		pstmt.setString(1, id);
+		cnt = pstmt.executeUpdate();
+		if (pstmt != null) {pstmt.close();}	
+
+		
+		//step 02 : 현재 세션 정보를 반복하여 테이블에 인서트
+		sql = " insert into wishlist(id, pnum, qty) ";
+		sql += " values(?, ?, ?)";
+		
+		pstmt = conn.prepareStatement(sql);
+		
+		for(Integer pnum : wishList.keySet()) {
+
+			pstmt.setString(1, id);
+			pstmt.setInt(2, pnum);
+			pstmt.setInt(3, wishList.get(pnum));
+			
+			cnt = pstmt.executeUpdate();
+		}
+		
+		conn.commit();
+		if (pstmt != null) {pstmt.close();}			
+		if (conn != null) {conn.close();}
+	}
+
+	public List<WishList> getWishList(String id) throws Exception{
+		List<WishList> lists = new ArrayList<WishList>();
+		//나의 WishList 항목을 컬렉션으로 반환
+		
+		String sql = " select * from wishlist where id = ?";
+		
+		conn = super.getConnection();
+		PreparedStatement pstmt = conn.prepareStatement(sql);
+		
+		pstmt.setString(1, id);
+		
+		ResultSet rs = pstmt.executeQuery();
+		
+		while(rs.next()) {
+			lists.add(makeWishListBean(rs));
+		}
+		
+		if (rs != null) {rs.close();}
+		if (pstmt != null) {pstmt.close();}	
+		if (conn != null) {conn.close();}
+		
+		
+		return lists;
+	}
+
+	private WishList makeWishListBean(ResultSet rs) throws Exception{
+		WishList bean = new WishList();
+		bean.setId(rs.getString("id"));
+		bean.setPnum(rs.getInt("pnum"));
+		bean.setQty(rs.getInt("qty"));
+		return bean;
+	}
 }
