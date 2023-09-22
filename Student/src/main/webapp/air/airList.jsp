@@ -15,14 +15,28 @@
 	</style>
 	
 	<script type="text/javascript">
-	$(document).ready(function(){
-		
-		
 	
+	
+	$(document).ready(function(){
+	
+	/* 	var optionList = $('#mode option');
 		
-		
-	});
-		
+		for(var i = 0 ; i < optionList.length ; i++){
+			if(optionList[i].value == '${requestScope.pageInfo.mode}'){
+				optionList[i].selected = true;
+			}
+		}
+		 if('${requestScope.pageInfo.keyword}').val == 'all' || '${requestScope.pageInfo.keyword}').val == null)
+		{
+			console.log("전체페이지");
+		}
+		else
+		{
+			$('#keyword').val('${requestScope.pageInfo.keyword}');
+		} 
+		*/
+	}); 
+	
 	function moveList()
 	{
 		location.href = '<%=notWithFormTag%>airList&mode=all&keyword=';
@@ -33,9 +47,7 @@
 		location.href = '<%=notWithFormTag%>airHome';
 	}
 	
-	
-	
-	
+		
 	</script>
 
 </head>

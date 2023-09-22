@@ -75,6 +75,12 @@
 					>
 			</div>
 			
+			<div class="input-group">
+				<input
+					id="price" name="price" type="hidden" class="form-control" value="150000"
+					>
+			</div>
+			
 			
 			
 			<div id="buttonset" class="input-group">

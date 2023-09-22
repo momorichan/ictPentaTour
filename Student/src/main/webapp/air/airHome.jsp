@@ -115,18 +115,7 @@ div [class^="col-"] {
 
 <script type="text/javascript">
 	$(document).ready(function() {
-
-		$('.tripB').hide();
-
-		$('#keyword').val('${requestScope.pageInfo.keyword}');
-
-		var myOptionList = $('#mode option');
-		
-		for (var i = 0; i < myOptionList.length; i++) 
-		{
-			if (myOptionList[i].value == '${requestScope.pageInfo.mode}')
-				myOptionList[i].selected = true;
-		}
+		$('.tripB').hide();	
 	});
 
 	function setDisplay() {
@@ -163,6 +152,7 @@ div [class^="col-"] {
 			<label for="roundway">왕복</label> <label for="oneway">편도</label> <label
 				for="checkinfo">체크인</label>
 		</div>
+		
 
 		<div class="tripA">
 			<div class="container">
@@ -182,6 +172,7 @@ div [class^="col-"] {
 								</select>
 							</div>
 
+
 							<div class="to">
 								<h3>To</h3>
 								<input class="form-control" type="hidden" id="mode2"
@@ -199,14 +190,14 @@ div [class^="col-"] {
 								<h3>가는 날</h3>
 								<input type="hidden" id="mode3" name="mode3" value="detime">
 								<input class="departdate" type="date" id="keyword3"
-									name="keyword3" min="2023-09-20">
+									name="keyword3">
 							</div>
 
 							<div class="arriveday">
 								<h3>오는 날</h3>
 								<input type="hidden" id="mode4" name="mode4" value="artime">
 								<input class="arrivedate" type="date" id="keyword4"
-									name="keyword4" min="2023-09-20">
+									name="keyword4">
 							</div>
 
 
@@ -218,6 +209,7 @@ div [class^="col-"] {
 				</div>
 			</div>
 		</div>
+		
 
 		<div class="tripB">
 			<div class="container">
@@ -230,12 +222,10 @@ div [class^="col-"] {
 								<input class="form-control" type="number" id="regid" name="regid"
 									placeholder="예약번호">
 							</div>
-							<div class="find_checkin">
+						</div>
+						<div class="find_checkin">
 								<button type="submit" class="search_btn btn-primary">조회</button>
 							</div>
-
-						</div>
-
 					</form>
 				</div>
 			</div>
@@ -273,8 +263,7 @@ div [class^="col-"] {
 							alt="Photo of sunset">
 						</a>
 						<h5 class="card-title  mt-3 mb-3">중국</h5>
-						<p class="card-text">This is a company that builds websites,
-							web .</p>
+						<p class="card-text">할인</p>
 					</div>
 				</div>
 				<div class="col-md-3 col-sm-6">
@@ -289,8 +278,7 @@ div [class^="col-"] {
 							alt="Photo of sunset">
 						</a>
 						<h5 class="card-title  mt-3 mb-3">대만</h5>
-						<p class="card-text">This is a company that builds websites,
-							web apps and e-commerce solutions.</p>
+						<p class="card-text">많이</p>
 					</div>
 				</div>
 				<div class="col-md-3 col-sm-6">
@@ -305,12 +293,12 @@ div [class^="col-"] {
 							alt="Photo of sunset">
 						</a>
 						<h5 class="card-title  mt-3 mb-3">괌</h5>
-						<p class="card-text">This is a company that builds websites,
-							web apps and e-commerce solutions.</p>
+						<p class="card-text">해줌</p>
 					</div>
 				</div>
 			</div>
 
+			</div>
 		</div>
 </body>
 </html>

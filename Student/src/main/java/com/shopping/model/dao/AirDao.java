@@ -453,6 +453,7 @@ public class AirDao extends SuperDao {
 	}
 
 	public List<Airline> selectB(Paging pageInfo) throws Exception {
+		
 		PreparedStatement pstmt = null;
 
 		ResultSet rs = null;
@@ -617,6 +618,7 @@ public class AirDao extends SuperDao {
 	{
 
 		String artime[] = keyword4.split("-");
+		System.out.println("여기냐?");
 
 		for (int i = 0; i < artime.length; i++) {
 			if (i == 0) {
