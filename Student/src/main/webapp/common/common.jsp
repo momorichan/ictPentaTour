@@ -42,6 +42,48 @@ String notWithFormTag = appName + mappingName + "?command=";
 <!-- 자바 관련 변수 및 패키지 임포트, 네비게이션 바, jstl 등등-->
 <script src="/Student/js/sweetalert.js"></script>
 <script type="text/javascript">
+	var scrollheight = 0;
+	$(window).scroll(function(){
+	    scrollheight = $(window).scrollTop();
+	    console.log(scrollheight);
+	    if(scrollheight < 1 && window.innerWidth > 2140){
+			$(".navbar-brand, .navbar, .dropdown, .login-div").addClass("scrolltop");
+			$(".navbar").removeClass("non-scrolltop");
+			$(".dropdown-toggle, .dropdown-menu").addClass("show");
+			$(".dropdown-toggle").attr("aria-expanded", "true");
+			$('html,body').animate({scrollTop:0},0);
+		}
+		if(scrollheight > 150 || window.innerWidth <= 2140){
+			$(".navbar-brand, .navbar, .dropdown, .login-div").removeClass("scrolltop");
+			$(".navbar").addClass("non-scrolltop");
+			$(".dropdown-toggle, .dropdown-menu").removeClass("show");
+			$(".dropdown-toggle").attr("aria-expanded", "false");
+		}
+		
+	    return scrollheight;
+	});
+	window.addEventListener('resize', () => {
+		if(scrollheight < 1 && window.innerWidth > 2140){
+			$(".navbar-brand, .navbar, .dropdown, .login-div").addClass("scrolltop");
+			$(".navbar").removeClass("non-scrolltop");
+			$(".dropdown-toggle, .dropdown-menu").addClass("show");
+			$(".dropdown-toggle").attr("aria-expanded", "true");
+		}
+		if(window.innerWidth <= 2140){
+			$(".navbar-brand, .navbar, .dropdown, .login-div").removeClass("scrolltop");
+			$(".navbar").addClass("non-scrolltop");
+			$(".dropdown-toggle, .dropdown-menu").removeClass("show");
+			$(".dropdown-toggle").attr("aria-expanded", "false");
+		}
+	});
+	window.addEventListener('resize', () => {
+		if(window.innerWidth < 501) {
+			$("").addClass("mobile");
+		}
+		if(window.innerWidth >= 501) {
+			$("").removeClass("mobile");
+		}
+	});
 	var setCookie = function(name, value) {
 	    document.cookie = name + '=' + value;
 	};
@@ -203,19 +245,62 @@ String notWithFormTag = appName + mappingName + "?command=";
 	filter:invert(1);
 }
 .navbar {
-	margin-bottom: 20px !important;
-	position: fixed !important;
-	top:0px !important;
-	width:calc(100% + 200px) !important;
+	padding-top:10px;
+	padding-bottom:10px;
+	margin-bottom: 25px !important;
+	position: sticky !important;
+	top:-0px !important;
+	width:100% !important;
 	z-index: 999 !important;
 	background-color: black !important;
-	padding-right:100px;
-	padding-left:100px;
+	transition:padding 300ms;
+}
+.navbar.mobile {
+	padding-top:10px;
+	padding-bottom:10px;
+	margin-bottom: 25px !important;
+	position: sticky !important;
+	top:-0px !important;
+	width:100% !important;
+	z-index: 999 !important;
+	background-color: black !important;
+	transition:padding 300ms;
+}
+.navbar.non-scrolltop {
+	padding-top:10px;
+	padding-bottom:10px;
+	margin-bottom: 25px !important;
+	position: sticky !important;
+	top:0px !important;
+	width:100% !important;
+	z-index: 999 !important;
+	background-color: black !important;
+	transition:padding 300ms;
+}
+.navbar.scrolltop {
+	padding-bottom:160px;
+	padding-top:10px;
+	margin-bottom: 25px !important;
+	position: sticky !important;
+	top:-150px !important;
+	width:100% !important;
+	z-index: 999 !important;
+	background-color: black !important;
 }
 .navbar-brand {
 	position: relative !important;
 	z-index: 998 !important;
 	font-family: 'Jeju Gothic', sans-serif !important;
+	transition:color 300ms;
+}
+.navbar-brand.scrolltop {
+	position: absolute!important;
+    z-index: 998 !important;
+    font-family: 'Jeju Gothic', sans-serif !important;
+    color: white;
+    top: 0;
+    font-size: 44px;
+    transition: 300ms;
 }
 
 .alert-danger {
@@ -267,11 +352,15 @@ String notWithFormTag = appName + mappingName + "?command=";
 	color: white !important;
 	padding-top : 0.5rem !important;
 }
+html{
+	
+}
 body{
-	padding-top:56px !important;
+	padding-top:0px !important;
 	padding-bottom:120px !important;
 	justify-content: center;
     display: flex;
+    flex-direction:column;
     position: relative !important;
     z-index: 999 !important;
     min-width: 70% !important;
@@ -289,8 +378,8 @@ body{
 	right:0 !important;
 	margin-left: auto !important;
 	margin-right: auto !important;
-	padding-left: 820px !important;
-	padding-right: 820px !important;
+	padding-left: 720px !important;
+	padding-right: 720px !important;
 	justify-content: center !important;
 	clear: both !important;
 }
@@ -299,11 +388,29 @@ body{
 	width:330px;
 	clear: both;
 }
+.login-div.scrolltop{
+	display: flex;
+    width: 330px;
+    clear: both;
+    position: absolute;
+    top: 50%;
+    margin-left: 0;
+    font-size: 20px;
+    transition: 300ms;
+}
 .navbar-nav{
 	width:220px;
 }
 .dropdown{
+	width:auto;
 	margin-right:15px;
+	display: block;
+	transition: width 300ms, margin-right 300ms;
+}
+.dropdown.scrolltop{
+	margin-right:87px;
+	width:72px;
+	display: block;
 }
 .dropdown-menu {
 	background-color:rgb(33,37,41) !important;
@@ -452,17 +559,10 @@ body.sideon, .navbar.sideon, .copyright.sideon{
 </style>
 </head>
 <body>
-	<div id="top"></div>
-	<c:if test="${not empty sessionScope.alertMessage}">
-		<div class="alert alert-danger alert-dismissible fade show">
-	    	<button type="button" class="btn-close" data-bs-dismiss="alert"></button>
-	    	<strong></strong> ${sessionScope.alertMessage}
-	  	</div>
-	  	<c:remove var="alertMessage" scope="session"/>
-  	</c:if>
+	
 </body>
 <!--  footer -->
-	<div class="dummy-navbar"></div>
+<!-- 	<div class="dummy-navbar"></div> -->
 	<nav class="navbar navbar-expand-sm bg-dark navbar-dark" id="navbar">
 		<div class="container-fluid">
 			<a class="navbar-brand" href="/Student/common/home.jsp">ICTPentaTour</a>
@@ -575,7 +675,15 @@ body.sideon, .navbar.sideon, .copyright.sideon{
 			</div>
 		</div>
 	</nav>
-<div class="dummy-copyright"></div>
+	<div id="top"></div>
+	<c:if test="${not empty sessionScope.alertMessage}">
+		<div class="alert alert-danger alert-dismissible fade show">
+	    	<button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+	    	<strong></strong> ${sessionScope.alertMessage}
+	  	</div>
+	  	<c:remove var="alertMessage" scope="session"/>
+  	</c:if>
+<!-- <div class="dummy-copyright"></div> -->
 <div id="container" class="copyright" style="width: 100%; z-index: 1; bottom:0; position: fixed;">
 	<ul class="icons">
 		<li><a href="#" class="icon fa-twitter"><span class="label">Twitter</span></a></li>
