@@ -471,6 +471,7 @@ body.sideon, .navbar.sideon, .copyright.sideon{
 								</c:if>							
 							</ul>
 						</li>
+<<<<<<< HEAD
 						<li class="nav-item dropdown">
 						<a	class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown">렌트카</a>
 							<ul class="dropdown-menu">
@@ -480,6 +481,13 @@ body.sideon, .navbar.sideon, .copyright.sideon{
 								</c:if>							
 							</ul>
 						</li>	
+=======
+						
+					<li class="nav-item">
+						<a class="nav-link" href="<%=notWithFormTag%>airHome" role="button">항공</a>
+					</li>
+					
+>>>>>>> refs/remotes/origin/aviation
 					</div>
 				</ul>
 			</div>

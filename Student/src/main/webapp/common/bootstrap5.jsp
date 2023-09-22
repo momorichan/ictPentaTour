@@ -15,6 +15,7 @@
 	<link rel="stylesheet" href="${pageContext.request.contextPath}/css/jquery-ui.css">
   	<script type="text/javascript" src="${pageContext.request.contextPath}/js/jquery-ui.js"></script>
   	<script type="text/javascript" src="${pageContext.request.contextPath}/js/bootstrap.bundle.min.js"></script>
+
 </head>
 <body>
 

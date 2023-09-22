@@ -56,10 +56,13 @@ tourList=com.shopping.controller.tour.TourListController
 tourDetail=com.shopping.controller.tour.TourDetailController
 tourInsert=com.shopping.controller.tour.TourInsertController
 #air section
-#airHome=com.shopping.controller.air.AirHomeController
-#airList=com.shopping.controller.air.AirListController
-#airDetail=com.shopping.controller.air.AirDetailController
-#airCheck=com.shopping.controller.air.AirCheckController
+airHome=com.shopping.controller.air.AirHomeController
+airList=com.shopping.controller.air.AirListController
+airDetail=com.shopping.controller.air.AirDetailController
+airCheck=com.shopping.controller.air.AirCheckController
+airInsert=com.shopping.controller.air.AirInsertController
+airInsertCheck=com.shopping.controller.air.AirInsertCheckController
+airCancel=com.shopping.controller.air.AirCancelController
 #rentalcar section
 #rcList=com.shopping.controller.rentalcar.RentalcarListController
 #rcDetail=com.shopping.controller.rentalcar.RentalcarDetailController
