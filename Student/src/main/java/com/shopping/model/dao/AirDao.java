@@ -536,12 +536,47 @@ public class AirDao extends SuperDao {
 		{
 			if (pageInfo.getKeyword2() == null || pageInfo.getKeyword2().equals("all")) 
 			{
+				if(pageInfo.getKeyword3() == null || pageInfo.getKeyword3().equals(""))
+				{
+					
+					if(pageInfo.getKeyword4() == null || pageInfo.getKeyword4().equals(""))
+					{
+
+					}
+					else
+					{
+						for (int i = 0; i < key.length; i++) 
+						{
+							if(i == 0)
+							{
+								sql += " where " + pageInfo.getMode3() + " like '%" + key[i] + "%'";
+							}
+							else
+							{
+								sql += " and " + pageInfo.getMode3() + " like '%" + key[i] + "%'";
+							}
+						}
+					}	
+				}
+				else
+				{
+					for (int i = 0; i < key.length; i++) 
+					{
+						if(i == 0)
+						{
+							sql += " where " + pageInfo.getMode3() + " like '%" + key[i] + "%'";
+						}
+						else
+						{
+							sql += " and " + pageInfo.getMode3() + " like '%" + key[i] + "%'";
+						}
+					}
+				}
 			} 
 			else 
 			{
 				sql += " where " + pageInfo.getMode2() + " like '%" + pageInfo.getKeyword2() + "%'";
 			}
-
 		} 
 		else 
 		{
