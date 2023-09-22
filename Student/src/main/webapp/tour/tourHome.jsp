@@ -130,7 +130,7 @@ function deleteCheck(toid){
 		z-index: 1;
 	}
 </style>
-<!-- </head> -->
+</head>
 <body>
 	<div class="container container-main">
 		<h2>투어</h2>

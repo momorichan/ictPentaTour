@@ -1,7 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 
-<%@ include file="./../common/bootstrap5.jsp" %>
 <%@ include file="./../common/common.jsp" %>
 <!DOCTYPE html>
 <html>
@@ -17,7 +16,7 @@
 		#updateAnchor, #deleteAnchor{opacity:0.8;}   
 		.mode, .keyword, .col{margin: auto;}  
 		.form-control-sm{border: 1px solid Gainsboro;}
-		#totalprice {	color: red;	font-size: 20px;	 font-weight: bolder;}
+		#minprice {	color: black;	font-size: 18px;	 font-weight: bolder;}
 </style>
 <script type="text/javascript">
       $(document).ready(function(){
@@ -85,7 +84,7 @@
           		</div>
 			</td>
 			</tr>
-				<c:set var="colsu" value="${applicationScope.settingMap['accommodation_list_column_size']}"/>
+				<c:set var="colsu" value="${applicationScope.map['accommodation_list_column_size']}"/>
 				<c:forEach var="bean" items="${requestScope.datalist}" varStatus="status">
 				<c:if test="${status.index%colsu==0}">
 					<tr>
@@ -97,10 +96,8 @@
 							<div class="card-body"> 
 								<h5 class="card-title">${bean.name}</h5> 
 								<p class="card-text">
-									<span id="totalprice">
-									<fmt:formatNumber>
-										${bean.price}
-									</fmt:formatNumber>
+									<span id="minprice">
+									<fmt:formatNumber value="${bean.minprice}" ></fmt:formatNumber>원~
 									</span>
 								</p>
 							<c:if test="${whologin == 2}">
