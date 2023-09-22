@@ -17,8 +17,12 @@ public class AirCheckController extends SuperClass{
 		// TODO Auto-generated method stub
 		super.doGet(request, response);
 		
-		
-		System.out.println("regid : " + Integer.parseInt(request.getParameter("regid")));
+		if(request.getParameter("regid") == null || request.getParameter("regid").equals(""))
+		{
+			super.setAlertMessage("번호를 입력해주세요");
+			new AirHomeController().doGet(request, response);
+			return;
+		}
 		
 		int regid = Integer.parseInt(request.getParameter("regid"));
 		
