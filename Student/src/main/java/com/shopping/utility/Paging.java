@@ -565,4 +565,3 @@ public class Paging {
 		this.keyword2 = keyword2;
 	}	
 }
-

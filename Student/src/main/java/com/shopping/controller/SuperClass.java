@@ -107,7 +107,4 @@ public class SuperClass implements SuperController{
 		String text = appName + mappingName + "?command=" + todoCommand;
 		return text;
 	}
-
-
-
 }

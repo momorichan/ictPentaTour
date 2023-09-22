@@ -11,7 +11,6 @@
 		justify-content: center;
  		display: flex;
  		min-height:600px;
-		
 	}
 	.main-image-div{
 		min-width:50%;
@@ -48,10 +47,10 @@
 	}
 	.side-pannel{
 		width: 368px;
-		height: 1226px;
+		height: 924px;
 		position: sticky;
 		top:0px;
-		background-color: aqua;
+		background-color: gray;
 	}
 	.side-pannel-inner{
 		width:100%;
@@ -126,6 +125,9 @@
 	h2{
 		font-size: 32px;
 	}
+	.side-bar-div {
+		display: none;
+	}
 </style>
 </head>
 <body>
@@ -196,10 +198,16 @@
 		</div>
 		<div class="bottom-info-div">
 			<div class="detail-info-div">
+				<hr style="margin:0px;">
+				<br>
 				<h4 class="detail-info">사용 가능 일자 : ${bean.tusedate }</h4>
+				<br>
 				<h4 class="detail-info">제한 연령 : ${bean.tage }</h4>
-				<p class="detail-info">${bean.tcontent }</p>
-				<img class="detail-info-big" alt="jsp" src="/Student/image/la.jpg">
+				<br>
+				<br>
+				<p class="detail-info">${bean.tcontent }
+				<br>
+				<br>
 				9월 14, 2023 2:29:54 오후 org.apache.catalina.core.StandardContext reload
 정보: 이름이 [/Student]인 컨텍스트를 다시 로드하는 작업이 시작되었습니다.
 9월 14, 2023 2:29:54 오후 org.apache.catalina.loader.WebappClassLoaderBase clearReferencesJdbc

@@ -164,11 +164,11 @@ function deleteCheck(toid){
 					</div>
 				</thead>
 				<tbody>
-					<c:set var="colsu" value="${applicationScope.map['product_list_column_size']}"/>
+<%-- 					<c:set var="colsu" value="${applicationScope.map['product_list_column_size']}"/> --%>
 					<c:forEach var="bean" items="${requestScope.datalist }" varStatus="asdf">
-						<c:if test="${asdf.index % colsu == 0}">
-							<tr></tr>
-						</c:if>
+<%-- 						<c:if test="${asdf.index % colsu == 0}"> --%>
+<!-- 							<tr></tr> -->
+<%-- 						</c:if> --%>
 							<td>
 								<div class = "card" style = "width : 19rem" >
 									<a href="<%=notWithFormTag%>tourDetail&toid=${bean.toid}" class="removeUnderLine">
@@ -176,19 +176,6 @@ function deleteCheck(toid){
 										<div class = "card-body">
 											<p>${bean.location }
 											<h5 class = "card-title">${bean.tname}</h5>
-											<p class = "card-text">										
-												<span
-												data-bs-toggle="popover"
-												data-bs-content="${bean.tcontent}"
-												data-bs-trigger="hover">
-												<c:if test="${fn:length(bean.tcontent) >= 18}">
-													${fn:substring(bean.tcontent, 0, 18)}...
-												</c:if>
-												</span>
-											</p>
-												<c:if test="${fn:length(bean.tcontent) < 18}">
-													${bean.tcontent}
-												</c:if>
 										</div>
 									</a>
 									<c:if test="${whologin == '2'}">

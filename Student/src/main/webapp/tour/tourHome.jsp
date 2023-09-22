@@ -1,7 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 
-<%@ include file="./../common/bootstrap5.jsp"%>
 <%@ include file="./../common/common.jsp"%>
 <!DOCTYPE html>
 <html>
@@ -42,7 +41,7 @@ function deleteCheck(toid){
 	}
     .card{
     	width: 302px;
-		height: 450px;
+		height: 420px;
     	margin-left:auto;
     	margin-right:auto;
     }
@@ -76,7 +75,7 @@ function deleteCheck(toid){
 		margin-right: -720px;
 		text-align: center;
 		width: 120px;
-		z-index: 1;
+		z-index: 3;
 	}
 	.tablecon{
 		
@@ -86,14 +85,14 @@ function deleteCheck(toid){
 		left: 0%;
 	}
 	.pur-btn-div{
-		margin-top:19px;
+		margin-top:0px;
 		margin-bottom:auto;
 		display:flex;
 		justify-content: center;
 	}
     .slide-div{
 		justify-content: center;
- 		display: flex;
+ 		display: block;
  		width:1106px;
  		height:220px;
 		margin-left:auto;
@@ -126,11 +125,12 @@ function deleteCheck(toid){
 		margin-left:auto;
 		margin-right:auto;
 	}
-	.carousel-item{
-		display: flex;
+	.btn-insert {
+		position:relative;
+		z-index: 1;
 	}
 </style>
-<!-- </head> -->
+</head>
 <body>
 	<div class="container container-main">
 		<h2>투어</h2>
@@ -143,16 +143,17 @@ function deleteCheck(toid){
 						<button type="button" data-bs-target="#demo" data-bs-slide-to="2"></button>
 					</div>
 					<div class="carousel-inner">
-						<c:forEach var="bean" items="${requestScope.eventlists }">
-						<div class="carousel-item">
-							<div class="slide-image active">
-								<img src="/Student/upload/${bean.timage01}" alt="${bean.timage01}" class="d-block" style="width:100%">
-							</div>
-							<div class="slide-caption">
-								
-							</div>
+<%-- 						<c:forEach var="bean" items="${requestScope.eventlists }"> --%>
+						<div class="carousel-item active">
+							<img src="/Student/upload/상단배너01.png" alt="상단배너01.png" class="d-block" style="width:100%">
 						</div>
-						</c:forEach>
+						<div class="carousel-item">
+							<img src="/Student/upload/상단배너02.jpg" alt="상단배너02.jpg" class="d-block" style="width:100%">
+						</div>
+						<div class="carousel-item">
+							<img src="/Student/upload/상단배너03.jpg" alt="상단배너03.jpg" class="d-block" style="width:100%">
+						</div>
+<%-- 						</c:forEach> --%>
 					</div>
 					<button class="carousel-control-prev" type="button" data-bs-target="#demo" data-bs-slide="prev">
 						<span class="carousel-control-prev-icon"></span>
@@ -174,9 +175,6 @@ function deleteCheck(toid){
 					<input type="text" class="input-group-text" id="keyword" name="keyword" style="width:250px;" value="${pageInfo.getKeyword()}">
 					<button type="submit" class="btn btn-secondary rounded" value="search">검색</button>
 					<button type="button" class="btn btn-dark rounded" onclick="searchAll();" style="margin-left:5px;">전체 검색</button>
-					<c:if test="${whologin == '2'}">
-						<button type="button" class="btn btn-primary rounded" onclick="writeForm();" style="margin-left:5px;">상품 등록</button>
-					</c:if>
 				</div>
 			</div>
 		</form>
@@ -201,18 +199,7 @@ function deleteCheck(toid){
 											<p>${bean.location }
 											<h5 class = "card-title">${bean.tname}</h5>
 											<p class = "card-text">										
-												<span
-												data-bs-toggle="popover"
-												data-bs-content="${bean.tcontent}"
-												data-bs-trigger="hover">
-												<c:if test="${fn:length(bean.tcontent) >= 18}">
-													${fn:substring(bean.tcontent, 0, 18)}...
-												</c:if>
-												</span>
 											</p>
-												<c:if test="${fn:length(bean.tcontent) < 18}">
-													${bean.tcontent}
-												</c:if>
 										</div>
 										<div class="pur-btn-div">
 											<a href="<%=notWithFormTag%>tourDetail&toid=${bean.toid}" class="purchasebtn btn btn-outline-secondary">예매하기</a>
@@ -225,7 +212,7 @@ function deleteCheck(toid){
 			</table>
 		</div>
 		${pageInfo.pagingHtml}
-		<button type="button" class="btn btn-outline-primary" onclick="location.href='<%=notWithFormTag %>tourInsert'">등록</button>
+		<button type="button" class="btn-insert btn btn-outline-primary" onclick="location.href='<%=notWithFormTag %>tourInsert'">등록</button>
 	</div>
 </body>
 </html>

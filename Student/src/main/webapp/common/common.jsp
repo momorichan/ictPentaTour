@@ -42,22 +42,33 @@ String notWithFormTag = appName + mappingName + "?command=";
 <!-- 자바 관련 변수 및 패키지 임포트, 네비게이션 바, jstl 등등-->
 <script src="/Student/js/sweetalert.js"></script>
 <script type="text/javascript">
-	var togglecheck = "";
+	var setCookie = function(name, value) {
+	    document.cookie = name + '=' + value;
+	};
+	var getCookie = function(name) {
+	    var value = document.cookie.match('(^|;) ?' + name + '=([^;]*)(;|$)');
+	    return value? value[2] : null;
+	};
+	document.cookie = getCookie("sidebar");
 	function toggleSideOn(){
-		togglecheck = "on";
+		setCookie("sidebar", "on")
 		checkToggle();
 	}
 	
 	function toggleSideOff(){
-		togglecheck = "";
+		setCookie("sidebar", "")
 		checkToggle();
 	}
 	
 	function checkToggle(){
-		if(togglecheck == "on"){
-			$("#side-bar-toggle, .side-bar, .side-bar-inner, html, body, .copyright, .navbar").addClass("sideon");
+		if(getCookie("sidebar") == "on"){
+// 			$("#side-bar-toggle, .side-bar, .side-bar-inner, html, body, .copyright, .navbar").addClass("sideon");
+			$(".side-icon, .hide-arrow, .side-bar-icon-div, .top-btn-div").addClass("sideon");
+			$(".side-hide-btn").attr("href", 'javascript:toggleSideOff();')
 		}else{
-			$("#side-bar-toggle, .side-bar, .side-bar-inner, html, body, .copyright, .navbar").removeClass("sideon");
+// 			$("#side-bar-toggle, .side-bar, .side-bar-inner, html, body, .copyright, .navbar").removeClass("sideon");
+			$(".side-icon, .hide-arrow, .side-bar-icon-div, .top-btn-div").removeClass("sideon");
+			$(".side-hide-btn").attr("href", 'javascript:toggleSideOn();')
 		}
 	}
 	$(function(){
@@ -278,8 +289,8 @@ body{
 	right:0 !important;
 	margin-left: auto !important;
 	margin-right: auto !important;
-	padding-left: 720px !important;
-	padding-right: 720px !important;
+	padding-left: 820px !important;
+	padding-right: 820px !important;
 	justify-content: center !important;
 	clear: both !important;
 }
@@ -318,24 +329,6 @@ body{
 	z-index: 998 !important;
 }
 
-.arrow {
-    position: absolute;
-    left: 0; 
-    top: 0; 
-    filter:grayscale(100%);
-    content: '';
-    width: 25px; /* 사이즈 */
-    height: 25px; /* 사이즈 */
-    border-top: 5px solid #000; /* 선 두께 */
-    border-right: 5px solid #000; /* 선 두께 */
-    transform: rotate(-45deg); /* 각도 */
-}
-.top-btn-div{
-	position:fixed;
-	right:75px;
-	bottom:150px;
-	z-index: 997;
-}
 body.sideon, .navbar.sideon, .copyright.sideon{
 	width:calc(100% - 200px) !important;
 	padding-right:0;
@@ -358,7 +351,104 @@ body.sideon, .navbar.sideon, .copyright.sideon{
 	bottom:0 !important;
 	z-index: -999 !important;
 }
-
+.top-btn-div{
+	position:fixed;
+	right:17px;
+	bottom:90px;
+	z-index: 997;
+	display: flex;
+	flex-direction: row;
+	pointer-events:none;
+}
+.top-btn-div.sideon{
+	position:fixed;
+	right:17px;
+	bottom:90px;
+	display: flex;
+	flex-direction: row;
+	pointer-events:all;
+	z-index: 999;
+}
+.arrow {
+    position: relative;
+    left: 0; 
+    top: 0; 
+    filter:grayscale(100%);
+    content: '';
+    width: 25px;
+    height: 25px;
+    border-top: 5px solid #000;
+    border-right: 5px solid #000;
+    transform: rotate(-45deg);
+}
+.kakao {
+	position:relative;
+	width:50px;
+	height:50px;
+}
+.naver {
+	position:relative;
+	width:50px;
+	height:50px;
+}
+.top-btn {
+	display: flex;
+	position: relative;
+	margin-top:10px;
+	justify-content: center;
+	pointer-events:all !important;
+	z-index: 999 !important;
+}
+.side-bar-icon-div {
+	display: flex;
+	flex-direction: column;
+	pointer-events: none;
+}
+.side-bar-icon-div.sideon {
+	display: flex;
+	flex-direction: column;
+	pointer-events: all;
+}
+.side-hide-btn {
+	bottom:90%;
+	position:absolute;
+	margin-left: -6px;
+	opacity: 30%;
+	pointer-events:all !important;
+}
+.hide-arrow {
+	position: absolute;
+    left: 0; 
+    top: 0; 
+    filter:grayscale(100%);
+    content: '';
+    width: 25px;
+    height: 25px;
+    border-top: 5px solid #000;
+    border-right: 5px solid #000;
+    transform: translate(5px, 0) scaleX(0.5) scaleY(0.7) rotate(-135deg);
+}
+.hide-arrow.sideon {
+	position: absolute;
+    left: 0; 
+    top: 0; 
+    filter:grayscale(100%);
+    content: '';
+    width: 25px;
+    height: 25px;
+    border-top: 5px solid #000;
+    border-right: 5px solid #000;
+    transform:scaleX(0.5) scaleY(0.7) rotate(45deg);
+}
+.side-icon {
+	position: relative;
+	right:-75px;
+	transition: transform 300ms;
+}
+.side-icon.sideon {
+	transform: translate(-75px, 0);
+	transition: transform 300ms;
+}
 </style>
 </head>
 <body>
@@ -504,19 +594,34 @@ body.sideon, .navbar.sideon, .copyright.sideon{
 		<li>Made with <a href="https://naver.com/">5조</a></li>
 	</ul>
 </div>
-<div class="side-bar">
-	<div id="side-bar-toggle" class="">
-		<button type="button" class="side-bar-on-btn" onclick="toggleSideOn()"><img class="side-bar-icon" src="/Student/upload/sidebar.png"></button>
+<!-- <div class="side-bar"> -->
+<!-- 	<div id="side-bar-toggle" class=""> -->
+<!-- 		<button type="button" class="side-bar-on-btn" onclick="toggleSideOn()"><img class="side-bar-icon" src="/Student/upload/sidebar.png"></button> -->
+<!-- 	</div> -->
+<!-- 	<div class="side-bar-inner"> -->
+<!-- 		<button type="button" class="side-bar-off-btn" onclick="toggleSideOff()">X</button> -->
+<!-- 		<div class="simple-login-div"> -->
+<!-- 			<a class="simple-login-a google-login" href=""><img class="simple-login" src="/Student/upload/google.png"></a> -->
+<!-- 			<a class="simple-login-a kakao-login" href=""><img class="simple-login" src="/Student/upload/kakao.png"></a> -->
+<!-- 		</div> -->
+<!-- 	</div> -->
+<!-- </div> -->
+<div class="top-btn-div sideon">
+	<div class="side-bar-icon-div sideon">
+		<a class="kakao-button side-icon sideon" href="https://open.kakao.com/o/gY9q37Ef" target='_blank'>
+			<img class="side-button kakao" src="/Student/upload/kakao_chat.png">
+		</a>
+		<a class="naver-mail-button side-icon sideon" href="">
+			<img class="side-button naver" src="/Student/upload/naver_mail.png">
+		</a>
+		<a class="top-btn" href="">
+			<span class="arrow"></span>
+		</a>
 	</div>
-	<div class="side-bar-inner">
-		<button type="button" class="side-bar-off-btn" onclick="toggleSideOff()">X</button>
-		<div class="simple-login-div">
-			<a class="simple-login-a google-login" href=""><img class="simple-login" src="/Student/upload/google.png"></a>
-			<a class="simple-login-a kakao-login" href=""><img class="simple-login" src="/Student/upload/kakao.png"></a>
-		</div>
+	<div>
+		<a class="side-hide-btn " href="javascript:toggleSideOff();">
+			<span class="hide-arrow sideon"></span>
+		</a>
 	</div>
-</div>
-<div class="top-btn-div">
-	<a class="top-btn" href=""><span class="arrow"></span></a>
 </div>
 </html>

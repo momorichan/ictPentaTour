@@ -2,7 +2,6 @@
     pageEncoding="UTF-8"%>
     
 <%@ include file="./../common/common.jsp" %>
-    
 <!DOCTYPE html>
 <html>
 <head>
@@ -71,15 +70,23 @@
   	</script>
   	<style type="text/css">
   		/* box model에 대한 공부가 필요합니다. */
-  		.container{margin-top: 10px;}
-  		.input-group{margin: 7px;}
+  		.container{
+  			width: 1200px;
+  			margin-top: 10px;
+  		}
+  		.input-group{
+  			margin: 7px;
+  		}
   		.input-group-text{
+  			width:96px;
   			display: block;
   			margin-left: auto;
   			margin-right: auto;
   		}
-  		#buttonset{margin-top: 15px;}
-  		.radio_gender, .checkbox_hobby{font-size: 1.1rem;} /* 주위 글꼴의 1.1배 */
+  		#buttonset{
+  			margin-top: 15px;
+  		}
+  		
   	</style>
 </head>
 <body>
@@ -90,7 +97,7 @@
 			<input type="hidden" name="command" value="meInsert">  
 			<div class="input-group"> 
 				<span class="input-group-text">아이디</span>
-				<input class="form-control" type="text" id="id" name="id" >				
+				<input class="form-control" type="text" id="meid" name="meid" >				
 			</div>
 			<div class="input-group">
 				<span class="input-group-text">이름</span>
@@ -134,11 +141,11 @@
 				<input class="form-control" type="text" id="manager" name="manager">				
 			</div>			
 			<div id="buttonset" class="input-group">
-				<button type="submit" class="btn btn-primary" onclick="return validCheck();"> 
-					등록
+				<button type="submit" class="btn btn-primary rounded" onclick="return validChack();">
+				등록
 				</button>
 				&nbsp;&nbsp;&nbsp;
-				<button type="reset" class="btn btn-primary">초기화</button>				
+				<button type="reset" class="btn btn-primary rounded">초기화</button>				
 			</div>
 		</form>
 	</div>

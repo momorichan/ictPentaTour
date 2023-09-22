@@ -8,8 +8,11 @@
 <title>Insert title here</title>
 <style type="text/css">
 	.input-group-text{
-		width:133px;
+		width:150px;
 		text-align: center;
+	}
+	.side-bar-div {
+		display: none;
 	}
 </style>
 <script type="text/javascript">
