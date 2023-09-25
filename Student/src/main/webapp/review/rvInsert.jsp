@@ -27,7 +27,7 @@
   	  		$('#regdate').datepicker({dateFormat: "yy/mm/dd"});   	
   		});
   	
-  	function validChack(){
+  	function validCheck(){
 
 		
 		var subject = $('#subject').val();
@@ -60,64 +60,56 @@
 	<div class="container">
 		<h2>게시물 등록</h2>
 		<p>사용자들이 게시물을 등록하는 페이지입니다.</p>
-		
-		<form action="<%=withFormTag%>" method="post">
-			<input type="hidden" name="command" value="boInsert">
-			<div id = "boardNo" class="input-group">
+		<form action="<%=withFormTag%>" method="post" name="myform" id="myform">
+			<div id = "trid" class="input-group">
 				<span class="input-group-text col-md-2">게시물 번호</span> 
-				<input id="no" name="no" type="number" class="form-control" placeholder="">
+				<input id="trid" name="trid" type="number" class="form-control" placeholder="">
 			</div> 
 			<div class="input-group">
 				<span class="input-group-text col-md-2">작성자</span> 
-				
-				<c:set var="userInfo" value="${sessionScope.loginfo.name}(${sessionScope.loginfo.id})"/>
-				
+				<c:set var="userInfo" value="${sessionScope.loginfo.name}(${sessionScope.loginfo.id})"/>	
 				<input id="fakeid" name="fakeid" disabled="disabled" 
 					type="text" class="form-control" placeholder="" value="${userInfo}">
-				<input id="id" name="id" type="text" value="${sessionScope.loginfo.id}">
 			</div>
 			<div class="input-group">
 				<span class="input-group-text col-md-2">글제목</span> 
 				<input id="subject" name="subject" type="text" class="form-control" placeholder="">
-			</div>
-			<div class="input-group">
-				<span class="input-group-text col-md-2">글내용</span> 
-				<input id="content" name="content" type="text" class="form-control" placeholder="">
-			</div>  
-			<div class="input-group">
-				<span class="input-group-text col-md-2">글비밀번호</span> 
-				<input id="password" name="password" type="password" class="form-control" placeholder="">
-			</div>			
+				<select name="type" style ="text-align : center">
+					<option selected ="selected">--- 선택해주세요 ---
+					<option value="해외숙박">해외숙박
+					<option value="국내숙박">국내숙박
+					<option value="국내여행">국내여행
+					<option value="해외여행">해외여행
+				</select>
+			</div> 		
 			<div class="input-group">
 				<span class="input-group-text col-md-2">등록 일자</span> 
 				<input id="regdate" name="regdate" type="datetime" class="form-control" placeholder="">
 			</div>
+	<fieldset>
+		<span class="text-bold">별점을 선택해주세요</span>
+		<input type="radio" name="rating" value="5" id="rate1"><label
+			for="rate1">★</label>
+		<input type="radio" name="rating" value="4" id="rate2"><label
+			for="rate2">★</label>
+		<input type="radio" name="rating" value="3" id="rate3"><label
+			for="rate3">★</label>
+		<input type="radio" name="rating" value="2" id="rate4"><label
+			for="rate4">★</label>
+		<input type="radio" name="rating" value="1" id="rate5"><label
+			for="rate5">★</label>
+	</fieldset>
+	<div>
+		<textarea class="col-auto form-control" type="text" id="content"
+				  placeholder=""></textarea>
+	</div>
 			<div id="buttonset" class="input-group">
-				<button type="submit" class="btn btn-primary btn-lg" onclick="return validChack();">등록</button>
+				<button type="submit" class="btn btn-primary btn-lg" onclick="return validCheck();">등록</button>
 				&nbsp;&nbsp;&nbsp;
 				<button type="reset" class="btn btn-secondary btn-lg">초기화</button>
 			</div>
 		</form>
 	</div>
 
- 	<form class="mb-3" name="myform" id="myform" method="post">
-	<fieldset>
-		<span class="text-bold">별점을 선택해주세요</span>
-		<input type="radio" name="reviewStar" value="5" id="rate1"><label
-			for="rate1">★</label>
-		<input type="radio" name="reviewStar" value="4" id="rate2"><label
-			for="rate2">★</label>
-		<input type="radio" name="reviewStar" value="3" id="rate3"><label
-			for="rate3">★</label>
-		<input type="radio" name="reviewStar" value="2" id="rate4"><label
-			for="rate4">★</label>
-		<input type="radio" name="reviewStar" value="1" id="rate5"><label
-			for="rate5">★</label>
-	</fieldset>
-	<div>
-		<textarea class="col-auto form-control" type="text" id="reviewContents"
-				  placeholder=""></textarea>
-	</div>
-</form>
 </body>
 </html>
