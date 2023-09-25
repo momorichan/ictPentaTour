@@ -43,18 +43,19 @@ String notWithFormTag = appName + mappingName + "?command=";
 <script src="/Student/js/sweetalert.js"></script>
 <script type="text/javascript">
 	var scrollheight = 0;
+	var navbartoggle = "";
 	$(window).scroll(function(){
 	    scrollheight = $(window).scrollTop();
 	    console.log(scrollheight);
-	    if(scrollheight < 1 && window.innerWidth > 2140){
-			$(".navbar-brand, .navbar, .dropdown, .login-div").addClass("scrolltop");
+	    if(scrollheight < 1 && window.innerWidth > 1900){
+			$(".navbar-brand, .navbar, .dropdown, .login-div, body, .dropdown-div").addClass("scrolltop");
 			$(".navbar").removeClass("non-scrolltop");
 			$(".dropdown-toggle, .dropdown-menu").addClass("show");
 			$(".dropdown-toggle").attr("aria-expanded", "true");
 			$('html,body').animate({scrollTop:0},0);
 		}
-		if(scrollheight > 150 || window.innerWidth <= 2140){
-			$(".navbar-brand, .navbar, .dropdown, .login-div").removeClass("scrolltop");
+		if(scrollheight > 1 || window.innerWidth <= 1900){
+			$(".navbar-brand, .navbar, .dropdown, .login-div, body, .dropdown-div").removeClass("scrolltop");
 			$(".navbar").addClass("non-scrolltop");
 			$(".dropdown-toggle, .dropdown-menu").removeClass("show");
 			$(".dropdown-toggle").attr("aria-expanded", "false");
@@ -63,27 +64,44 @@ String notWithFormTag = appName + mappingName + "?command=";
 	    return scrollheight;
 	});
 	window.addEventListener('resize', () => {
-		if(scrollheight < 1 && window.innerWidth > 2140){
-			$(".navbar-brand, .navbar, .dropdown, .login-div").addClass("scrolltop");
-			$(".navbar").removeClass("non-scrolltop");
-			$(".dropdown-toggle, .dropdown-menu").addClass("show");
-			$(".dropdown-toggle").attr("aria-expanded", "true");
-		}
-		if(window.innerWidth <= 2140){
-			$(".navbar-brand, .navbar, .dropdown, .login-div").removeClass("scrolltop");
+		console.log(scrollheight);
+		if(window.innerWidth <= 1900){
+			$(".navbar-brand, .navbar, .dropdown, .login-div, body, .dropdown-div").removeClass("scrolltop");
 			$(".navbar").addClass("non-scrolltop");
 			$(".dropdown-toggle, .dropdown-menu").removeClass("show");
 			$(".dropdown-toggle").attr("aria-expanded", "false");
 		}
 	});
+	window.onload=function(){
+		if(window.innerWidth < 501) {
+			$(".slide-div, .card-title, .card, .card-img-top, .serchcon, .tablecon, .tablecon-2, .navbar-toggle-btn").addClass("mobile");
+		}
+	}
 	window.addEventListener('resize', () => {
 		if(window.innerWidth < 501) {
-			$("").addClass("mobile");
+			$(".slide-div, .card-title, .card, .card-img-top, .serchcon, .tablecon, .tablecon-2, .navbar-toggle-btn").addClass("mobile");
 		}
 		if(window.innerWidth >= 501) {
-			$("").removeClass("mobile");
+			$(".slide-div, .card-title, .card, .card-img-top, .serchcon, .tablecon, .tablecon-2, .navbar-toggle-btn").removeClass("mobile");
+			$(".navbar, .dropdown-div").removeClass("toggle-on");
+			$(".dropdown-div").removeClass("dropstart");
+			$(".collapse").removeClass("show");
+			navbartoggle = "";
 		}
 	});
+	function navtoggle(){
+		if(navbartoggle == ""){
+			$(".navbar, .dropdown-div").addClass("toggle-on");
+			$(".dropdown-div").addClass("dropstart");
+			$(".collapse").addClass("show");
+			navbartoggle = "on";
+		}else{
+			$(".navbar, .dropdown-div").removeClass("toggle-on");
+			$(".dropdown-div").removeClass("dropstart");
+			$(".collapse").removeClass("show");
+			navbartoggle = "";
+		}
+	};
 	var setCookie = function(name, value) {
 	    document.cookie = name + '=' + value;
 	};
@@ -149,6 +167,9 @@ String notWithFormTag = appName + mappingName + "?command=";
 .side-bar-off-btn {
 	display: none;
 }
+.navbar-toggler{
+	display:none !important;
+}
 .side-bar-inner.sideon .side-bar-off-btn {
 	position:absolute;
 	top:7px;
@@ -184,6 +205,19 @@ String notWithFormTag = appName + mappingName + "?command=";
 	transform:translate(0px,0);
 	transition:transform 300ms ease 0ms;
 }
+.card.mobile {
+    width: 215px;
+    height: 290px;
+    margin-left: auto;
+    margin-right: auto;
+}
+.card-title.mobile {
+    font-size: 1.0rem;
+}
+.card-img-top.mobile {
+    width: 213px;
+    height: 133px;
+}
 .side-bar-inner {
 	width:200px;
 	height:948px;
@@ -194,6 +228,21 @@ String notWithFormTag = appName + mappingName + "?command=";
 	position: relative;
 	transform:translate(0,0);
     transition:transform 300ms;
+}
+.serchcon.mobile {
+    width: 460px;
+}
+.tablecon-2.mobile {
+	display: block;
+}
+.tablecon-2{
+	display: none;
+}
+.tablecon.mobile {
+	display: none;
+}
+.tablecon{
+	display: block;
 }
 .side-bar.sideon {
 	width:0px;
@@ -248,41 +297,69 @@ String notWithFormTag = appName + mappingName + "?command=";
 	padding-top:10px;
 	padding-bottom:10px;
 	margin-bottom: 25px !important;
-	position: sticky !important;
-	top:-0px !important;
+	position: fixed !important;
+	top:0px !important;
 	width:100% !important;
 	z-index: 999 !important;
 	background-color: black !important;
-	transition:padding 300ms;
+	transition: 300ms;
 }
-.navbar.mobile {
-	padding-top:10px;
-	padding-bottom:10px;
-	margin-bottom: 25px !important;
-	position: sticky !important;
-	top:-0px !important;
-	width:100% !important;
-	z-index: 999 !important;
-	background-color: black !important;
-	transition:padding 300ms;
+.navbar.non-scrolltop.toggle-on {
+    padding-top: 10px;
+    padding-bottom: 370px;
+    margin-bottom: 25px !important;
+    position: fixed !important;
+    top: 0px !important;
+    right: 0px !important;
+    width: 100% !important;
+    z-index: 999 !important;
+    background-color: black !important;
+    transition: 300ms;
+}
+.navbar.toggle-on {
+    padding-top: 10px;
+    padding-bottom: 370px;
+    margin-bottom: 25px !important;
+    position: fixed !important;
+    top: 0px !important;
+    right: 0px !important;
+    width: 100% !important;
+    z-index: 999 !important;
+    background-color: black !important;
+    transition: 300ms;
+}
+.navbar-toggle-btn.mobile{
+	position: fixed;
+	right:10px;
+	top:10px;
+	width:40px;
+	height:40px;
+	background: none;
+	border: none;
+	filter:invert(1);
+	display: block;
+}
+.navbar-toggle-btn{
+	display:none;
 }
 .navbar.non-scrolltop {
 	padding-top:10px;
 	padding-bottom:10px;
 	margin-bottom: 25px !important;
-	position: sticky !important;
+	position: fixed !important;
 	top:0px !important;
+	right:0px !important;
 	width:100% !important;
 	z-index: 999 !important;
 	background-color: black !important;
-	transition:padding 300ms;
+	transition: 300ms;
 }
 .navbar.scrolltop {
 	padding-bottom:160px;
 	padding-top:10px;
 	margin-bottom: 25px !important;
-	position: sticky !important;
-	top:-150px !important;
+	position: fixed !important;
+	top:0px !important;
 	width:100% !important;
 	z-index: 999 !important;
 	background-color: black !important;
@@ -302,7 +379,17 @@ String notWithFormTag = appName + mappingName + "?command=";
     font-size: 44px;
     transition: 300ms;
 }
-
+.slide-div.mobile {
+    justify-content: center;
+    display: block;
+    width: 460px;
+    height: 220px;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 20px;
+    margin-bottom: 20px;
+    border-radius: 10px;
+}
 .alert-danger {
 	margin-left: auto;
 	margin-right: auto;
@@ -356,7 +443,7 @@ html{
 	
 }
 body{
-	padding-top:0px !important;
+	padding-top:70px !important;
 	padding-bottom:120px !important;
 	justify-content: center;
     display: flex;
@@ -364,7 +451,19 @@ body{
     position: relative !important;
     z-index: 999 !important;
     min-width: 70% !important;
-    transition:width 300ms;
+    transition:300ms;
+}
+
+body.scrolltop{
+	padding-top:200px !important;
+	padding-bottom:120px !important;
+	justify-content: center;
+    display: flex;
+    flex-direction:column;
+    position: relative !important;
+    z-index: 999 !important;
+    min-width: 70% !important;
+    transition:300ms;
 }
 .container{
 	margin-left:auto;
@@ -380,6 +479,35 @@ body{
 	margin-right: auto !important;
 	padding-left: 720px !important;
 	padding-right: 720px !important;
+	justify-content: center !important;
+	clear: both !important;
+	transition: 300ms
+}
+.dropdown-div.dropstart.toggle-on {
+	width:800px !important;
+	display: flex !important;
+	flex-direction:column;
+	position: absolute !important;
+	left:0 !important;
+	right:0 !important;
+	margin-left: auto !important;
+	margin-right: auto !important;
+	padding-left: 370px !important;
+	padding-right: 0px !important;
+	justify-content: center !important;
+	clear: both !important;
+	transition: 300ms
+}
+.dropdown-div.scrolltop {
+	width:800px !important;
+	display: flex !important;
+	position: absolute !important;
+	left:0 !important;
+	right:0 !important;
+	margin-left: auto !important;
+	margin-right: auto !important;
+	padding-left: 200px !important;
+	padding-right: 0px !important;
 	justify-content: center !important;
 	clear: both !important;
 }
@@ -422,6 +550,16 @@ body{
 	padding-left:9px;
 	padding-right:2px;
 }
+.dropstart .dropdown-menu[data-bs-popper] {
+    top: auto;
+    right: 120px;
+    bottom: auto;
+    left: auto;
+    transform: translate(0px, -50px);
+    margin-top: 0;
+    margin-right: var(--bs-dropdown-spacer);
+    position: fixed;
+}
 .dropdown-item:hover {
 	background-color: rgb(53,53,53) !important;
 }
@@ -460,7 +598,7 @@ body.sideon, .navbar.sideon, .copyright.sideon{
 }
 .top-btn-div{
 	position:fixed;
-	right:17px;
+	right:14px;
 	bottom:90px;
 	z-index: 997;
 	display: flex;
@@ -469,7 +607,7 @@ body.sideon, .navbar.sideon, .copyright.sideon{
 }
 .top-btn-div.sideon{
 	position:fixed;
-	right:17px;
+	right:14px;
 	bottom:90px;
 	display: flex;
 	flex-direction: row;
@@ -531,9 +669,9 @@ body.sideon, .navbar.sideon, .copyright.sideon{
     content: '';
     width: 25px;
     height: 25px;
-    border-top: 5px solid #000;
-    border-right: 5px solid #000;
-    transform: translate(5px, 0) scaleX(0.5) scaleY(0.7) rotate(-135deg);
+    border-top: 7px solid #000;
+    border-right: 7px solid #000;
+    transform: translate(4px, 0) scaleX(0.3) scaleY(0.7) rotate(-135deg);
 }
 .hide-arrow.sideon {
 	position: absolute;
@@ -543,9 +681,9 @@ body.sideon, .navbar.sideon, .copyright.sideon{
     content: '';
     width: 25px;
     height: 25px;
-    border-top: 5px solid #000;
-    border-right: 5px solid #000;
-    transform:scaleX(0.5) scaleY(0.7) rotate(45deg);
+    border-top: 7px solid #000;
+    border-right: 7px solid #000;
+    transform:scaleX(0.3) scaleY(0.7) rotate(45deg);
 }
 .side-icon {
 	position: relative;
@@ -673,6 +811,7 @@ body.sideon, .navbar.sideon, .copyright.sideon{
 					</div>
 				</ul>
 			</div>
+			<button type="button" class="navbar-toggle-btn" onclick="navtoggle()"><img src="/Student/upload/sidebar.png" style="width:100%; height:100%"></button>
 		</div>
 	</nav>
 	<div id="top"></div>
