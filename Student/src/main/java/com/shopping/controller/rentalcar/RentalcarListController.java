@@ -6,7 +6,6 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import com.shopping.controller.SuperClass;
-import com.shopping.model.bean.Board;
 import com.shopping.model.bean.Rentalcar;
 import com.shopping.model.dao.RentalcarDao;
 import com.shopping.utility.Paging;
@@ -20,14 +19,16 @@ public class RentalcarListController extends SuperClass{
 		String pageSize = request.getParameter("pageSize") ;	
 		
 		/* 렌트카 페이징 */
+		// list.jsp의  name value 가져옴
 		String startLocation = request.getParameter("startLocation");
-		String endLocation = request.getParameter("endLocation");
+		String endLocation = request.getParameter("endLocation"); 
 		String startDate = request.getParameter("startDate");
 		String endDate = request.getParameter("endDate");
 		
+		System.out.println("asdfasdfwerwer"+startDate);
+		System.out.println("asdfasdfwerwer"+endDate);
+		
 		RentalcarDao dao = new RentalcarDao();
-		
-		
 		
 		try {			
 			boolean isGrid = false ;
@@ -39,8 +40,8 @@ public class RentalcarListController extends SuperClass{
 					if(startDate != null && endDate != null && startDate.equalsIgnoreCase("") && endDate.equalsIgnoreCase("")) {
 						totalCount = dao.GetTotalRecordCountSLELSDED(startLocation, endLocation, startDate, endDate);
 					}else {
-						System.out.println("흠...");
-						totalCount = dao.GetTotalRecordCount();												
+						System.out.println("SL, EL, SD, ED 싹다 null 값");
+						totalCount = dao.GetTotalRecordCount(startLocation, endLocation);												
 					}					
 				}else {
 					// 대여장소 x, 반납 장소 o
@@ -87,8 +88,7 @@ public class RentalcarListController extends SuperClass{
 			}
 						
 			/* lists*/
-			List<Rentalcar> lists = dao.selectAll(pageInfo);
-			
+			List<Rentalcar> lists = dao.selectAll(pageInfo, startLocation, endLocation);			
 //			if(startLocation == null || startLocation.equals("")) {				
 //				if(endLocation == null || endLocation.equals("")) {
 //					if(startDate != null && endDate != null && startDate.equalsIgnoreCase("") && endDate.equalsIgnoreCase("")) {
@@ -120,7 +120,7 @@ public class RentalcarListController extends SuperClass{
 			
 			request.setAttribute("datalist", lists);
 			
-			System.out.println("lists: " + lists);
+			
 			// 페이징 관련 정보를 바인딩
 			request.setAttribute("pageInfo", pageInfo);
 			

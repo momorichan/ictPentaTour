@@ -106,6 +106,8 @@ public class BoardDao extends SuperDao{
 		
 		conn = super.getConnection() ;
 		pstmt = conn.prepareStatement(sql) ;
+	
+		System.out.println("보드다오카운트: " +sql);
 		
 		rs = pstmt.executeQuery() ; 
 		
@@ -203,7 +205,7 @@ public class BoardDao extends SuperDao{
 		pstmt.setInt(2, pageInfo.getEndRow());
 		
 //		오류 체크
-		System.out.println(pageInfo.getMode());
+		System.out.println("mode:" +pageInfo.getMode());
 		System.out.println("SQL:= "+sql);
 		System.out.println("getBeginRow: "+pageInfo.getBeginRow());
 		System.out.println("getEndRow: "+pageInfo.getEndRow());
@@ -211,7 +213,7 @@ public class BoardDao extends SuperDao{
 		rs = pstmt.executeQuery() ;
 		
 		List<Board> lists = new ArrayList<Board>();
-		
+
 		while(rs.next()) {
 			lists.add(getBeanData(rs)) ;
 		}

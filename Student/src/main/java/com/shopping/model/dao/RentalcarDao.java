@@ -3,7 +3,6 @@ package com.shopping.model.dao;
 
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
-import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -38,7 +37,7 @@ public class RentalcarDao extends SuperDao{
 		return bean;
 	}	
 	
-	@Deprecated
+	
 	public List<Rentalcar> selectSL(Paging pageInfo) throws Exception{
 		// TopN 구문을 사용하여 페이징 처리된 게시물 목록을 반환합니다.
 		PreparedStatement pstmt = null ;
@@ -82,7 +81,7 @@ public class RentalcarDao extends SuperDao{
 	}
 	
 	// 렌트카 리스트,페이징 둘다 수정해야함
-	public List<Rentalcar> selectAll(Paging pageInfo) throws Exception{
+	public List<Rentalcar> selectAll(Paging pageInfo, String startLocation, String endLocation) throws Exception{
 		// TopN 구문을 사용하여 페이징 처리된 게시물 목록을 반환합니다.
 		PreparedStatement pstmt = null ;
 		ResultSet rs = null ;		
@@ -90,8 +89,8 @@ public class RentalcarDao extends SuperDao{
 		String sql = " select rcid, carType, startLocation, endLocation, startDate, endDate, price, passengers";
 		sql += " from (select rcid, carType, startLocation, endLocation, startDate, endDate, price, passengers, rank() over(order by price asc) as ranking";
 		sql += " from rentalcar ";	
-		sql += " where startLocation= '" + pageInfo.getStartLocation() + "'";
-		sql += " and endLocation='" + pageInfo.getEndLocation() + "'";
+		sql += " where startLocation= '" + startLocation + "'";
+		sql += " and endLocation='" + endLocation + "'";
 		sql += ") ";
 		sql += " where ranking between ? and ?";
 		
@@ -103,17 +102,17 @@ public class RentalcarDao extends SuperDao{
 	
 //		오류 체크		
 		System.out.println("selectAll SQL: "+sql);
-		System.out.println("getBeginRow: "+pageInfo.getBeginRow());
-		System.out.println("getEndRow: "+pageInfo.getEndRow());
+		System.out.println("getBeginRow: "+ pageInfo.getBeginRow());
+		System.out.println("getEndRow: " + pageInfo.getEndRow());
 		
 		rs = pstmt.executeQuery() ;
 		
-		List<Rentalcar> lists = new ArrayList<Rentalcar>();
+		List<Rentalcar> lists = new ArrayList<Rentalcar>();		
 		
 		while(rs.next()) {
 			lists.add(getBeanData(rs)) ;
-		}
-		
+			System.out.println("sdfsadf");
+		}		
 		if(rs != null) {rs.close();}
 		if(pstmt != null) {pstmt.close();}
 		if(conn != null) {conn.close();}
@@ -161,7 +160,7 @@ public class RentalcarDao extends SuperDao{
 		return bean;
 	}
 	
-	/* 렌터카 검색 카운터 4*/
+	/* 렌터카 검색 카운터 5*/
 	public int GetTotalRecordCountSLELSDED(String startLocation, String endLocation, String startDate, String endDate) throws Exception {
 		System.out.println("대여 장소, 반납 장소, 날짜까지 선택");
 		System.out.println("대여: " + startLocation);
@@ -203,7 +202,7 @@ public class RentalcarDao extends SuperDao{
 		
 		return cnt;
 	}
-	/* 렌터카 검색 장소 카운터 3*/
+	/* 렌터카 검색 장소 카운터 4*/
 	public int GetTotalRecordCountSDED(String startDate, String endDate) throws Exception {
 		System.out.println("시작일, 종료일 선택");
 		System.out.println("시작일 : "+ startDate);
@@ -283,6 +282,10 @@ public class RentalcarDao extends SuperDao{
 		return cnt;
 	}
 	
+	
+	
+	
+	/* 매개 변수 하나는 필요 없는 듯 ? ↓ */
 	/* 렌터카 검색 장소 카운터 2*/
 	public int GetTotalRecordCountOnlyEndLocation(String endLocation) throws Exception {
 		System.out.println("반납 장소만 클릭함");
@@ -351,7 +354,7 @@ public class RentalcarDao extends SuperDao{
 		return cnt;
 	}
 	
-//	mode, keyword
+//	mode, keyword 렌터카는 안씀
 	public int GetTotalRecordCount(String mode, String keyword) throws Exception {
 		System.out.print("검색할 필드명 : " + mode);
 		System.out.println(", 검색할 키워드 : " + keyword);

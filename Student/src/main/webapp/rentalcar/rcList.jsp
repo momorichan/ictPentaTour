@@ -24,14 +24,11 @@
 					var startDate = picker.startDate;
 					var endDate = picker.endDate;
 					
+					
 					$('#startDate').val(startDate.format('YYYY/MM/DD'));
 					$('#endDate').val(endDate.format('YYYY/MM/DD'));
 					
-					console.log($('#startDate').val(startDate.format('YYYY/MM/DD')));
-					
-					$('#endDate').change(function() {			
-						console.log("대여일 : " + $(this).val());			
-					});
+					console.log($('#startDate').val(startDate.format('YYYY/MM/DD')));					
 					
 				});
 		
