@@ -355,7 +355,7 @@ String notWithFormTag = appName + mappingName + "?command=";
 	transition: 300ms;
 }
 .navbar.scrolltop {
-	padding-bottom:160px;
+	padding-bottom:200px;
 	padding-top:10px;
 	margin-bottom: 25px !important;
 	position: fixed !important;

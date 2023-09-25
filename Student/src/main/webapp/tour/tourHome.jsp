@@ -211,6 +211,39 @@ function deleteCheck(toid){
 				</tbody>
 			</table>
 		</div>
+		<div class="tablecon-2">
+			<table class="table table-borderless">
+				<thead>
+					<div class="input-group" style="margin-left:8px;">
+						<span class="label label-info">${pageInfo.pagingStatus }</span>
+					</div>
+				</thead>
+				<tbody>
+					<c:set var="colsu" value="2"/>
+					<c:forEach var="bean" items="${requestScope.datalist }" varStatus="asdf">
+						<c:if test="${asdf.index % colsu == 0}">
+							<tr></tr>
+						</c:if>
+							<td>
+								<div class = "card">
+									<div class="removeUnderLine">
+										<img class = "card-img-top" alt="${bean.timage01 }" src="/Student/upload/${bean.timage01 }">
+										<div class = "card-body">
+											<p>${bean.location }
+											<h5 class = "card-title">${bean.tname}</h5>
+											<p class = "card-text">										
+											</p>
+										</div>
+										<div class="pur-btn-div">
+											<a href="<%=notWithFormTag%>tourDetail&toid=${bean.toid}" class="purchasebtn btn btn-outline-secondary">예매하기</a>
+										</div>
+									</div>
+								</div>
+							</td>
+					</c:forEach>
+				</tbody>
+			</table>
+		</div>
 		${pageInfo.pagingHtml}
 		<button type="button" class="btn-insert btn btn-outline-primary" onclick="location.href='<%=notWithFormTag %>tourInsert'">등록</button>
 	</div>
