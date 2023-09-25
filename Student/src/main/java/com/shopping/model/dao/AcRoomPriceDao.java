@@ -46,7 +46,6 @@ public class AcRoomPriceDao extends SuperDao{
 		if (conn != null) {
 			conn.close();
 		}
-
 		return cnt;
 	}
 
@@ -84,6 +83,8 @@ public class AcRoomPriceDao extends SuperDao{
 
 		pstmt.setInt(1, pageInfo.getBeginRow());
 		pstmt.setInt(2, pageInfo.getEndRow());
+		
+		System.out.println(pageInfo.getBeginRow()+ "      +      " + pageInfo.getEndRow());
 
 		rs = pstmt.executeQuery();
 

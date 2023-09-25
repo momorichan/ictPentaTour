@@ -19,7 +19,6 @@ public class RoomDao extends SuperDao{
 		bean.setBreakfast(rs.getString("breakfast"));
 		bean.setRoom(rs.getString("room"));
 		bean.setRoominfo(rs.getString("roominfo"));
-		bean.setRoomtype(rs.getString("roomtype"));
 		bean.setImage01(rs.getString("image01"));
 		bean.setImage02(rs.getString("image02"));
 		bean.setImage03(rs.getString("image03"));
@@ -122,6 +121,68 @@ List<String> lists = new ArrayList<String>();
 			conn.close();
 		}
 		
+		return lists;
+	}
+
+	public int InsertData(Room bean) throws Exception{
+		int cnt = -1;
+		
+		String sql = " insert into rooms(roid, acid, room, roominfo, price, breakfast, guests, image01, image02, image03)" ;
+		sql += "values(roomseq.nextval, 0, ?, ?, ?, ?, ?, ?, ?, ?)";
+		
+		PreparedStatement pstmt = null;
+		conn = super.getConnection();
+		conn.setAutoCommit(false);		
+		pstmt = conn.prepareStatement(sql);
+
+		pstmt.setString(1, bean.getRoom());
+		pstmt.setString(2, bean.getRoominfo());
+		pstmt.setInt(3, bean.getPrice());
+		pstmt.setString(4, bean.getBreakfast());
+		pstmt.setInt(5, bean.getGuests());
+		pstmt.setString(6, bean.getImage01());
+		pstmt.setString(7, bean.getImage02());
+		pstmt.setString(8, bean.getImage03());
+
+		cnt = pstmt.executeUpdate();
+		conn.commit();
+
+		if (pstmt != null) {
+			pstmt.close();
+		}
+		if (conn != null) {
+			conn.close();
+		}
+
+		return cnt;
+	}
+
+	public List<Room> getTempRoom() throws Exception{
+		List<Room> lists = new ArrayList<Room>();
+		
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		
+		String sql = " select * from rooms where acid = 0" ;
+
+		conn = super.getConnection();
+		pstmt = conn.prepareStatement(sql);
+		
+		rs = pstmt.executeQuery();
+
+		while (rs.next()) {
+			lists.add(getBeanData(rs));
+		}
+
+		if (rs != null) {
+			rs.close();
+		}
+		if (pstmt != null) {
+			pstmt.close();
+		}
+		if (conn != null) {
+			conn.close();
+		}
 		return lists;
 	}
 	

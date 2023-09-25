@@ -56,6 +56,29 @@ img {
 </style>
 <script type="text/javascript">
 
+$(function() {
+
+	$('#datepicker').daterangepicker({
+		autoUpdateInput : false,
+		locale : {
+			cancelLabel : 'Clear'
+		}
+	});
+
+	$('#datepicker').on(
+			'apply.daterangepicker',
+			function(ev, picker) {
+				$(this).val(
+						picker.startDate.format('YYYY/MM/DD') + ' - '
+								+ picker.endDate.format('YYYY/MM/DD'));
+			});
+
+	$('#datepicker').on('cancel.daterangepicker',
+			function(ev, picker) {
+				$(this).val('');
+			});
+});
+
 function getRoomDetail(roid){
 	$('#roomDetail').empty();
 	//$.ajax() 함수를 이용하여 데이터 보여주기 
@@ -75,8 +98,7 @@ function getAmenities(){
 	$('#amList').empty();
 	//$.ajax() 함수를 이용하여 데이터 보여주기 
 	$.ajax({
-		url:'<%=notWithFormTag%>
-	amList',
+		url:'<%=notWithFormTag%>amList',
 			data : 'acid=' + '${requestScope.acbean.acid}',
 			type : 'get',
 			//dataType:'json', 
@@ -119,7 +141,6 @@ function getAmenities(){
 					<tr>
 						<td>
 							<h2 align="right">${requestScope.acbean.name}</h2>
-							${requestScope.acbean.acid}
 							<p align="right">${requestScope.acbean.description}</p>
 						</td>
 					</tr>
@@ -137,7 +158,9 @@ function getAmenities(){
 				<tbody>
 					<tr>
 						<td>숙소 정보</td>
-						<td align="right">날짜 및 인원</td>
+						<td align="right"><input class="form-control-sm" type="text"
+							name="keyword" id="datepicker" placeholder="날짜를 선택하세요.">
+						</td>
 					</tr>
 				</tbody>
 			</table>

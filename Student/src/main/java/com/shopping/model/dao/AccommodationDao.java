@@ -62,7 +62,7 @@ public class AccommodationDao extends SuperDao {
 		String keyword = pageInfo.getKeyword();
 
 		
-		String column = " ACID, ADDRESS, NAME, DESCRIPTION, CHECKIN, CHECKOUT, GUESTS, image01, image02, image03";
+		String column = " ACID, ADDRESS, NAME, DESCRIPTION, image01, image02, image03";
 		
 		String sql = " select " + column;
 		sql += " from ( select " + column + ", rank() over(order by ACID asc) as ranking";
@@ -107,13 +107,10 @@ public class AccommodationDao extends SuperDao {
 		accommodation bean = new accommodation();
 		
 		bean.setAcid(rs.getInt("acid"));
-		bean.setGuests(rs.getInt("guests"));
 		
 		bean.setName(rs.getString("name"));
 		bean.setAddress(rs.getString("address"));
 		bean.setDescription(rs.getString("description"));
-		bean.setCheckin(rs.getString("checkin"));
-		bean.setCheckout(rs.getString("checkout"));
 		bean.setImage01(rs.getString("image01"));
 		bean.setImage02(rs.getString("image02"));
 		bean.setImage03(rs.getString("image03"));
@@ -186,6 +183,11 @@ public class AccommodationDao extends SuperDao {
 		}
 
 		return bean;
+	}
+
+	public int InsertData(accommodation bean) {
+		// TODO Auto-generated method stub
+		return 0;
 	}
 
 	

@@ -41,13 +41,16 @@ vwExam04=com.shopping.controller.view.View04Controller
 vwExam05=com.shopping.controller.view.View05Controller
 #accommodation section
 acList=com.shopping.controller.accommodation.AccommodationListController
-#acInsert=com.shopping.controller.accommodation.AccommodationInsertController
-#acUpdate=com.shopping.controller.accommodation.AccommodationUpdateController
-#acDelete=com.shopping.controller.accommodation.AccommodationDeleteController
+acInsert=com.shopping.controller.accommodation.AccommodationInsertController
+acUpdate=com.shopping.controller.accommodation.AccommodationUpdateController
+acDelete=com.shopping.controller.accommodation.AccommodationDeleteController
 acDetail=com.shopping.controller.accommodation.AccommodationDetailController
 #Room section
 roDetail=com.shopping.controller.room.RoomDetailController
 roReservation=com.shopping.controller.room.RoomReservationController
+roInsert=com.shopping.controller.room.RoomInsertController
+roUpdate=com.shopping.controller.room.RoomUpdateController
+roDelete=com.shopping.controller.room.RoomDeleteController
 #amenities section
 amList=com.shopping.controller.amenities.AmenitiesListController
 #tour section

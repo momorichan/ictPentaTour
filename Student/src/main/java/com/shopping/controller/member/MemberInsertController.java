@@ -33,7 +33,6 @@ public class MemberInsertController extends SuperClass{
 		bean.setAddress(request.getParameter("address"));
 		bean.setRole(request.getParameter("role"));
 		
-		bean.setStatus(Integer.parseInt(request.getParameter("salary")));
 		
 		MemberDao dao = new MemberDao();
 		

@@ -21,6 +21,7 @@ public class AccommodationListController extends SuperClass {
 		String mode = request.getParameter("mode");
 		String keyword = request.getParameter("keyword");
 
+		
 		AcRoomPriceDao ardao = new AcRoomPriceDao();
 		try {
 			int totalCount = ardao.getTotalRecordCount(mode, keyword);
@@ -28,9 +29,8 @@ public class AccommodationListController extends SuperClass {
 			boolean isGrid = true;
 
 			Paging pageInfo = new Paging(pageNumber, pageSize, totalCount, url, mode, keyword, isGrid);
-
+			System.out.println("asdzxcsad " + pageInfo.getEndRow());
 			List<AcRoomPrice> lists = ardao.selectAll(pageInfo);
-			
 			
 			request.setAttribute("datalist", lists);
 			request.setAttribute("pageInfo", pageInfo);

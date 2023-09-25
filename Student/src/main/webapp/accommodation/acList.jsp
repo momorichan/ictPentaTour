@@ -74,7 +74,7 @@
                          <button type="submit" class="btn btn-warning form-control-sm" onclick="">검색</button>    
                          <button type="button" class="btn btn-warning form-control-sm" onclick="searchAll();">전체 검색</button>       
                       	 <c:if test="${whologin==2}">
-                         <button type="button" class="btn btn-info form-control-sm"  onclick="writeForm();">상품 등록</button>
+                         <button type="button" class="btn btn-info form-control-sm"  onclick="writeForm();">숙소 등록</button>
                          </c:if>          
                          <span class="label label-default">${requestScope.pageInfo.pagingStatus}</span> 
                       </div>
