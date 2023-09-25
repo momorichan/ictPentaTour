@@ -21,7 +21,7 @@
 			$("#mode").change(function(){				 
 				  if($(this).val() != 'all'){
 					  $('#keyword').attr('disabled', false);
-				  }else{ // all 이면 값 변경을 막아서 sql에 ''만 올라가게 함
+				  }else{ 
 					  $('#keyword').val('');
 					  $('#keyword').attr('disabled', true);
 				  }

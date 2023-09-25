@@ -3,6 +3,7 @@ package com.shopping.model.dao;
 
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -37,45 +38,74 @@ public class RentalcarDao extends SuperDao{
 		return bean;
 	}	
 	
-	// 렌트카 리스트,페이징 둘다 수정해야함
-	public List<Rentalcar> selectAll(Paging pageInfo) throws Exception{
+	@Deprecated
+	public List<Rentalcar> selectSL(Paging pageInfo) throws Exception{
 		// TopN 구문을 사용하여 페이징 처리된 게시물 목록을 반환합니다.
 		PreparedStatement pstmt = null ;
-		ResultSet rs = null ;
-		
+		ResultSet rs = null ;		
 		// 가격이 저렴한 순으로 ranking
 		String sql = " select rcid, carType, startLocation, endLocation, startDate, endDate, price, passengers";
 		sql += " from (select rcid, carType, startLocation, endLocation, startDate, endDate, price, passengers, rank() over(order by price asc) as ranking";
-		sql += " from rentalcar ";
+		sql += " from rentalcar ";	
 
-		/*
-		 * String mode = pageInfo.getMode() ; String keyword = pageInfo.getKeyword() ;
-		 * if(mode == null || mode.equals("all") ) { }else { // 전체 모드가 아니면 sql +=
-		 * " where " + mode + " like '%" + keyword + "%'" ; }
-		 */
-
-		String startLocation = pageInfo.getStartLocation();
-		String endLocation = pageInfo.getEndLocation();
-		String startDate = pageInfo.getStartDate();
-		String endDate = pageInfo.getEndDate();
+		if(pageInfo.getStartLocation() != null || pageInfo.getStartLocation().equals("all")) {
+			sql += " where startLocation ='" + pageInfo.getStartLocation() + "'";
+		}
 		
-		if(startLocation != null || endLocation != null || startDate != null || endDate != null) {
-			if(startLocation.equals("all")) {				
-				System.out.println("대여 지점을 선택해주세요.");				
-			}else {
-				sql += " where startLocation = (" + startLocation + ")";
-			}			
-		}	
 		sql += ") ";
 		sql += " where ranking between ? and ?";
 		
 		conn = super.getConnection();
-		
+			
 		pstmt = conn.prepareStatement(sql) ;
 		pstmt.setInt(1, pageInfo.getBeginRow());
 		pstmt.setInt(2, pageInfo.getEndRow());
+	
+//		오류 체크		
+		System.out.println("SQL: "+sql);
+		System.out.println("getBeginRow: "+pageInfo.getBeginRow());
+		System.out.println("getEndRow: "+pageInfo.getEndRow());
 		
-				
+		rs = pstmt.executeQuery() ;
+		
+		List<Rentalcar> lists = new ArrayList<Rentalcar>();
+		
+		while(rs.next()) {
+			lists.add(getBeanData(rs)) ;
+		}
+		
+		if(rs != null) {rs.close();}
+		if(pstmt != null) {pstmt.close();}
+		if(conn != null) {conn.close();}
+		
+		return lists;
+	}
+	
+	// 렌트카 리스트,페이징 둘다 수정해야함
+	public List<Rentalcar> selectAll(Paging pageInfo) throws Exception{
+		// TopN 구문을 사용하여 페이징 처리된 게시물 목록을 반환합니다.
+		PreparedStatement pstmt = null ;
+		ResultSet rs = null ;		
+		// 가격이 저렴한 순으로 ranking
+		String sql = " select rcid, carType, startLocation, endLocation, startDate, endDate, price, passengers";
+		sql += " from (select rcid, carType, startLocation, endLocation, startDate, endDate, price, passengers, rank() over(order by price asc) as ranking";
+		sql += " from rentalcar ";	
+		sql += " where startLocation= '" + pageInfo.getStartLocation() + "'";
+		sql += " and endLocation='" + pageInfo.getEndLocation() + "'";
+		sql += ") ";
+		sql += " where ranking between ? and ?";
+		
+		conn = super.getConnection();
+			
+		pstmt = conn.prepareStatement(sql) ;
+		pstmt.setInt(1, pageInfo.getBeginRow());
+		pstmt.setInt(2, pageInfo.getEndRow());
+	
+//		오류 체크		
+		System.out.println("selectAll SQL: "+sql);
+		System.out.println("getBeginRow: "+pageInfo.getBeginRow());
+		System.out.println("getEndRow: "+pageInfo.getEndRow());
+		
 		rs = pstmt.executeQuery() ;
 		
 		List<Rentalcar> lists = new ArrayList<Rentalcar>();
@@ -131,21 +161,64 @@ public class RentalcarDao extends SuperDao{
 		return bean;
 	}
 	
-	/* 렌터카 검색 카운터 3*/
-	public int GetTotalRecordCountRentDate1(String date) throws Exception {
-		System.out.println("날짜: "+ date);
+	/* 렌터카 검색 카운터 4*/
+	public int GetTotalRecordCountSLELSDED(String startLocation, String endLocation, String startDate, String endDate) throws Exception {
+		System.out.println("대여 장소, 반납 장소, 날짜까지 선택");
+		System.out.println("대여: " + startLocation);
+		System.out.println("반납: " + endLocation);
+		System.out.println("시작일: " + startDate);
+		System.out.println("종료일: " + endDate);
+		
 		
 		
 		// 테이블의 총 행개수를 구합니다.
 		String sql = " select count(*) as cnt from rentalcar " ;
-		if(startLocation == null || startLocation.equals("all") ) {			
-			if(endLocation == null || endLocation.equals("all")) {
-				
-			}else {
-				sql += " where endLocation " + endLocation;
-			}
+		if(startLocation == null || startLocation.equals("all")) {			
+		}else { // 전체 모드가 아니면
+			if(endLocation == null) {
+				sql += " where startLocation = '" + startLocation + "'";
+			}else {	
+				sql += " where startLocation = '" + startLocation + "'";
+				sql += " and endLocation = '" + endLocation +"'";
+			}			
+		}		
+		
+		PreparedStatement pstmt = null ;
+		ResultSet rs = null ;
+		
+		conn = super.getConnection() ;
+		pstmt = conn.prepareStatement(sql) ;
+		
+		rs = pstmt.executeQuery() ; 
+		
+		int cnt = -1 ;
+		
+		if(rs.next()) {
+			cnt = rs.getInt("cnt") ;
+		}
+
+		if(rs!=null) {rs.close();}
+		if(pstmt!=null) {pstmt.close();}
+		if(conn!=null) {conn.close();}
+		
+		return cnt;
+	}
+	/* 렌터카 검색 장소 카운터 3*/
+	public int GetTotalRecordCountSDED(String startDate, String endDate) throws Exception {
+		System.out.println("시작일, 종료일 선택");
+		System.out.println("시작일 : "+ startDate);
+		System.out.println("종료일 : "+ endDate);
+		
+		// 테이블의 총 행개수를 구합니다.
+		String sql = " select count(*) as cnt from rentalcar " ;
+		if(startDate== null || startDate.equals("all") ) {	
 		}else { // 전체 모드가 아니면			
-			sql += " where startLocation " + startLocation ;
+			if(endDate== null || endDate.equals("all")) {
+				sql += " where startDate= '" + startDate+ "'";
+			}else {
+				sql += " where startDate= '" + startDate+ "'";
+				sql += " and endDate'" + endDate+ "'";
+			}		
 		}		
 		
 		PreparedStatement pstmt = null ;
@@ -168,21 +241,59 @@ public class RentalcarDao extends SuperDao{
 		
 		return cnt;
 	}
-	/* 렌터카 검색 장소 카운터 2*/
-	public int GetTotalRecordCountRentLocation2(String startLocation, String endLocation) throws Exception {
-		System.out.println("대여 장소: "+ startLocation);
+	/* 렌터카 검색 장소 카운터 3*/
+	public int GetTotalRecordCountSLEL(String startLocation, String endLocation) throws Exception {
+		System.out.println("대여, 반납 둘다 선택");
+		System.out.printf("대여 장소: "+ startLocation + "\t");
 		System.out.println("반납 장소: "+ endLocation);
 		
 		// 테이블의 총 행개수를 구합니다.
 		String sql = " select count(*) as cnt from rentalcar " ;
 		if(startLocation == null || startLocation.equals("all") ) {			
-			if(endLocation == null || endLocation.equals("all")) {
-				
-			}else {
-				sql += " where endLocation " + endLocation;
-			}
 		}else { // 전체 모드가 아니면			
-			sql += " where startLocation " + startLocation ;
+			if(endLocation == null || endLocation.equals("all")) {
+				sql += " where startLocation = '" + startLocation + "'";
+				sql += " and endLocation = '" + endLocation + "'";
+			}else {
+				sql += " where startLocation = '" + startLocation + "'";
+				sql += " and endLocation ='" + endLocation + "'";
+			}
+			
+		}
+		System.out.println("SLEL: " + sql); 
+		
+		PreparedStatement pstmt = null ;
+		ResultSet rs = null ;
+		
+		conn = super.getConnection() ;
+		pstmt = conn.prepareStatement(sql) ;
+
+		rs = pstmt.executeQuery() ; 
+		
+		int cnt = -1 ;
+		
+		if(rs.next()) {
+			cnt = rs.getInt("cnt") ;
+		}
+		
+		if(rs!=null) {rs.close();}
+		if(pstmt!=null) {pstmt.close();}
+		if(conn!=null) {conn.close();}
+		
+		return cnt;
+	}
+	
+	/* 렌터카 검색 장소 카운터 2*/
+	public int GetTotalRecordCountOnlyEndLocation(String endLocation) throws Exception {
+		System.out.println("반납 장소만 클릭함");
+		System.out.println("반납 장소: "+ endLocation);
+		
+		
+		// 테이블의 총 행개수를 구합니다.
+		String sql = " select count(*) as cnt from rentalcar " ;
+		if(endLocation == null || endLocation.equals("all") ) {			
+		}else { // 전체 모드가 아니면			
+			sql += " where endLocation '" + endLocation +"'";
 		}		
 		
 		PreparedStatement pstmt = null ;
@@ -205,8 +316,9 @@ public class RentalcarDao extends SuperDao{
 		
 		return cnt;
 	}
+	
 	/* 렌터카 검색 장소 카운터 1*/
-	public int GetTotalRecordCountRentLocation(String startLocation) throws Exception {
+	public int GetTotalRecordCountOnlyStartLocation(String startLocation) throws Exception {
 		System.out.println("대여 장소만 클릭함");
 		System.out.println("대여 장소: "+ startLocation);
 		
@@ -215,7 +327,7 @@ public class RentalcarDao extends SuperDao{
 		String sql = " select count(*) as cnt from rentalcar " ;
 		if(startLocation == null || startLocation.equals("all") ) {			
 		}else { // 전체 모드가 아니면			
-			sql += " where startLocation " + startLocation ;
+			sql += " where startLocation '" + startLocation +"'";
 		}		
 		
 		PreparedStatement pstmt = null ;
@@ -238,33 +350,6 @@ public class RentalcarDao extends SuperDao{
 		
 		return cnt;
 	}
-	
-	 
-	public int GetTotalRecordCount() throws Exception {
-		// 테이블의 총 행개수를 구합니다.
-		String sql = " select count(*) as cnt from rentalcar " ;
-		
-		PreparedStatement pstmt = null ;
-		ResultSet rs = null ;
-		
-		conn = super.getConnection() ;
-		pstmt = conn.prepareStatement(sql) ;
-		
-		rs = pstmt.executeQuery() ; 
-		
-		int cnt = -1 ;
-		
-		if(rs.next()) {
-			cnt = rs.getInt("cnt") ;
-		}
-		
-		if(rs!=null) {rs.close();}
-		if(pstmt!=null) {pstmt.close();}
-		if(conn!=null) {conn.close();}
-		
-		return cnt;
-	}
-	
 	
 //	mode, keyword
 	public int GetTotalRecordCount(String mode, String keyword) throws Exception {
@@ -297,21 +382,11 @@ public class RentalcarDao extends SuperDao{
 		if(conn!=null) {conn.close();}
 		
 		return cnt;
-	}
-	
-	
-
-	public int GetTotalRecordCount(String startLocation, String endLocation, String startDate, String endDate) {
-		System.out.print("대여 장소 : " + startLocation);
-		System.out.println(", 반납 장소 : " + endLocation);
-		
+	}	
+	 
+	public int GetTotalRecordCount() throws Exception {
 		// 테이블의 총 행개수를 구합니다.
 		String sql = " select count(*) as cnt from rentalcar " ;
-		if(mode == null || mode.equals("all") ) {			
-		}else { // 전체 모드가 아니면
-			/* sql += " where " + mode + " like '%" + keyword + "%'" ; */
-			sql += " where startLocation " + mode + " like '%" + keyword + "%'" ;
-		}		
 		
 		PreparedStatement pstmt = null ;
 		ResultSet rs = null ;
@@ -332,7 +407,6 @@ public class RentalcarDao extends SuperDao{
 		if(conn!=null) {conn.close();}
 		
 		return cnt;
-		return 0;
 	}
 	
 

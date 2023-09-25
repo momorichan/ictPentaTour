@@ -83,6 +83,7 @@
 		/* 삭제 버튼 클릭 */
 		/* on() 메소드는 선택된 요소에 이벤트 핸들러 함수를 연결시켜 주는 기능을 합니다. */
 		/* cnum이라는 속성을 개발자가 지정해 두었습니다. */
+		
 		$(document).on('click', '.delete_btn', function(){
 			if(confirm('선택하신 항목을 삭제하시겠습니까?')){
 				$.ajax({
@@ -97,9 +98,9 @@
 					}
 				});
 			}
-		});
+		}); 
 		
-		function getListComment(){
+ 		function getListComment(){
 			$('#comment_list').empty();			
 			/* $.ajax() 함수를 이용하여 데이터 보여 주기 */
 			$.ajax({
@@ -124,9 +125,11 @@
 					console.log(status) ;
 				}
 			});
-		}
+		} 
 		
-		function addNewItem(cnum, id, content, regdate){
+		
+		
+ 		function addNewItem(cnum, id, content, regdate){
 			/* 댓글 1개를 추가해주는 함수입니다. */
 			var litag = $('<li>') ; /* 댓글의 외곽 li 태그  */
 			litag.addClass('commentItem') ;
@@ -159,7 +162,8 @@
 			litag.append(ptag).append(content_p) ; 
 			
 			$('#comment_list').append(litag) ;
-		}
+		} 
+		
 	
 		 
 		
@@ -191,6 +195,7 @@
 				return false ;
 			});
 		});
+		
 	</script>	
 </head>
 <body>

@@ -17,28 +17,110 @@ public class RentalcarListController extends SuperClass{
 		super.doGet(request, response);
 		
 		String pageNumber = request.getParameter("pageNumber") ;
-		String pageSize = request.getParameter("pageSize") ;
-		String mode = request.getParameter("mode") ;
-		String keyword = request.getParameter("keyword") ;
-		
+		String pageSize = request.getParameter("pageSize") ;	
 		
 		/* 렌트카 페이징 */
 		String startLocation = request.getParameter("startLocation");
 		String endLocation = request.getParameter("endLocation");
-		String date = request.getParameter("date");
+		String startDate = request.getParameter("startDate");
+		String endDate = request.getParameter("endDate");
+		
 		RentalcarDao dao = new RentalcarDao();
 		
 		
-		try {
-			int totalCount = dao.GetTotalRecordCount(mode, keyword); // 수정 예정
-			String url = super.getUrlInfomation("rcList") ;
+		
+		try {			
 			boolean isGrid = false ;
-			Paging pageInfo = new Paging(pageNumber, pageSize, totalCount, url, mode, keyword, isGrid);
+			String url = super.getUrlInfomation("rcList") ;			
+			int totalCount = dao.GetTotalRecordCountSLEL(startLocation,endLocation);
+			if(startLocation == null || startLocation.equals("")) {				
+				if(endLocation == null || endLocation.equals("")) {
+					// 대여 장소 x, 반납 장소 x, 시작일 o, 반납일 o
+					if(startDate != null && endDate != null && startDate.equalsIgnoreCase("") && endDate.equalsIgnoreCase("")) {
+						totalCount = dao.GetTotalRecordCountSLELSDED(startLocation, endLocation, startDate, endDate);
+					}else {
+						System.out.println("흠...");
+						totalCount = dao.GetTotalRecordCount();												
+					}					
+				}else {
+					// 대여장소 x, 반납 장소 o
+					totalCount = dao.GetTotalRecordCountOnlyEndLocation(endLocation);
+				}
+			// 대여 장소 o,
+			}else {  
+				if(endLocation == null || startLocation.equals("")) {
+					// 대여 장소 o, 반납 장소 x
+					totalCount = dao.GetTotalRecordCountOnlyStartLocation(startLocation);
+				}else {
+					// 대여장소 o, 반납 장소 o
+					totalCount = dao.GetTotalRecordCountSLEL(startLocation, endLocation);
+				}			
+				
+			}			
 			
+			/* Paging */
+//			Paging pageInfo = null;
+			Paging pageInfo = new Paging(isGrid, pageNumber, pageSize, totalCount, url, startLocation, endLocation);
+			if(startLocation == null || startLocation.equals("")) {				
+				if(endLocation == null || endLocation.equals("")) {
+					if(startDate != null && endDate != null && startDate.equalsIgnoreCase("") && endDate.equalsIgnoreCase("")) {
+						// 대여 장소 x, 반납 장소 x, 시작일 o, 반납일 o
+						pageInfo = new Paging(pageNumber, pageSize, totalCount, url, startDate, endDate, isGrid);
+					}else {
+						// 대여 장소 x, 반납 장소 x, 시작일 x , 반납일 x						
+						pageInfo = new Paging(pageNumber, pageSize, totalCount, url, startDate, endDate, isGrid);
+					}					
+				}else {
+					// 대여장소 x, 반납 장소 o
+					pageInfo = new Paging(pageNumber, pageSize, totalCount, url, startLocation, endLocation, isGrid);
+				}
+			// 대여 장소 o,
+			}else {  
+				if(endLocation == null || startLocation.equals("")) {
+					// 대여 장소 o, 반납 장소 x
+					pageInfo = new Paging(pageNumber, pageSize, totalCount, url, startLocation, endLocation, isGrid);
+				}else {
+					// 대여장소 o, 반납 장소 o
+					pageInfo = new Paging(pageNumber, pageSize, totalCount, url, startLocation, endLocation, isGrid);
+				}			
+				
+			}
+						
+			/* lists*/
 			List<Rentalcar> lists = dao.selectAll(pageInfo);
+			
+//			if(startLocation == null || startLocation.equals("")) {				
+//				if(endLocation == null || endLocation.equals("")) {
+//					if(startDate != null && endDate != null && startDate.equalsIgnoreCase("") && endDate.equalsIgnoreCase("")) {
+//						// 대여 장소 x, 반납 장소 x, 시작일 o, 반납일 o
+//						
+//					}else {
+//						// 대여 장소 x, 반납 장소 x, 시작일 x , 반납일 x						
+//						pageInfo = new Paging(pageNumber, pageSize, totalCount, url, startDate, endDate, isGrid);
+//					}					
+//				}else {
+//					// 대여장소 x, 반납 장소 o
+//					pageInfo = new Paging(pageNumber, pageSize, totalCount, url, startLocation, endLocation, isGrid);
+//				}
+//			// 대여 장소 o,
+//			}else {  
+//				if(endLocation == null || startLocation.equals("")) {
+//					// 대여 장소 o, 반납 장소 x
+//					pageInfo = new Paging(pageNumber, pageSize, totalCount, url, startLocation, endLocation, isGrid);
+//				}else {
+//					// 대여장소 o, 반납 장소 o
+//					pageInfo = new Paging(pageNumber, pageSize, totalCount, url, startLocation, endLocation, isGrid);
+//				}			
+//				
+//			}
+			
+			
+			
+			
 			
 			request.setAttribute("datalist", lists);
 			
+			System.out.println("lists: " + lists);
 			// 페이징 관련 정보를 바인딩
 			request.setAttribute("pageInfo", pageInfo);
 			

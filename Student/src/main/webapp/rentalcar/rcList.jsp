@@ -8,49 +8,7 @@
 <meta charset="UTF-8">
 <title>rcList</title>
 
-
-<!-- mod, keyword -> startLocation, endLocation, startDate, endDate 교체 예정 -->
-<script type="text/javascript">
-	$(document)
-			.ready(
-					function() {
-						const optionListSL = $('#startLocation option');
-						for (var i = 0; i < optionListSL.length; i++) {
-							if (optionListSL[i].value == '${requestScope.pageInfo.startLocation}') {
-								optionListSL[i].selected = true;
-							}
-						}
-						$('#startLocation').change(function() {
-							if ($(this).val() == 'all') {
-								swal('대여 장소를 선택해주세요.');
-							} else {
-								console.log("대여 장소: " + $(this).val());
-								$('#keyword').attr('disabled', false);
-							}
-						});
-
-						const optionListEL = $('#endLocation option');
-						for (var i = 0; i < optionListSL.length; i++) {
-							if (optionListEL[i].value == '${requestScope.pageInfo.endLocation}') {
-								optionListEL[i].selected = true;
-							}
-						}
-						$('#endLocation').change(function() {
-							if ($(this).val() == 'all') {
-								swal('반납 장소를 선택해주세요.');
-							} else {
-								console.log("반납 장소: " + $(this).val());
-								$('#keyword').attr('disabled', false);
-							}
-						});
-
-						/* 날짜는 일단 keyword로 */
-
-						$('#keyword').val('${requestScope.pageInfo.startDate}');
-					});
-</script>
-
-<!-- datetimepicker  -->
+<!-- datepicker  -->
 <script type="text/javascript">
 	$(function() {
 
@@ -60,14 +18,6 @@
 				cancelLabel : 'Clear'
 			}
 		});
-
-		/* $('.datepicker').on(
-				'apply.daterangepicker',
-				function(ev, picker) {
-					$(this).val(
-							picker.startDate.format('YYYY/MM/DD') + ' - '
-									+ picker.endDate.format('YYYY/MM/DD'));
-				}); */
 		$('.datepicker').on(
 				'apply.daterangepicker',
 				function(ev, picker) {
@@ -75,15 +25,70 @@
 					var endDate = picker.endDate;
 					
 					$('#startDate').val(startDate.format('YYYY/MM/DD'));
-					$('#endDate').val(endDate.format('YYYY/MM/DD'));									
+					$('#endDate').val(endDate.format('YYYY/MM/DD'));
+					
+					console.log($('#startDate').val(startDate.format('YYYY/MM/DD')));
+					
+					$('#endDate').change(function() {			
+						console.log("대여일 : " + $(this).val());			
+					});
+					
 				});
-
+		
 		$('.datepicker').on('cancel.daterangepicker', function(ev, picker) {
 			$(this).val('');
-		});
-
+		});	
 	});
 </script>
+<!-- mod, keyword -> startLocation, endLocation, startDate, endDate 교체 예정 -->
+<script type="text/javascript">
+	$(document).ready(function() {	
+		/* 새로고침 select 고정 */
+		var optionListSL = $('#startLocation option');
+		for (var i = 0; i < optionListSL.length; i++) {
+			if (optionListSL[i].value == '${requestScope.pageInfo.startLocation}') {
+				optionListSL[i].selected = true;
+			}
+		}
+		var optionListEL = $('#endLocation option');
+		for (var i = 0; i < optionListSL.length; i++) {
+			if (optionListEL[i].value == '${requestScope.pageInfo.endLocation}') {
+				optionListEL[i].selected = true;
+			}
+		}
+		
+		
+		
+		$('#startLocation').change(function() {
+			if ($(this).val() == 'all') {
+				swal('대여 장소를 선택해주세요.');
+			} else {
+				console.log("대여 장소: " + $(this).val());
+				$('#keyword').attr('disabled', false);
+			}
+		});
+	
+		
+		$('#endLocation').change(function() {
+			if ($(this).val() == 'all') {
+				swal('반납 장소를 선택해주세요.');
+			} else {
+				console.log("반납 장소: " + $(this).val());
+				$('#keyword').attr('disabled', false);
+			}
+		});
+		
+		
+		function searchAll(){ /* 전체 검색 */
+			location.href = '<%=notWithFormTag%>rcList';
+		}
+
+		
+		
+	});
+</script>
+
+
 
 </head>
 <body>
@@ -99,19 +104,20 @@
 							<select class="form-control-sm" id="startLocation"
 								name="startLocation">
 								<option value="all" selected="selected">--대여 장소---
-								<option value="Seoul">서울
-								<option value="Daejeon">대전
-								<option value="Daegu">대구
-								<option value="Busan">부산
-								<option value="Jeju">제주
-							</select> <select class="form-control-sm" id="endLocation"
+								<option value="seoul">서울
+								<option value="daejeon">대전
+								<option value="daegu">대구
+								<option value="busan">부산
+								<option value="jeju">제주
+							</select> 
+							<select class="form-control-sm" id="endLocation"
 								name="endLocation">
 								<option value="all" selected="selected">--반납 장소--
-								<option value="Seoul">서울
-								<option value="Daejeon">대전
-								<option value="Daegu">대구
-								<option value="Busan">부산
-								<option value="Jeju">제주
+								<option value="seoul">서울
+								<option value="daejeon">대전
+								<option value="daegu">대구
+								<option value="busan">부산
+								<option value="jeju">제주
 							</select>
 							<!-- <input class="form-control-sm" type="text" name="keyword"
 												id="keyword" placeholder="키워드 입력"> -->

@@ -31,7 +31,7 @@ public class BoardListController extends SuperClass{
 			List<Board> lists = dao.selectAll(pageInfo);
 			
 			request.setAttribute("datalist", lists);
-			
+			System.out.println("lists: "+lists);
 			// 페이징 관련 정보를 바인딩
 			request.setAttribute("pageInfo", pageInfo);
 			

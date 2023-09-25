@@ -176,8 +176,7 @@ public class BoardDao extends SuperDao{
 	public List<Board> selectAll(Paging pageInfo) throws Exception{
 		// TopN 구문을 사용하여 페이징 처리된 게시물 목록을 반환합니다.
 		PreparedStatement pstmt = null ;
-		ResultSet rs = null ;
-		
+		ResultSet rs = null ;		
 		String sql = " select no, id, password, subject, content, readhit, regdate, remark, groupno, orderno, depth, likes, hates " ;
 		
 		// 답글 이전 코딩 방식
@@ -204,6 +203,7 @@ public class BoardDao extends SuperDao{
 		pstmt.setInt(2, pageInfo.getEndRow());
 		
 //		오류 체크
+		System.out.println(pageInfo.getMode());
 		System.out.println("SQL:= "+sql);
 		System.out.println("getBeginRow: "+pageInfo.getBeginRow());
 		System.out.println("getEndRow: "+pageInfo.getEndRow());

@@ -52,13 +52,7 @@ public class Paging {
 
 		// "all"이면 전체 검색
 		this.mode = mode == null ? "all" : mode;
-		this.keyword = keyword == null ? "" : keyword;
-		
-		/* 렌터카 */
-		this.startLocation = startLocation == null ? "all" : startLocation;
-		this.endLocation = endLocation == null ? "all" : endLocation;
-		
-		
+		this.keyword = keyword == null ? "" : keyword;			
 
 		double _totalPage = Math.ceil((double) totalCount / pageSize);
 		totalPage = (int) _totalPage;
@@ -87,11 +81,10 @@ public class Paging {
 
 		this.pagingHtml = this.getMakePagingHtml();
 	}	
-	
-	/* <2> mode, keyword, startLocation, endLocation */
-	public Paging(String _pageNumber, String _pageSize, int totalCount, String url, String mode, 
-			String keyword, String endLocation,String startLocation, 
-			boolean isGrid) {
+
+	/* <2> startLocation, endLocation */
+	public Paging(boolean isGrid, String _pageNumber, String _pageSize, int totalCount, String url, String startLocation, String endLocation
+			) {
 		if (_pageNumber == null || _pageNumber.equals("null") || _pageNumber.equals("")) {
 			_pageNumber = "1";
 		}
@@ -112,7 +105,8 @@ public class Paging {
 
 		// "all"이면 전체 검색
 		this.mode = mode == null ? "all" : mode;
-		this.keyword = keyword == null ? "" : keyword;
+		this.keyword = keyword == null ? "" : keyword;		
+		
 		/* 렌터카 */
 		this.startLocation = startLocation == null ? "all" : startLocation;
 		this.endLocation = endLocation == null ? "all" : endLocation;
@@ -140,15 +134,13 @@ public class Paging {
 
 		this.flowParameter = "";
 		this.flowParameter += "&pageNumber=" + pageNumber;
-		this.flowParameter += "&pageSize=" + pageSize;
-		this.flowParameter += "&mode=" + mode;
-		this.flowParameter += "&keyword=" + keyword;
-
+		this.flowParameter += "&pageSize=" + pageSize;		
+		this.flowParameter += "&startLocation=" + startLocation;
+		this.flowParameter += "&endLocation=" + endLocation;
 		this.pagingHtml = this.getMakePagingHtml();
 	}
-	/* <3> mode, keyword, startLocation, endLocation, startDate, endDate */
-	public Paging(String _pageNumber, String _pageSize, int totalCount, String url, String mode, 
-			String keyword, String endLocation,String startLocation, String startDate, String endDate, 
+	/* <3> startLocation, endLocation, startDate, endDate */
+	public Paging(String _pageNumber, String _pageSize, int totalCount, String url, String startLocation, String endLocation, String startDate, String endDate, 
 			boolean isGrid) {
 		if (_pageNumber == null || _pageNumber.equals("null") || _pageNumber.equals("")) {
 			_pageNumber = "1";
@@ -168,14 +160,11 @@ public class Paging {
 		this.totalCount = totalCount;
 		this.url = url;
 
-		// "all"이면 전체 검색
-		this.mode = mode == null ? "all" : mode;
-		this.keyword = keyword == null ? "" : keyword;
 		/* 렌터카 */
 		this.startLocation = startLocation == null ? "all" : startLocation;
 		this.endLocation = endLocation == null ? "all" : endLocation;
-		this.startDate = startDate == null ? "all" : startDate;
-		this.endDate = endDate == null ? "all" : endDate;
+		this.startDate = startDate == null ? "" : startDate;
+		this.endDate = endDate == null ? "" : endDate;
 		
 		
 
@@ -200,9 +189,11 @@ public class Paging {
 
 		this.flowParameter = "";
 		this.flowParameter += "&pageNumber=" + pageNumber;
-		this.flowParameter += "&pageSize=" + pageSize;
-		this.flowParameter += "&mode=" + mode;
-		this.flowParameter += "&keyword=" + keyword;
+		this.flowParameter += "&pageSize=" + pageSize;		
+		this.flowParameter += "&startLocation=" + startLocation;
+		this.flowParameter += "&endLocation=" + endLocation;
+		this.flowParameter += "&startDate=" +startDate;
+		this.flowParameter += "&endDate=" +endDate;
 
 		this.pagingHtml = this.getMakePagingHtml();
 	}
@@ -298,7 +289,7 @@ public class Paging {
 		result += "&pageNumber=" + currPageNumber;
 		result += "&pageSize=" + this.pageSize;
 		result += "&mode=" + this.mode;
-		result += "&keyword=" + this.keyword;
+		result += "&keyword=" + this.keyword;	
 		result += "'>";
 		result += caption;
 		result += "</a></li>";
