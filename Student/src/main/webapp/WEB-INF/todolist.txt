@@ -63,3 +63,9 @@ tourInsert=com.shopping.controller.tour.TourInsertController
 #rcInsert=com.shopping.controller.product.RentalcarInsertController
 #rcUpdate=com.shopping.controller.product.RentalcarUpdateController
 #rcDelete=com.shopping.controller.product.RentalcarDeleteController
+#review section
+rvList=com.shopping.controller.review.ReviewListController
+rvInsert=com.shopping.controller.review.ReviewInsertController
+#rvDelete=com.shopping.controller.review.ReviewDeleteController
+#rvDetail=com.shopping.controller.review.ReviewDetailController
+#rvUpdate=com.shopping.controller.mall.ReviewUpdateController

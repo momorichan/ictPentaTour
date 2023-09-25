@@ -55,7 +55,6 @@ public class MemberDao extends SuperDao{
 		bean.setPhone(rs.getString("phone"));
 		bean.setAddress(rs.getString("address"));
 		bean.setRole(rs.getString("role"));
-		bean.setStatus(Integer.parseInt(rs.getString("status")));
 
 		return bean;
 	}
@@ -66,7 +65,7 @@ public class MemberDao extends SuperDao{
 		int cnt = -1;
 
 		// ?를 placehoder라고 합니다. 치환되어야 할 영역		
-		String sql = " insert into members(meid, password, name, gender, birth, phone, address, role, status)";
+		String sql = " insert into members(meid, password, name, gender, birth, phone, address, role)";
 		sql += " values(?, ?, ?, ?, ?, ?, ?, ?, ?)";
 		PreparedStatement pstmt = null;
 		
@@ -83,7 +82,6 @@ public class MemberDao extends SuperDao{
 		pstmt.setString(6, bean.getPhone());
 		pstmt.setString(7, bean.getAddress());
 		pstmt.setString(8, bean.getRole());
-		pstmt.setInt(9, bean.getStatus());
 		
 		cnt = pstmt.executeUpdate();//단계4-1
 		conn.commit();

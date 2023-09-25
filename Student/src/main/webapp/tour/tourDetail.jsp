@@ -7,9 +7,12 @@
 <meta charset="UTF-8">
 <title>Insert title here</title>
 <script type="text/javascript">
-	var price = ${bean.tprice};
-	price = '가격 : ' +  price.toLocaleString() + '원';
-	$('.price').html(price);
+	$(document).ready(function(){
+		var price = ${bean.tprice};
+		price = '가격 : ' +  price.toLocaleString() + '원';
+		console.log(price);
+		$('.price').html(price);
+	})
 </script>
 <style type="text/css">
 	.main-div{
@@ -196,12 +199,12 @@
 			</div>
 			<div class="main-info-div">
 				<div class="info-div">
-					<p id="trlocation" style="width:530px; height:10px; margin-bottom: 0; margin-top: 50px;">${bean.location }
+					<p id="trlocation" style="width:530px;height:10px;margin-bottom:0;margin-top: 50px;text-align:center;">${bean.location }
 					<div class="title" style="width:530px; height:auto; margin-bottom: 0;">
-						<h2 align="left" style="width:530px; margin-bottom: 50px;"id="title">${bean.tname }</h2>
+						<h2 align="left" style="width:530px; margin-bottom: 50px; text-align: center;"id="title">${bean.tname }</h2>
 					</div>
 					<div>
-						<h3>가격 : ${bean.tprice}원</h3>
+						<h3 class="price"></h3>
 					</div>
 					<button type="button" class="btn btn-lg btn-danger purchasebtn">구매</button>
 				</div>
@@ -227,7 +230,7 @@
 						<h2 align="left" style="width:250px; margin-bottom: 50px; font-size:26px; text-align: center;"id="title">${bean.tname }</h2>
 					</div>
 					<div>
-						<h3 style="font-size: 22px; text-align: center;" class="price">가격 : ${price}원</h3>
+						<h3 style="font-size: 22px; text-align: center;" class="price"></h3>
 					</div>
 					<button type="button" class="btn btn-danger purchasebtn">구매</button>
 				</div>

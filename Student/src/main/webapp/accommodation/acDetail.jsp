@@ -56,7 +56,30 @@ img {
 </style>
 <script type="text/javascript">
 
-function getListComment(roid){
+$(function() {
+
+	$('#datepicker').daterangepicker({
+		autoUpdateInput : false,
+		locale : {
+			cancelLabel : 'Clear'
+		}
+	});
+
+	$('#datepicker').on(
+			'apply.daterangepicker',
+			function(ev, picker) {
+				$(this).val(
+						picker.startDate.format('YYYY/MM/DD') + ' - '
+								+ picker.endDate.format('YYYY/MM/DD'));
+			});
+
+	$('#datepicker').on('cancel.daterangepicker',
+			function(ev, picker) {
+				$(this).val('');
+			});
+});
+
+function getRoomDetail(roid){
 	$('#roomDetail').empty();
 	//$.ajax() 함수를 이용하여 데이터 보여주기 
 	$.ajax({
@@ -67,33 +90,31 @@ function getListComment(roid){
 			dataType : 'html',
 			success : function(result) {
 				$('#roomDetail').html(result);
-				//showRoom(result);
 			}
 		});
-
 	}
-
-	function showRoom(result) {
-
-		var divtag = $('<div>');
-		divtag.addClass('container');
-
-		var htag = $('<h2>');
-		htag.html(result.room);
-
-		var ptag = $('<p>');
-		ptag.html(result.roominfo);//방 설명
-
-		//조립하기(compose up)
-		divtag.append(htag);
-		divtag.append(ptag);
-		$('#roomDetail').append(divtag);
+	
+function getAmenities(){
+	$('#amList').empty();
+	//$.ajax() 함수를 이용하여 데이터 보여주기 
+	$.ajax({
+		url:'<%=notWithFormTag%>amList',
+			data : 'acid=' + '${requestScope.acbean.acid}',
+			type : 'get',
+			//dataType:'json', 
+			dataType : 'html',
+			success : function(result) {
+				$('#amList').html(result);
+			}
+		});
 	}
 
 	$(document).ready(function() {
+
+		getAmenities();
 		$('td[data-bs-toggle="modal"]').on('click', function() {
 			var roid = $(this).data('roid'); // 클릭된 td의 data-roid 속성 가져오기
-			getListComment(roid); // 가져온 roid 값을 사용하여 함수 호출
+			getRoomDetail(roid); // 가져온 roid 값을 사용하여 함수 호출
 		});
 
 	});
@@ -124,22 +145,26 @@ function getListComment(roid){
 						</td>
 					</tr>
 					<tr>
-						<td>
-							리뷰 정보
-						</td>
+						<td>리뷰 정보</td>
 					</tr>
 					<tr>
-						<td>
-							최저가 정보
-						</td>
+						<td>최저가 정보</td>
 					</tr>
 				</thead>
 			</table>
 		</div>
-		<table class="table">
-			
-		</table>
-
+		<div>
+			<table class="table">
+				<tbody>
+					<tr>
+						<td>숙소 정보</td>
+						<td align="right"><input class="form-control-sm" type="text"
+							name="keyword" id="datepicker" placeholder="날짜를 선택하세요.">
+						</td>
+					</tr>
+				</tbody>
+			</table>
+		</div>
 		<table class="table">
 
 			<tbody>
@@ -151,18 +176,14 @@ function getListComment(roid){
 						<td class="col-1">1박<br> <fmt:formatNumber
 								value="${bean.price}"></fmt:formatNumber>원
 						</td>
-						<td class="col-2"><a href="#" class="btn btn-primary">예약하기</a></td>
+						<td class="col-2"><a href="<%=notWithFormTag%>roReservation"
+							class="btn btn-primary">예약하기</a></td>
 					</tr>
 				</c:forEach>
 
 			</tbody>
 		</table>
-		<table class="table table-borderless">
-			<tbody>
-				<tr>
-					<td align="center">편의시설</td>
-				</tr>
-			</tbody>
+		<table class="table table-borderless" id="amList">
 		</table>
 
 		<!-- The Modal -->
@@ -170,6 +191,67 @@ function getListComment(roid){
 			<div class="modal-dialog modal-dialog-centered modal-lg">
 				<div class="modal-content" id="roomDetail"></div>
 			</div>
+		</div>
+		<div class="head">
+	<div class = "rvList_image">
+	 	<img alt="사진이 어디갔더라" src="https://cdn.pixabay.com/photo/2021/09/07/11/53/car-6603726_640.jpg" style="height:300px; width:100%;">
+	 		 <h1 class="rvList_image_text" style="font-size:50px">여행 후기</h1>
+	 </div>
+	</div>
+	<div class="wrap">
+		<a type="button" class="btn btn-primary" href="<%=notWithFormTag%>rvInsert&acid=${requestScope.acbean.acid}&category=ac&meid=${sessionScope.loginfo.meid}">리뷰 입력</a>
+	</div>
+	<hr class="shape"></hr>
+
+	<div class="review-section">
+		<div class="rating_main">
+			<div class="rating_main_left">
+				<div class="point_txt">
+				<strong class="tit mid">숙소후기</strong><br>
+					<strong>3.8</strong> <span>/ 5</span><br>
+					<span>1564명의 여행후기</span>
+				</div>
+			</div>
+			<div class="rating_main_right">
+				<ul>
+					<li class="best"><span>3.9</span>
+						<div class="progress-bar">
+							<div class="progress" style="width: 78%;"></div>
+						</div>
+						<p>청결</p></li>
+					<li class=""><span>3.8</span>
+						<div class="progress-bar">
+							<div class="progress" style="width: 76%;"></div>
+						</div>
+						<p>서비스</p></li>
+					<li class=""><span>3.7</span>
+						<div class="progress-bar">
+							<div class="progress" style="width: 74%;"></div>
+						</div>
+						<p>편의</p></li>
+					<li class="best"><span>3.9</span>
+						<div class="progress-bar">
+							<div class="progress" style="width: 78%;"></div>
+						</div>
+						<p>시설</p></li>
+				</ul>
+			</div>
+		</div>
+		<div data-v-bc3b5154="" class="best_review partner">
+			<div data-v-bc3b5154="" class="rating_info">
+				<strong data-v-bc3b5154="" class="point">5</strong> <span
+					data-v-bc3b5154="" class="logo hotels-com"></span>
+			</div>
+			<div data-v-bc3b5154="" class="review_cont con">
+				<p data-v-bc3b5154="">바닷가도 가깝고 객실크기도 여유있고 쾌적했어요! 침대도 크고 수압이나
+					청결상태도 좋았어요 :) 다만 체크인할때 투숙객 대비 직원이 턱없이 부족한 느낌이었네요.. 셀프체크인 줄만 3...</p>
+			</div>
+			<span data-v-bc3b5154="" class="date">2023.06.09</span>
+		</div>
+		<div data-v-bc3b5154="" class="btn_wrap">
+			<a data-v-bc3b5154="" href="#none" class="btn"> 제휴사 후기 1578건 보기 </a>
+			<br><br><br><br><br><br><br><br><br>
+			<a data-v-bc3b5154="" href="#none" class="btn"> 제휴사 후기 1578건 보기 </a>
 		</div>
 	</div>
 </body>

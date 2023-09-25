@@ -74,7 +74,7 @@
                          <button type="submit" class="btn btn-warning form-control-sm" onclick="">검색</button>    
                          <button type="button" class="btn btn-warning form-control-sm" onclick="searchAll();">전체 검색</button>       
                       	 <c:if test="${whologin==2}">
-                         <button type="button" class="btn btn-info form-control-sm"  onclick="writeForm();">상품 등록</button>
+                         <button type="button" class="btn btn-info form-control-sm"  onclick="writeForm();">숙소 등록</button>
                          </c:if>          
                          <span class="label label-default">${requestScope.pageInfo.pagingStatus}</span> 
                       </div>
@@ -84,15 +84,15 @@
           		</div>
 			</td>
 			</tr>
-				<c:set var="colsu" value="${applicationScope.map['accommodation_list_column_size']}"/>
+				<c:set var="colsu" value="3"/>
 				<c:forEach var="bean" items="${requestScope.datalist}" varStatus="status">
-				<c:if test="${status.index%colsu==0}">
+				<c:if test="${status.index % colsu==0}">
 					<tr>
 				</c:if> 
 				<td>
 					<div class="card" style="width:19rem;">
 						<a href="<%=notWithFormTag%>acDetail&acid=${bean.acid}${requestScope.pageInfo.flowParameter}" class="removeUnderLine">
-							<img class="card-img-top" alt="${bean.name}" src="${pageContext.request.contextPath}/upload/${bean.image}" >
+							<img class="card-img-top" alt="${bean.name}" src="/Student/upload/${bean.image}" >
 							<div class="card-body"> 
 								<h5 class="card-title">${bean.name}</h5> 
 								<p class="card-text">

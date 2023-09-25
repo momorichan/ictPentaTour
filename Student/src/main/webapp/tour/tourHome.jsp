@@ -35,6 +35,11 @@ function deleteCheck(toid){
 		width: 300px;
 		height: 250px;	
 	}
+	.card-img-top:hover{
+		width: 300px;
+		height: 250px;	
+		filter: brightness(1.1);
+	}
 	/* table 셀의 수평 가운데 정렬 */
 	.container-main{
 		
@@ -165,7 +170,7 @@ function deleteCheck(toid){
 			</div>
 		</div>
 		<form action="<%=withFormTag %>">
-			<input type="hidden" name="command" value="tourList">
+			<input type="hidden" name="command" value="tourHome">
 			<div class="container serchcon">
 				<div class="justify-content-center input-group search">
 					<select class="form-select" id="mode" name="mode" >

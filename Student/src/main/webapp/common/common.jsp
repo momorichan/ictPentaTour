@@ -37,6 +37,15 @@ String notWithFormTag = appName + mappingName + "?command=";
 <head>
 <meta charset="UTF-8">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+<script type="text/javascript"
+	src="https://cdn.jsdelivr.net/jquery/latest/jquery.min.js"></script>
+<script type="text/javascript"
+	src="https://cdn.jsdelivr.net/momentjs/latest/moment.min.js"></script>
+<script type="text/javascript"
+	src="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.min.js"></script>
+<link rel="stylesheet" type="text/css"
+	href="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.css" />
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
 <title>Insert title here</title>
 <!-- 이 파일은 모든 문서에서 공용으로 참조 할 파일입니다. -->
 <!-- 자바 관련 변수 및 패키지 임포트, 네비게이션 바, jstl 등등-->
@@ -46,7 +55,6 @@ String notWithFormTag = appName + mappingName + "?command=";
 	var navbartoggle = "";
 	$(window).scroll(function(){
 	    scrollheight = $(window).scrollTop();
-	    console.log(scrollheight);
 	    if(scrollheight < 1 && window.innerWidth > 1900){
 			$(".navbar-brand, .navbar, .dropdown, .login-div, body, .dropdown-div").addClass("scrolltop");
 			$(".navbar").removeClass("non-scrolltop");
@@ -64,7 +72,6 @@ String notWithFormTag = appName + mappingName + "?command=";
 	    return scrollheight;
 	});
 	window.addEventListener('resize', () => {
-		console.log(scrollheight);
 		if(window.innerWidth <= 1900){
 			$(".navbar-brand, .navbar, .dropdown, .login-div, body, .dropdown-div").removeClass("scrolltop");
 			$(".navbar").addClass("non-scrolltop");
@@ -415,6 +422,7 @@ String notWithFormTag = appName + mappingName + "?command=";
 }
 .logout {
 	color : red !important;
+	top:2px;
 	opacity: 90%;
 	z-index: 998;
 	position: relative;
@@ -693,6 +701,117 @@ body.sideon, .navbar.sideon, .copyright.sideon{
 .side-icon.sideon {
 	transform: translate(-75px, 0);
 	transition: transform 300ms;
+}
+</style>
+<!-- --------------------------review-------------------------------- -->
+<script type="text/javascript">
+		$(document).ready(function(){
+			var optionList = $('#mode option');
+			for(var i=0 ; i<optionList.length ; i++){
+				if(optionList[i].value == '${requestScope.pageInfo.mode}'){
+					optionList[i].selected = true ;
+				}	
+			}
+			
+			$('#keyword').val('${requestScope.pageInfo.keyword}');
+			
+			$("#mode").change(function(){				 
+				  if($(this).val() != 'all'){
+					  $('#keyword').attr('disabled', false);
+				  }else{
+					  $('#keyword').val('');
+					  $('#keyword').attr('disabled', true);
+				  }
+			});			
+		});
+		
+		function searchAll(){ /* 전체 검색 */
+			location.href = '<%=notWithFormTag%>rvList';
+		}
+		
+		function writeForm(){ /* 글쓰기 */
+			location.href = '<%=notWithFormTag%>rvInsert';
+		}
+		
+	</script>
+<style type="text/css">
+.head {
+	width: 100%;
+	height: 300px;
+	text-align : center;
+}
+
+.wrap {
+	width: 100%;
+	height: 300px;
+	text-align : center;
+}
+
+.review-section {
+	width: 100%;
+	height: 300px;
+}
+
+.shape {
+	height: 30px;
+	background-color : #bbb;
+	border-top : 1px;
+}
+.text_reviewtype{
+	position : relative ;
+	left : 70px ;
+}
+.point_box{
+	display: flex;
+}
+.rating_main{
+	display: flex;
+}
+.rvList_image {
+	position: relative;
+	
+}
+
+.rvList_image_text {
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	color: white;
+	transform: translate(-50%, -50%);
+}
+
+.progress-bar {
+    width: 100%;
+    height: 30px;
+    background-color: #dedede;
+    font-weight: 600;
+    font-size: .8rem;
+}
+
+.progress {
+    height: 30px;
+    padding: 0;
+    text-align: center;
+    background-color: #4F98FF;
+    color: #111;
+}
+.rating_box{
+	float : right;
+}
+.rating_main_left {
+    width: 50%;
+    float: left;
+    box-sizing: border-box;  
+    }
+.rating_main_right {
+     width: 50%;
+     float: right;
+     box-sizing: border-box;
+    }
+.point_txt{
+ 	width: 600px;height: 400px;
+	line-height: 100px; /* 세로 가운데 정렬 : line-height와 height값을 동일하게 처리합니다.*/
+	text-align: center /* 텍스트 가운데 정렬 */
 }
 </style>
 </head>
