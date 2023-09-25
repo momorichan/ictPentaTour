@@ -273,10 +273,12 @@ input[type='date']:valid::before {
 	}
 	
 	
-	
-	
-	
-	
+	$(function(){
+	    $('[type="date"]').prop('min', function(){
+	        return new Date().toJSON().split('T')[0];
+	    });
+	});
+
 </script>
 
 </head>

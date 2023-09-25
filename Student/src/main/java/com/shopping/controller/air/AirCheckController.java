@@ -17,12 +17,15 @@ public class AirCheckController extends SuperClass{
 		// TODO Auto-generated method stub
 		super.doGet(request, response);
 		
-		
+		if(request.getParameter("regid") == null || request.getParameter("regid").equals(""))
+		{
+			super.setAlertMessage("번호를 입력해주세요");
+			new AirHomeController().doGet(request, response);
+			return;
+		}
 		System.out.println("regid : " + Integer.parseInt(request.getParameter("regid")));
 		
 		int regid = Integer.parseInt(request.getParameter("regid"));
-		
-		
 		
 		Flight bean = null;
 		FlyDao dao = new FlyDao();

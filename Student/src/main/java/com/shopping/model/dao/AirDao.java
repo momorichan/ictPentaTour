@@ -908,13 +908,13 @@ public class AirDao extends SuperDao {
 		String sql = " select count(*) as cnt from airline";
 
 
-		if(keyword == null || keyword.equals(""))
+		if(keyword == null || keyword.equals("all"))
 		{
 			if (keyword2 == null || keyword2.equals("all")) 
 			{
-				if(keyword3 == null || keyword3.equals("all"))
+				if(keyword3 == null || keyword3.equals(""))
 				{
-					if(keyword4 == null || keyword4.equals("all"))
+					if(keyword4 == null || keyword4.equals(""))
 					{
 			
 					}
@@ -952,7 +952,7 @@ public class AirDao extends SuperDao {
 					}
 					
 					
-					if(keyword4 == null || keyword4.equals("all"))
+					if(keyword4 == null || keyword4.equals(""))
 					{
 						
 					}
@@ -1017,9 +1017,9 @@ public class AirDao extends SuperDao {
 
 			if (keyword2 == null || keyword2.equals("all")) 
 			{
-				if(keyword3 == null || keyword3.equals("all"))
+				if(keyword3 == null || keyword3.equals(""))
 				{
-					if(keyword4 == null || keyword4.equals("all"))
+					if(keyword4 == null || keyword4.equals(""))
 					{
 			
 					}
@@ -1058,7 +1058,7 @@ public class AirDao extends SuperDao {
 			} 
 			else 
 			{
-				sql += " where " + mode2 + " like '%" + keyword2 + "%'";
+				sql += " and " + mode2 + " like '%" + keyword2 + "%'";
 	
 				if(keyword3 == null || keyword3.equals("all"))
 				{
