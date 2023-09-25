@@ -60,7 +60,7 @@
 
 		.commentItem .id {
 			color: #555;
-			line-height: 200%;
+			line-height: 20%;
 		}
 
 		.commentItem .id input {
