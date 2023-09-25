@@ -55,7 +55,6 @@ public class MemberDao extends SuperDao{
 		bean.setPhone(rs.getString("phone"));
 		bean.setAddress(rs.getString("address"));
 		bean.setRole(rs.getString("role"));
-		bean.setStatus(Integer.parseInt(rs.getString("status")));
 
 		return bean;
 	}

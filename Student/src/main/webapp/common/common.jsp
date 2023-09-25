@@ -574,10 +574,8 @@ body.sideon, .navbar.sideon, .copyright.sideon{
 =======
 						
 					<li class="nav-item">
-						<a class="nav-link" href="<%=notWithFormTag%>airHome" role="button">항공</a>
+						<a class="nav-link" href="<%=notWithFormTag%>allCheck" role="button">회원예약조회</a>
 					</li>
-					
->>>>>>> refs/remotes/origin/aviation
 					</div>
 				</ul>
 			</div>

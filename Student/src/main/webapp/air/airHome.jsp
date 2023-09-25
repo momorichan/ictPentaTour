@@ -253,7 +253,12 @@ input[type='date']:valid::before {
 
 <script type="text/javascript">
 	$(document).ready(function() {
-		$('.tripB').hide();	
+		$('.tripB').hide();
+		
+/* 		$('[type="date"]').prop('min', function(){
+	        return new Date().toJSON().split('T')[0];
+	    }); */
+		
 	});
 
 	function setDisplay() {
@@ -272,8 +277,7 @@ input[type='date']:valid::before {
 		}
 	}
 	
-	
-	$(function(){
+ 	$(function(){
 	    $('[type="date"]').prop('min', function(){
 	        return new Date().toJSON().split('T')[0];
 	    });
