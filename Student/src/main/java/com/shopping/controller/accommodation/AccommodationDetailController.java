@@ -23,7 +23,7 @@ public class AccommodationDetailController extends SuperClass{
 		
 		
 		try {
-			accommodation bean = dao.getBeanData(acid); 
+			accommodation bean = dao.getDataByPk(acid); 
 			List<Room> lists = roomdao.getDataByFk(acid);
 			List<String> randomimage = roomdao.randomImage(acid);
 			request.setAttribute("roomlists", lists);

@@ -55,6 +55,7 @@ roDelete=com.shopping.controller.room.RoomDeleteController
 amList=com.shopping.controller.amenities.AmenitiesListController
 amSelect=com.shopping.controller.amenities.AmenitiesSelectController
 amInsert=com.shopping.controller.amenities.AmenitiesInsertController
+amUpdate=com.shopping.controller.amenities.AmenitiesUpdateController
 #tour section
 tourHome=com.shopping.controller.tour.TourHomeController
 tourList=com.shopping.controller.tour.TourListController

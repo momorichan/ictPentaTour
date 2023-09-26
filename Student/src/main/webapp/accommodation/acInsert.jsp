@@ -78,7 +78,7 @@ $(document).ready(function() {
 			<div class="input-group">
 				<span class="input-group-text col-md-2">숙소 이름</span> <input
 					id="name" name="name" type="text" class="form-control"
-					value="${empty sessionScope.temp ? '' : sessionScope.temp.name}">
+					>
 			</div>
 			<div class="input-group">
 				<span class="input-group-text col-md-2">숙소 주소</span> <input

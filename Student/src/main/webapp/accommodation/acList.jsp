@@ -49,8 +49,8 @@
 </head>
 <body>
 	<div class="container">
-		<h2>상품 목록</h2>
-		<p>고객들이 구매하고자 하는 상품 목록을 보여 주는 페이지입니다.</p>		
+		<h2>숙소 목록</h2>
+		<p>숙소 목록입니다.</p>		
 		<table class="table table-borderless">
 			<thead>
 			</thead>

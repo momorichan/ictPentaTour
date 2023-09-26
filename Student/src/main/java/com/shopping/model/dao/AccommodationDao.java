@@ -120,7 +120,7 @@ public class AccommodationDao extends SuperDao {
 		return bean;
 	}
 
-	public List<Room> getDataByPk(Integer acid) throws Exception{
+	public List<Room> getDataByPkList(Integer acid) throws Exception{
 		List<Room> lists = new ArrayList<>();
 		RoomDao roomdao = new RoomDao();
 		PreparedStatement pstmt = null;
@@ -153,7 +153,7 @@ public class AccommodationDao extends SuperDao {
 		return lists;
 	}
 
-	public accommodation getBeanData(Integer acid) throws Exception{
+	public accommodation getDataByPk(Integer acid) throws Exception{
 		accommodation bean = new accommodation();
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;

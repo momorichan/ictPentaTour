@@ -37,7 +37,6 @@
 			
 			var optionList = $('#category option');
 			optionList.each(function(){
-				console.log($(this).val());
 				if($(this).val() == category){
 					$('option[value="' + category + '"').attr('selected', true);
 				}
