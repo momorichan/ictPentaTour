@@ -12,7 +12,7 @@ public class TourDetailController extends SuperClass{
 	public void doGet(HttpServletRequest request, HttpServletResponse response) throws Exception {
 		super.doGet(request, response);
 		
-		String toid = request.getParameter("toid");
+		int toid = Integer.parseInt(request.getParameter("toid"));
 		TourDao dao = new TourDao();
 		Tour bean = null;
 		try {

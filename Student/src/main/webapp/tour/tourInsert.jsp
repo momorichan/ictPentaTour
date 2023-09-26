@@ -58,8 +58,6 @@
 			$('#tname').focus();
 			return false;
 		};
-		
-		
 	};
 </script>
 </head>

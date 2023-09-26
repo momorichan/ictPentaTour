@@ -17,7 +17,7 @@ $(document).ready(function(){
    });
 });
 function searchAll(){ /* 전체 검색 */
-	location.href = '<%=notWithFormTag%>tourList';
+	location.href = '<%=notWithFormTag%>tourHome';
 	}
 
 function deleteCheck(toid){
@@ -30,7 +30,9 @@ function deleteCheck(toid){
 }
 </script>
 <link href="../css/jquery-picZoomer.css">
+
 <style type="text/css">
+@import url('https://fonts.googleapis.com/css2?family=Black+Han+Sans&family=Noto+Sans+KR&display=swap');
 	.card-img-top{
 		width: 300px;
 		height: 250px;	
@@ -40,7 +42,6 @@ function deleteCheck(toid){
 		height: 250px;	
 		filter: brightness(1.1);
 	}
-	/* table 셀의 수평 가운데 정렬 */
 	.container-main{
 		
 	}
@@ -119,9 +120,14 @@ function deleteCheck(toid){
  		border-radius: 10px; 
 	}
 	body{
+		padding-top:70px;
 		width:100%;
 		min-width:100%;
 		margin: 0px;
+		font-family: 'Noto Sans KR', sans-serif;
+		-webkit-font-smoothing: antialiased;
+   		-moz-osx-font-smoothing: grayscale;
+   		transform:rotate(-0.03deg);
 	}
 	.container{
 		max-width:1226.7px;
@@ -138,7 +144,7 @@ function deleteCheck(toid){
 </head>
 <body>
 	<div class="container container-main">
-		<h2>투어</h2>
+		<h2 style="text-align:center;">투어</h2>
 		<div class="slide-div">
 			<div class="slide-image-div">
 				<div id="demo" class="carousel slide" data-bs-ride="carousel">

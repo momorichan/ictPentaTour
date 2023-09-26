@@ -100,7 +100,7 @@ public class TourDao extends SuperDao {
 		return bean;
 	}
 
-	public Tour getDataByPrimaryKey(String toid) throws Exception {
+	public Tour getDataByPrimaryKey(int toid) throws Exception {
 
 		Tour bean = null;
 		String sql = " select * from tour where toid = ?";
@@ -111,7 +111,7 @@ public class TourDao extends SuperDao {
 
 		pstmt = conn.prepareStatement(sql);
 
-		pstmt.setString(1, toid);
+		pstmt.setInt(1, toid);
 		rs = pstmt.executeQuery();
 
 		if (rs.next()) {
@@ -158,6 +158,38 @@ public class TourDao extends SuperDao {
 			conn.close();
 		}
 
+		return cnt;
+	}
+	
+	public int UpdateData(Tour bean) throws Exception{
+		int cnt = -1;
+		String sql = "update tour set location=?, tname=?, tprice=?, tusedate=?, texdate=?, tage=?, tcontent=?, tfreeage=?, timage01=?, timage02=?, timage03=? where toid=?";
+		
+		conn = super.getConnection();
+		PreparedStatement pstmt = conn.prepareStatement(sql);
+		conn.setAutoCommit(false);
+		
+		pstmt.setString(1, bean.getLocation());
+		pstmt.setString(2, bean.getTname());
+		pstmt.setInt(3, bean.getTprice());
+		pstmt.setString(4, bean.getTusedate());
+		pstmt.setInt(5, bean.getTexdate());
+		pstmt.setInt(6, bean.getTage());
+		pstmt.setString(7, bean.getTcontent());
+		pstmt.setInt(8, bean.getTfreeage());
+		pstmt.setString(9, bean.getTimage01());
+		pstmt.setString(10, bean.getTimage02());
+		pstmt.setString(11, bean.getTimage03());
+		pstmt.setInt(12, bean.getToid());
+		
+		cnt = pstmt.executeUpdate();
+		conn.commit();
+		
+		if(pstmt != null)
+			pstmt.close();
+		if(conn != null)
+			conn.close();
+		
 		return cnt;
 	}
 

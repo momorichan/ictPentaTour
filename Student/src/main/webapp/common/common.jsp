@@ -82,6 +82,8 @@ String notWithFormTag = appName + mappingName + "?command=";
 	window.onload=function(){
 		if(window.innerWidth < 501) {
 			$(".slide-div, .card-title, .card, .card-img-top, .serchcon, .tablecon, .tablecon-2, .navbar-toggle-btn").addClass("mobile");
+		}else{
+			$(".slide-div, .card-title, .card, .card-img-top, .serchcon, .tablecon, .tablecon-2, .navbar-toggle-btn").removeClass("mobile");
 		}
 	}
 	window.addEventListener('resize', () => {
@@ -225,6 +227,11 @@ String notWithFormTag = appName + mappingName + "?command=";
     width: 213px;
     height: 133px;
 }
+.card-img-top:hover.mobile{
+		width: 213px;
+		height: 133px;	
+		filter: brightness(1.1);
+	}
 .side-bar-inner {
 	width:200px;
 	height:948px;
@@ -310,6 +317,9 @@ String notWithFormTag = appName + mappingName + "?command=";
 	z-index: 999 !important;
 	background-color: black !important;
 	transition: 300ms;
+	-webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    transform:rotate(-0.03deg);
 }
 .navbar.non-scrolltop.toggle-on {
     padding-top: 10px;
@@ -463,7 +473,7 @@ body{
 }
 
 body.scrolltop{
-	padding-top:200px !important;
+	padding-top:220px !important;
 	padding-bottom:120px !important;
 	justify-content: center;
     display: flex;
@@ -582,12 +592,12 @@ body.scrolltop{
 	z-index: 998 !important;
 }
 
-body.sideon, .navbar.sideon, .copyright.sideon{
-	width:calc(100% - 200px) !important;
-	padding-right:0;
-	padding-left:0;
-	transition:width 300ms;
-}
+/* body.sideon, .navbar.sideon, .copyright.sideon{ */
+/* 	width:calc(100% - 200px) !important; */
+/* 	padding-right:0; */
+/* 	padding-left:0; */
+/* 	transition:width 300ms; */
+/* } */
 .dummy-navbar{
 	height:56px !important;
 	background-color: black !important;
@@ -813,6 +823,8 @@ body.sideon, .navbar.sideon, .copyright.sideon{
 	line-height: 100px; /* 세로 가운데 정렬 : line-height와 height값을 동일하게 처리합니다.*/
 	text-align: center /* 텍스트 가운데 정렬 */
 }
+
+
 </style>
 </head>
 <body>
@@ -930,7 +942,7 @@ body.sideon, .navbar.sideon, .copyright.sideon{
 					</div>
 				</ul>
 			</div>
-			<button type="button" class="navbar-toggle-btn" onclick="navtoggle()"><img src="/Student/upload/sidebar.png" style="width:100%; height:100%"></button>
+			<button type="button" class="navbar-toggle-btn mobile" onclick="navtoggle()"><img src="/Student/upload/sidebar.png" style="width:100%; height:100%"></button>
 		</div>
 	</nav>
 	<div id="top"></div>
