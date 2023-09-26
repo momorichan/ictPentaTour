@@ -20,17 +20,16 @@ public class Paging {
 
 	private String mode = ""; // 검색 모드(예시 : 작성자, 글제목 등등)
 	private String keyword = ""; // 검색할 단어
-	/* 렌트카 */	
-	private String startLocation ="";
-	private String endLocation ="";
+	/* 렌트카 */
+	private String startLocation = "";
+	private String endLocation = "";
 	private String startDate = "";
 	private String endDate = "";
-	
+
 	private String flowParameter = ""; // 페이지 이동시 같이 수반되는 파라미터 리스트
+
 	
-	/* <1> mode, keyword */
-	public Paging(String _pageNumber, String _pageSize, int totalCount, String url, 
-			String mode, String keyword,
+	public Paging(String _pageNumber, String _pageSize, int totalCount, String url, String mode, String keyword,
 			boolean isGrid) {
 		if (_pageNumber == null || _pageNumber.equals("null") || _pageNumber.equals("")) {
 			_pageNumber = "1";
@@ -52,7 +51,7 @@ public class Paging {
 
 		// "all"이면 전체 검색
 		this.mode = mode == null ? "all" : mode;
-		this.keyword = keyword == null ? "" : keyword;			
+		this.keyword = keyword == null ? "" : keyword;
 
 		double _totalPage = Math.ceil((double) totalCount / pageSize);
 		totalPage = (int) _totalPage;
@@ -80,11 +79,10 @@ public class Paging {
 		this.flowParameter += "&keyword=" + keyword;
 
 		this.pagingHtml = this.getMakePagingHtml();
-	}	
+	}
 
 	/* <2> startLocation, endLocation */
-	public Paging(boolean isGrid, String _pageNumber, String _pageSize, int totalCount, String url, String startLocation, String endLocation
-			) {
+	public Paging(boolean isGrid, String _pageNumber, String _pageSize, int totalCount, String url, String startLocation, String endLocation) {
 		if (_pageNumber == null || _pageNumber.equals("null") || _pageNumber.equals("")) {
 			_pageNumber = "1";
 		}
@@ -104,14 +102,9 @@ public class Paging {
 		this.url = url;
 
 		// "all"이면 전체 검색
-		this.mode = mode == null ? "all" : mode;
-		this.keyword = keyword == null ? "" : keyword;		
-		
 		/* 렌터카 */
 		this.startLocation = startLocation == null ? "all" : startLocation;
 		this.endLocation = endLocation == null ? "all" : endLocation;
-		
-		
 
 		double _totalPage = Math.ceil((double) totalCount / pageSize);
 		totalPage = (int) _totalPage;
@@ -134,14 +127,15 @@ public class Paging {
 
 		this.flowParameter = "";
 		this.flowParameter += "&pageNumber=" + pageNumber;
-		this.flowParameter += "&pageSize=" + pageSize;		
+		this.flowParameter += "&pageSize=" + pageSize;
 		this.flowParameter += "&startLocation=" + startLocation;
 		this.flowParameter += "&endLocation=" + endLocation;
 		this.pagingHtml = this.getMakePagingHtml();
 	}
+
 	/* <3> startLocation, endLocation, startDate, endDate */
-	public Paging(String _pageNumber, String _pageSize, int totalCount, String url, String startLocation, String endLocation, String startDate, String endDate, 
-			boolean isGrid) {
+	public Paging(boolean isGrid, String _pageNumber, String _pageSize, int totalCount, String url, String startLocation, String endLocation, String startDate, String endDate
+			) {
 		if (_pageNumber == null || _pageNumber.equals("null") || _pageNumber.equals("")) {
 			_pageNumber = "1";
 		}
@@ -159,14 +153,12 @@ public class Paging {
 
 		this.totalCount = totalCount;
 		this.url = url;
-
+		// all 이면 전체 검색
 		/* 렌터카 */
 		this.startLocation = startLocation == null ? "all" : startLocation;
 		this.endLocation = endLocation == null ? "all" : endLocation;
 		this.startDate = startDate == null ? "" : startDate;
 		this.endDate = endDate == null ? "" : endDate;
-		
-		
 
 		double _totalPage = Math.ceil((double) totalCount / pageSize);
 		totalPage = (int) _totalPage;
@@ -189,17 +181,14 @@ public class Paging {
 
 		this.flowParameter = "";
 		this.flowParameter += "&pageNumber=" + pageNumber;
-		this.flowParameter += "&pageSize=" + pageSize;		
+		this.flowParameter += "&pageSize=" + pageSize;
 		this.flowParameter += "&startLocation=" + startLocation;
 		this.flowParameter += "&endLocation=" + endLocation;
-		this.flowParameter += "&startDate=" +startDate;
-		this.flowParameter += "&endDate=" +endDate;
+		this.flowParameter += "&startDate=" + startDate;
+		this.flowParameter += "&endDate=" + endDate;
 
 		this.pagingHtml = this.getMakePagingHtml();
 	}
-	
-	
-	
 
 	public String getStartDate() {
 		return startDate;
@@ -221,25 +210,17 @@ public class Paging {
 		return startLocation;
 	}
 
-
-
 	public void setStartLocation(String startLocation) {
 		this.startLocation = startLocation;
 	}
-
-
 
 	public String getEndLocation() {
 		return endLocation;
 	}
 
-
-
 	public void setEndLocation(String endLocation) {
 		this.endLocation = endLocation;
 	}
-
-
 
 	private String getMakePagingHtml() {
 		String html = "";
@@ -289,15 +270,13 @@ public class Paging {
 		result += "&pageNumber=" + currPageNumber;
 		result += "&pageSize=" + this.pageSize;
 		result += "&mode=" + this.mode;
-		result += "&keyword=" + this.keyword;	
+		result += "&keyword=" + this.keyword;
 		result += "'>";
 		result += caption;
 		result += "</a></li>";
 
 		return result;
 	}
-	
-	
 
 	public int getTotalCount() {
 		return totalCount;
@@ -440,6 +419,5 @@ public class Paging {
 		imsi += "pagingHtml=" + pagingHtml + "<br/>";
 		return imsi;
 	}
-
 
 }
