@@ -293,26 +293,25 @@ input[type='date']:valid::before {
 
 		$('.datepicker').daterangepicker({
 			autoUpdateInput : false,
+			"minDate" : new Date(),
 			locale : {
 				cancelLabel : 'Clear'
 			}
 		});
 		
+		//$( '.datepicker' ).datepicker({ minDate: 0 });
 		
-		
-/* 		$('.datepicker').datepicker('setDate', 'today');
-		$('.datepicker').datepicker('minDate','-1D');
-		 */
-		$('.datepicker').on(
-				'apply.daterangepicker',
-				function(ev, picker) {
+		// $('.datepicker').datepicker('setDate', 'today');
+		//$('.datepicker').datepicker('minDate','-1D');
+		 
+		$('.datepicker').on( 'apply.daterangepicker', function(ev, picker) {
+				
 					var startDate = picker.startDate;
 					var endDate = picker.endDate;
 					
 					$('#keyword3').val(startDate.format('YYYY-MM-DD'));
-					$('#keyword4').val(endDate.format('YYYY-MM-DD'));				
+					$('#keyword4').val(endDate.format('YYYY-MM-DD'));			
 				});
-		
 		
 		$('.datepicker').on('cancel.daterangepicker', function(ev, picker) {
 			$(this).val('');
