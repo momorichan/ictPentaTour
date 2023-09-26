@@ -137,7 +137,9 @@ $(document).ready(function() {
 						<td>${temp.breakfast}</td>
 						<td>${temp.guests}명</td>
 						<td>클릭</td>
-						<td>수정</td>
+						<td>
+						<a href="<%=notWithFormTag%>roUpdate">수정</a>
+						</td>
 						<td>삭제</td>
 					</tr>
 				</c:forEach>

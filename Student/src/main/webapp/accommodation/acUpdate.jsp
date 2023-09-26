@@ -19,7 +19,7 @@ function amenitiesForm(){
 	}
 
 function selectAmenities(){
-	$('#amUpdate').empty();
+	$('#amenities').empty();
 	//$.ajax() 함수를 이용하여 데이터 보여주기 
 	$.ajax({
 		url:'<%=notWithFormTag%>amUpdate',
@@ -28,7 +28,7 @@ function selectAmenities(){
 			//dataType:'json', 
 			dataType : 'html',
 			success : function(result) {
-				$('#amUpdate').html(result);
+				$('#amenities').html(result);
 			}
 		});
 	}
@@ -71,7 +71,7 @@ $(document).ready(function() {
 		<p>숙소를 등록하는 페이지입니다.</p>
 
 		<form action="<%=withFormTag%>" method="post">
-			<input type="hidden" name="command" value="acInsert">
+			<input type="hidden" name="command" value="acUpdate">
 			<div id="invisible" class="input-group">
 				<span class="input-group-text col-md-2">예약 번호</span> <input
 					id="acid" name="acid" 
@@ -95,27 +95,26 @@ $(document).ready(function() {
 					value="${requestScope.acbean.description}">
 			</div>
 			<div class="input-group">
-				<span class="input-group-text col-md-2">이미지01</span> <input
-					id="image01" name="image01" type="file" class="form-control"
-					value="${requestScope.acbean.image01}">
+				<span class="input-group-text col-md-2">이미지01</span> 
+				<input id="image01" name="newimage01" type="file" class="form-control">
+				<input type="hidden" name="preimage01"  value=${requestScope.acbean.image01 }>
 			</div>
 			<div class="input-group">
-				<span class="input-group-text col-md-2">이미지02</span> <input
-					id="image02" name="image02" type="file" class="form-control"
-					value="${requestScope.acbean.image02}">
+				<span class="input-group-text col-md-2">이미지02</span> 
+				<input id="image02" name="newimage02" type="file" class="form-control">
+				<input type="hidden" name="preimage02"  value=${requestScope.acbean.image02 }>				
 			</div>
 			<div class="input-group">
-				<span class="input-group-text col-md-2">이미지03</span> <input
-					id="image03" name="image03" type="file" class="form-control"
-					value="${requestScope.acbean.image03}">
+				<span class="input-group-text col-md-2">이미지03</span> 
+				<input id="image03" name="newimage03" type="file" class="form-control">
+				<input type="hidden" name="preimage03"  value=${requestScope.acbean.image03 }>				
 			</div>		
 			<div class="input-group">
-					<span type="button" class="btn btn-info form-control-sm" onclick="amenitiesUpdateForm();">편의시설 변경</span>
-					&nbsp;&nbsp;&nbsp;&nbsp;
+					<span class="input-group-text col-md-2 " >편의시설 선택</span>
 					<span type="button" class="btn btn-info form-control-sm" onclick="amenitiesForm();">편의시설 추가하기</span>
 			</div>
 			<div class="input-group">
-					<span id="amUpdate"></span>
+					<span id="amenities"></span>
 			</div>							
 			<div>
 			<table class="table table-striped">
@@ -142,7 +141,9 @@ $(document).ready(function() {
 						<td>${room.breakfast}</td>
 						<td>${room.guests}명</td>
 						<td>클릭</td>
-						<td>수정</td>
+						<td>
+						<a href="<%=notWithFormTag%>roUpdate&roid=${room.roid}">수정</a>
+						</td>
 						<td>삭제</td>
 					</tr>
 				</c:forEach>

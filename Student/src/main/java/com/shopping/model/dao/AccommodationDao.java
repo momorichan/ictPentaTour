@@ -247,6 +247,83 @@ public class AccommodationDao extends SuperDao {
 		return cnt;
 	}
 
+	public int updateData(accommodation bean, int[] amlist) throws Exception{
+		int cnt = -1;
+		
+		String sql = " update accommodation set address = ?, name = ?, description = ?, image01 = ?, image02 = ?, image03 = ? " ;
+		sql += " where acid = ?";
+		
+		PreparedStatement pstmt = null;
+		conn = super.getConnection();
+		conn.setAutoCommit(false);		
+		pstmt = conn.prepareStatement(sql);
+
+		pstmt.setString(1, bean.getAddress());
+		pstmt.setString(2, bean.getName());
+		pstmt.setString(3, bean.getDescription());
+		pstmt.setString(4, bean.getImage01());
+		pstmt.setString(5, bean.getImage02());
+		pstmt.setString(6, bean.getImage03());
+		pstmt.setInt(7, bean.getAcid());
+
+		cnt = pstmt.executeUpdate();
+		
+		if (pstmt != null) {
+			pstmt.close();
+		}
+		
+		sql = " update rooms set acid = ? where acid = 0" ;
+		
+		pstmt = conn.prepareStatement(sql);
+
+		pstmt.setInt(1,bean.getAcid());
+		
+		cnt = pstmt.executeUpdate();
+		
+		if (pstmt != null) {
+			pstmt.close();
+		}			
+		
+		sql = " delete from amenitiedetails where acid = ?" ;
+		
+		pstmt = conn.prepareStatement(sql);
+
+		pstmt.setInt(1,bean.getAcid());
+		
+		cnt = pstmt.executeUpdate();
+		
+		if (pstmt != null) {
+			pstmt.close();
+		}		
+		
+		
+		if(amlist.length != 0) {
+			for(int amid : amlist) {
+				sql = " insert into amenitiedetails(acid, amid) values(?,?)" ;
+				
+				pstmt = conn.prepareStatement(sql);
+				
+				pstmt.setInt(1,bean.getAcid());
+				pstmt.setInt(2,amid);
+				
+				cnt = pstmt.executeUpdate();
+				
+				if (pstmt != null) {
+					pstmt.close();
+				}		
+			}
+		}
+		conn.commit();
+		
+		if (pstmt != null) {
+			pstmt.close();
+		}
+		if (conn != null) {
+			conn.close();
+		}
+		return cnt;
+	}
+
 	
 	
 	
