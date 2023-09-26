@@ -10,6 +10,7 @@
 <meta charset="UTF-8">
 <title>Insert title here</title>
 
+
 <style type="text/css">
 .search {
 	display: flex;
@@ -159,7 +160,7 @@ body
 }
 		
 		
-input[type='date'] {
+input[type='text'] {
 color : white;
   border: none; 
   position: relative; 
@@ -285,6 +286,43 @@ input[type='date']:valid::before {
 
 </script>
 
+
+<script type="text/javascript">
+
+	$(function() {
+
+		$('.datepicker').daterangepicker({
+			autoUpdateInput : false,
+			locale : {
+				cancelLabel : 'Clear'
+			}
+		});
+		
+		
+		
+/* 		$('.datepicker').datepicker('setDate', 'today');
+		$('.datepicker').datepicker('minDate','-1D');
+		 */
+		$('.datepicker').on(
+				'apply.daterangepicker',
+				function(ev, picker) {
+					var startDate = picker.startDate;
+					var endDate = picker.endDate;
+					
+					$('#keyword3').val(startDate.format('YYYY-MM-DD'));
+					$('#keyword4').val(endDate.format('YYYY-MM-DD'));				
+				});
+		
+		
+		$('.datepicker').on('cancel.daterangepicker', function(ev, picker) {
+			$(this).val('');
+		});
+	});
+</script>
+
+
+
+
 </head>
 <body>
 
@@ -336,14 +374,14 @@ input[type='date']:valid::before {
 							<div class="departday">
 								<h3>가는 날</h3>
 								<input type="hidden" id="mode3" name="mode3" value="detime">
-								<input class="departdate" type="date" id="keyword3" 
+								<input class="departdate datepicker" type="text" id="keyword3" 
 									name="keyword3" placeholder="날짜를 선택해주세요">
 							</div>
 
 							<div class="arriveday">
 								<h3>오는 날</h3>
 								<input type="hidden" id="mode4" name="mode4" value="artime">
-								<input class="arrivedate" type="date" id="keyword4"
+								<input class="arrivedate datepicker" type="text" id="keyword4"
 									name="keyword4">
 							</div>
 

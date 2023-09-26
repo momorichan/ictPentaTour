@@ -78,9 +78,22 @@ String notWithFormTag = appName + mappingName + "?command=";
 		  });
 		});
 </script>
+
+
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com">
 <link href="https://fonts.googleapis.com/css2?family=Black+Han+Sans&display=swap" rel="stylesheet">
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+<script type="text/javascript"
+	src="https://cdn.jsdelivr.net/jquery/latest/jquery.min.js"></script>
+<script type="text/javascript"
+	src="https://cdn.jsdelivr.net/momentjs/latest/moment.min.js"></script>
+<script type="text/javascript"
+	src="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.min.js"></script>
+<link rel="stylesheet" type="text/css"
+	href="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.css" />
+	
 <style type="text/css">
 @import url(//fonts.googleapis.com/earlyaccess/jejugothic.css);
 @import url(//fonts.googleapis.com/earlyaccess/kopubbatang.css);
@@ -561,7 +574,7 @@ body.sideon, .navbar.sideon, .copyright.sideon{
 								</c:if>							
 							</ul>
 						</li>
-<<<<<<< HEAD
+						
 						<li class="nav-item dropdown">
 						<a	class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown">렌트카</a>
 							<ul class="dropdown-menu">
@@ -571,7 +584,7 @@ body.sideon, .navbar.sideon, .copyright.sideon{
 								</c:if>							
 							</ul>
 						</li>	
-=======
+
 						
 					<li class="nav-item">
 						<a class="nav-link" href="<%=notWithFormTag%>allCheck" role="button">회원예약조회</a>

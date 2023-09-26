@@ -1208,6 +1208,7 @@ public class AirDao extends SuperDao {
 	public List<Airline> selectAllList(Paging pageInfo) throws Exception
 	{
 		String detime[] = pageInfo.getKeyword3().split("-");
+		
 		for (int i = 0; i < detime.length; i++)
 		{
 			if (i == 0) 
@@ -1238,7 +1239,7 @@ public class AirDao extends SuperDao {
 		sql += " from (select flid,fname,depart,arrive,detime,artime, rank() over(order by flid asc) as ranking ";
 		sql += " from airline ";
 	
-		if(pageInfo.getKeyword() == null || pageInfo.getKeyword().equals(""))
+		if(pageInfo.getKeyword() == null || pageInfo.getKeyword().equals("all"))
 		{
 			if(pageInfo.getKeyword2() == null || pageInfo.getKeyword2().equals("all"))
 			{
