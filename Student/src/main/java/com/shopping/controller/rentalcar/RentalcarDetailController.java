@@ -15,11 +15,10 @@ public class RentalcarDetailController extends SuperClass{
 		RentalcarDao dao = new RentalcarDao();
 		Rentalcar bean = null;
 		try {
-			bean = dao.GetDataByPk(rcid);
-			
+			bean = dao.GetDataByPk(rcid);			
 			if(bean == null) {
 				super.setAlertMessage("잘못된 게시물");
-				super.gotoPage("rentalcar/rcList.jsp");
+				super.gotoPage("common/home.jsp");
 			}else {
 				request.setAttribute("bean", bean);
 				super.gotoPage("rentalcar/rcDetail.jsp");

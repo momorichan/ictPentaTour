@@ -127,10 +127,7 @@
 
 
 							<button type="submit" class="btn btn-warning form-control-sm"
-								onclick="">검색</button>
-							<!-- <button type="button" class="btn btn-warning form-control-sm"
-												onclick="searchAll();">전체 검색</button> -->
-
+								onclick="">검색</button>							
 							<span class="label label-default">${requestScope.pageInfo.pagingStatus}</span>
 						</div>
 					</div>
@@ -158,7 +155,11 @@
 				</tr>
 				<c:forEach var="bean" items="${requestScope.datalist}">
 					<tr>
-						<td>${bean.rcid}</td>
+						<td>
+							<a href="<%=notWithFormTag%>rcDetail&no=${bean.rcid}">
+								${bean.rcid}
+							</a>							
+						</td>
 						<td>${bean.carType}</td>
 						<td>${bean.startLocation}</td>
 						<td>${bean.endLocation}</td>

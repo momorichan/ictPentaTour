@@ -13,11 +13,13 @@ public class RentalcarDao extends SuperDao {
 
 	public Rentalcar GetDataByPk(String rcid) throws Exception {
 		// 렌트카 번호(String)를 이용하여 해당 상품에 대한 Bean 객체를 반환해 줍니다.
-		PreparedStatement pstmt = null;
-		ResultSet rs = null;
+		
 		String sql = " select * from rentalcar ";
 		sql += " where rcid = ? ";
-
+		
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		
 		conn = super.getConnection();
 		pstmt = conn.prepareStatement(sql);
 		pstmt.setString(1, rcid);
@@ -50,10 +52,8 @@ public class RentalcarDao extends SuperDao {
 		String endLocation = pageInfo.getEndLocation();
 		String startDate = pageInfo.getStartDate();
 		String endDate = pageInfo.getEndDate();
-		String startDateReplace = startDate.replace("/", ""); /* 날짜 문자열 */
-		System.out.println("startDateReplace: " + startDateReplace);
-		String endDateReplace = endDate.replace("/", ""); /* 날짜 문자열 */
-		System.out.println("endDateReplace: "+endDateReplace);
+		String startDateReplace = startDate.replace("/", ""); /* 날짜 문자열 */		
+		String endDateReplace = endDate.replace("/", ""); /* 날짜 문자열 */		
 
 		String sql = " select rcid, carType, startLocation, endLocation, startDate, endDate, price, passengers";
 		sql += " from (select rcid, carType, startLocation, endLocation, startDate, endDate, price, passengers, rank() over(order by price asc) as ranking";
@@ -66,10 +66,10 @@ public class RentalcarDao extends SuperDao {
 				if (startDate == null || startDate.equals("")) {
 					/* x x x x */
 					if (endDate == null || endDate.equals("")) {
-						System.out.println("싹 다 널값(all)이면 여기로 옴");
+						System.out.println("select: 싹 다 널 값이면 여기로 옴");
 						/* x x x o */
 					} else {
-						sql += " where endDate >= to_date('" + startDateReplace + "', 'YYYYMMDD')";
+						sql += " where endDate >= to_date('" + endDateReplace + "', 'YYYYMMDD')";
 					}
 					/* x x o _ */
 				} else {
@@ -79,7 +79,7 @@ public class RentalcarDao extends SuperDao {
 						/* x x o o */
 					} else {
 						sql += " where startDate <= to_date('" + startDateReplace + "', 'YYYYMMDD')";
-						sql += " and endDate >= to_date('" + startDateReplace + "', 'YYYYMMDD')";
+						sql += " and endDate >= to_date('" + endDateReplace + "', 'YYYYMMDD')";
 					}
 				}
 				/* x o _ _ */
@@ -120,7 +120,7 @@ public class RentalcarDao extends SuperDao {
 						/* o x x o */
 					} else {
 						sql += " where startLocation= '" + startLocation + "'";
-						sql += " and endDate >= to_date('" + startDateReplace + "', 'YYYYMMDD')";
+						sql += " and endDate >= to_date('" + endDateReplace + "', 'YYYYMMDD')";
 					}
 					/* o x o _ */
 				} else {
@@ -132,7 +132,7 @@ public class RentalcarDao extends SuperDao {
 					} else {
 						sql += " where startLocation ='" + startLocation + "'";
 						sql += " and startDate <= to_date('" + startDateReplace + "', 'YYYYMMDD')";
-						sql += " and endDate >= to_date('" + startDateReplace + "', 'YYYYMMDD')";
+						sql += " and endDate >= to_date('" + endDateReplace + "', 'YYYYMMDD')";
 					}
 				}
 				/* o o _ _ */
@@ -177,7 +177,7 @@ public class RentalcarDao extends SuperDao {
 		pstmt.setInt(2, pageInfo.getEndRow());
 
 //		오류 체크		
-		System.out.println("SLELSDED: " + sql);
+		System.out.println("select-SLELSDED: " + sql);
 		System.out.println("getBeginRow: " + pageInfo.getBeginRow());
 		System.out.println("getEndRow: " + pageInfo.getEndRow());
 
@@ -207,11 +207,9 @@ public class RentalcarDao extends SuperDao {
 
 		String startDate = pageInfo.getStartDate();
 		String endDate = pageInfo.getEndDate();
-
-		String startDateReplace = startDate.replace("/", "");
-		System.out.println(startDateReplace);
+		String startDateReplace = startDate.replace("/", "");		
 		String endDateReplace = endDate.replace("/", "");
-		System.out.println(endDateReplace);
+		
 
 		String sql = " select rcid, carType, startLocation, endLocation, startDate, endDate, price, passengers";
 		sql += " from (select rcid, carType, startLocation, endLocation, startDate, endDate, price, passengers, rank() over(order by price asc) as ranking";
@@ -224,7 +222,7 @@ public class RentalcarDao extends SuperDao {
 			}
 		} else {
 			if (endDate == null || endDate.equals("")) {
-				sql += " where startDate >= to_date('" + startDateReplace + "', 'YYYYMMDD')";
+				sql += " where startDate <= to_date('" + startDateReplace + "', 'YYYYMMDD')";
 			} else {
 				sql += " where startDate <= to_date('" + startDateReplace + "', 'YYYYMMDD')";
 				sql += " and endDate >= to_date('" + startDateReplace + "', 'YYYYMMDD')";
@@ -297,7 +295,7 @@ public class RentalcarDao extends SuperDao {
 		pstmt.setInt(2, pageInfo.getEndRow());
 
 //		오류 체크		
-		System.out.println("SLEL: " + sql);
+		System.out.println("select-SLEL: " + sql);
 
 		rs = pstmt.executeQuery();
 
@@ -306,6 +304,98 @@ public class RentalcarDao extends SuperDao {
 		while (rs.next()) {
 			lists.add(getBeanData(rs));
 		}
+		if (rs != null) {
+			rs.close();
+		}
+		if (pstmt != null) {
+			pstmt.close();
+		}
+		if (conn != null) {
+			conn.close();
+		}
+
+		return lists;
+	}
+	/* ED */
+	public List<Rentalcar> selectED(Paging pageInfo) throws Exception {
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		String endDate = pageInfo.getEndDate();
+		String endDateReplace = endDate.replace("/", ""); /* 날짜 문자열 */
+		
+		String sql = " select rcid, carType, startLocation, endLocation, startDate, endDate, price, passengers";
+		sql += " from (select rcid, carType, startLocation, endLocation, startDate, endDate, price, passengers, rank() over(order by price asc) as ranking";
+		sql += " from rentalcar ";
+
+		if (endDate == null || endDate.equals("")) {
+		} else {
+			sql += " where endDate >='" + endDateReplace + "'";
+		}
+		sql += ") ";
+		sql += " where ranking between ? and ?";
+
+		conn = super.getConnection();
+
+		pstmt = conn.prepareStatement(sql);
+		pstmt.setInt(1, pageInfo.getBeginRow());
+		pstmt.setInt(2, pageInfo.getEndRow());
+
+//		오류 체크		
+		System.out.println("select-ED: " + sql);
+
+		rs = pstmt.executeQuery();
+		List<Rentalcar> lists = new ArrayList<Rentalcar>();
+
+		while (rs.next()) {
+			lists.add(getBeanData(rs));
+		}
+
+		if (rs != null) {
+			rs.close();
+		}
+		if (pstmt != null) {
+			pstmt.close();
+		}
+		if (conn != null) {
+			conn.close();
+		}
+
+		return lists;
+	}
+	/* SD */
+	public List<Rentalcar> selectSD(Paging pageInfo) throws Exception {
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		String startDate = pageInfo.getStartDate();
+		String startDateReplace = startDate.replace("/", ""); /* 날짜 문자열 */
+		
+		String sql = " select rcid, carType, startLocation, endLocation, startDate, endDate, price, passengers";
+		sql += " from (select rcid, carType, startLocation, endLocation, startDate, endDate, price, passengers, rank() over(order by price asc) as ranking";
+		sql += " from rentalcar ";
+
+		if (startDate == null || startDate.equals("")) {
+		} else {
+			sql += " where startDate <='" + startDateReplace + "'";
+		}
+		sql += ") ";
+		sql += " where ranking between ? and ?";
+
+		conn = super.getConnection();
+
+		pstmt = conn.prepareStatement(sql);
+		pstmt.setInt(1, pageInfo.getBeginRow());
+		pstmt.setInt(2, pageInfo.getEndRow());
+
+//		오류 체크		
+		System.out.println("select-SD: " + sql);
+
+		rs = pstmt.executeQuery();
+		List<Rentalcar> lists = new ArrayList<Rentalcar>();
+
+		while (rs.next()) {
+			lists.add(getBeanData(rs));
+		}
+
 		if (rs != null) {
 			rs.close();
 		}
@@ -342,7 +432,7 @@ public class RentalcarDao extends SuperDao {
 		pstmt.setInt(2, pageInfo.getEndRow());
 
 //		오류 체크		
-		System.out.println("EL: " + sql);
+		System.out.println("select-EL: " + sql);
 
 		rs = pstmt.executeQuery();
 		List<Rentalcar> lists = new ArrayList<Rentalcar>();
@@ -387,7 +477,7 @@ public class RentalcarDao extends SuperDao {
 		pstmt.setInt(2, pageInfo.getEndRow());
 
 //		오류 체크		
-		System.out.println("SL: " + sql);
+		System.out.println("select-SL: " + sql);
 
 		rs = pstmt.executeQuery();
 		List<Rentalcar> lists = new ArrayList<Rentalcar>();
@@ -408,7 +498,7 @@ public class RentalcarDao extends SuperDao {
 
 		return lists;
 	}
-
+	
 	public List<Rentalcar> selectAll() throws Exception {
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
@@ -587,7 +677,9 @@ public class RentalcarDao extends SuperDao {
 
 		conn = super.getConnection();
 		pstmt = conn.prepareStatement(sql);
-
+		
+		// 
+		System.out.println("GetTotalRecordCount: " + sql);
 		rs = pstmt.executeQuery();
 
 		int cnt = -1;
@@ -613,7 +705,13 @@ public class RentalcarDao extends SuperDao {
 		System.out.println("시작일, 종료일 둘다 선택");
 		System.out.println("시작일 : " + startDate);
 		System.out.println("종료일 : " + endDate);
+		
+		String startDateReplace = startDate.replace("/", "");
+		System.out.println("GetTotalRecordCount: " + startDateReplace);
+		String endDateReplace = endDate.replace("/", "");
+		System.out.println("GetTotalRecordCount: " + endDateReplace);
 
+		
 		// 테이블의 총 행개수를 구합니다.
 		String sql = " select count(*) as cnt from rentalcar ";
 		if (startDate == null || startDate.equals("")) {
@@ -623,21 +721,21 @@ public class RentalcarDao extends SuperDao {
 			}
 		}else { 
 			if (endDate == null || endDate.equals("all")) {
-				sql += " where startDate= '" + startDate + "'";
+				sql += " where startDate= '" + startDateReplace+ "'";
 			} else {
-				sql += " where startDate= '" + startDate + "'";
-				sql += " and endDate='" + endDate + "'";
+				sql += " where startDate= '" + startDateReplace + "'";
+				sql += " and endDate='" + endDateReplace + "'";
 			}
 		}
 
-		System.out.println("SDED: " + sql);
+		System.out.println("GetTotalRecordCount-SDED: " + sql);
 
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
 
 		conn = super.getConnection();
 		pstmt = conn.prepareStatement(sql);
-
+		System.out.println("GetTotalRecordCount: " + sql);
 		rs = pstmt.executeQuery();
 
 		int cnt = -1;
@@ -686,9 +784,85 @@ public class RentalcarDao extends SuperDao {
 
 		conn = super.getConnection();
 		pstmt = conn.prepareStatement(sql);
-
+		System.out.println("GetTotalRecordCount: " + sql);
 		rs = pstmt.executeQuery();
 
+		int cnt = -1;
+
+		if (rs.next()) {
+			cnt = rs.getInt("cnt");
+		}
+
+		if (rs != null) {
+			rs.close();
+		}
+		if (pstmt != null) {
+			pstmt.close();
+		}
+		if (conn != null) {
+			conn.close();
+		}
+
+		return cnt;
+	}
+	/* ED */
+	public int GetTotalRecordCountED(String endDate) throws Exception {
+		// 테이블의 총 행개수를 구합니다.
+		String sql = " select count(*) as cnt from rentalcar ";
+		
+		String endDateReplace = endDate.replace("/", "");
+		System.out.println("GetTotalRecordCount: " + endDateReplace);
+		
+		if (endDate == null || endDate.equals("")) {
+		} else { // 전체 모드가 아니면
+			sql += " where endDate >='" + endDateReplace + "'";
+		}
+
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+
+		conn = super.getConnection();
+		pstmt = conn.prepareStatement(sql);
+		System.out.println("GetTotalRecordCount: " + sql);
+		rs = pstmt.executeQuery();
+		int cnt = -1;
+
+		if (rs.next()) {
+			cnt = rs.getInt("cnt");
+		}
+
+		if (rs != null) {
+			rs.close();
+		}
+		if (pstmt != null) {
+			pstmt.close();
+		}
+		if (conn != null) {
+			conn.close();
+		}
+
+		return cnt;
+	}
+	/* SD */
+	public int GetTotalRecordCountSD(String startDate) throws Exception {
+		// 테이블의 총 행개수를 구합니다.
+		String sql = " select count(*) as cnt from rentalcar ";
+		
+		String startDateReplace = startDate.replace("/", "");
+		System.out.println("GetTotalRecordCount: " + startDateReplace);
+		
+		if (startDate == null || startDate.equals("all")) {
+		} else { // 전체 모드가 아니면
+			sql += " where startDate <='" + startDateReplace + "'";
+		}
+
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+
+		conn = super.getConnection();
+		pstmt = conn.prepareStatement(sql);
+		System.out.println("GetTotalRecordCount: " + sql);
+		rs = pstmt.executeQuery();
 		int cnt = -1;
 
 		if (rs.next()) {
@@ -722,6 +896,7 @@ public class RentalcarDao extends SuperDao {
 
 		conn = super.getConnection();
 		pstmt = conn.prepareStatement(sql);
+		System.out.println("GetTotalRecordCount: " + sql);
 		rs = pstmt.executeQuery();
 		int cnt = -1;
 
@@ -757,6 +932,7 @@ public class RentalcarDao extends SuperDao {
 
 		conn = super.getConnection();
 		pstmt = conn.prepareStatement(sql);
+		System.out.println("GetTotalRecordCount: " + sql);
 		rs = pstmt.executeQuery();
 		int cnt = -1;
 

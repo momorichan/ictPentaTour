@@ -1,4 +1,3 @@
-<%@ page import="com.shopping.myservlet.HelloServlet"%>
 <%@ page import="com.shopping.model.bean.Member"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ page import="java.util.*"%>
@@ -46,27 +45,97 @@ String notWithFormTag = appName + mappingName + "?command=";
 	src="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.min.js"></script>
 <link rel="stylesheet" type="text/css"
 	href="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.css" />
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
 <title>Insert title here</title>
 <!-- 이 파일은 모든 문서에서 공용으로 참조 할 파일입니다. -->
 <!-- 자바 관련 변수 및 패키지 임포트, 네비게이션 바, jstl 등등-->
 <script src="/Student/js/sweetalert.js"></script>
 <script type="text/javascript">
-	var togglecheck = "";
+	var scrollheight = 0;
+	var navbartoggle = "";
+	$(window).scroll(function(){
+	    scrollheight = $(window).scrollTop();
+	    if(scrollheight < 1 && window.innerWidth > 1900){
+			$(".navbar-brand, .navbar, .dropdown, .login-div, body, .dropdown-div").addClass("scrolltop");
+			$(".navbar").removeClass("non-scrolltop");
+			$(".dropdown-toggle, .dropdown-menu").addClass("show");
+			$(".dropdown-toggle").attr("aria-expanded", "true");
+			$('html,body').animate({scrollTop:0},0);
+		}
+		if(scrollheight > 1 || window.innerWidth <= 1900){
+			$(".navbar-brand, .navbar, .dropdown, .login-div, body, .dropdown-div").removeClass("scrolltop");
+			$(".navbar").addClass("non-scrolltop");
+			$(".dropdown-toggle, .dropdown-menu").removeClass("show");
+			$(".dropdown-toggle").attr("aria-expanded", "false");
+		}
+		
+	    return scrollheight;
+	});
+	window.addEventListener('resize', () => {
+		if(window.innerWidth <= 1900){
+			$(".navbar-brand, .navbar, .dropdown, .login-div, body, .dropdown-div").removeClass("scrolltop");
+			$(".navbar").addClass("non-scrolltop");
+			$(".dropdown-toggle, .dropdown-menu").removeClass("show");
+			$(".dropdown-toggle").attr("aria-expanded", "false");
+		}
+	});
+	window.onload=function(){
+		if(window.innerWidth < 501) {
+			$(".slide-div, .card-title, .card, .card-img-top, .serchcon, .tablecon, .tablecon-2, .navbar-toggle-btn").addClass("mobile");
+		}
+	}
+	window.addEventListener('resize', () => {
+		if(window.innerWidth < 501) {
+			$(".slide-div, .card-title, .card, .card-img-top, .serchcon, .tablecon, .tablecon-2, .navbar-toggle-btn").addClass("mobile");
+		}
+		if(window.innerWidth >= 501) {
+			$(".slide-div, .card-title, .card, .card-img-top, .serchcon, .tablecon, .tablecon-2, .navbar-toggle-btn").removeClass("mobile");
+			$(".navbar, .dropdown-div").removeClass("toggle-on");
+			$(".dropdown-div").removeClass("dropstart");
+			$(".collapse").removeClass("show");
+			navbartoggle = "";
+		}
+	});
+	function navtoggle(){
+		if(navbartoggle == ""){
+			$(".navbar, .dropdown-div").addClass("toggle-on");
+			$(".dropdown-div").addClass("dropstart");
+			$(".collapse").addClass("show");
+			navbartoggle = "on";
+		}else{
+			$(".navbar, .dropdown-div").removeClass("toggle-on");
+			$(".dropdown-div").removeClass("dropstart");
+			$(".collapse").removeClass("show");
+			navbartoggle = "";
+		}
+	};
+	var setCookie = function(name, value) {
+	    document.cookie = name + '=' + value;
+	};
+	var getCookie = function(name) {
+	    var value = document.cookie.match('(^|;) ?' + name + '=([^;]*)(;|$)');
+	    return value? value[2] : null;
+	};
+	document.cookie = getCookie("sidebar");
 	function toggleSideOn(){
-		togglecheck = "on";
+		setCookie("sidebar", "on")
 		checkToggle();
 	}
 	
 	function toggleSideOff(){
-		togglecheck = "";
+		setCookie("sidebar", "")
 		checkToggle();
 	}
 	
 	function checkToggle(){
-		if(togglecheck == "on"){
-			$("#side-bar-toggle, .side-bar, .side-bar-inner, html, body, .copyright, .navbar").addClass("sideon");
+		if(getCookie("sidebar") == "on"){
+// 			$("#side-bar-toggle, .side-bar, .side-bar-inner, html, body, .copyright, .navbar").addClass("sideon");
+			$(".side-icon, .hide-arrow, .side-bar-icon-div, .top-btn-div").addClass("sideon");
+			$(".side-hide-btn").attr("href", 'javascript:toggleSideOff();')
 		}else{
-			$("#side-bar-toggle, .side-bar, .side-bar-inner, html, body, .copyright, .navbar").removeClass("sideon");
+// 			$("#side-bar-toggle, .side-bar, .side-bar-inner, html, body, .copyright, .navbar").removeClass("sideon");
+			$(".side-icon, .hide-arrow, .side-bar-icon-div, .top-btn-div").removeClass("sideon");
+			$(".side-hide-btn").attr("href", 'javascript:toggleSideOn();')
 		}
 	}
 	$(function(){
@@ -105,6 +174,9 @@ String notWithFormTag = appName + mappingName + "?command=";
 .side-bar-off-btn {
 	display: none;
 }
+.navbar-toggler{
+	display:none !important;
+}
 .side-bar-inner.sideon .side-bar-off-btn {
 	position:absolute;
 	top:7px;
@@ -140,6 +212,19 @@ String notWithFormTag = appName + mappingName + "?command=";
 	transform:translate(0px,0);
 	transition:transform 300ms ease 0ms;
 }
+.card.mobile {
+    width: 215px;
+    height: 290px;
+    margin-left: auto;
+    margin-right: auto;
+}
+.card-title.mobile {
+    font-size: 1.0rem;
+}
+.card-img-top.mobile {
+    width: 213px;
+    height: 133px;
+}
 .side-bar-inner {
 	width:200px;
 	height:948px;
@@ -150,6 +235,21 @@ String notWithFormTag = appName + mappingName + "?command=";
 	position: relative;
 	transform:translate(0,0);
     transition:transform 300ms;
+}
+.serchcon.mobile {
+    width: 460px;
+}
+.tablecon-2.mobile {
+	display: block;
+}
+.tablecon-2{
+	display: none;
+}
+.tablecon.mobile {
+	display: none;
+}
+.tablecon{
+	display: block;
 }
 .side-bar.sideon {
 	width:0px;
@@ -201,21 +301,102 @@ String notWithFormTag = appName + mappingName + "?command=";
 	filter:invert(1);
 }
 .navbar {
-	margin-bottom: 20px !important;
+	padding-top:10px;
+	padding-bottom:10px;
+	margin-bottom: 25px !important;
 	position: fixed !important;
 	top:0px !important;
-	width:calc(100% + 200px) !important;
+	width:100% !important;
 	z-index: 999 !important;
 	background-color: black !important;
-	padding-right:100px;
-	padding-left:100px;
+	transition: 300ms;
+}
+.navbar.non-scrolltop.toggle-on {
+    padding-top: 10px;
+    padding-bottom: 370px;
+    margin-bottom: 25px !important;
+    position: fixed !important;
+    top: 0px !important;
+    right: 0px !important;
+    width: 100% !important;
+    z-index: 999 !important;
+    background-color: black !important;
+    transition: 300ms;
+}
+.navbar.toggle-on {
+    padding-top: 10px;
+    padding-bottom: 370px;
+    margin-bottom: 25px !important;
+    position: fixed !important;
+    top: 0px !important;
+    right: 0px !important;
+    width: 100% !important;
+    z-index: 999 !important;
+    background-color: black !important;
+    transition: 300ms;
+}
+.navbar-toggle-btn.mobile{
+	position: fixed;
+	right:10px;
+	top:10px;
+	width:40px;
+	height:40px;
+	background: none;
+	border: none;
+	filter:invert(1);
+	display: block;
+}
+.navbar-toggle-btn{
+	display:none;
+}
+.navbar.non-scrolltop {
+	padding-top:10px;
+	padding-bottom:10px;
+	margin-bottom: 25px !important;
+	position: fixed !important;
+	top:0px !important;
+	right:0px !important;
+	width:100% !important;
+	z-index: 999 !important;
+	background-color: black !important;
+	transition: 300ms;
+}
+.navbar.scrolltop {
+	padding-bottom:200px;
+	padding-top:10px;
+	margin-bottom: 25px !important;
+	position: fixed !important;
+	top:0px !important;
+	width:100% !important;
+	z-index: 999 !important;
+	background-color: black !important;
 }
 .navbar-brand {
 	position: relative !important;
 	z-index: 998 !important;
 	font-family: 'Jeju Gothic', sans-serif !important;
+	transition:color 300ms;
 }
-
+.navbar-brand.scrolltop {
+	position: absolute!important;
+    z-index: 998 !important;
+    font-family: 'Jeju Gothic', sans-serif !important;
+    color: white;
+    top: 0;
+    font-size: 44px;
+    transition: 300ms;
+}
+.slide-div.mobile {
+    justify-content: center;
+    display: block;
+    width: 460px;
+    height: 220px;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 20px;
+    margin-bottom: 20px;
+    border-radius: 10px;
+}
 .alert-danger {
 	margin-left: auto;
 	margin-right: auto;
@@ -241,6 +422,7 @@ String notWithFormTag = appName + mappingName + "?command=";
 }
 .logout {
 	color : red !important;
+	top:2px;
 	opacity: 90%;
 	z-index: 998;
 	position: relative;
@@ -265,15 +447,31 @@ String notWithFormTag = appName + mappingName + "?command=";
 	color: white !important;
 	padding-top : 0.5rem !important;
 }
+html{
+	
+}
 body{
-	padding-top:56px !important;
+	padding-top:70px !important;
 	padding-bottom:120px !important;
 	justify-content: center;
     display: flex;
+    flex-direction:column;
     position: relative !important;
     z-index: 999 !important;
     min-width: 70% !important;
-    transition:width 300ms;
+    transition:300ms;
+}
+
+body.scrolltop{
+	padding-top:200px !important;
+	padding-bottom:120px !important;
+	justify-content: center;
+    display: flex;
+    flex-direction:column;
+    position: relative !important;
+    z-index: 999 !important;
+    min-width: 70% !important;
+    transition:300ms;
 }
 .container{
 	margin-left:auto;
@@ -291,17 +489,64 @@ body{
 	padding-right: 720px !important;
 	justify-content: center !important;
 	clear: both !important;
+	transition: 300ms
+}
+.dropdown-div.dropstart.toggle-on {
+	width:800px !important;
+	display: flex !important;
+	flex-direction:column;
+	position: absolute !important;
+	left:0 !important;
+	right:0 !important;
+	margin-left: auto !important;
+	margin-right: auto !important;
+	padding-left: 370px !important;
+	padding-right: 0px !important;
+	justify-content: center !important;
+	clear: both !important;
+	transition: 300ms
+}
+.dropdown-div.scrolltop {
+	width:800px !important;
+	display: flex !important;
+	position: absolute !important;
+	left:0 !important;
+	right:0 !important;
+	margin-left: auto !important;
+	margin-right: auto !important;
+	padding-left: 200px !important;
+	padding-right: 0px !important;
+	justify-content: center !important;
+	clear: both !important;
 }
 .login-div{
 	display:flex;
 	width:330px;
 	clear: both;
 }
+.login-div.scrolltop{
+	display: flex;
+    width: 330px;
+    clear: both;
+    position: absolute;
+    top: 50%;
+    margin-left: 0;
+    font-size: 20px;
+    transition: 300ms;
+}
 .navbar-nav{
 	width:220px;
 }
 .dropdown{
+	width:auto;
 	margin-right:15px;
+	display: block;
+	transition: width 300ms, margin-right 300ms;
+}
+.dropdown.scrolltop{
+	margin-right:87px;
+	width:72px;
+	display: block;
 }
 .dropdown-menu {
 	background-color:rgb(33,37,41) !important;
@@ -312,6 +557,16 @@ body{
 	font-family: 'Jeju Gothic', sans-serif !important;
 	padding-left:9px;
 	padding-right:2px;
+}
+.dropstart .dropdown-menu[data-bs-popper] {
+    top: auto;
+    right: 120px;
+    bottom: auto;
+    left: auto;
+    transform: translate(0px, -50px);
+    margin-top: 0;
+    margin-right: var(--bs-dropdown-spacer);
+    position: fixed;
 }
 .dropdown-item:hover {
 	background-color: rgb(53,53,53) !important;
@@ -327,24 +582,6 @@ body{
 	z-index: 998 !important;
 }
 
-.arrow {
-    position: absolute;
-    left: 0; 
-    top: 0; 
-    filter:grayscale(100%);
-    content: '';
-    width: 25px; /* 사이즈 */
-    height: 25px; /* 사이즈 */
-    border-top: 5px solid #000; /* 선 두께 */
-    border-right: 5px solid #000; /* 선 두께 */
-    transform: rotate(-45deg); /* 각도 */
-}
-.top-btn-div{
-	position:fixed;
-	right:75px;
-	bottom:150px;
-	z-index: 997;
-}
 body.sideon, .navbar.sideon, .copyright.sideon{
 	width:calc(100% - 200px) !important;
 	padding-right:0;
@@ -367,21 +604,222 @@ body.sideon, .navbar.sideon, .copyright.sideon{
 	bottom:0 !important;
 	z-index: -999 !important;
 }
+.top-btn-div{
+	position:fixed;
+	right:14px;
+	bottom:90px;
+	z-index: 997;
+	display: flex;
+	flex-direction: row;
+	pointer-events:none;
+}
+.top-btn-div.sideon{
+	position:fixed;
+	right:14px;
+	bottom:90px;
+	display: flex;
+	flex-direction: row;
+	pointer-events:all;
+	z-index: 999;
+}
+.arrow {
+    position: relative;
+    left: 0; 
+    top: 0; 
+    filter:grayscale(100%);
+    content: '';
+    width: 25px;
+    height: 25px;
+    border-top: 5px solid #000;
+    border-right: 5px solid #000;
+    transform: rotate(-45deg);
+}
+.kakao {
+	position:relative;
+	width:50px;
+	height:50px;
+}
+.naver {
+	position:relative;
+	width:50px;
+	height:50px;
+}
+.top-btn {
+	display: flex;
+	position: relative;
+	margin-top:10px;
+	justify-content: center;
+	pointer-events:all !important;
+	z-index: 999 !important;
+}
+.side-bar-icon-div {
+	display: flex;
+	flex-direction: column;
+	pointer-events: none;
+}
+.side-bar-icon-div.sideon {
+	display: flex;
+	flex-direction: column;
+	pointer-events: all;
+}
+.side-hide-btn {
+	bottom:90%;
+	position:absolute;
+	margin-left: -6px;
+	opacity: 30%;
+	pointer-events:all !important;
+}
+.hide-arrow {
+	position: absolute;
+    left: 0; 
+    top: 0; 
+    filter:grayscale(100%);
+    content: '';
+    width: 25px;
+    height: 25px;
+    border-top: 7px solid #000;
+    border-right: 7px solid #000;
+    transform: translate(4px, 0) scaleX(0.3) scaleY(0.7) rotate(-135deg);
+}
+.hide-arrow.sideon {
+	position: absolute;
+    left: 0; 
+    top: 0; 
+    filter:grayscale(100%);
+    content: '';
+    width: 25px;
+    height: 25px;
+    border-top: 7px solid #000;
+    border-right: 7px solid #000;
+    transform:scaleX(0.3) scaleY(0.7) rotate(45deg);
+}
+.side-icon {
+	position: relative;
+	right:-75px;
+	transition: transform 300ms;
+}
+.side-icon.sideon {
+	transform: translate(-75px, 0);
+	transition: transform 300ms;
+}
+</style>
+<!-- --------------------------review-------------------------------- -->
+<script type="text/javascript">
+		$(document).ready(function(){
+			var optionList = $('#mode option');
+			for(var i=0 ; i<optionList.length ; i++){
+				if(optionList[i].value == '${requestScope.pageInfo.mode}'){
+					optionList[i].selected = true ;
+				}	
+			}
+			
+			$('#keyword').val('${requestScope.pageInfo.keyword}');
+			
+			$("#mode").change(function(){				 
+				  if($(this).val() != 'all'){
+					  $('#keyword').attr('disabled', false);
+				  }else{
+					  $('#keyword').val('');
+					  $('#keyword').attr('disabled', true);
+				  }
+			});			
+		});
+		
+		function searchAll(){ /* 전체 검색 */
+			location.href = '<%=notWithFormTag%>rvList';
+		}
+		
+		function writeForm(){ /* 글쓰기 */
+			location.href = '<%=notWithFormTag%>rvInsert';
+		}
+		
+	</script>
+<style type="text/css">
+.head {
+	width: 100%;
+	height: 300px;
+	text-align : center;
+}
 
+.wrap {
+	width: 100%;
+	height: 300px;
+	text-align : center;
+}
+
+.review-section {
+	width: 100%;
+	height: 300px;
+}
+
+.shape {
+	height: 30px;
+	background-color : #bbb;
+	border-top : 1px;
+}
+.text_reviewtype{
+	position : relative ;
+	left : 70px ;
+}
+.point_box{
+	display: flex;
+}
+.rating_main{
+	display: flex;
+}
+.rvList_image {
+	position: relative;
+	
+}
+
+.rvList_image_text {
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	color: white;
+	transform: translate(-50%, -50%);
+}
+
+.progress-bar {
+    width: 100%;
+    height: 30px;
+    background-color: #dedede;
+    font-weight: 600;
+    font-size: .8rem;
+}
+
+.progress {
+    height: 30px;
+    padding: 0;
+    text-align: center;
+    background-color: #4F98FF;
+    color: #111;
+}
+.rating_box{
+	float : right;
+}
+.rating_main_left {
+    width: 50%;
+    float: left;
+    box-sizing: border-box;  
+    }
+.rating_main_right {
+     width: 50%;
+     float: right;
+     box-sizing: border-box;
+    }
+.point_txt{
+ 	width: 600px;height: 400px;
+	line-height: 100px; /* 세로 가운데 정렬 : line-height와 height값을 동일하게 처리합니다.*/
+	text-align: center /* 텍스트 가운데 정렬 */
+}
 </style>
 </head>
 <body>
-	<div id="top"></div>
-	<c:if test="${not empty sessionScope.alertMessage}">
-		<div class="alert alert-danger alert-dismissible fade show">
-	    	<button type="button" class="btn-close" data-bs-dismiss="alert"></button>
-	    	<strong></strong> ${sessionScope.alertMessage}
-	  	</div>
-	  	<c:remove var="alertMessage" scope="session"/>
-  	</c:if>
+	
 </body>
 <!--  footer -->
-	<div class="dummy-navbar"></div>
+<!-- 	<div class="dummy-navbar"></div> -->
 	<nav class="navbar navbar-expand-sm bg-dark navbar-dark" id="navbar">
 		<div class="container-fluid">
 			<a class="navbar-brand" href="/Student/common/home.jsp">ICTPentaTour</a>
@@ -492,9 +930,18 @@ body.sideon, .navbar.sideon, .copyright.sideon{
 					</div>
 				</ul>
 			</div>
+			<button type="button" class="navbar-toggle-btn" onclick="navtoggle()"><img src="/Student/upload/sidebar.png" style="width:100%; height:100%"></button>
 		</div>
 	</nav>
-<div class="dummy-copyright"></div>
+	<div id="top"></div>
+	<c:if test="${not empty sessionScope.alertMessage}">
+		<div class="alert alert-danger alert-dismissible fade show">
+	    	<button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+	    	<strong></strong> ${sessionScope.alertMessage}
+	  	</div>
+	  	<c:remove var="alertMessage" scope="session"/>
+  	</c:if>
+<!-- <div class="dummy-copyright"></div> -->
 <div id="container" class="copyright" style="width: 100%; z-index: 1; bottom:0; position: fixed;">
 	<ul class="icons">
 		<li><a href="#" class="icon fa-twitter"><span class="label">Twitter</span></a></li>
@@ -505,20 +952,34 @@ body.sideon, .navbar.sideon, .copyright.sideon{
 		<li>Made with <a href="https://naver.com/">5조</a></li>
 	</ul>
 </div>
-<!-- side bar -->
-<div class="side-bar">
-	<div id="side-bar-toggle" class="">
-		<button type="button" class="side-bar-on-btn" onclick="toggleSideOn()"><img class="side-bar-icon" src="/Student/upload/sidebar.png"></button>
+<!-- <div class="side-bar"> -->
+<!-- 	<div id="side-bar-toggle" class=""> -->
+<!-- 		<button type="button" class="side-bar-on-btn" onclick="toggleSideOn()"><img class="side-bar-icon" src="/Student/upload/sidebar.png"></button> -->
+<!-- 	</div> -->
+<!-- 	<div class="side-bar-inner"> -->
+<!-- 		<button type="button" class="side-bar-off-btn" onclick="toggleSideOff()">X</button> -->
+<!-- 		<div class="simple-login-div"> -->
+<!-- 			<a class="simple-login-a google-login" href=""><img class="simple-login" src="/Student/upload/google.png"></a> -->
+<!-- 			<a class="simple-login-a kakao-login" href=""><img class="simple-login" src="/Student/upload/kakao.png"></a> -->
+<!-- 		</div> -->
+<!-- 	</div> -->
+<!-- </div> -->
+<div class="top-btn-div sideon">
+	<div class="side-bar-icon-div sideon">
+		<a class="kakao-button side-icon sideon" href="https://open.kakao.com/o/gY9q37Ef" target='_blank'>
+			<img class="side-button kakao" src="/Student/upload/kakao_chat.png">
+		</a>
+		<a class="naver-mail-button side-icon sideon" href="mailto:﻿superman@test.com?cc=user@dammy.net">
+			<img class="side-button naver" src="/Student/upload/naver-icon.png" >
+		</a>
+		<a class="top-btn" href="">
+			<span class="arrow"></span>
+		</a>
 	</div>
-	<div class="side-bar-inner">
-		<button type="button" class="side-bar-off-btn" onclick="toggleSideOff()">X</button>
-		<div class="simple-login-div">
-			<a class="simple-login-a google-login" href=""><img class="simple-login" src="/Student/upload/google.png"></a>
-			<a class="simple-login-a kakao-login" href=""><img class="simple-login" src="/Student/upload/kakao.png"></a>
-		</div>
+	<div>
+		<a class="side-hide-btn " href="javascript:toggleSideOff();">
+			<span class="hide-arrow sideon"></span>
+		</a>
 	</div>
-</div>
-<div class="top-btn-div">
-	<a class="top-btn" href=""><span class="arrow"></span></a>
 </div>
 </html>

@@ -10,9 +10,8 @@
 </head>
 <body>
 <%
-	String gotopage = notWithFormTag + "home" ;
-	//out.print(gotopage);
-	response.sendRedirect(gotopage) ;
+	
+	
 %>
 </body>
 </html>
