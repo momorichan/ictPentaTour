@@ -149,14 +149,11 @@
 					<th>탑승 인원</th>
 				</tr>
 			</thead>
-			<tbody>
-				<tr>
-					<td colspan="6" align="center"></td>
-				</tr>
+			<tbody>		
 				<c:forEach var="bean" items="${requestScope.datalist}">
 					<tr>
 						<td>
-							<a href="<%=notWithFormTag%>rcDetail&no=${bean.rcid}">
+							<a href="<%=notWithFormTag%>rcDetail&rcid=${bean.rcid}">
 								${bean.rcid}
 							</a>							
 						</td>

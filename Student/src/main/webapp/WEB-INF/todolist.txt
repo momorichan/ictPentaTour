@@ -59,6 +59,6 @@ vwExam05=com.shopping.controller.view.View05Controller
 # rentalcar section
 rcList=com.shopping.controller.rentalcar.RentalcarListController
 rcDetail=com.shopping.controller.rentalcar.RentalcarDetailController
-#rcInsert=com.shopping.controller.product.RentalcarInsertController
-#rcUpdate=com.shopping.controller.product.RentalcarUpdateController
-#rcDelete=com.shopping.controller.product.RentalcarDeleteController
+#rcInsert=com.shopping.controller.rentalcar.RentalcarInsertController
+#rcUpdate=com.shopping.controller.rentalcar.RentalcarUpdateController
+#rcDelete=com.shopping.controller.rentalcar.RentalcarDeleteController
