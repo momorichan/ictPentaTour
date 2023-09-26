@@ -53,6 +53,8 @@ roUpdate=com.shopping.controller.room.RoomUpdateController
 roDelete=com.shopping.controller.room.RoomDeleteController
 #amenities section
 amList=com.shopping.controller.amenities.AmenitiesListController
+amSelect=com.shopping.controller.amenities.AmenitiesSelectController
+amInsert=com.shopping.controller.amenities.AmenitiesInsertController
 #tour section
 tourHome=com.shopping.controller.tour.TourHomeController
 tourList=com.shopping.controller.tour.TourListController

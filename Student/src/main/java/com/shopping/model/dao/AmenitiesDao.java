@@ -86,5 +86,67 @@ public class AmenitiesDao extends SuperDao{
 		return bean;
 	}
 
+	public List<Amenities> selectAll() throws Exception{
+		List<Amenities> lists = new ArrayList<Amenities>();
+		
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		
+		String sql = " select * from amenities" ;
+
+		conn = super.getConnection();
+
+		pstmt = conn.prepareStatement(sql);
+
+
+		rs = pstmt.executeQuery();
+
+		while (rs.next()) {
+			lists.add(getBeanData(rs));
+		}
+
+		if (rs != null) {
+			rs.close();
+		}
+		if (pstmt != null) {
+			pstmt.close();
+		}
+		if (conn != null) {
+			conn.close();
+		}
+
+		return lists;
+	}
+
+	public int insertData(Amenities bean) throws Exception{
+		int cnt = -1;
+		
+		String sql = " insert into amenities(amid, name, description, image)" ;
+		sql += "values(amseq.nextval, ?, ?, ?)";
+		
+		PreparedStatement pstmt = null;
+		conn = super.getConnection();
+		conn.setAutoCommit(false);		
+		pstmt = conn.prepareStatement(sql);
+
+
+		pstmt.setString(1, bean.getName());
+		pstmt.setString(2, bean.getDescription());
+		pstmt.setString(3, bean.getImage());
+
+		cnt = pstmt.executeUpdate();
+		
+
+		conn.commit();
+		
+		if (pstmt != null) {
+			pstmt.close();
+		}
+		if (conn != null) {
+			conn.close();
+		}
+		return cnt;
+	}
+
 
 }

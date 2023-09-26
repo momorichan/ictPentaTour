@@ -115,7 +115,7 @@
 					</td>
 					
  				 <c:if test="${status.index%colsu==colsu-1}">
-					</tr>
+					
 				</c:if>			
 				</c:forEach>
 			</tbody>

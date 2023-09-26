@@ -29,11 +29,11 @@ public class AccommodationListController extends SuperClass {
 			boolean isGrid = true;
 
 			Paging pageInfo = new Paging(pageNumber, pageSize, totalCount, url, mode, keyword, isGrid);
-			System.out.println("asdzxcsad " + pageInfo.getEndRow());
 			List<AcRoomPrice> lists = ardao.selectAll(pageInfo);
 			
 			request.setAttribute("datalist", lists);
 			request.setAttribute("pageInfo", pageInfo);
+			
 			super.gotopage("accommodation/acList.jsp");
 		} catch (Exception e) {
 			e.printStackTrace();

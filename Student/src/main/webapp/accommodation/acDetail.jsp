@@ -2,6 +2,7 @@
 	pageEncoding="UTF-8"%>
 
 <%@ include file="./../common/common.jsp"%>
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -123,17 +124,30 @@ function getAmenities(){
 <body>
 	<div class="container">
 		<div class="left-div">
-			<span class="p1"><img
-				src="${pageContext.request.contextPath}/upload/${requestScope.randomimage.get(1)}"
-				style="width: 100%;" " data-src="" alt=""></span> <span class="p1"><img
-				src="${pageContext.request.contextPath}/upload/${requestScope.randomimage.get(2)}"
-				style="width: 100%;" " data-src="" alt=""></span> <span class="p2"><img
-				src="${pageContext.request.contextPath}/upload/${requestScope.randomimage.get(3)}"
-				style="width: 100%;" " data-src="" alt=""></span> <span class="p2"><img
-				src="${pageContext.request.contextPath}/upload/${requestScope.randomimage.get(4)}"
-				style="width: 100%;" " data-src="" alt=""></span> <span class="p2"><img
-				src="${pageContext.request.contextPath}/upload/${requestScope.randomimage.get(0)}"
-				style="width: 100%;" title="" data-src="" alt=""></span>
+			
+			<span class="p1">
+			<img
+			src="${pageContext.request.contextPath}/upload/${requestScope.randomimage.get(1)}"
+			style="width: 100%;" data-src="" alt=""></span> 
+			<span class="p1">
+			<img
+			src="${pageContext.request.contextPath}/upload/${requestScope.randomimage.get(2)}"
+			style="width: 100%;" data-src="" alt=""></span> 
+			
+			<span class="p2">
+			<img
+			src="${pageContext.request.contextPath}/upload/${requestScope.randomimage.get(3)}"
+			style="width: 100%;" data-src="" alt=""></span> 
+			
+			<span class="p2">
+			<img
+			src="${pageContext.request.contextPath}/upload/${requestScope.randomimage.get(4)}"
+			style="width: 100%;" data-src="" alt=""></span> 
+			
+			<span class="p2">
+			<img
+			src="${pageContext.request.contextPath}/upload/${requestScope.randomimage.get(0)}"
+			style="width: 100%;" title="" data-src="" alt=""></span>
 		</div>
 		<div class="right-div">
 			<table class="table table-borderless">
@@ -185,7 +199,7 @@ function getAmenities(){
 		</table>
 		<table class="table table-borderless" id="amList">
 		</table>
-
+</div>
 		<!-- The Modal -->
 		<div class="modal fade" id="myModal">
 			<div class="modal-dialog modal-dialog-centered modal-lg">

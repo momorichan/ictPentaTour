@@ -1,4 +1,4 @@
-<%@ page import="com.shopping.model.bean.Member"%>
+
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ page import="java.util.*"%>
 <%@ include file="../common/bootstrap5.jsp"%>
@@ -16,12 +16,7 @@ String notWithFormTag = appName + mappingName + "?command=";
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
-<%
-	/* Member mem = new Member();
-	mem.setId("admin");
-	mem.setName("관리자");
-	session.setAttribute("loginfo",mem); */
-%>
+
 <c:set var="whologin" value="0"/>
 <c:if test="${not empty sessionScope.loginfo}">
 	<c:if test="${sessionScope.loginfo.meid == 'admin'}">
@@ -36,6 +31,15 @@ String notWithFormTag = appName + mappingName + "?command=";
 <html>
 <head>
 <meta charset="UTF-8">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+<script type="text/javascript"
+	src="https://cdn.jsdelivr.net/jquery/latest/jquery.min.js"></script>
+<script type="text/javascript"
+	src="https://cdn.jsdelivr.net/momentjs/latest/moment.min.js"></script>
+<script type="text/javascript"
+	src="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.min.js"></script>
+<link rel="stylesheet" type="text/css"
+	href="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.css" />
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
 <title>Insert title here</title>
 <!-- 이 파일은 모든 문서에서 공용으로 참조 할 파일입니다. -->

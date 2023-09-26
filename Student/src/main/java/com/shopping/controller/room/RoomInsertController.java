@@ -1,8 +1,5 @@
 package com.shopping.controller.room;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
@@ -45,8 +42,6 @@ public class RoomInsertController extends SuperClass {
 				new RoomInsertController().doGet(request, response);
 				
 			}else { // 성공
-				List<Room> lists = dao.getTempRoom();
-				request.setAttribute("roomlist", lists);
 				new AccommodationInsertController().doGet(request, response);
 			}
 		} catch (Exception e) {

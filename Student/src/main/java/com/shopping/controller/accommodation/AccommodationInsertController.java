@@ -1,11 +1,15 @@
 package com.shopping.controller.accommodation;
 
+import java.util.List;
+
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import com.shopping.controller.SuperClass;
+import com.shopping.model.bean.Room;
 import com.shopping.model.bean.accommodation;
 import com.shopping.model.dao.AccommodationDao;
+import com.shopping.model.dao.RoomDao;
 
 public class AccommodationInsertController extends SuperClass{
 	private final String PREFIX = "accommodation/" ;
@@ -13,6 +17,10 @@ public class AccommodationInsertController extends SuperClass{
 	@Override
 	public void doGet(HttpServletRequest request, HttpServletResponse response) throws Exception {
 		super.doGet(request, response);
+		
+		RoomDao dao = new RoomDao();
+		List<Room> lists = dao.getTempRoom();
+		request.setAttribute("roomlist", lists);
 		
 		super.gotoPage(PREFIX + "acInsert.jsp");	
 	}
@@ -23,17 +31,35 @@ public class AccommodationInsertController extends SuperClass{
 
 		accommodation bean = new accommodation();
 		
-		AccommodationDao dao = new AccommodationDao();
+		bean.setName(request.getParameter("name"));
+		bean.setAddress(request.getParameter("address"));
+		bean.setDescription(request.getParameter("description"));
+		bean.setImage01(request.getParameter("image01"));
+		bean.setImage02(request.getParameter("image02"));
+		bean.setImage03(request.getParameter("image03"));
 		
+		AccommodationDao dao = new AccommodationDao();
 		int cnt = -1 ;
+		
+		String[] templist = request.getParameterValues("amenities");
+		
+		 int[] amlist = new int[templist.length];
+	        for (int i = 0; i < amlist.length; i++) {
+	        	amlist[i] = Integer.parseInt(templist[i]);
+	        }
+		
+
+		
+		
 		try {
-			cnt = dao.InsertData(bean);	
+			
+			cnt = dao.InsertData(bean, amlist);	
 			
 			if(cnt == -1) { // 등록 실패
 				new AccommodationInsertController().doGet(request, response);
 				
 			}else { // 성공
-				// 게시물 목록 보기 페이지로 이동
+				new AccommodationListController().doGet(request, response);
 			}
 			
 		} catch (Exception e) {

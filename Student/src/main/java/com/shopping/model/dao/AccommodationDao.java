@@ -185,9 +185,66 @@ public class AccommodationDao extends SuperDao {
 		return bean;
 	}
 
-	public int InsertData(accommodation bean) {
-		// TODO Auto-generated method stub
-		return 0;
+	public int InsertData(accommodation bean, int[] amlist) throws Exception{
+		int cnt = -1;
+		
+		String sql = " insert into accommodation(acid, address, name, description, image01, image02, image03)" ;
+		sql += "values(acseq.nextval, ?, ?, ?, ?, ?, ?)";
+		
+		PreparedStatement pstmt = null;
+		conn = super.getConnection();
+		conn.setAutoCommit(false);		
+		pstmt = conn.prepareStatement(sql);
+
+		pstmt.setString(1, bean.getAddress());
+		pstmt.setString(2, bean.getName());
+		pstmt.setString(3, bean.getDescription());
+		pstmt.setString(4, bean.getImage01());
+		pstmt.setString(5, bean.getImage02());
+		pstmt.setString(6, bean.getImage03());
+
+		cnt = pstmt.executeUpdate();
+		
+		if (pstmt != null) {
+			pstmt.close();
+		}
+		
+		sql = " update rooms set acid = acseq.currval where acid = 0" ;
+		
+		pstmt = conn.prepareStatement(sql);
+
+		cnt = pstmt.executeUpdate();
+		
+		if (pstmt != null) {
+			pstmt.close();
+		}		
+		
+		
+		
+		if(amlist.length != 0) {
+			for(int amid : amlist) {
+				sql = " insert into amenitiedetails(acid, amid) values(acseq.currval,?)" ;
+				
+				pstmt = conn.prepareStatement(sql);
+	
+				pstmt.setInt(1,amid);
+				
+				cnt = pstmt.executeUpdate();
+				
+				if (pstmt != null) {
+					pstmt.close();
+				}		
+			}
+		}
+		conn.commit();
+		
+		if (pstmt != null) {
+			pstmt.close();
+		}
+		if (conn != null) {
+			conn.close();
+		}
+		return cnt;
 	}
 
 	
