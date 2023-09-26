@@ -555,6 +555,7 @@ body.sideon, .navbar.sideon, .copyright.sideon{
 							<ul class="dropdown-menu">
 								<li><a class="dropdown-item" href="<%=notWithFormTag%>airHome">목록보기</a></li>
 							</ul>
+							
 						</li>
 						<li class="nav-item dropdown">
 							<a	class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown">숙박</a>
@@ -579,16 +580,8 @@ body.sideon, .navbar.sideon, .copyright.sideon{
 						<a	class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown">렌트카</a>
 							<ul class="dropdown-menu">
 								<li><a class="dropdown-item" href="<%=notWithFormTag%>rcList">렌트카</a></li>
-								<c:if test="${whologin == 2}">
-									
-								</c:if>							
 							</ul>
 						</li>	
-
-						
-					<li class="nav-item">
-						<a class="nav-link" href="<%=notWithFormTag%>allCheck" role="button">회원예약조회</a>
-					</li>
 					</div>
 				</ul>
 			</div>

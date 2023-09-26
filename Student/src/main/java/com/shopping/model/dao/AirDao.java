@@ -721,7 +721,7 @@ public class AirDao extends SuperDao {
 	{
 
 		String artime[] = keyword4.split("-");
-		System.out.println("여기냐?");
+		System.out.println("여기냐? 키워드2개밖에없음");
 
 		for (int i = 0; i < artime.length; i++) {
 			if (i == 0) {
@@ -958,7 +958,7 @@ public class AirDao extends SuperDao {
 		String artime[] = keyword4.split("-");
 		
 		
-		System.out.println("여기냐?");
+		System.out.println("여기냐????????????");
 
 
 		for (int i = 0; i < detime.length; i++) {
@@ -1403,34 +1403,20 @@ public class AirDao extends SuperDao {
 							sql += " and " + pageInfo.getMode4() + " like '%" + artime[i] + "%'";
 						}
 					}
-					
-					
-					
 				}
 				
 			}
 		}
 		else
 		{
-			System.out.println("1234567");
+			System.out.println("1234567asdadsdad");
 			sql += " where " + pageInfo.getMode() + " like '%" + pageInfo.getKeyword() + "%'";
 			
 			if(pageInfo.getKeyword2() == null || pageInfo.getKeyword2().equals("all"))
 			{
 				if(pageInfo.getKeyword3() == null || pageInfo.getKeyword3().equals(""))
 				{
-					if(pageInfo.getKeyword4() == null || pageInfo.getKeyword4().equals(""))
-					{
-						
-					}
-					else
-					{
-						System.out.println("여기인데?????");
-						for(int i =0; i < artime.length ; i++)
-						{
-							sql += " and " + pageInfo.getMode4() + " like '%" + artime[i] + "%'";
-						}
-					}
+
 				}
 				else
 				{
@@ -1438,58 +1424,24 @@ public class AirDao extends SuperDao {
 					for(int i =0; i < detime.length ; i++)
 					{
 						sql += " and " + pageInfo.getMode3() + " like '%" + detime[i] + "%'";
-					}
-				
-					if(pageInfo.getKeyword4() == null || pageInfo.getKeyword4().equals(""))
-					{
-						
-					}
-					else
-					{
-						for(int i =0; i < artime.length ; i++)
-						{
-							sql += " and " + pageInfo.getMode4() + " like '%" + artime[i] + "%'";
-						}
-					}
-					
+					}	
 				}
 			}
 			else
 			{
-				System.out.println("gd");
 				sql += " and " + pageInfo.getMode2() + " like '%" + pageInfo.getKeyword2() + "%'";
 				
+				System.out.println("왜안되는데");
+				System.out.println(pageInfo.getMode3());
 				if(pageInfo.getKeyword3() == null || pageInfo.getKeyword3().equals(""))
 				{
-					if(pageInfo.getKeyword4() == null || pageInfo.getKeyword4().equals(""))
-					{
-							
-					}
-					else
-					{
-						for(int i =0; i < artime.length ; i++)
-						{
-							sql += " and " + pageInfo.getMode4() + " like '%" + artime[i] + "%'";
-						}
-					}
+
 				}
 				else
 				{
 					for(int i =0; i < detime.length ; i++)
 					{
 						sql += " and " + pageInfo.getMode3() + " like '%" + detime[i] + "%'";
-					}
-				
-					if(pageInfo.getKeyword4() == null || pageInfo.getKeyword4().equals(""))
-					{
-	
-					}
-					else
-					{
-						for(int i =0; i < artime.length ; i++)
-						{
-							sql += " and " + pageInfo.getMode4() + " like '%" + artime[i] + "%'";
-						}
 					}
 					
 				}

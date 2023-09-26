@@ -2,7 +2,6 @@
     pageEncoding="UTF-8"%>
     
 
-<%@ include file="./../common/bootstrap5.jsp" %>
 <%@ include file="./../common/common.jsp" %> 
     
 <!DOCTYPE html>

@@ -123,10 +123,8 @@
 		</table>
 		
 		
-		
+		<c:if test="${requestScope.ones == null}">
 		<div class="container mt-2">
-		
-		
 		<h2>오는날</h2>
 		<table  class="table table-striped">
 		
@@ -153,12 +151,10 @@
 						<td align="left">${lest.artime}</td>			
 				</tr>
 				</c:forEach>
-			
-			
 			</tbody>
 		</table>
-		
 		</div>
+		</c:if>
 	<div align="center">
 		<button type="button" class="btn btn-primary" onclick="goHome();">
 				홈으로
