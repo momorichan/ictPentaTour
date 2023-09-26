@@ -1,8 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 
-
-<%@ include file="./../common/bootstrap5.jsp"%>
 <%@ include file="./../common/common.jsp"%>
 <!DOCTYPE html>
 <html>
@@ -17,14 +15,6 @@
 	padding: 80px;
 }
 
-/* .from, .to, .depart, .arrive, .btn, .people {
-	margin: auto;
-}
-
-.froms, .tos, .departs, .arrives, .btn2, .peoples {
-	margin: auto;
-}
- */
 #qty {
 	margin: -10px;
 	border: 0px;
@@ -161,7 +151,8 @@ body
 		
 		
 input[type='text'] {
-color : white;
+  
+  color : white;
   border: none; 
   position: relative; 
   width: 100%;
@@ -177,7 +168,7 @@ color : white;
 }
 
 input[type='number'] {
-  color : #184DA0;
+  color : white;
   border: none; 
   position: relative; 
   width: 100%;
@@ -190,6 +181,37 @@ input[type='number'] {
   text-align: center;
   font-size: 100%;
   margin-bottom: 20px;
+}
+
+
+.search_btn {
+  color : #184DA0;
+  border: none; 
+  position: relative; 
+  width: 100%;
+  padding: 10px;
+  background: url(../../../assets/Calendar.svg) no-repeat right 10px center /
+  35px auto;
+  background-color: white;
+  box-shadow: 2px 2px 7px rgba(0, 0, 0, 0.2);
+  border-radius: 8px;
+  text-align: center;
+  font-size: 100%;
+}
+
+.reset_btn {
+  color : #184DA0;
+  border: none; 
+  position: relative; 
+  width: 100%;
+  padding: 10px;
+  background: url(../../../assets/Calendar.svg) no-repeat right 10px center /
+  35px auto;
+  background-color: white;
+  box-shadow: 2px 2px 7px rgba(0, 0, 0, 0.2);
+  border-radius: 8px;
+  text-align: center;
+  font-size: 100%;
 }
 
 
@@ -249,12 +271,23 @@ input[type='date']:valid::before {
   
   from:valid::before {
   display: none; }
+  
+  input::placeholder
+  {
+  color: white;}
+  
 		
 </style>
 
 <script type="text/javascript">
 	$(document).ready(function() {
 		$('.tripB').hide();
+		
+		
+		
+		
+		
+		
 		
 /* 		$('[type="date"]').prop('min', function(){
 	        return new Date().toJSON().split('T')[0];
@@ -286,9 +319,7 @@ input[type='date']:valid::before {
 
 </script>
 
-
 <script type="text/javascript">
-
 	$(function() {
 
 		$('.datepicker').daterangepicker({
@@ -304,8 +335,7 @@ input[type='date']:valid::before {
 		// $('.datepicker').datepicker('setDate', 'today');
 		//$('.datepicker').datepicker('minDate','-1D');
 		 
-		$('.datepicker').on( 'apply.daterangepicker', function(ev, picker) {
-				
+		$('.datepicker').on( 'apply.daterangepicker', function(ev, picker) {	
 					var startDate = picker.startDate;
 					var endDate = picker.endDate;
 					
@@ -318,9 +348,6 @@ input[type='date']:valid::before {
 		});
 	});
 </script>
-
-
-
 
 </head>
 <body>
@@ -345,20 +372,17 @@ input[type='date']:valid::before {
 						<input type="hidden" name="command" value="airList">
 						<div class="search justify-content-center">
 							<div class="from">
-								<h3>From</h3>
 								<input class="form-control " type="hidden" id="mode" name="mode"
 									value="depart"> <select id="keyword" name="keyword">
 									<option value="all" selected="selected">출발지
 									<option value="김포">김포
-									<option value="일본">일본
-									<option value="중국">중국
-									<option value="대만">대만</option>
+									<option value="인천">인천
+									</option>
 								</select>
 							</div>
 
 
 							<div class="to">
-								<h3>To</h3>
 								<input class="form-control" type="hidden" id="mode2"
 									name="mode2" value="arrive"> <select class="city2"
 									id="keyword2" name="keyword2">
@@ -371,24 +395,34 @@ input[type='date']:valid::before {
 							</div>
 
 							<div class="departday">
-								<h3>가는 날</h3>
 								<input type="hidden" id="mode3" name="mode3" value="detime">
 								<input class="departdate datepicker" type="text" id="keyword3" 
-									name="keyword3" placeholder="날짜를 선택해주세요">
+									name="keyword3" placeholder="가는날">
 							</div>
 
 							<div class="arriveday">
-								<h3>오는 날</h3>
 								<input type="hidden" id="mode4" name="mode4" value="artime">
 								<input class="arrivedate datepicker" type="text" id="keyword4"
-									name="keyword4">
+									name="keyword4" placeholder="오는날">
 							</div>
-
+							
+							
+							<div class="find">
+								<button type="submit" class="search_btn btn-primary"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-search" viewBox="0 0 16 16">
+  								<path d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001c.03.04.062.078.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1.007 1.007 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0z"/>
+								</svg></button>
+							</div>
+							
+							
+							<div class="reset">
+							<button type="reset" class="reset_btn btn-primary"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-arrow-repeat" viewBox="0 0 16 16">
+  							<path d="M11.534 7h3.932a.25.25 0 0 1 .192.41l-1.966 2.36a.25.25 0 0 1-.384 0l-1.966-2.36a.25.25 0 0 1 .192-.41zm-11 2h3.932a.25.25 0 0 0 .192-.41L2.692 6.23a.25.25 0 0 0-.384 0L.342 8.59A.25.25 0 0 0 .534 9z"/>
+  							<path fill-rule="evenodd" d="M8 3c-1.552 0-2.94.707-3.857 1.818a.5.5 0 1 1-.771-.636A6.002 6.002 0 0 1 13.917 7H12.9A5.002 5.002 0 0 0 8 3zM3.1 9a5.002 5.002 0 0 0 8.757 2.182.5.5 0 1 1 .771.636A6.002 6.002 0 0 1 2.083 9H3.1z"/>
+							</svg></button>
+						</div>
 
 						</div>
-						<div class="find">
-							<button type="submit" class="search_btn btn-primary">검색</button>
-						</div>
+						
 					</form>
 				</div>
 			</div>

@@ -38,12 +38,13 @@ public class AirListController extends SuperClass{
 		AirDao dao = new AirDao();
 
 		int totalCount = 0;
+		int addCount = 0;
 		
 		try
 		{
 			boolean isGrid = false; // 상품목록이 아니기때문에 false
 			String url = super.getUrlInfomation("airList");
-			
+
 			if(keyword2 == "all" || keyword2 == null)
 			{
 				// 2 x
@@ -53,10 +54,12 @@ public class AirListController extends SuperClass{
 					if(keyword4 == null || keyword4.equals(""))
 					{
 						totalCount = dao.GetTotalRecordCount(mode,keyword); // 수정 예정
+						addCount = dao.GetTotalRecordCount(mode,keyword);
 					}
 					else
 					{
 						totalCount = dao.GetTotalRecordCountDate2(mode,keyword,mode4,keyword4); // 수정 예정
+						addCount = dao.GetTotalRecordCount(mode,keyword,mode4,keyword4);
 					}
 				}
 				else
@@ -64,10 +67,12 @@ public class AirListController extends SuperClass{
 					if(keyword4 == null || keyword4.equals(""))
 					{
 						totalCount = dao.GetTotalRecordCountDate2(mode,keyword,mode3,keyword3);
+						addCount  = dao.GetTotalRecordCountDate2(mode,keyword,mode3,keyword3);
 					}
 					else
 					{
 						totalCount = dao.GetTotalRecordCountDate2x3o4o(mode,keyword,mode3,keyword3,mode4,keyword4); // 수정 예정
+						addCount  =   dao.GetTotalRecordCountDate2x3o4o(mode,keyword,mode3,keyword3,mode4,keyword4);
 					}
 					
 				}
@@ -81,10 +86,12 @@ public class AirListController extends SuperClass{
 					if(keyword4 == null || keyword4.equals(""))
 					{
 						totalCount = dao.GetTotalRecordCount(mode,keyword,mode2,keyword2);
+						addCount = dao.GetTotalRecordCount(mode2,keyword2,mode,keyword);
 					}
 					else
 					{
 						totalCount = dao.GetTotalRecordCount2o3x4o(mode,keyword,mode2,keyword2,mode4,keyword4);
+						addCount = dao.GetTotalRecordCount2o3x4o(mode2,keyword2,mode,keyword,mode4,keyword4);
 					}
 					
 				}
@@ -93,10 +100,12 @@ public class AirListController extends SuperClass{
 					if(keyword4 == null || keyword4.equals(""))
 					{
 						totalCount = dao.GetTotalRecordCountDate2(mode,keyword,mode2,keyword2,mode3,keyword3);
+						addCount = dao.GetTotalRecordCountDate2(mode2,keyword2,mode,keyword,mode3,keyword3);
 					}
 					else
 					{
 						totalCount = dao.GetTotalRecordCountDate2o3o4o(mode,keyword,mode2,keyword2,mode3,keyword3,mode4,keyword4);
+						addCount = dao.GetTotalRecordCountDate2o3o4o(mode2,keyword2,mode,keyword,mode3,keyword3,mode4,keyword4);
 					}
 				}
 				// 2o
@@ -104,7 +113,9 @@ public class AirListController extends SuperClass{
 			}
 			
 			
-			Paging pageInfo = null; 
+			
+			Paging pageInfo = null;
+			Paging page = null;
 			
 			if(keyword2 == "all" || keyword2 == null)
 			{
@@ -146,11 +157,13 @@ public class AirListController extends SuperClass{
 					{
 						// 2o 3x 4x
 						pageInfo = new Paging(pageNumber, pageSize, totalCount, url, mode, keyword, mode2, keyword2,isGrid);
+						page = new Paging(pageNumber, pageSize, totalCount, url, mode2, keyword2, mode, keyword,isGrid);
 					}
 					else
 					{
 						// 2o 3x 4o
 						pageInfo = new Paging(pageNumber, pageSize, totalCount, url, mode, keyword, mode2, keyword2 ,mode4,keyword4,isGrid);
+						pageInfo = new Paging(pageNumber, pageSize, totalCount, url, mode2, keyword2, mode, keyword ,mode4,keyword4,isGrid);
 					}	
 				}
 				else
@@ -161,20 +174,24 @@ public class AirListController extends SuperClass{
 					{
 						// 2o 3o 4x
 						pageInfo = new Paging(pageNumber, pageSize, totalCount, url, mode, keyword,mode2,keyword2,mode3,keyword3,isGrid);
+						page = new Paging(pageNumber, pageSize, totalCount, url, mode2, keyword2,mode,keyword,mode3,keyword3,isGrid);
 					}
 					else
 					{
 						// 2o 3o 4o
 						pageInfo = new Paging(pageNumber, pageSize, totalCount, url, mode, keyword,mode2,keyword2,mode3,keyword3,mode4,keyword4,isGrid);
+						page = new Paging(pageNumber, pageSize, totalCount, url, mode2, keyword2,mode,keyword,mode3,keyword3,mode4,keyword4,isGrid);
 					}	
 				}
 				// 2 p
 			}
-			
+
 			List<Airline> list = new ArrayList<Airline>();
-			
+			List<Airline> list2 = new ArrayList<Airline>();
+
 			if(keyword2 == "all" || keyword2 == null)
 			{
+				list2 = null;
 				if(keyword3 == null || keyword3.equals(""))
 				{
 					if(keyword4 == null || keyword4.equals(""))
@@ -211,10 +228,12 @@ public class AirListController extends SuperClass{
 					if(keyword4 == null || keyword4.equals(""))
 					{
 						list = dao.selectAll(pageInfo);
+						list2 = dao.selectAllReverse(page);
 					}
 					else
 					{
 						list = dao.selectAllb(pageInfo);
+						list2 = dao.selectAllb(page);
 					}
 				}
 				else
@@ -223,22 +242,32 @@ public class AirListController extends SuperClass{
 					if(keyword4 == null || keyword4.equals(""))
 					{
 						list = dao.selectAllb(pageInfo);
+						list2 = dao.selectAllb(page);
 					}
 					else
 					{
 						list = dao.selectAllList(pageInfo);
+						list2 = dao.selectAllListReverse(page);
 					}
 					
 				}
 				
 			}
 			
-		
 			/* List<Board> list2 = dao.selectOne(pageInfo); */
 			
 			request.setAttribute("datalist", list);
+			request.setAttribute("list", list2);
 			// pageinfo를 바인딩
 			request.setAttribute("pageInfo", pageInfo);
+			request.setAttribute("page", page);
+			
+			// 오는날 바인딩
+			/*
+			 * request.setAttribute("secondData", second);
+			 * request.setAttribute("pageInfoSec", pageInfoSecond);
+			 */
+			
 			super.gotopage("air/airList.jsp");
 		}
 		catch(Exception e)

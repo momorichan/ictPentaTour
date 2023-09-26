@@ -112,22 +112,31 @@ public class AirDao extends SuperDao {
 		sql += " from (select flid,fname,depart,arrive,detime,artime, rank() over(order by flid asc) as ranking ";
 		sql += " from airline ";
 
-		if (pageInfo.getKeyword() == null || pageInfo.getKeyword().equals("all")) {
-			if (pageInfo.getKeyword2() == null || pageInfo.getKeyword2().equals("all")) {
+		if (pageInfo.getKeyword() == null || pageInfo.getKeyword().equals("all")) 
+		{
+			if (pageInfo.getKeyword2() == null || pageInfo.getKeyword2().equals("all")) 
+			{
 
-			} else {
-
+			} 
+			else 
+			{
 				sql += " where " + pageInfo.getMode2() + " like '%" + pageInfo.getKeyword2() + "%'";
 			}
 
-		} else {
+		} 
+		else 
+		{
 			sql += " where " + pageInfo.getMode() + " like '%" + pageInfo.getKeyword() + "%'";
+			System.out.println("keyword : " + pageInfo.getKeyword());
 
 			System.out.println("keyword2 : " + pageInfo.getKeyword2());
 
-			if (pageInfo.getKeyword2() == null || pageInfo.getKeyword2().equals("all")) {
+			if (pageInfo.getKeyword2() == null || pageInfo.getKeyword2().equals("all")) 
+			{
 
-			} else {
+			} 
+			else
+			{
 				sql += " and " + pageInfo.getMode2() + " like '%" + pageInfo.getKeyword2() + "%'";
 			}
 		}
@@ -161,6 +170,65 @@ public class AirDao extends SuperDao {
 
 		return lists;
 	}
+	
+	
+	
+	
+	
+	
+	
+	
+	public List<Airline> selectAllReverse(Paging pageInfo) throws Exception {
+
+		// Top N 구문을 사용하여 페이징 처리된 게시물 목록을 리턴합니다.
+		PreparedStatement pstmt = null;
+
+		ResultSet rs = null;
+
+		String sql = " select flid,fname,depart,arrive,detime,artime";
+		sql += " from (select flid,fname,depart,arrive,detime,artime, rank() over(order by flid asc) as ranking ";
+		sql += " from airline ";
+		sql += " where " + pageInfo.getMode() + " like '%" + pageInfo.getKeyword2() + "%'";
+		sql += " and " + pageInfo.getMode2() + " like '%" + pageInfo.getKeyword() + "%'";
+		sql += ")";
+		sql += " where ranking between ? and ?";
+
+		conn = super.getConnection();
+
+		pstmt = conn.prepareStatement(sql);
+
+		pstmt.setInt(1, pageInfo.getBeginRow());
+		pstmt.setInt(2, pageInfo.getEndRow());
+
+		rs = pstmt.executeQuery();
+
+		List<Airline> lists = new ArrayList<Airline>();
+
+		while (rs.next()) {
+			lists.add(getBeanData(rs));
+		}
+
+		if (rs != null) {
+			rs.close();
+		}
+		if (pstmt != null) {
+			pstmt.close();
+		}
+		if (conn != null) {
+			conn.close();
+		}
+
+		return lists;
+	}
+	
+	
+	
+	
+	
+	
+	
+	
+	
 
 	private Airline getBeanData(ResultSet rs) throws Exception {
 
@@ -1006,10 +1074,7 @@ public class AirDao extends SuperDao {
 					}
 					
 				}
-			}
-			
-			
-			
+			}	
 		}
 		else
 		{
@@ -1462,5 +1527,90 @@ public class AirDao extends SuperDao {
 
 		return lists;
 	}
+	
+	
+	public List<Airline> selectAllListReverse(Paging pageInfo) throws Exception
+	{
+		String detime[] = pageInfo.getKeyword3().split("-");
+		
+		for (int i = 0; i < detime.length; i++)
+		{
+			if (i == 0) 
+			{
+				detime[i] = detime[i].substring(2);
+			}
+			System.out.println("detime : " + detime[i]);
+		}
+		
+		String artime[] = pageInfo.getKeyword4().split("-");
+		for (int i = 0; i < artime.length; i++) 
+		{
+			if (i == 0) 
+			{
+				artime[i] = artime[i].substring(2);
+			}
+			System.out.println("artime : " + artime[i]);
+		}
+		
+		System.out.println("mode : " + pageInfo.getMode());
+		System.out.println("mode2 : " + pageInfo.getMode2());
+		
+		System.out.println("keyword : " + pageInfo.getKeyword());
+		System.out.println("keyword2 : " + pageInfo.getKeyword2());
+		
+		System.out.println("try selectAllListReverse");
+		
+		PreparedStatement pstmt = null;
+
+		ResultSet rs = null;
+
+		// 리버스는 키워드만 반대다
+		String sql = " select flid,fname,depart,arrive,detime,artime";
+		sql += " from (select flid,fname,depart,arrive,detime,artime, rank() over(order by flid asc) as ranking ";
+		sql += " from airline ";
+		
+		
+		
+		sql += " where " + pageInfo.getMode2() + " like '%" + pageInfo.getKeyword() + "%' ";
+		sql += " and " + pageInfo.getMode() + " like '%" + pageInfo.getKeyword2() + "%' ";
+		
+		for(int i = 0; i < artime.length; i++)
+		{
+			sql += " and " + pageInfo.getMode3() + " like '%" + artime[i] + "%' ";
+		}
+		sql += ")";
+		sql += " where ranking between ? and ?";
+		
+
+		conn = super.getConnection();
+
+		pstmt = conn.prepareStatement(sql);
+
+		pstmt.setInt(1, pageInfo.getBeginRow());
+		pstmt.setInt(2, pageInfo.getEndRow());
+
+		rs = pstmt.executeQuery();
+
+		List<Airline> lists = new ArrayList<Airline>();
+
+		while (rs.next()) {
+			lists.add(getBeanData(rs));
+		}
+
+		if (rs != null) {
+			rs.close();
+		}
+		if (pstmt != null) {
+			pstmt.close();
+		}
+		if (conn != null) {
+			conn.close();
+		}
+
+		return lists;
+	}
+	
+	
+	
 
 }
