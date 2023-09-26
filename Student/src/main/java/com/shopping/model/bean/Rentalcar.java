@@ -1,5 +1,7 @@
 package com.shopping.model.bean;
 
+import org.json.simple.JSONObject;
+
 public class Rentalcar {
 	private String rcid; // 렌터카 번호
 	private String carType; // 차 종류...소형, 중형, 대형 
@@ -81,6 +83,11 @@ public class Rentalcar {
 		// TODO Auto-generated constructor stub
 	}
 	
+	/* json test****************************************************************************************************/
+	JSONObject jsonObj = new JSONObject();
+	public static void main(String[] args)throws Exception {
+		String jsonData = "{"
+	}
 	
 		
 	
