@@ -75,3 +75,5 @@ airCancel=com.shopping.controller.air.AirCancelController
 #rcInsert=com.shopping.controller.product.RentalcarInsertController
 #rcUpdate=com.shopping.controller.product.RentalcarUpdateController
 #rcDelete=com.shopping.controller.product.RentalcarDeleteController
+# all check section
+allCheck=com.shopping.controller.check.allCheckController

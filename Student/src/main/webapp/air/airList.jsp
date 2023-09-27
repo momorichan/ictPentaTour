@@ -2,7 +2,6 @@
     pageEncoding="UTF-8"%>
     
 
-<%@ include file="./../common/bootstrap5.jsp" %>
 <%@ include file="./../common/common.jsp" %> 
     
 <!DOCTYPE html>
@@ -55,8 +54,7 @@
 	
 	
 	<div class="container">
-		<h2>항공권 목록</h2>
-		<p>항공권 목록을 보여주는 페이지</p>	
+		<h2>가는날</h2>	
 		<table class="table table-striped">
 			<thead>
 				<tr>
@@ -100,15 +98,10 @@
 			                         <div class="col">            
 		                   </div>     
 		                </div>
-                  </form>                     
-               </div>
-             
-					</td>
-				</tr>
-
-				<c:forEach var="bean" items="${requestScope.datalist}"> 
+		                
+		               <c:forEach var="bean" items="${requestScope.datalist}"> 
 					<tr onclick="location.href='<%=notWithFormTag%>airDetail&flid=${bean.flid}'" style="cursor: pointer;"
-					 onmouseover="style.background='blue'">
+>
 						<td align="left">${bean.flid}</td>
 						<td align="left">${bean.fname}</td>
 						<td align="left" class="deptime">${bean.depart}</td>
@@ -117,16 +110,62 @@
 						<td align="left">${bean.detime}</td>
 						<td align="left">${bean.artime}</td>			
 				</tr>
-				</c:forEach>			 
+				</c:forEach>
+			
+		                
+		                
+                  </form>                     
+               </div>
+             
+					</td>
+				</tr>	 
 			</tbody>
 		</table>
 		
 		
-	</div>
+		<c:if test="${requestScope.ones == null}">
+		<div class="container mt-2">
+		<h2>오는날</h2>
+		<table  class="table table-striped">
+		
+			<thead>
+				<tr>
+					<th align="center">항공편</th>
+					<th align="center">항공사</th>
+					<th align="center">출발지</th>
+					<th align="center">도착지</th>
+					<th align="center">출발 시간</th>
+					<th align="center">도착 시간</th>	
+				</tr>
+			</thead>
+			
+			
+			<tbody>
+				<c:forEach var="lest" items="${requestScope.list}"> 
+					<tr onclick="location.href='<%=notWithFormTag%>airDetail&flid=${lest.flid}'" style="cursor: pointer;">
+						<td align="left">${lest.flid}</td>
+						<td align="left">${lest.fname}</td>
+						<td align="left" class="deptime">${lest.depart}</td>
+						<td align="left" class="arrtime">${lest.arrive}</td>
+						<td align="left">${lest.detime}</td>
+						<td align="left">${lest.artime}</td>			
+				</tr>
+				</c:forEach>
+			</tbody>
+		</table>
+		</div>
+		</c:if>
 	<div align="center">
 		<button type="button" class="btn btn-primary" onclick="goHome();">
 				홈으로
 			</button>
 	</div>
+		
+		
+		
+		
+		</div>
+		
+		
 </body>
 </html>
