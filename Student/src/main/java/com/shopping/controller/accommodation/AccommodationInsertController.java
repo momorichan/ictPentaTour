@@ -21,7 +21,6 @@ public class AccommodationInsertController extends SuperClass{
 		RoomDao dao = new RoomDao();
 		List<Room> lists = dao.getTempRoom();
 		request.setAttribute("roomlist", lists);
-		
 		super.gotoPage(PREFIX + "acInsert.jsp");	
 	}
 	

@@ -118,6 +118,26 @@ function getAmenities(){
 			getRoomDetail(roid); // 가져온 roid 값을 사용하여 함수 호출
 		});
 
+		
+		$('.reserve-button').click(function(e) {
+	        e.preventDefault(); // 기본 동작 방지
+
+	        var datepickerId = $(this).data('datepicker'); // datepicker 필드의 ID 가져오기
+	        var dateRange = $(datepickerId).val(); // 선택한 날짜 범위 가져오기
+	        var roid = $(this).data('roid'); // 선택한 방의 roid 가져오기
+
+	        // 날짜 범위를 시작 날짜와 끝 날짜로 분리
+	        var dateParts = dateRange.split(' - ');
+	        var startDate = dateParts[0].trim(); // 시작 날짜
+	        var endDate = dateParts[1].trim();   // 끝 날짜
+
+	        // 예약 페이지 URL 생성 및 이동
+	        var reservationUrl = '<%= notWithFormTag %>roReservation';
+	        reservationUrl += '&startDate=' + startDate + '&endDate=' + endDate + '&roid=' + roid;
+
+	        // 생성된 URL로 페이지 이동
+	        window.location.href = reservationUrl;
+	    });
 	});
 </script>
 </head>
@@ -173,7 +193,7 @@ function getAmenities(){
 					<tr>
 						<td>숙소 정보</td>
 						<td align="right"><input class="form-control-sm" type="text"
-							name="keyword" id="datepicker" placeholder="날짜를 선택하세요.">
+							name="date" id="datepicker" placeholder="날짜를 선택하세요.">
 						</td>
 					</tr>
 				</tbody>
@@ -190,8 +210,13 @@ function getAmenities(){
 						<td class="col-1">1박<br> <fmt:formatNumber
 								value="${bean.price}"></fmt:formatNumber>원
 						</td>
-						<td class="col-2"><a href="<%=notWithFormTag%>roReservation"
-							class="btn btn-primary">예약하기</a></td>
+						<td class="col-2">
+						    <a href="#" class="btn btn-primary reserve-button"
+						        data-datepicker="#datepicker"
+						        data-roid="${bean.roid}">
+						        예약하기
+						    </a>
+						</td>
 					</tr>
 				</c:forEach>
 

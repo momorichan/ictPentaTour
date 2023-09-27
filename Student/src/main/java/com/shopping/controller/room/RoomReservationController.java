@@ -9,5 +9,13 @@ public class RoomReservationController extends SuperClass{
 	@Override
 	public void doGet(HttpServletRequest request, HttpServletResponse response) throws Exception {
 		super.doGet(request, response);
+		
+		String startDate = request.getParameter("startDate");
+		String endDate = request.getParameter("endDate");
+		
+		System.out.println(startDate);
+		System.out.println(endDate);
+		
+		gotopage("room/roReservation.jsp");
 	}
 }

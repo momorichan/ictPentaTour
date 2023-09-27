@@ -61,6 +61,11 @@ $(document).ready(function() {
 	display: none;
 	visibility: hidden;
 }
+img{
+	max-width: 100%;
+	width: 300px;
+    height: auto;
+}
 </style>
 
 </head>
@@ -136,11 +141,52 @@ $(document).ready(function() {
 						<td><fmt:formatNumber>${temp.price}</fmt:formatNumber>원</td>
 						<td>${temp.breakfast}</td>
 						<td>${temp.guests}명</td>
-						<td>클릭</td>
-						<td>
-						<a href="<%=notWithFormTag%>roUpdate">수정</a>
+						<td data-bs-toggle="modal" data-bs-target="#myModal">
+						클릭
+							<!-- The Modal -->
+						<div class="modal fade" id="myModal">
+						  <div class="modal-dialog">
+						    <div class="modal-content">
+						      <!-- Modal body -->
+						      <div class="modal-body">
+						        <table>
+						        <thead>
+						        <tr>
+						        <td><p>이미지 01</p></td>
+						        <td><p>이미지 02</p></td>
+						        <td><p>이미지 03</p></td>
+						        </tr>
+						        </thead>
+						        <tbody>
+						          <tr>
+						            <td>
+						              <img src="${pageContext.request.contextPath}/upload/${temp.image01}" data-src="" alt="">
+						            </td>
+						            <td>
+						              <img src="${pageContext.request.contextPath}/upload/${temp.image02}" data-src="" alt="">
+						            </td>
+						            <td>
+						              <img src="${pageContext.request.contextPath}/upload/${temp.image03}" data-src="" alt="">
+						            </td>
+						          </tr>
+						          </tbody>
+						        </table>
+						      </div>
+						
+						      <!-- Modal footer -->
+						      <div class="modal-footer">
+						        <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Close</button>
+						      </div>
+						    </div>
+						  </div>
+						</div>			
 						</td>
-						<td>삭제</td>
+						<td>
+						<a href="<%=notWithFormTag%>roUpdate&roid=${temp.roid}">수정</a>
+						</td>
+						<td>
+						<a href="<%=notWithFormTag%>roDelete&roid=${temp.roid}">삭제</a>
+						</td>
 					</tr>
 				</c:forEach>
 			</c:if>
@@ -158,5 +204,19 @@ $(document).ready(function() {
 			</div>
 		</form>
 	</div>
+	
+	
+	
+	
+	
+
+	
+	
+	
+	
+	
+	
+	
+	
 </body>
 </html>

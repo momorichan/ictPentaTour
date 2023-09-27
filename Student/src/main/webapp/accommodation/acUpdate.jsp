@@ -140,11 +140,52 @@ $(document).ready(function() {
 						<td><fmt:formatNumber>${room.price}</fmt:formatNumber>원</td>
 						<td>${room.breakfast}</td>
 						<td>${room.guests}명</td>
-						<td>클릭</td>
+						<td data-bs-toggle="modal" data-bs-target="#myModal">
+						클릭
+							<!-- The Modal -->
+						<div class="modal fade" id="myModal">
+						  <div class="modal-dialog">
+						    <div class="modal-content">
+						      <!-- Modal body -->
+						      <div class="modal-body">
+						        <table>
+						        <thead>
+						        <tr>
+						        <td><p>이미지 01</p></td>
+						        <td><p>이미지 02</p></td>
+						        <td><p>이미지 03</p></td>
+						        </tr>
+						        </thead>
+						        <tbody>
+						          <tr>
+						            <td>
+						              <img src="${pageContext.request.contextPath}/upload/${room.image01}" data-src="" alt="">
+						            </td>
+						            <td>
+						              <img src="${pageContext.request.contextPath}/upload/${room.image02}" data-src="" alt="">
+						            </td>
+						            <td>
+						              <img src="${pageContext.request.contextPath}/upload/${room.image03}" data-src="" alt="">
+						            </td>
+						          </tr>
+						          </tbody>
+						        </table>
+						      </div>
+						
+						      <!-- Modal footer -->
+						      <div class="modal-footer">
+						        <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Close</button>
+						      </div>
+						    </div>
+						  </div>
+						</div>			
+						</td>
 						<td>
 						<a href="<%=notWithFormTag%>roUpdate&roid=${room.roid}">수정</a>
 						</td>
-						<td>삭제</td>
+						<td>
+						<a href="<%=notWithFormTag%>roDelete&roid=${room.roid}">삭제</a>
+						</td>
 					</tr>
 				</c:forEach>
 			</c:if>

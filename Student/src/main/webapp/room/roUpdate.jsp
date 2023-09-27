@@ -59,6 +59,11 @@ optionList.each(function(){
 		<form action="<%=withFormTag%>" method="post">
 			<input type="hidden" name="command" value="roUpdate">
 			<div id="roomNo" class="input-group">
+				<span class="input-group-text col-md-2">숙소 번호</span> <input
+					id="acid" name="acid" type="number" class="form-control"
+					value="${requestScope.bean.acid}">
+			</div>
+			<div id="roomNo" class="input-group">
 				<span class="input-group-text col-md-2">방 번호</span> <input
 					id="roid" name="roid" type="number" class="form-control"
 					value="${requestScope.bean.roid}">
@@ -92,20 +97,20 @@ optionList.each(function(){
 					value="${requestScope.bean.guests}">
 			</div>
 			<div class="input-group">
-				<span class="input-group-text col-md-2">이미지01</span> <input
-					id="image01" name="image01" type="file" class="form-control"
-					placeholder="">
+				<span class="input-group-text col-md-2">이미지01</span> 
+				<input id="image01" name="newimage01" type="file" class="form-control">
+				<input type="hidden" name="preimage01"  value=${requestScope.bean.image01 }>
 			</div>
 			<div class="input-group">
-				<span class="input-group-text col-md-2">이미지02</span> <input
-					id="image02" name="image02" type="file" class="form-control"
-					placeholder="">
+				<span class="input-group-text col-md-2">이미지02</span> 
+				<input id="image02" name="newimage02" type="file" class="form-control">
+				<input type="hidden" name="preimage02"  value=${requestScope.bean.image02 }>				
 			</div>
 			<div class="input-group">
-				<span class="input-group-text col-md-2">이미지03</span> <input
-					id="image03" name="image03" type="file" class="form-control"
-					placeholder="">
-			</div>
+				<span class="input-group-text col-md-2">이미지03</span> 
+				<input id="image03" name="newimage03" type="file" class="form-control">
+				<input type="hidden" name="preimage03"  value=${requestScope.bean.image03 }>				
+			</div>		
 			<div id="buttonset" class="input-group">
 				<button type="submit" class="btn btn-primary btn-lg">등록</button>
 				&nbsp;&nbsp;&nbsp;

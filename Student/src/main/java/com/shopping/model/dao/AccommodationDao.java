@@ -324,6 +324,31 @@ public class AccommodationDao extends SuperDao {
 		return cnt;
 	}
 
+	public int deleteData(int acid) throws Exception {
+		int cnt = -1;
+		
+		String sql = " delete from accommodation where acid = ? " ;
+		
+		PreparedStatement pstmt = null;
+		conn = super.getConnection();
+		conn.setAutoCommit(false);		
+		pstmt = conn.prepareStatement(sql);
+
+		pstmt.setInt(1, acid);
+
+		cnt = pstmt.executeUpdate();
+		
+		conn.commit();
+		
+		if (pstmt != null) {
+			pstmt.close();
+		}
+		if (conn != null) {
+			conn.close();
+		}
+		return cnt;
+	}
+
 	
 	
 	

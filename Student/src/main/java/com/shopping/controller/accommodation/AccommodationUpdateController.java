@@ -25,12 +25,12 @@ public class AccommodationUpdateController extends SuperClass{
 		
 		
 		RoomDao rodao = new RoomDao();
-		List<Room> roomlist = rodao.getDataByFk(acid);
+		List<Room> roomlist = rodao.getDataByFk(acid); //원래 숙소에 등록된 방 정보
+		List<Room> newroomlist = rodao.getTempRoom(); //신규 방 정보
+		roomlist.addAll(newroomlist); //원래 방 정보와 신규 방 정보를 결합
 		request.setAttribute("roomlist", roomlist);
 
-		
-		
-		gotopage(PREFIX+"acUpdate.jsp");
+		gotoPage(PREFIX+"acUpdate.jsp");
 	}
 	@Override
 	public void doPost(HttpServletRequest request, HttpServletResponse response) throws Exception {

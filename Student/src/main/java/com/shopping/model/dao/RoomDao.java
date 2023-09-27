@@ -185,5 +185,66 @@ List<String> lists = new ArrayList<String>();
 		}
 		return lists;
 	}
-	
+
+	public int updateData(Room bean) throws Exception{
+		int cnt = -1;
+		
+		String sql = " update rooms set " ;
+		sql += " room = ?, roominfo = ?, price = ?, breakfast = ?, guests = ?, image01 = ?, image02 = ?, image03 = ? ";
+		sql += " where roid = ?";
+		
+		PreparedStatement pstmt = null;
+		conn = super.getConnection();
+		conn.setAutoCommit(false);		
+		pstmt = conn.prepareStatement(sql);
+
+		pstmt.setString(1, bean.getRoom());
+		pstmt.setString(2, bean.getRoominfo());
+		pstmt.setInt(3, bean.getPrice());
+		pstmt.setString(4, bean.getBreakfast());
+		pstmt.setInt(5, bean.getGuests());
+		pstmt.setString(6, bean.getImage01());
+		pstmt.setString(7, bean.getImage02());
+		pstmt.setString(8, bean.getImage03());
+		pstmt.setInt(9, bean.getRoid());
+
+		cnt = pstmt.executeUpdate();
+		
+		conn.commit();
+		
+		if (pstmt != null) {
+			pstmt.close();
+		}
+		if (conn != null) {
+			conn.close();
+		}
+		return cnt;
+	}
+
+	public int deleteData(int roid) throws Exception{
+		int cnt = -1;
+		
+		String sql = " delete from rooms where roid = ? " ;
+		
+		PreparedStatement pstmt = null;
+		conn = super.getConnection();
+		conn.setAutoCommit(false);		
+		pstmt = conn.prepareStatement(sql);
+
+		pstmt.setInt(1, roid);
+
+		cnt = pstmt.executeUpdate();
+		
+		conn.commit();
+		
+		if (pstmt != null) {
+			pstmt.close();
+		}
+		if (conn != null) {
+			conn.close();
+		}
+		return cnt;
+	}
+
+
 }

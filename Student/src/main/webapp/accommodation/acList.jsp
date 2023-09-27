@@ -37,6 +37,34 @@
 				}
 			}
 			$('#keyword').val('${requestScope.pageInfo.keyword}');
+			
+			
+			// 기존의 삭제 버튼 href 속성을 저장합니다.
+			var originalDeleteHref = $("#acDelete").attr("href");
+
+			// 클릭된 삭제 버튼의 ${bean.acid} 값을 얻는 함수
+			function getAcidFromDeleteButton(button) {
+			  // 버튼의 ID 속성 값을 가져옵니다.
+			  var buttonId = button.attr("id");
+			  
+			  // 버튼 ID에서 ${bean.acid} 부분을 추출합니다.
+			  var startIndex = buttonId.indexOf("deleteAnchor") + "deleteAnchor".length;
+			  var endIndex = buttonId.length;
+			  var acid = buttonId.substring(startIndex, endIndex);
+			  
+			  // 추출한 ${bean.acid} 값을 반환합니다.
+			  return acid;
+			}
+
+			// 클릭 이벤트 핸들러를 추가하여 삭제 버튼 클릭 시 href 속성을 변경합니다.
+			$("[id^=deleteAnchor]").click(function() {
+			  var acidValue = getAcidFromDeleteButton($(this));
+
+			  // 삭제 링크의 href 속성에 데이터 추가
+			  var deleteLink = $("#acDelete");
+			  var href = originalDeleteHref + acidValue;
+			  deleteLink.attr("href", href);
+			});
       });
       function searchAll(){ 
 			location.href = '<%=notWithFormTag%>acList';
@@ -45,6 +73,8 @@
 		function writeForm(){ 
 			location.href = '<%=notWithFormTag%>acInsert';
 		}
+		
+
    </script>
 </head>
 <body>
@@ -104,8 +134,9 @@
 								<div id="buttonList">
 									<a id="updateAnchor" href="<%=notWithFormTag%>acUpdate&acid=${bean.acid}${requestScope.pageInfo.flowParameter}" class="btn btn-info">
 									수정</a>
-									<a id="deleteAnchor" href="<%=notWithFormTag%>acDelete&acid=${bean.acid}${requestScope.pageInfo.flowParameter}" class="btn btn-info">
-									삭제</a>							
+									<span id="deleteAnchor${bean.acid}" data-bs-toggle="modal" data-bs-target="#myModal" class="btn btn-info" data-acid="${bean.acid}">
+									삭제
+									</span>							
 								</div>
 							</c:if>
 							</div>
@@ -122,5 +153,23 @@
 		</table>
 		${requestScope.pageInfo.pagingHtml}	
 	</div>	 
+	
+	
+			<!-- The Modal -->
+	<div class="modal fade" id="myModal">
+	  <div class="modal-dialog">
+	    <div class="modal-content">
+	      <!-- Modal body -->
+	      <div class="modal-body">
+			정말 삭제하시겠습니까?
+	      </div>
+	      <!-- Modal footer -->
+	      <div class="modal-footer">
+	        <a id="acDelete" href="<%=notWithFormTag%>acDelete&acid=" class="btn btn-danger" >삭제합니다.</a>
+	        <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Close</button>
+	      </div>
+	    </div>
+	  </div>
+	</div>	
 </body>
 </html>
