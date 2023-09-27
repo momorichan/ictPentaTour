@@ -557,7 +557,7 @@ input[type='date']:valid::before {
 							<i class="material-icons"></i>
 						</h4>
 						<a
-							href="<%=notWithFormTag%>airList&mode=depart&keyword=all&mode2=arrive&keyword2=일본">
+							href="<%=notWithFormTag%>airList&mode=depart&keyword=all&mode2=arrive&keyword2=일본&ones=rest">
 							<img
 							src="https://image.hanatour.com/usr/cms/resize/400_0/2022/09/05/10000/4d34420c-7d47-4835-becf-f04454a99d20.jpeg"
 							alt="Photo of sunset">
@@ -572,7 +572,7 @@ input[type='date']:valid::before {
 							<i class="material-icons"></i>
 						</h4>
 						<a
-							href="<%=notWithFormTag%>airList&mode=depart&keyword=all&mode2=arrive&keyword2=중국">
+							href="<%=notWithFormTag%>airList&mode=depart&keyword=all&mode2=arrive&keyword2=중국&ones=rest">
 							<img
 							src="https://image.hanatour.com/usr/cms/resize/400_0/2023/04/06/10000/49738def-cc04-494b-a597-d86128ef9a38.jpg"
 							alt="Photo of sunset">
@@ -587,7 +587,7 @@ input[type='date']:valid::before {
 							<i class="material-icons"></i>
 						</h4>
 						<a
-							href="<%=notWithFormTag%>airList&mode=depart&keyword=all&mode2=arrive&keyword2=대만">
+							href="<%=notWithFormTag%>airList&mode=depart&keyword=all&mode2=arrive&keyword2=대만&ones=rest">
 							<img
 							src="https://image.hanatour.com/usr/cms/resize/400_0/2019/07/04/10000/a895c128-729e-448b-a9f2-ba66e6ce3503.jpg"
 							alt="Photo of sunset">
@@ -602,7 +602,7 @@ input[type='date']:valid::before {
 							<i class="material-icons"></i>
 						</h4>
 						<a
-							href="<%=notWithFormTag%>airList&mode=depart&keyword=all&mode2=arrive&keyword2=괌">
+							href="<%=notWithFormTag%>airList&mode=depart&keyword=all&mode2=arrive&keyword2=괌&ones=rest">
 							<img
 							src="https://image.hanatour.com/usr/cms/resize/400_0/2022/10/12/10000/2a3c5702-2f0e-4438-934e-0ce5e696deb7.jpg"
 							alt="Photo of sunset">
