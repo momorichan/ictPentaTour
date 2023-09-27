@@ -19,12 +19,12 @@ public class ProductDetailController extends SuperClass {
 			Product bean = dao.GetDataByPk(pnum) ;
 			request.setAttribute("bean", bean); 
 			
-//			String gotopage = super.getUrlInfomation("boList") ;
-//			gotopage += "&pageNumber=" + request.getParameter("pageNumber");
-//			gotopage += "&pageSize=" + request.getParameter("pageSize");
-//			gotopage += "&mode=" + request.getParameter("mode");
-//			gotopage += "&keyword=" + request.getParameter("keyword");
-//			response.sendRedirect(gotopage); 			
+			String gotopage = super.getUrlInfomation("boList") ;
+			gotopage += "&pageNumber=" + request.getParameter("pageNumber");
+			gotopage += "&pageSize=" + request.getParameter("pageSize");
+			gotopage += "&mode=" + request.getParameter("mode");
+			gotopage += "&keyword=" + request.getParameter("keyword");
+			response.sendRedirect(gotopage); 			
 			
 			super.gotoPage("product/prDetail.jsp"); 
 			

@@ -39,7 +39,7 @@
 	<c:set var="result01" value="0" />
 	<c:set var="result02" value="0" />
 	<c:set var="result03" value="0" />
-	
+	ㅁㄴㅇㄻㄴ
 	<c:forEach var="i" begin="1" end="10" step="1">
 		<c:choose>
 			<c:when test="${i mod 3==0}">

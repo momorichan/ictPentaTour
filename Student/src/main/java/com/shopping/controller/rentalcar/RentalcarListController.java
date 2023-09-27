@@ -34,7 +34,8 @@ public class RentalcarListController extends SuperClass{
 		List<Rentalcar> lists = new ArrayList<Rentalcar>();
 		Paging pageInfo = null;
 		try {			
-			boolean isGrid = false ;
+//			boolean isGrid = false ;
+			boolean isGrid = true;
 			String url = super.getUrlInfomation("rcList") ;
 //			String startDateReplace = startDate.replace("/", ""); /* 날짜 문자열 */
 //			System.out.println(startDateReplace);
@@ -55,18 +56,18 @@ public class RentalcarListController extends SuperClass{
 							totalCount = dao.GetTotalRecordCountAll();
 						/* x x x o*/
 						}else {
-							System.out.println("/* x x x o*/");
+							System.out.println("totalCount: /* x x x o*/");
 							totalCount = dao.GetTotalRecordCountSDED(startDate, endDate);
 						}
 					/* x x o _ */	
 					}else {
 						/* x x o x*/
 						if(endDate == null || endDate.equals("")) {
-							System.out.println("/* x x o x*/");
+							System.out.println("totalCount:/* x x o x*/");
 							totalCount = dao.GetTotalRecordCountSDED(startDate, endDate);
 						/* x x o o */
 						}else {
-							System.out.println("/* x x o o */");
+							System.out.println("totalCount:/* x x o o */");
 							totalCount = dao.GetTotalRecordCountSDED(startDate, endDate);
 						}						
 					}
@@ -76,22 +77,22 @@ public class RentalcarListController extends SuperClass{
 					if(startDate == null || startDate.equals("")) {
 						/* x o x x*/
 						if(endDate == null || endDate.equals("")) {
-							System.out.println("/* x o x x*/");
+							System.out.println("totalCount:/* x o x x*/");
 							totalCount = dao.GetTotalRecordCountSLEL(startLocation, endLocation);
 						/* x o x o*/
 						}else {
-							System.out.println("/* x o x o*/");
+							System.out.println("totalCount:/* x o x o*/");
 							totalCount = dao.GetTotalRecordCountSLELSDED(startLocation, endLocation, startDate, endDate);
 						}
 					/* x o o _ */	
 					}else {
 						/* x o o x*/
 						if(endDate == null || endDate.equals("")) {
-							System.out.println("/* x o o x*/");
+							System.out.println("totalCount:/* x o o x*/");
 							totalCount = dao.GetTotalRecordCountSLELSDED(startLocation, endLocation, startDate, endDate);
 						/* x o o o */
 						}else {
-							System.out.println("/* x o o o */");
+							System.out.println("totalCount:/* x o o o */");
 							totalCount = dao.GetTotalRecordCountSLELSDED(startLocation, endLocation, startDate, endDate);							
 						}						
 					}
@@ -104,22 +105,22 @@ public class RentalcarListController extends SuperClass{
 					if(startDate == null || startDate.equals("")) {
 						/* o x x x*/
 						if(endDate == null || endDate.equals("")) {
-							System.out.println("/* o x x x*/");
+							System.out.println("totalCount:/* o x x x*/");
 							totalCount = dao.GetTotalRecordCountSL(startLocation);
 						/* o x x o */
 						}else {
-							System.out.println("/* o x x o */");
+							System.out.println("totalCount:/* o x x o */");
 							totalCount = dao.GetTotalRecordCountSLELSDED(startLocation, endLocation, startDate, endDate);
 						}
 					/* o x o _ */
 					}else {
 						/* o x o x*/
 						if (endDate == null || endDate.equals("")) {
-							System.out.println("/* o x o x*/");
+							System.out.println("totalCount:/* o x o x*/");
 							totalCount = dao.GetTotalRecordCountSLELSDED(startLocation, endLocation, startDate, endDate);
 						/* o x o o */
 						} else {
-							System.out.println("total/* o x o o */");
+							System.out.println("totalCount:/* o x o o */");
 							totalCount = dao.GetTotalRecordCountSLELSDED(startLocation, endLocation, startDate, endDate);
 						}
 					}					
@@ -129,22 +130,22 @@ public class RentalcarListController extends SuperClass{
 					if(startDate == null || startDate.equals("")) {
 						/* o o x x*/
 						if(endDate == null || endDate.equals("")) {
-							System.out.println("/* o o x x*/");
+							System.out.println("totalCount:/* o o x x*/");
 							totalCount = dao.GetTotalRecordCountSLELSDED(startLocation, endLocation, startDate, endDate);
 						/* o o x o */
 						}else {
-							System.out.println("/* o o x o */");
+							System.out.println("totalCount:/* o o x o */");
 							totalCount = dao.GetTotalRecordCountSLELSDED(startLocation, endLocation, startDate, endDate);
 						}
 					/* o o o _ */
 					}else {
 						/* o o o x */
 						if (endDate == null || endDate.equals("")) {
-							System.out.println("/* o o o x */");
+							System.out.println("totalCount:/* o o o x */");
 							totalCount = dao.GetTotalRecordCountSLELSDED(startLocation, endLocation, startDate, endDate);
 						/* o o o o */
 						} else {
-							System.out.println("/* o o o o */");
+							System.out.println("totalCount:/* o o o o */");
 							totalCount = dao.GetTotalRecordCountSLELSDED(startLocation, endLocation, startDate, endDate);
 						}
 					}
@@ -166,18 +167,18 @@ public class RentalcarListController extends SuperClass{
 							pageInfo = new Paging(isGrid, pageNumber, pageSize, totalCount, url, startLocation, endLocation, startDate, endDate);
 						/* x x x o */
 						} else {
-							System.out.println("/* x x x o */");
+							System.out.println("Paging:/* x x x o */");
 							pageInfo = new Paging(isGrid, pageNumber, pageSize, totalCount, url, startLocation, endLocation, startDate, endDate);
 						}
 						/* x x o _ */
 					} else {
 						/* x x o x */
 						if (endDate == null || endDate.equals("")) {
-							System.out.println("/* x x o x */");
+							System.out.println("Paging:/* x x o x */");
 							pageInfo = new Paging(isGrid, pageNumber, pageSize, totalCount, url, startLocation, endLocation);
 							/* x x o o */
 						} else {
-							System.out.println("/* x x o o */");
+							System.out.println("Paging:/* x x o o */");
 							pageInfo = new Paging(isGrid, pageNumber, pageSize, totalCount, url, startLocation, endLocation);
 						}
 					}
@@ -187,22 +188,22 @@ public class RentalcarListController extends SuperClass{
 					if (startDate == null || startDate.equals("")) {
 						/* x o x x */
 						if (endDate == null || endDate.equals("")) {
-							System.out.println("/* x o x x */");
+							System.out.println("Paging:/* x o x x */");
 							pageInfo = new Paging(isGrid, pageNumber, pageSize, totalCount, url, startLocation, endLocation);
 						/* x o x o */
 						} else {
-							System.out.println("/* x o x o */");
+							System.out.println("Paging:/* x o x o */");
 							pageInfo = new Paging(isGrid, pageNumber, pageSize, totalCount, url, startLocation, endLocation);
 						}
 					/* x o o _ */
 					} else {
 						/* x o o x */
 						if (endDate == null || endDate.equals("")) {
-							System.out.println("/* x o o x */");
+							System.out.println("Paging:/* x o o x */");
 							pageInfo = new Paging(isGrid, pageNumber, pageSize, totalCount, url, startLocation, endLocation);
 						/* x o o o */
 						} else {
-							System.out.println("/* x o o o */");
+							System.out.println("Paging:/* x o o o */");
 							pageInfo = new Paging(isGrid, pageNumber, pageSize, totalCount, url, startLocation, endLocation);
 						}
 					}
@@ -215,22 +216,22 @@ public class RentalcarListController extends SuperClass{
 					if (startDate == null || startDate.equals("")) {
 						/* o x x x */
 						if (endDate == null || endDate.equals("")) {
-							System.out.println("/* o x x x */");
+							System.out.println("Paging:/* o x x x */");
 							pageInfo = new Paging(isGrid, pageNumber, pageSize, totalCount, url, startLocation, endLocation);
 						/* o x x o */
 						} else {
-							System.out.println("/* o x x o */");
+							System.out.println("Paging:/* o x x o */");
 							pageInfo = new Paging(isGrid, pageNumber, pageSize, totalCount, url, startLocation, endLocation);
 						}
 					/* o x o _ */
 					} else {
 						/* o x o x */
 						if (endDate == null || endDate.equals("")) {
-							System.out.println("/* o x o x */");
+							System.out.println("Paging:/* o x o x */");
 							pageInfo = new Paging(isGrid, pageNumber, pageSize, totalCount, url, startLocation, endLocation);
 						/* o x o o */
 						} else {
-							System.out.println("/* o x o o */");
+							System.out.println("Paging:/* o x o o */");
 							pageInfo = new Paging(isGrid, pageNumber, pageSize, totalCount, url, startLocation, endLocation);
 						}
 					}
@@ -240,22 +241,22 @@ public class RentalcarListController extends SuperClass{
 					if (startDate == null || startDate.equals("")) {
 						/* o o x x */
 						if (endDate == null || endDate.equals("")) {
-							System.out.println("/* o o x x */");
+							System.out.println("Paging:/* o o x x */");
 							pageInfo = new Paging(isGrid, pageNumber, pageSize, totalCount, url, startLocation, endLocation);
 						/* o o x o */
 						} else {
-							System.out.println("/* o o x o */");
+							System.out.println("Paging:/* o o x o */");
 							pageInfo = new Paging(isGrid, pageNumber, pageSize, totalCount, url, startLocation, endLocation);
 						}
 					/* o o o _ */
 					} else {
 						/* o o o x */
 						if (endDate == null || endDate.equals("")) {
-							System.out.println("/* o o o x */");
+							System.out.println("Paging:/* o o o x */");
 							pageInfo = new Paging(isGrid, pageNumber, pageSize, totalCount, url, startLocation, endLocation);
 						/* o o o o */
 						} else {
-							System.out.println("/* o o o o */");
+							System.out.println("Paging:/* o o o o */");
 							pageInfo = new Paging(isGrid, pageNumber, pageSize, totalCount, url, startLocation, endLocation);
 						}
 					}
@@ -275,19 +276,20 @@ public class RentalcarListController extends SuperClass{
 							lists = dao.selectAll();
 						/* x x x o */
 						} else {
-							System.out.println("/* x x x o */");
+							System.out.println("lists:/* x x x o */");
 							lists = dao.selectED(pageInfo);
 						}
 					/* x x o _ */
 					} else {
 						/* x x o x */
 						if (endDate == null || endDate.equals("")) {
-							System.out.println("/* x x o x */");
+							System.out.println("lists:/* x x o x */");
 							lists = dao.selectSD(pageInfo);
 						/* x x o o */
 						} else {
-							System.out.println("/* x x o o */");
+							System.out.println("lists:/* x x o o */");							
 							lists = dao.selectSDED(pageInfo);
+							
 						}
 					}
 					/* x o _ _ */
@@ -296,22 +298,22 @@ public class RentalcarListController extends SuperClass{
 					if (startDate == null || startDate.equals("")) {
 						/* x o x x */
 						if (endDate == null || endDate.equals("")) {
-							System.out.println("/* x o x x */");
+							System.out.println("lists: /* x o x x */");
 							lists = dao.selectSLELSDED(pageInfo);
 						/* x o x o */
 						} else {
-							System.out.println("/* x o x o */");
+							System.out.println("lists: /* x o x o */");
 							lists = dao.selectSLELSDED(pageInfo);
 						}
 					/* x o o _ */
 					} else {
 						/* x o o x */
 						if (endDate == null || endDate.equals("")) {
-							System.out.println("/* x o o x */");
+							System.out.println("lists: /* x o o x */");
 							lists = dao.selectSLELSDED(pageInfo);
 						/* x o o o */
 						} else {
-							System.out.println("/* x o o o */");
+							System.out.println("lists: /* x o o o */");
 							lists = dao.selectSLELSDED(pageInfo);
 						}
 					}
@@ -324,22 +326,22 @@ public class RentalcarListController extends SuperClass{
 					if (startDate == null || startDate.equals("")) {
 						/* o x x x */
 						if (endDate == null || endDate.equals("")) {
-							System.out.println("/* o x x x */");
+							System.out.println("lists: /* o x x x */");
 							lists = dao.selectSL(pageInfo);
 						/* o x x o */
 						} else {
-							System.out.println("/* o x x o */");
+							System.out.println("lists: /* o x x o */");
 							lists = dao.selectSLELSDED(pageInfo);
 						}
 					/* o x o _ */
 					} else {
 						/* o x o x */
 						if (endDate == null || endDate.equals("")) {
-							System.out.println("/* o x o x */");
+							System.out.println("lists: /* o x o x */");
 							lists = dao.selectSLELSDED(pageInfo);
 						/* o x o o */
 						} else {
-							System.out.println("/* o x o o */");
+							System.out.println("lists: /* o x o o */");
 							lists = dao.selectSLELSDED(pageInfo);
 						}
 					}
@@ -349,22 +351,22 @@ public class RentalcarListController extends SuperClass{
 					if (startDate == null || startDate.equals("")) {
 						/* o o x x */
 						if (endDate == null || endDate.equals("")) {
-							System.out.println("/* o o x x */");
+							System.out.println("lists: /* o o x x */");
 							lists = dao.selectSLEL(pageInfo);
 						/* o o x o */
 						} else {
-							System.out.println("/* o o x o */");
+							System.out.println("lists: /* o o x o */");
 							lists = dao.selectSLELSDED(pageInfo);
 						}
 					/* o o o _ */
 					} else {
 						/* o o o x */
 						if (endDate == null || endDate.equals("")) {
-							System.out.println("/* o o o x */");
+							System.out.println("lists: /* o o o x */");
 							lists = dao.selectSLELSDED(pageInfo);
 						/* o o o o */
 						} else {
-							System.out.println("/* o o o o */");
+							System.out.println("lists: /* o o o o */");
 							lists = dao.selectSLELSDED(pageInfo);
 						}
 					}

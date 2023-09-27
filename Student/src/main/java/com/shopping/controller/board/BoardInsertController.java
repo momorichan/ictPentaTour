@@ -13,11 +13,12 @@ public class BoardInsertController extends SuperClass {
 	@Override
 	public void doGet(HttpServletRequest request, HttpServletResponse response) throws Exception {
 		super.doGet(request, response);
-		super.gotoPage(PREFIX + "boInsertForm.jsp");	
+		super.gotoPage(PREFIX + "boInsertForm.jsp");
+		
 	}
 	@Override
 	public void doPost(HttpServletRequest request, HttpServletResponse response) throws Exception {
-		super.doPost(request, response);
+		super.doPost(request, response);		
 		
 		Board bean = new Board() ;
 		bean.setId(request.getParameter("id"));
@@ -36,13 +37,14 @@ public class BoardInsertController extends SuperClass {
 				
 			}else { // 성공
 				// 게시물 목록 보기 페이지로 이동
+				
 			}
-			
 		} catch (Exception e) {
 			e.printStackTrace();
 			new BoardInsertController().doGet(request, response);
 		}		
 	}
+	
 }
 
 

@@ -8,8 +8,6 @@
 <meta charset="UTF-8">
 <title>rcList</title>
 
-
-
 <!-- datepicker  -->
 <script type="text/javascript">
 	$(function() {
@@ -174,7 +172,7 @@
 				</thead>
 				<tbody>				
 				<c:set var="colsu" value="${applicationScope.map['rentalcar_list_column_size']}"/>
-								
+<%-- 				<c:set var="colsu" value="${applicationScope.map['rentalcar_list_column_size']}"/>				 --%>
 				<c:forEach var="bean" items="${requestScope.datalist}" varStatus="status">
 					<c:if test="${status.index mod colsu == 0}">
 											

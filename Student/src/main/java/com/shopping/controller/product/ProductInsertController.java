@@ -1,9 +1,7 @@
 package com.shopping.controller.product;
 
-import java.io.IOException;
 import java.util.List;
 
-import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
@@ -16,6 +14,9 @@ import com.shopping.model.dao.ProductDao;
 
 public class ProductInsertController extends SuperClass{
 	private final String PREFIX = "product/" ;
+	
+	
+	
 	
 	@Override
 	public void doGet(HttpServletRequest request, HttpServletResponse response) throws Exception {
@@ -66,10 +67,9 @@ public class ProductInsertController extends SuperClass{
 			cnt = dao.InsertData(bean) ; 
 			
 			if(cnt == -1) {
-				super.gotoPage(PREFIX + "prInsertForm.jsp");
-				
+				super.gotoPage(PREFIX + "prInsertForm.jsp");				
 			}else {
-				new ProductListController().doGet(request, response); 
+				 new ProductListController().doGet(request, response); 
 			}
 		} catch (Exception e) {
 			e.printStackTrace();

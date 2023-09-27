@@ -41,4 +41,6 @@ public class BoardListController extends SuperClass{
 			e.printStackTrace();
 		}
 	}
+	
+	
 }
