@@ -11,6 +11,12 @@
 <title>Insert title here</title>
 
 	<style type="text/css">
+	
+	
+	.btn-warning
+	{
+		margin-left: 30px;
+	}
 	</style>
 	
 	<script type="text/javascript">
@@ -92,11 +98,10 @@
 			                        <div class="col">                     
 			                           <button type="submit" class="btn btn-warning form-control-sm" onclick="">검색</button>
 			                        </div>
-			                        <div class="col">
-			                           <button type="button" class="btn btn-warning form-control-sm" onclick="moveList();">전체 검색</button>
+			                        
+			                         <div class="col">                     
+			                           <button type="button" class="btn btn-warning form-control-sm" onclick="moveList();">전체검색</button>
 			                        </div>
-			                         <div class="col">            
-		                   </div>     
 		                </div>
 		                
 		               <c:forEach var="bean" items="${requestScope.datalist}"> 

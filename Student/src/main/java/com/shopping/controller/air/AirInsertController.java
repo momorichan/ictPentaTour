@@ -72,6 +72,7 @@ public class AirInsertController extends SuperClass{
 		catch(Exception e)
 		{
 			e.printStackTrace();
+			new AirInsertController().doGet(request, response);
 		}
 	}
 	
