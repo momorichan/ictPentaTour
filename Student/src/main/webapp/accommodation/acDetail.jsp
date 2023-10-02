@@ -145,29 +145,14 @@ function getAmenities(){
 	<div class="container">
 		<div class="left-div">
 			
-			<span class="p1">
-			<img
-			src="${pageContext.request.contextPath}/upload/${requestScope.randomimage.get(1)}"
-			style="width: 100%;" data-src="" alt=""></span> 
-			<span class="p1">
-			<img
-			src="${pageContext.request.contextPath}/upload/${requestScope.randomimage.get(2)}"
-			style="width: 100%;" data-src="" alt=""></span> 
-			
-			<span class="p2">
-			<img
-			src="${pageContext.request.contextPath}/upload/${requestScope.randomimage.get(3)}"
-			style="width: 100%;" data-src="" alt=""></span> 
-			
-			<span class="p2">
-			<img
-			src="${pageContext.request.contextPath}/upload/${requestScope.randomimage.get(4)}"
-			style="width: 100%;" data-src="" alt=""></span> 
-			
-			<span class="p2">
-			<img
-			src="${pageContext.request.contextPath}/upload/${requestScope.randomimage.get(0)}"
-			style="width: 100%;" title="" data-src="" alt=""></span>
+		<c:forEach items="${requestScope.randomimage}" var="image" varStatus="loop" begin="0" end="4">
+		    <span class="p${loop.index < 2 ? '1' : '2'}">
+		        <img
+		            src="${pageContext.request.contextPath}/upload/${image}"
+		            style="width: 100%;" data-src="" alt="">
+		    </span>
+		</c:forEach>
+
 		</div>
 		<div class="right-div">
 			<table class="table table-borderless">

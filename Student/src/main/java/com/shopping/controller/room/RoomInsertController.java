@@ -4,7 +4,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import com.shopping.controller.SuperClass;
-import com.shopping.controller.accommodation.AccommodationInsertController;
+import com.shopping.controller.accommodation.AccommodationUpdateController;
 import com.shopping.model.bean.Room;
 import com.shopping.model.dao.RoomDao;
 
@@ -14,6 +14,10 @@ public class RoomInsertController extends SuperClass {
 	@Override
 	public void doGet(HttpServletRequest request, HttpServletResponse response) throws Exception {
 		super.doGet(request, response);
+		
+		int acid = Integer.parseInt(request.getParameter("acid"));
+		
+		request.setAttribute("acid", acid);
 		super.gotoPage(PREFIX + "roInsert.jsp");			
 	}
 
@@ -23,6 +27,7 @@ public class RoomInsertController extends SuperClass {
 		
 		Room bean = new Room();
 		
+		bean.setAcid(Integer.parseInt(request.getParameter("acid")));
 		bean.setRoom(request.getParameter("room"));
 		bean.setRoominfo(request.getParameter("roominfo"));
 		bean.setPrice(Integer.parseInt(request.getParameter("price")));
@@ -42,7 +47,7 @@ public class RoomInsertController extends SuperClass {
 				new RoomInsertController().doGet(request, response);
 				
 			}else { // 성공
-				new AccommodationInsertController().doGet(request, response);
+				new AccommodationUpdateController().doGet(request, response);
 			}
 		} catch (Exception e) {
 			e.printStackTrace();

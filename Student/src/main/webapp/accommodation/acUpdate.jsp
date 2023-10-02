@@ -12,7 +12,7 @@
 
 <script type="text/javascript">
 function roomForm(){ 
-	location.href = '<%=notWithFormTag%>roInsert';
+	location.href = '<%=notWithFormTag%>roInsert&acid=${requestScope.acbean.acid}';
 	}
 function amenitiesForm(){ 
 	location.href = '<%=notWithFormTag%>amInsert';

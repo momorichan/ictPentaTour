@@ -19,6 +19,7 @@
 		#minprice {	color: black;	font-size: 18px;	 font-weight: bolder;}
 </style>
 <script type="text/javascript">
+
       $(document).ready(function(){
          // Initialize popoveer
          
@@ -42,7 +43,7 @@
 			// 기존의 삭제 버튼 href 속성을 저장합니다.
 			var originalDeleteHref = $("#acDelete").attr("href");
 
-			// 클릭된 삭제 버튼의 ${bean.acid} 값을 얻는 함수
+			// 클릭된 버튼의 ${bean.acid} 값을 얻는 함수
 			function getAcidFromDeleteButton(button) {
 			  // 버튼의 ID 속성 값을 가져옵니다.
 			  var buttonId = button.attr("id");
@@ -127,7 +128,9 @@
 								<h5 class="card-title">${bean.name}</h5> 
 								<p class="card-text">
 									<span id="minprice">
+									<c:if test="${bean.minprice != 0}">
 									<fmt:formatNumber value="${bean.minprice}" ></fmt:formatNumber>원~
+									</c:if>
 									</span>
 								</p>
 							<c:if test="${whologin == 2}">
@@ -139,6 +142,11 @@
 									</span>							
 								</div>
 							</c:if>
+							<c:if test="${bean.minprice == 0}">
+								<a id="roominsert" href="<%=notWithFormTag%>roInsert&acid=${bean.acid}" class="btn btn-info"">
+								방 등록하기
+								</a>
+							</c:if>									
 							</div>
 						</a>
 

@@ -48,9 +48,9 @@
 		<form action="<%=withFormTag%>" method="post">
 			<input type="hidden" name="command" value="roInsert">
 			<div id="roomNo" class="input-group">
-				<span class="input-group-text col-md-2">방 번호</span> <input
-					id="roid" name="roid" type="number" class="form-control"
-					placeholder="">
+				<span class="input-group-text col-md-2">숙소 번호</span> <input
+					id="acid" name="acid" type="number" class="form-control"
+					value="${requestScope.acid}">
 			</div>
 			<div class="input-group">
 				<span class="input-group-text col-md-2">객실 이름</span> <input

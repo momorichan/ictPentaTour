@@ -128,21 +128,22 @@ List<String> lists = new ArrayList<String>();
 		int cnt = -1;
 		
 		String sql = " insert into rooms(roid, acid, room, roominfo, price, breakfast, guests, image01, image02, image03)" ;
-		sql += "values(roomseq.nextval, 0, ?, ?, ?, ?, ?, ?, ?, ?)";
+		sql += "values(roomseq.nextval, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
 		
 		PreparedStatement pstmt = null;
 		conn = super.getConnection();
 		conn.setAutoCommit(false);		
 		pstmt = conn.prepareStatement(sql);
-
-		pstmt.setString(1, bean.getRoom());
-		pstmt.setString(2, bean.getRoominfo());
-		pstmt.setInt(3, bean.getPrice());
-		pstmt.setString(4, bean.getBreakfast());
-		pstmt.setInt(5, bean.getGuests());
-		pstmt.setString(6, bean.getImage01());
-		pstmt.setString(7, bean.getImage02());
-		pstmt.setString(8, bean.getImage03());
+		
+		pstmt.setInt(1, bean.getAcid());
+		pstmt.setString(2, bean.getRoom());
+		pstmt.setString(3, bean.getRoominfo());
+		pstmt.setInt(4, bean.getPrice());
+		pstmt.setString(5, bean.getBreakfast());
+		pstmt.setInt(6, bean.getGuests());
+		pstmt.setString(7, bean.getImage01());
+		pstmt.setString(8, bean.getImage02());
+		pstmt.setString(9, bean.getImage03());
 
 		cnt = pstmt.executeUpdate();
 		conn.commit();

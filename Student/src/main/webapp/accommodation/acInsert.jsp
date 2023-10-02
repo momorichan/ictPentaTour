@@ -11,9 +11,6 @@
 
 
 <script type="text/javascript">
-function roomForm(){ 
-	location.href = '<%=notWithFormTag%>roInsert';
-	}
 function amenitiesForm(){ 
 	location.href = '<%=notWithFormTag%>amInsert';
 	}
@@ -117,86 +114,6 @@ img{
 			<div class="input-group">
 					<span id="amenities"></span>
 			</div>							
-			<div>
-			<table class="table table-striped">
-			<thead>
-				<tr>
-					<th>방 이름</th>
-					<th>방 정보</th>
-					<th>1박 가격</th>
-					<th>조식</th>
-					<th>수용인원</th>
-					<th>이미지</th>
-					<th>수정</th>
-					<th>삭제</th>
-				</tr>
-			</thead>
-			<tbody>
-			
-			<c:if test="${requestScope.roomlist != null}">
-				<c:forEach items="${requestScope.roomlist}" var="temp">
-					<tr>
-						<td>${temp.room}</td>
-						<td>${temp.roominfo}</td>
-						<td><fmt:formatNumber>${temp.price}</fmt:formatNumber>원</td>
-						<td>${temp.breakfast}</td>
-						<td>${temp.guests}명</td>
-						<td data-bs-toggle="modal" data-bs-target="#myModal">
-						클릭
-							<!-- The Modal -->
-						<div class="modal fade" id="myModal">
-						  <div class="modal-dialog">
-						    <div class="modal-content">
-						      <!-- Modal body -->
-						      <div class="modal-body">
-						        <table>
-						        <thead>
-						        <tr>
-						        <td><p>이미지 01</p></td>
-						        <td><p>이미지 02</p></td>
-						        <td><p>이미지 03</p></td>
-						        </tr>
-						        </thead>
-						        <tbody>
-						          <tr>
-						            <td>
-						              <img src="${pageContext.request.contextPath}/upload/${temp.image01}" data-src="" alt="">
-						            </td>
-						            <td>
-						              <img src="${pageContext.request.contextPath}/upload/${temp.image02}" data-src="" alt="">
-						            </td>
-						            <td>
-						              <img src="${pageContext.request.contextPath}/upload/${temp.image03}" data-src="" alt="">
-						            </td>
-						          </tr>
-						          </tbody>
-						        </table>
-						      </div>
-						
-						      <!-- Modal footer -->
-						      <div class="modal-footer">
-						        <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Close</button>
-						      </div>
-						    </div>
-						  </div>
-						</div>			
-						</td>
-						<td>
-						<a href="<%=notWithFormTag%>roUpdate&roid=${temp.roid}">수정</a>
-						</td>
-						<td>
-						<a href="<%=notWithFormTag%>roDelete&roid=${temp.roid}">삭제</a>
-						</td>
-					</tr>
-				</c:forEach>
-			</c:if>
-			</tbody>
-			</table>
-			</div>
-			<div class="input-group">
-				<span type="button" class="btn btn-info form-control-sm"
-					onclick="roomForm();">방 등록</span>
-			</div>
 			<div id="buttonset" class="input-group">
 				<button type="submit" class="btn btn-primary btn-lg">등록</button>
 				&nbsp;&nbsp;&nbsp;

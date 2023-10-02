@@ -209,18 +209,6 @@ public class AccommodationDao extends SuperDao {
 			pstmt.close();
 		}
 		
-		sql = " update rooms set acid = acseq.currval where acid = 0" ;
-		
-		pstmt = conn.prepareStatement(sql);
-
-		cnt = pstmt.executeUpdate();
-		
-		if (pstmt != null) {
-			pstmt.close();
-		}		
-		
-		
-		
 		if(amlist.length != 0) {
 			for(int amid : amlist) {
 				sql = " insert into amenitiedetails(acid, amid) values(acseq.currval,?)" ;

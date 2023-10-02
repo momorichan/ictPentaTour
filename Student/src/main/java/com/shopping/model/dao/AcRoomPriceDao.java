@@ -60,10 +60,10 @@ public class AcRoomPriceDao extends SuperDao{
 		String keyword = pageInfo.getKeyword();
 		
 		String sql = " with ranked as ( "
-				+ " SELECT a.acid, a.name, a.address, a.image01 image, min(r.price) minprice, "
+				+ " SELECT a.acid, a.name, a.address, a.image01 image, COALESCE(MIN(r.price), 0) minprice, "
 				+ " rank() over(order by a.acid asc) as ranking "
 				+ " FROM ACCOMMODATION a "
-				+ " INNER JOIN ROOMS r ON a.acid = r.acid ";
+				+ " LEFT JOIN ROOMS r ON a.acid = r.acid ";
 		
 		if (mode == null || mode.equals("all")) {// 전체 모드인 경우
 
