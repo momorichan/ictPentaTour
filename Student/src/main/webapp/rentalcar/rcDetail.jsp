@@ -66,7 +66,7 @@
 			</thead>
 			<tbody>
 				<tr>
-					<td align="center">렌터카 번호</td>
+					<td align="center">차량 번호</td>
 					<td>${requestScope.bean.rcid}</td>
 				</tr>
 				<tr>
@@ -166,11 +166,11 @@
 	
 	<!-- &&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&& -->
 	
-	<div class="hide_login">
+	<div class="hide_login2">
 	
 	<th:block th:fragment="setLogin(login)">
     <body>
-    <div class="member_login">
+    <div class="member_login">      
         <form th:action="@{/auth/loginProc}" th:method="POST">
             <div class="member_login_input">
                 <input type="text" name="username" placeholder="아이디" >
@@ -179,13 +179,13 @@
             <div class="member_login_input">
                 <input type="password" name="password" placeholder="비밀번호">
             </div>
-
             <div class="member_login_btn">
+ 
 
                 <input type="submit" class="btn btn-secondary" id="btn-login" value="로그인">
 
                 <input type="button" class="btn btn-secondary" value="회원가입" onclick="location.href='/member/join'">
-
+				
             </div>
 
             <div class="find_password">
@@ -193,7 +193,7 @@
             </div>
 
             <div class="login_api">
-                <a href="https://kauth.kakao.com/oauth/authorize?client_id=d860d38c992ca8bf5f07dcc3fd5122b9&redirect_uri=http://localhost:8181/member/auth/kakao/callback&response_type=code"><img src="../image/kakao_login.png"></a>
+                <a href="https://kauth.kakao.com/oauth/authorize?client_id=d860d38c992ca8bf5f07dcc3fd5122b9&redirect_uri=http://localhost:8181/member/auth/kakao/callback&response_type=code"><img src="${pageContext.request.contextPath}/image/kakao_login.png"></a>
             </div>
 
 <!--             <div class="login_api"> -->
@@ -206,10 +206,6 @@
 </th:block>
 </div>
 	
-	
-	
-	
-
 
 </body>
 </html>
