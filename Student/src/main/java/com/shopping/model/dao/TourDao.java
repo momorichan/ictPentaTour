@@ -131,7 +131,13 @@ public class TourDao extends SuperDao {
 	public int InsertData(Tour bean) throws Exception {
 
 		int cnt = -1;
-		String sql = " insert into tour values(seqtour.nextval, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+		String sql = "";
+		if(bean.getTusedate() == null || bean.getTusedate().equals("")) {
+			sql = " insert into tour values(seqtour.nextval, ?, ?, ?, default, ?, ?, ?, ?, ?, ?, ?)";
+		} else {
+			sql = " insert into tour values(seqtour.nextval, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+		}
+		
 
 		conn = super.getConnection();
 		conn.setAutoCommit(false);
@@ -140,14 +146,24 @@ public class TourDao extends SuperDao {
 		pstmt.setString(1, bean.getLocation());
 		pstmt.setString(2, bean.getTname());
 		pstmt.setInt(3, bean.getTprice());
-		pstmt.setString(4, bean.getTusedate());
-		pstmt.setInt(5, bean.getTexdate());
-		pstmt.setInt(6, bean.getTage());
-		pstmt.setString(7, bean.getTcontent());
-		pstmt.setInt(8, bean.getTfreeage());
-		pstmt.setString(9, bean.getTimage01());
-		pstmt.setString(10, bean.getTimage02());
-		pstmt.setString(11, bean.getTimage03());
+		if(bean.getTusedate() == null || bean.getTusedate().equals("")) {
+			pstmt.setInt(4, bean.getTexdate());
+			pstmt.setInt(5, bean.getTage());
+			pstmt.setInt(6, bean.getTfreeage());
+			pstmt.setString(7, bean.getTimage01());
+			pstmt.setString(8, bean.getTimage02());
+			pstmt.setString(9, bean.getTimage03());
+			pstmt.setString(10, bean.getTcontent());
+		} else {
+			pstmt.setString(4, bean.getTusedate());
+			pstmt.setInt(5, bean.getTexdate());
+			pstmt.setInt(6, bean.getTage());
+			pstmt.setInt(7, bean.getTfreeage());
+			pstmt.setString(8, bean.getTimage01());
+			pstmt.setString(9, bean.getTimage02());
+			pstmt.setString(10, bean.getTimage03());
+			pstmt.setString(11, bean.getTcontent());
+		}
 		cnt = pstmt.executeUpdate();
 		conn.commit();
 
@@ -255,5 +271,24 @@ public class TourDao extends SuperDao {
 			conn.close();
 		
 		return randomlist;
+	}
+
+	public void DeleteData(int toid) throws Exception{
+		int cnt = -1;
+		String sql = " delete from tour where toid = ?";
+		
+		conn = super.getConnection();
+		conn.setAutoCommit(false);
+		
+		PreparedStatement pstmt = conn.prepareStatement(sql);
+		pstmt.setInt(1, toid);
+		
+		cnt = pstmt.executeUpdate();
+		conn.commit();
+		
+		if(pstmt != null)
+			pstmt.close();
+		if(conn != null)
+			conn.close();
 	}
 }

@@ -53,6 +53,7 @@ tourList=com.shopping.controller.tour.TourListController
 tourDetail=com.shopping.controller.tour.TourDetailController
 tourInsert=com.shopping.controller.tour.TourInsertController
 tourUpdate=com.shopping.controller.tour.TourUpdateController
+tourDelete=com.shopping.controller.tour.TourDeleteController
 #air section
 #airHome=com.shopping.controller.air.AirHomeController
 #airList=com.shopping.controller.air.AirListController

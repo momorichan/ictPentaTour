@@ -7,7 +7,7 @@
 <head>
 <!-- http-equiv=Refresh content=1 -->
 <meta charset="UTF-8" >
-<title>Insert title here</title>
+<title>투어 홈 - ICTPentaTour</title>
 <script type="text/javascript">
 $(document).ready(function(){
    // Initialize popoveer
@@ -15,6 +15,11 @@ $(document).ready(function(){
    var popoverList = popoverTriggerList.map(function (popoverTriggerEl) {
         return new bootstrap.Popover(popoverTriggerEl);
    });
+   if(window.innerWidth < 501) {
+		$(".slide-div, .card-title, .card, .card-img-top, .serchcon, .tablecon, .tablecon-2").addClass("mobile");
+	}else{
+		$(".slide-div, .card-title, .card, .card-img-top, .serchcon, .tablecon, .tablecon-2").removeClass("mobile");
+	}
 });
 function searchAll(){ /* 전체 검색 */
 	location.href = '<%=notWithFormTag%>tourHome';
@@ -28,6 +33,15 @@ function deleteCheck(toid){
 		return false;
 	}
 }
+
+window.addEventListener('resize', () => {
+	if(window.innerWidth < 501) {
+		$(".slide-div, .card-title, .card, .card-img-top, .serchcon, .tablecon, .tablecon-2").addClass("mobile");
+	}
+	if(window.innerWidth >= 501) {
+		$(".slide-div, .card-title, .card, .card-img-top, .serchcon, .tablecon, .tablecon-2").removeClass("mobile");
+	}
+});
 </script>
 <link href="../css/jquery-picZoomer.css">
 
@@ -47,9 +61,13 @@ function deleteCheck(toid){
 	}
     .card{
     	width: 302px;
-		height: 420px;
+		height: 430px;
     	margin-left:auto;
     	margin-right:auto;
+    }
+    .price {
+    	text-align: right;
+    	margin:0px;
     }
     button-div{
     	margin-left:10px;
@@ -127,7 +145,6 @@ function deleteCheck(toid){
 		font-family: 'Noto Sans KR', sans-serif;
 		-webkit-font-smoothing: antialiased;
    		-moz-osx-font-smoothing: grayscale;
-   		transform:rotate(-0.03deg);
 	}
 	.container{
 		max-width:1226.7px;
@@ -139,6 +156,24 @@ function deleteCheck(toid){
 	.btn-insert {
 		position:relative;
 		z-index: 1;
+	}
+	.card.mobile {
+    width: 215px;
+    height: 322px;
+    margin-left: auto;
+    margin-right: auto;
+	}
+	.card-title.mobile {
+	    font-size: 1.0rem;
+	}
+	.card-img-top.mobile {
+	    width: 213px;
+	    height: 150px;
+	}
+	.card-img-top:hover.mobile{
+		width: 213px;
+		height: 150px;	
+		filter: brightness(1.1);
 	}
 </style>
 </head>
@@ -209,8 +244,7 @@ function deleteCheck(toid){
 										<div class = "card-body">
 											<p>${bean.location }
 											<h5 class = "card-title">${bean.tname}</h5>
-											<p class = "card-text">										
-											</p>
+											<p class = "price" id="price1"><fmt:formatNumber value="${bean.tprice}" pattern="#,###" />원</p>
 										</div>
 										<div class="pur-btn-div">
 											<a href="<%=notWithFormTag%>tourDetail&toid=${bean.toid}" class="purchasebtn btn btn-outline-secondary">예매하기</a>
@@ -240,10 +274,9 @@ function deleteCheck(toid){
 									<div class="removeUnderLine">
 										<img class = "card-img-top" alt="${bean.timage01 }" src="/Student/upload/${bean.timage01 }">
 										<div class = "card-body">
-											<p>${bean.location }
+											<p>${bean.location }</p>
 											<h5 class = "card-title">${bean.tname}</h5>
-											<p class = "card-text">										
-											</p>
+											<p class = "price"><fmt:formatNumber value="${bean.tprice}" pattern="#,###" />원</p>
 										</div>
 										<div class="pur-btn-div">
 											<a href="<%=notWithFormTag%>tourDetail&toid=${bean.toid}" class="purchasebtn btn btn-outline-secondary">예매하기</a>

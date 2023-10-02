@@ -92,8 +92,8 @@ public class Paging {
 			if(i == pageNumber) {//i가 현재 페이지인 경우
 				//active 속성으로 활성화시키고, 빨간색으로 진하게 표현하기
 				html += "<li class='page-item active'>";
-				html += "<a class='page-link' href='#'>";
-				html += "<b><font color='red'>"+i+"</font></b>";
+				html += "<button type='button' class='page-link' href='#' disabled='disabled'>";
+				html += "<b><font color='white'>"+i+"</font></b>";
 				html += "</a></li>";
 			}else {
 				html += makeLiTag(String.valueOf(i),i);
