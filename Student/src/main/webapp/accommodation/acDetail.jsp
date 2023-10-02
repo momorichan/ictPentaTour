@@ -54,6 +54,9 @@ img {
 	width: 100%;
 	height: 100%;
 }
+.price{
+	font-size: 32px;
+}
 </style>
 <script type="text/javascript">
 
@@ -167,7 +170,14 @@ function getAmenities(){
 						<td>리뷰 정보</td>
 					</tr>
 					<tr>
-						<td>최저가 정보</td>
+						<td class="col-6"><p class="tit">1박 요금 최저가</p></td>
+						<td class="col-6" align="right">
+						<strong class="price">
+						<fmt:formatNumber>
+						${requestScope.minprice}
+						</fmt:formatNumber>
+						</strong>
+						 원~</td>
 					</tr>
 				</thead>
 			</table>
