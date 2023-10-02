@@ -30,7 +30,7 @@ public class MallListController extends SuperClass {
 			new ProductListController().doGet(request, response);
 			
 		}else {
-			/* c	artItemList는 나의 카트 내 품목 리스트 */
+			/* cartItemList는 나의 카트 내 품목 리스트 */
 			Map<Integer, Integer> cartItemList = super.mycart.getAllCartList();
 			
 			try {

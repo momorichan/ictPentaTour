@@ -1,4 +1,4 @@
-
+<%@ page import="com.shopping.model.bean.Member"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ page import="java.util.*"%>
 <%@ include file="../common/bootstrap5.jsp"%>
@@ -16,7 +16,12 @@ String notWithFormTag = appName + mappingName + "?command=";
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
-
+<%
+	/* Member mem = new Member();
+	mem.setId("admin");
+	mem.setName("관리자");
+	session.setAttribute("loginfo",mem); */
+%>
 <c:set var="whologin" value="0"/>
 <c:if test="${not empty sessionScope.loginfo}">
 	<c:if test="${sessionScope.loginfo.meid == 'admin'}">
@@ -50,7 +55,6 @@ String notWithFormTag = appName + mappingName + "?command=";
 	var navbartoggle = "";
 	$(window).scroll(function(){
 	    scrollheight = $(window).scrollTop();
-	    console.log(scrollheight);
 	    if(scrollheight < 1 && window.innerWidth > 1900){
 			$(".navbar-brand, .navbar, .dropdown, .login-div, body, .dropdown-div").addClass("scrolltop");
 			$(".navbar").removeClass("non-scrolltop");
@@ -68,7 +72,6 @@ String notWithFormTag = appName + mappingName + "?command=";
 	    return scrollheight;
 	});
 	window.addEventListener('resize', () => {
-		console.log(scrollheight);
 		if(window.innerWidth <= 1900){
 			$(".navbar-brand, .navbar, .dropdown, .login-div, body, .dropdown-div").removeClass("scrolltop");
 			$(".navbar").addClass("non-scrolltop");
@@ -79,6 +82,8 @@ String notWithFormTag = appName + mappingName + "?command=";
 	window.onload=function(){
 		if(window.innerWidth < 501) {
 			$(".slide-div, .card-title, .card, .card-img-top, .serchcon, .tablecon, .tablecon-2, .navbar-toggle-btn").addClass("mobile");
+		}else{
+			$(".slide-div, .card-title, .card, .card-img-top, .serchcon, .tablecon, .tablecon-2, .navbar-toggle-btn").removeClass("mobile");
 		}
 	}
 	window.addEventListener('resize', () => {
@@ -142,22 +147,9 @@ String notWithFormTag = appName + mappingName + "?command=";
 		  });
 		});
 </script>
-
-
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com">
 <link href="https://fonts.googleapis.com/css2?family=Black+Han+Sans&display=swap" rel="stylesheet">
-
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
-<script type="text/javascript"
-	src="https://cdn.jsdelivr.net/jquery/latest/jquery.min.js"></script>
-<script type="text/javascript"
-	src="https://cdn.jsdelivr.net/momentjs/latest/moment.min.js"></script>
-<script type="text/javascript"
-	src="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.min.js"></script>
-<link rel="stylesheet" type="text/css"
-	href="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.css" />
-	
 <style type="text/css">
 @import url(//fonts.googleapis.com/earlyaccess/jejugothic.css);
 @import url(//fonts.googleapis.com/earlyaccess/kopubbatang.css);
@@ -235,6 +227,11 @@ String notWithFormTag = appName + mappingName + "?command=";
     width: 213px;
     height: 133px;
 }
+.card-img-top:hover.mobile{
+		width: 213px;
+		height: 133px;	
+		filter: brightness(1.1);
+	}
 .side-bar-inner {
 	width:200px;
 	height:948px;
@@ -320,6 +317,9 @@ String notWithFormTag = appName + mappingName + "?command=";
 	z-index: 999 !important;
 	background-color: black !important;
 	transition: 300ms;
+	-webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    transform:rotate(-0.03deg);
 }
 .navbar.non-scrolltop.toggle-on {
     padding-top: 10px;
@@ -372,7 +372,7 @@ String notWithFormTag = appName + mappingName + "?command=";
 	transition: 300ms;
 }
 .navbar.scrolltop {
-	padding-bottom:160px;
+	padding-bottom:200px;
 	padding-top:10px;
 	margin-bottom: 25px !important;
 	position: fixed !important;
@@ -432,6 +432,7 @@ String notWithFormTag = appName + mappingName + "?command=";
 }
 .logout {
 	color : red !important;
+	top:2px;
 	opacity: 90%;
 	z-index: 998;
 	position: relative;
@@ -472,7 +473,7 @@ body{
 }
 
 body.scrolltop{
-	padding-top:200px !important;
+	padding-top:220px !important;
 	padding-bottom:120px !important;
 	justify-content: center;
     display: flex;
@@ -591,12 +592,12 @@ body.scrolltop{
 	z-index: 998 !important;
 }
 
-body.sideon, .navbar.sideon, .copyright.sideon{
-	width:calc(100% - 200px) !important;
-	padding-right:0;
-	padding-left:0;
-	transition:width 300ms;
-}
+/* body.sideon, .navbar.sideon, .copyright.sideon{ */
+/* 	width:calc(100% - 200px) !important; */
+/* 	padding-right:0; */
+/* 	padding-left:0; */
+/* 	transition:width 300ms; */
+/* } */
 .dummy-navbar{
 	height:56px !important;
 	background-color: black !important;
@@ -712,6 +713,119 @@ body.sideon, .navbar.sideon, .copyright.sideon{
 	transition: transform 300ms;
 }
 </style>
+<!-- --------------------------review-------------------------------- -->
+<script type="text/javascript">
+		$(document).ready(function(){
+			var optionList = $('#mode option');
+			for(var i=0 ; i<optionList.length ; i++){
+				if(optionList[i].value == '${requestScope.pageInfo.mode}'){
+					optionList[i].selected = true ;
+				}	
+			}
+			
+			$('#keyword').val('${requestScope.pageInfo.keyword}');
+			
+			$("#mode").change(function(){				 
+				  if($(this).val() != 'all'){
+					  $('#keyword').attr('disabled', false);
+				  }else{
+					  $('#keyword').val('');
+					  $('#keyword').attr('disabled', true);
+				  }
+			});			
+		});
+		
+		function searchAll(){ /* 전체 검색 */
+			location.href = '<%=notWithFormTag%>rvList';
+		}
+		
+		function writeForm(){ /* 글쓰기 */
+			location.href = '<%=notWithFormTag%>rvInsert';
+		}
+		
+	</script>
+<style type="text/css">
+.head {
+	width: 100%;
+	height: 300px;
+	text-align : center;
+}
+
+.wrap {
+	width: 100%;
+	height: 300px;
+	text-align : center;
+}
+
+.review-section {
+	width: 100%;
+	height: 300px;
+}
+
+.shape {
+	height: 30px;
+	background-color : #bbb;
+	border-top : 1px;
+}
+.text_reviewtype{
+	position : relative ;
+	left : 70px ;
+}
+.point_box{
+	display: flex;
+}
+.rating_main{
+	display: flex;
+}
+.rvList_image {
+	position: relative;
+	
+}
+
+.rvList_image_text {
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	color: white;
+	transform: translate(-50%, -50%);
+}
+
+.progress-bar {
+    width: 100%;
+    height: 30px;
+    background-color: #dedede;
+    font-weight: 600;
+    font-size: .8rem;
+}
+
+.progress {
+    height: 30px;
+    padding: 0;
+    text-align: center;
+    background-color: #4F98FF;
+    color: #111;
+}
+.rating_box{
+	float : right;
+}
+.rating_main_left {
+    width: 50%;
+    float: left;
+    box-sizing: border-box;  
+    }
+.rating_main_right {
+     width: 50%;
+     float: right;
+     box-sizing: border-box;
+    }
+.point_txt{
+ 	width: 600px;height: 400px;
+	line-height: 100px; /* 세로 가운데 정렬 : line-height와 height값을 동일하게 처리합니다.*/
+	text-align: center /* 텍스트 가운데 정렬 */
+}
+
+
+</style>
 </head>
 <body>
 	
@@ -797,7 +911,6 @@ body.sideon, .navbar.sideon, .copyright.sideon{
 							<ul class="dropdown-menu">
 								<li><a class="dropdown-item" href="<%=notWithFormTag%>airHome">목록보기</a></li>
 							</ul>
-							
 						</li>
 						<li class="nav-item dropdown">
 							<a	class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown">숙박</a>
@@ -821,12 +934,15 @@ body.sideon, .navbar.sideon, .copyright.sideon{
 						<a	class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown">렌트카</a>
 							<ul class="dropdown-menu">
 								<li><a class="dropdown-item" href="<%=notWithFormTag%>rcList">렌트카</a></li>
+								<c:if test="${whologin == 2}">
+									
+								</c:if>							
 							</ul>
 						</li>	
 					</div>
 				</ul>
 			</div>
-			<button type="button" class="navbar-toggle-btn" onclick="navtoggle()"><img src="/Student/upload/sidebar.png" style="width:100%; height:100%"></button>
+			<button type="button" class="navbar-toggle-btn mobile" onclick="navtoggle()"><img src="/Student/upload/sidebar.png" style="width:100%; height:100%"></button>
 		</div>
 	</nav>
 	<div id="top"></div>

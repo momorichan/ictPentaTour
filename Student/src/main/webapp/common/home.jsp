@@ -15,6 +15,8 @@
 	position: relative;
 }
 .carousel {
+	margin-left:auto;
+	margin-right:auto;
 	width:100%;
 	max-height:806px;
 	max-width:1224px;
@@ -33,6 +35,9 @@
 }
 body {
 	background-color: white;
+	justify-content: center;
+	padding-top: 60px !important;
+    padding-bottom: 86px !important;
 }
 </style>
 </head>
