@@ -34,15 +34,9 @@ public class RentalcarListController extends SuperClass{
 		List<Rentalcar> lists = new ArrayList<Rentalcar>();
 		Paging pageInfo = null;
 		try {			
-//			boolean isGrid = false ;
 			boolean isGrid = true;
 			String url = super.getUrlInfomation("rcList") ;
-//			String startDateReplace = startDate.replace("/", ""); /* 날짜 문자열 */
-//			System.out.println(startDateReplace);
-//			String endDateReplace = endDate.replace("/", ""); /* 날짜 문자열 */
-//			System.out.println(endDateReplace);
-			
-			
+
 			/* totalCount */
 			/* x _ _ _ */
 			if(startLocation == null || startLocation.equals("all")) {

@@ -160,7 +160,7 @@
 							<h5 class="card-title">${bean.name}</h5>
 							<p class="card-text">${bean.contents}</p>
 							<p class="card-text">
-								합계 : <span id="totalprice">10,000</span>원
+								합계 : <span id="totalprice"></span>원
 							</p>
 							<form action="<%=withFormTag%>" method="post">							
 							<ul class="pagination">
@@ -181,7 +181,7 @@
 							</ul>
 							<div class="btn-group">
 								<button type="submit" class="btn btn-primary cart">장바구니</button>
-								<button type="button" class="btn btn-primary rightnow">바로 구매</button>								
+								<button type="submit" class="btn btn-primary rightnow">바로 구매</button>								
 							</div>
 							</form>
 						</div>

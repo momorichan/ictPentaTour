@@ -20,8 +20,7 @@ public class MallListController extends SuperClass {
 		if(super.loginfo==null) {
 			super.youNeededLogin();
 			return ;
-		}
-		
+		}		
 		//System.out.println("카트 품목 갯수 : " + super.mycart.GetCartItemSize());
 		
 		int cartItemSize = super.mycart.GetCartItemSize() ;

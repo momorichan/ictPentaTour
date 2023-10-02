@@ -9,12 +9,6 @@
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width,initial-scale=1">
 	<title>Insert title here</title>
-	<script type="text/javascript" src="https://cdn.jsdelivr.net/jquery/latest/jquery.min.js"></script>
-	<script type="text/javascript" src="https://cdn.jsdelivr.net/momentjs/latest/moment.min.js"></script>
-	<script type="text/javascript" src="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.min.js"></script>
-	<link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.css" />
-
-
 	<!-- kakao map api -->
 	<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=72eb84a62edf4d4ab7f08e47e8ca4b6d"></script>
 	<!-- kakao map -->
@@ -31,47 +25,7 @@
 		});	
 	</script>
 	
-	<!-- <!--  datepicker 날짜선택 -->
-	<script type="text/javascript">
-		
-		$(function() {
-			$('input[name="datefilter"]').daterangepicker({
-				timePicker : true,
-				autoUpdateInput : false,
-				locale : {
-					cancelLabel : 'Clear'
-				}
-			});
-	
-			$('input[name="datefilter"]').on(
-					'apply.daterangepicker',
-					function(ev, picker) {
-						$(this).val(
-								picker.startDate.format('MM/DD/YYYY') + ' - '
-										+ picker.endDate.format('MM/DD/YYYY'));
-					});
-	
-			$('input[name="datefilter"]').on('cancel.daterangepicker',
-					function(ev, picker) {
-						$(this).val('');
-					});
-						
-		});	
-	</script> -->
-	<script>
-	/* datetimepicker */
-	$(function() {
-	  $('input[name="datetimes"]').daterangepicker({
-	    timePicker: true,
-	    startDate: moment().startOf('hour'),
-	    endDate: moment().startOf('hour').add(32, 'hour'),
-	    locale: {
-	      format: 'M/DD hh:mm A'
-	    }
-	  });
-	});
-	</script>
-	
+
 	
 	<script type="text/javascript">
 		$(document).ready(function() {	

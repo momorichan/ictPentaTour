@@ -11,23 +11,18 @@ public class RentalcarDetailController extends SuperClass{
 	@Override
 	public void doGet(HttpServletRequest request, HttpServletResponse response) throws Exception {	
 		super.doGet(request, response);
-		String rcid = request.getParameter("rcid");
-		RentalcarDao dao = new RentalcarDao();
-		Rentalcar bean = null;
+		
+		String rcid = String.valueOf(request.getParameter("rcid")) ;
+		RentalcarDao dao = new RentalcarDao() ;
+		
 		try {
-			bean = dao.GetDataByPk(rcid);			
-			if(bean == null) {
-				super.setAlertMessage("잘못된 게시물");
-				super.gotoPage("common/home.jsp");
-			}else {
-				request.setAttribute("bean", bean);
-				super.gotoPage("rentalcar/rcDetail.jsp");
-			}
+			Rentalcar bean = dao.GetDataByPk(rcid) ;
+			request.setAttribute("bean", bean); 
+			
+			super.gotoPage("rentalcar/rcDetail.jsp"); 
 			
 		} catch (Exception e) {
 			e.printStackTrace();
-		}
-		
+		}		
 	}
-
 }

@@ -5,13 +5,12 @@ import javax.servlet.http.HttpServletResponse;
 
 import com.shopping.controller.SuperClass;
 
-public class RentalcarHomeController extends SuperClass {
+public class RentalcarCheckController extends SuperClass{
 	@Override
 	public void doGet(HttpServletRequest request, HttpServletResponse response) throws Exception {
-		// TODO Auto-generated method stub
-		super.doGet(request, response);		
+		super.doGet(request, response);
 		
-		super.gotoPage("rentalcar/rcHome.jsp");
+		super.gotoPage("rentalcar/rcCheck.jsp");
 	}
 
 }

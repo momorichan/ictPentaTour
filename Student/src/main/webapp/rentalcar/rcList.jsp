@@ -121,10 +121,10 @@
 												id="keyword" placeholder="키워드 입력"> -->
 							<input class="form-control-sm datepicker" type="text" 
 							name="startDate" id="startDate" autocomplete="off" 
-								 placeholder="📅대여일">
+								 placeholder="📅대여일" />
 						 <input class="form-control-sm datepicker" type="text" 
 						name="endDate" id="endDate" autocomplete="off"
-							 placeholder="📅반납일">
+							 placeholder="📅반납일" />
 
 
 							<button type="submit" class="btn btn-warning form-control-sm"
@@ -137,38 +137,6 @@
 			<div class="col-sm-1"></div>
 		</div>
 
-
-<!-- list -->
-<!-- 		<table class="table table-striped"> -->
-<!-- 			<thead> -->
-<!-- 				<tr> -->
-<!-- 					<th>렌터카 번호</th> -->
-<!-- 					<th>차 종</th> -->
-<!-- 					<th>차량 이름</th> -->
-<!-- 					<th>대여 장소</th> -->
-<!-- 					<th>반납 장소</th> -->
-<!-- 					<th>대여료</th> -->
-<!-- 					<th>탑승 인원</th> -->
-<!-- 					<th></th> -->
-<!-- 					<th></th> -->
-<!-- 				</tr> -->
-<!-- 			</thead> -->
-<!-- 			<tbody> -->
-<%-- 				<c:forEach var="bean" items="${requestScope.datalist}"> --%>
-<!-- 					<tr> -->
-<%-- 						<td><a href="<%=notWithFormTag%>rcDetail&rcid=${bean.rcid}"> --%>
-<%-- 								${bean.rcid} </a></td> --%>
-<%-- 						<td>${bean.carType}</td> --%>
-<%-- 						<td>${bean.startLocation}</td> --%>
-<%-- 						<td>${bean.endLocation}</td> --%>
-<%-- 						<td>${bean.price}</td> --%>
-<%-- 						<td>${bean.passengers}</td> --%>
-<!-- 						<td>수정</td> -->
-<!-- 						<td>삭제</td> -->
-<!-- 					</tr> -->
-<%-- 				</c:forEach> --%>
-<!-- 			</tbody> -->
-<!-- 		</table> -->
 		<table class="table table-borderless">
 				<thead>
 				</thead>

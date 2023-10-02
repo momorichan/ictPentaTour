@@ -15,9 +15,6 @@ import com.shopping.model.dao.ProductDao;
 public class ProductInsertController extends SuperClass{
 	private final String PREFIX = "product/" ;
 	
-	
-	
-	
 	@Override
 	public void doGet(HttpServletRequest request, HttpServletResponse response) throws Exception {
 		super.doGet(request, response);

@@ -921,9 +921,9 @@ body.sideon, .navbar.sideon, .copyright.sideon{
 						<li class="nav-item dropdown">
 						<a	class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown">렌트카</a>
 							<ul class="dropdown-menu">
-								<li><a class="dropdown-item" href="<%=notWithFormTag%>rcList">렌트카</a></li>
-								<c:if test="${whologin == 2}">
-									
+								<li><a class="dropdown-item" href="<%=notWithFormTag%>rcHome">렌트카 홈</a></li>
+								<li><a class="dropdown-item" href="<%=notWithFormTag%>rcList">렌트카 리스트</a></li>
+								<c:if test="${whologin == 2}">									
 								</c:if>							
 							</ul>
 						</li>	

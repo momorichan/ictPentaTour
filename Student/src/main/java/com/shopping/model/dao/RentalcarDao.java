@@ -990,4 +990,38 @@ public class RentalcarDao extends SuperDao {
 
 		return cnt;		
 	}
+	public int InsertData(Rentalcar bean)throws Exception {
+		// 기입한 상품 정보를 이용하여 데이터 베이스에 추가합니다.
+		System.out.println("상품 등록 빈 :\n" + bean);		
+		PreparedStatement pstmt = null ;
+		// cpnum 안 씀
+		String sql = " insert into rentalcar(rcid, carType, startLocation, endLocation, startDate, endDate, price, passengers, carName, carImage01, carImage02, carImage03)" ;
+		sql += "         			  values(	?, 		 ?,    			?,       	 ?,         ?,       ?,     ?,     		?,     	 ?,    	     ?,       	 ?,     	 ?)" ;		
+		int cnt = -1 ;
+		
+		conn = super.getConnection() ;
+		conn.setAutoCommit(false);		
+		
+		pstmt = conn.prepareStatement(sql) ;		
+		pstmt.setString(1, bean.getRcid());
+		pstmt.setString(2, bean.getCarType());
+		pstmt.setString(3, bean.getStartLocation());
+		pstmt.setString(4, bean.getEndLocation());
+		pstmt.setString(5, bean.getStartDate());
+		pstmt.setString(6, bean.getEndDate());
+		pstmt.setInt(7, bean.getPrice());
+		pstmt.setString(8, bean.getPassengers());
+		pstmt.setString(9, bean.getCarName());
+		pstmt.setString(10, bean.getCarImage01());
+		pstmt.setString(11, bean.getCarImage02());
+		pstmt.setString(12, bean.getCarImage03());
+		
+		cnt = pstmt.executeUpdate() ;
+		conn.commit();		
+		
+		if(pstmt!=null){pstmt.close();}
+		if(conn!=null){conn.close();}		
+		return cnt;		
+		
+	}
 }
