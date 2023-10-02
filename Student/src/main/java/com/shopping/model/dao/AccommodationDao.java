@@ -62,7 +62,7 @@ public class AccommodationDao extends SuperDao {
 		String keyword = pageInfo.getKeyword();
 
 		
-		String column = " ACID, ADDRESS, NAME, DESCRIPTION, image01, image02, image03";
+		String column = " ACID, city, ADDRESS, NAME, DESCRIPTION, image01, image02, image03";
 		
 		String sql = " select " + column;
 		sql += " from ( select " + column + ", rank() over(order by ACID asc) as ranking";
@@ -107,7 +107,7 @@ public class AccommodationDao extends SuperDao {
 		accommodation bean = new accommodation();
 		
 		bean.setAcid(rs.getInt("acid"));
-		
+		bean.setCity(rs.getString("city"));
 		bean.setName(rs.getString("name"));
 		bean.setAddress(rs.getString("address"));
 		bean.setDescription(rs.getString("description"));
@@ -188,8 +188,8 @@ public class AccommodationDao extends SuperDao {
 	public int InsertData(accommodation bean, int[] amlist) throws Exception{
 		int cnt = -1;
 		
-		String sql = " insert into accommodation(acid, address, name, description, image01, image02, image03)" ;
-		sql += "values(acseq.nextval, ?, ?, ?, ?, ?, ?)";
+		String sql = " insert into accommodation(acid, address, name, description, image01, image02, image03, city)" ;
+		sql += "values(acseq.nextval, ?, ?, ?, ?, ?, ?, ?)";
 		
 		PreparedStatement pstmt = null;
 		conn = super.getConnection();
@@ -202,6 +202,7 @@ public class AccommodationDao extends SuperDao {
 		pstmt.setString(4, bean.getImage01());
 		pstmt.setString(5, bean.getImage02());
 		pstmt.setString(6, bean.getImage03());
+		pstmt.setString(7, bean.getCity());
 
 		cnt = pstmt.executeUpdate();
 		
@@ -238,7 +239,7 @@ public class AccommodationDao extends SuperDao {
 	public int updateData(accommodation bean, int[] amlist) throws Exception{
 		int cnt = -1;
 		
-		String sql = " update accommodation set address = ?, name = ?, description = ?, image01 = ?, image02 = ?, image03 = ? " ;
+		String sql = " update accommodation set address = ?, name = ?, description = ?, image01 = ?, image02 = ?, image03 = ? , city = ?" ;
 		sql += " where acid = ?";
 		
 		PreparedStatement pstmt = null;
@@ -252,7 +253,8 @@ public class AccommodationDao extends SuperDao {
 		pstmt.setString(4, bean.getImage01());
 		pstmt.setString(5, bean.getImage02());
 		pstmt.setString(6, bean.getImage03());
-		pstmt.setInt(7, bean.getAcid());
+		pstmt.setString(7, bean.getCity());		
+		pstmt.setInt(8, bean.getAcid());
 
 		cnt = pstmt.executeUpdate();
 		

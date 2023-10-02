@@ -4,11 +4,21 @@ public class accommodation {
 	private int acid;
 	
 	private String name;
+	private String city;
 	private String address;
 	private String description;
 	private String image01;
 	private String image02;
 	private String image03;
+	
+	
+	
+	public String getCity() {
+		return city;
+	}
+	public void setCity(String city) {
+		this.city = city;
+	}
 	public int getAcid() {
 		return acid;
 	}
@@ -53,9 +63,11 @@ public class accommodation {
 	}
 	@Override
 	public String toString() {
-		return "accommodation [acid=" + acid + ", name=" + name + ", address=" + address + ", description="
-				+ description + ", image01=" + image01 + ", image02=" + image02 + ", image03=" + image03 + "]";
+		return "accommodation [acid=" + acid + ", name=" + name + ", city=" + city + ", address=" + address
+				+ ", description=" + description + ", image01=" + image01 + ", image02=" + image02 + ", image03="
+				+ image03 + "]";
 	}
+
 	
 	
 	

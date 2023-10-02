@@ -54,7 +54,8 @@ img {
 	width: 100%;
 	height: 100%;
 }
-.price{
+
+.price {
 	font-size: 32px;
 }
 </style>
@@ -128,6 +129,7 @@ function getAmenities(){
 	        var datepickerId = $(this).data('datepicker'); // datepicker 필드의 ID 가져오기
 	        var dateRange = $(datepickerId).val(); // 선택한 날짜 범위 가져오기
 	        var roid = $(this).data('roid'); // 선택한 방의 roid 가져오기
+	        var acid = ${requestScope.acbean.acid};
 
 	        // 날짜 범위를 시작 날짜와 끝 날짜로 분리
 	        var dateParts = dateRange.split(' - ');
@@ -135,26 +137,30 @@ function getAmenities(){
 	        var endDate = dateParts[1].trim();   // 끝 날짜
 
 	        // 예약 페이지 URL 생성 및 이동
-	        var reservationUrl = '<%= notWithFormTag %>roReservation';
-	        reservationUrl += '&startDate=' + startDate + '&endDate=' + endDate + '&roid=' + roid;
+	        var reservationUrl = '<%=notWithFormTag%>
+	roReservation';
+											reservationUrl += '&startDate='
+													+ startDate + '&endDate='
+													+ endDate + '&acid=' + acid
+													+ '&roid=' + roid;
 
-	        // 생성된 URL로 페이지 이동
-	        window.location.href = reservationUrl;
-	    });
-	});
+											// 생성된 URL로 페이지 이동
+											window.location.href = reservationUrl;
+										});
+					});
 </script>
 </head>
 <body>
 	<div class="container">
 		<div class="left-div">
-			
-		<c:forEach items="${requestScope.randomimage}" var="image" varStatus="loop" begin="0" end="4">
-		    <span class="p${loop.index < 2 ? '1' : '2'}">
-		        <img
-		            src="${pageContext.request.contextPath}/upload/${image}"
-		            style="width: 100%;" data-src="" alt="">
-		    </span>
-		</c:forEach>
+
+			<c:forEach items="${requestScope.randomimage}" var="image"
+				varStatus="loop" begin="0" end="4">
+				<span class="p${loop.index < 2 ? '1' : '2'}"> <img
+					src="${pageContext.request.contextPath}/upload/${image}"
+					style="width: 100%;" data-src="" alt="">
+				</span>
+			</c:forEach>
 
 		</div>
 		<div class="right-div">
@@ -171,13 +177,11 @@ function getAmenities(){
 					</tr>
 					<tr>
 						<td class="col-6"><p class="tit">1박 요금 최저가</p></td>
-						<td class="col-6" align="right">
-						<strong class="price">
-						<fmt:formatNumber>
+						<td class="col-6" align="right"><strong class="price">
+								<fmt:formatNumber>
 						${requestScope.minprice}
 						</fmt:formatNumber>
-						</strong>
-						 원~</td>
+						</strong> 원~</td>
 					</tr>
 				</thead>
 			</table>
@@ -188,12 +192,75 @@ function getAmenities(){
 					<tr>
 						<td>숙소 정보</td>
 						<td align="right"><input class="form-control-sm" type="text"
-							name="date" id="datepicker" placeholder="날짜를 선택하세요.">
-						</td>
+							name="date" id="datepicker" placeholder="날짜를 선택하세요."> <a
+							href="#select_person_htl2" class="btn btn-primary"> 객실 </a>
+							<button class="btn btn-primary">객실 검색</button></td>
 					</tr>
 				</tbody>
 			</table>
 		</div>
+
+		<div id="select_person_htl2"
+			class="js_show_wrap lypop_selectPerson on">
+			<div class="member_count">
+				<ul>
+					<li><div class="text_wrap mid line top">
+							<strong class="tit">객실 선택</strong>
+						</div>
+						<div class="num_count_holder">
+							<p class="tit">
+								<span class="txt">객실</span>
+							</p>
+							<span class="num_count_group cir"><button
+									class="btn_decrement down"></button> <span data-min="3"
+								data-max="1000" class="inpt_counter">1</span>
+								<button class="btn_increment up"></button></span>
+						</div></li>
+					<li class=""><div class="text_wrap mid line top">
+							<strong class="tit">객실별 인원 설정</strong>
+						</div>
+						<div class="text_wrap sml top">
+							<p class="txt em">
+								<span class="icn car"></span> 객실 1
+							</p>
+							<!---->
+						</div>
+						<div class="num_count_holder">
+							<p class="tit">
+								<span class="txt">성인</span>
+							</p>
+							<span class="num_count_group cir"><button
+									class="btn_decrement down"></button> <span data-min="3"
+								data-max="1000" class="inpt_counter">1</span>
+								<button class="btn_increment up"></button></span>
+						</div>
+						<div class="num_count_holder">
+							<p class="tit">
+								<span class="txt">아동</span>
+							</p>
+							<span class="num_count_group cir"><button
+									class="btn_decrement down"></button> <span data-min="3"
+								data-max="1000" class="inpt_counter">0</span>
+								<button class="btn_increment up"></button></span>
+						</div>
+						<div class="form_wrap mt5"></div>
+						<p class="stxt mt10" style="display: none;">
+							<em>아동 나이를 선택해 주세요.</em>
+						</p>
+						<p class="txt2 exclam em mt15">
+							아동: 0세 ~ 만 17세 이하<br>※숙소 형태에 따라 아동 나이. 투숙 가능 인원의 기준이 상이합니다.
+						</p></li>
+				</ul>
+			</div>
+			<br>
+			<div class="option_wrap">
+				<span class="txt em">객실1</span> <span class="divider_dot"><span
+					class="txt">성인1 <!----></span></span> <span class="right_cont"><button
+						class="btn pink">선택완료</button></span>
+			</div>
+		</div>
+
+
 		<table class="table">
 
 			<tbody>
@@ -205,13 +272,10 @@ function getAmenities(){
 						<td class="col-1">1박<br> <fmt:formatNumber
 								value="${bean.price}"></fmt:formatNumber>원
 						</td>
-						<td class="col-2">
-						    <a href="#" class="btn btn-primary reserve-button"
-						        data-datepicker="#datepicker"
-						        data-roid="${bean.roid}">
-						        예약하기
-						    </a>
-						</td>
+						<td class="col-2"><a href="#"
+							class="btn btn-primary reserve-button"
+							data-datepicker="#datepicker" data-roid="${bean.roid}"> 예약하기
+						</a></td>
 					</tr>
 				</c:forEach>
 
@@ -219,12 +283,12 @@ function getAmenities(){
 		</table>
 		<table class="table table-borderless" id="amList">
 		</table>
-</div>
-		<!-- The Modal -->
-		<div class="modal fade" id="myModal">
-			<div class="modal-dialog modal-dialog-centered modal-lg">
-				<div class="modal-content" id="roomDetail"></div>
-			</div>
+	</div>
+	<!-- The Modal -->
+	<div class="modal fade" id="myModal">
+		<div class="modal-dialog modal-dialog-centered modal-lg">
+			<div class="modal-content" id="roomDetail"></div>
 		</div>
+	</div>
 </body>
 </html>
