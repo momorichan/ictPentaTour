@@ -65,7 +65,7 @@
 					
 
 					<td align="center" valign="middle">
-   					 <a href="<%=notWithFormTag%>airCancel&regid=${bean.regid}&meid=${requestScope.regmeid}">예약취소</a>
+   					 <a href="<%=notWithFormTag%>airCancel&regid=${bean.regid}&meid=${requestScope.meid}">예약취소</a>
 					</td>
 			</tbody>
 		</table>
