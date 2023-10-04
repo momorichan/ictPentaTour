@@ -48,32 +48,32 @@ public class MemberLoginController extends SuperClass{
 			// session 영역에 나의 로그인 정보를 저장합니다.
 			super.session.setAttribute("loginfo", bean);
 			
-			MallDao mdao = new MallDao();
-			String prevURL = (String) session.getAttribute("prev_url");
+			MallDao mdao = new MallDao() ;
+			
 			try {
-				// 나의 WishList를 테이블에서 읽어와서 session 영역에 바인딩합니다.				
-				List<WishList> wishList = mdao.getWishList(bean.getId());
+				// 나의 WishList를 테이블에서 읽어 와서 session 영역에 바인딩합니다.
+				List<WishList> wishList = mdao.getWishList(bean.getId()) ;
 				for(WishList item : wishList) {
 					super.mycart.AddCart(item.getPnum(), item.getQty());
 				}
 				super.session.setAttribute("mycart", mycart);
-				super.session.setAttribute("prev_url", request.getRequestURL());
 				
-				// 로그인 성공 시, 홈 화면으로 이동합니다. 차후 상품 목록 페이지로 갈 예정			
+				// 홈 화면으로 이동합니다. 차후 상품 목록 페이지로 갈 예정
 				//new HomeController().doGet(request, response) ;
+//				new ProductListController().doGet(request, response) ;
+				
+				super.session.setAttribute("datalist", list);
+				super.session.setAttribute("",);
+				
+				response.sendRedirect(password);
+				// 로그인 후 상품리스트 말고 다른 곳으로 가기
 				
 				
-//				new ProductListController().doGet(request, response);
+		
 				
-				
-				
-				response.sendRedirect(prevURL);
 			} catch (Exception e) {
-				e.printStackTrace();
-			}
-
-			
-			
+				e.printStackTrace() ;
+			}			
 		}
 	}
 }

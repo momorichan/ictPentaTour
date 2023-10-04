@@ -30,7 +30,9 @@
 			    	const login = confirm("로그인이 필요합니다. 로그인하시겠습니까?");			    
 				    // 로그인	
 				    if(login){
-				    	location.href = ' member/meLoginForm.jsp';
+// 				    	location.href = ' member/meLoginForm.jsp';
+						window.open("member/meLoginForm.jsp");
+// 						window.open("member/meLoginForm.jsp", "a", "width=500, height=300");
 				    }else{
 				    	
 				    }
@@ -39,11 +41,10 @@
 			    }else{
 			    	const booking = confirm("예약하시겠습니까?");
 			    	if(booking){
-			    		$('#bookCarForm').submit();			    		
 			    		swal("예약이 완료되었습니다!");
+			    		$('#bookCarForm').submit();			    		
 			    		/* 사용자 아이디, 렌터카 번호 넘겨야 함. */
 			    	}else{
-			    		return;
 			    	}
 			    }
 			});
@@ -171,7 +172,7 @@
 	
 	<!-- &&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&& -->
 	
-	<div class="hide_login2">
+	<div class="hide_login">
 	
 	<th:block th:fragment="setLogin(login)">
     <body>

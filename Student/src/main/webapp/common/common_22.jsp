@@ -1,3 +1,4 @@
+<%@ page import="com.shopping.model.bean.Member"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ page import="java.util.*"%>
 <%@ include file="../common/bootstrap5.jsp"%>
@@ -15,12 +16,18 @@ String notWithFormTag = appName + mappingName + "?command=";
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+<%
+	/* Member mem = new Member();
+	mem.setId("admin");
+	mem.setName("관리자");
+	session.setAttribute("loginfo",mem); */
+%>
 <c:set var="whologin" value="0"/>
 <c:if test="${not empty sessionScope.loginfo}">
-	<c:if test="${sessionScope.loginfo.meid == 'admin'}">
+	<c:if test="${sessionScope.loginfo.id == 'admin'}">
 		<c:set var="whologin" value="2"/>
 	</c:if>
-	<c:if test="${sessionScope.loginfo.meid != 'admin'}">
+	<c:if test="${sessionScope.loginfo.id != 'admin'}">
 		<c:set var="whologin" value="1"/>
 	</c:if>
 </c:if>
@@ -39,21 +46,13 @@ String notWithFormTag = appName + mappingName + "?command=";
 <link rel="stylesheet" type="text/css"
 	href="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.css" />
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
-
+<title>Insert title here</title>
 <!-- 이 파일은 모든 문서에서 공용으로 참조 할 파일입니다. -->
 <!-- 자바 관련 변수 및 패키지 임포트, 네비게이션 바, jstl 등등-->
 <script src="/Student/js/sweetalert.js"></script>
 <script type="text/javascript">
 	var scrollheight = 0;
 	var navbartoggle = "";
-	var setCookie = function(name, value) {
-	    document.cookie = name + '=' + value;
-	};
-	var getCookie = function(name) {
-	    var value = document.cookie.match('(^|;) ?' + name + '=([^;]*)(;|$)');
-	    return value? value[2] : null;
-	};
-	document.cookie = getCookie("sidebar");
 	$(window).scroll(function(){
 	    scrollheight = $(window).scrollTop();
 	    if(scrollheight < 1 && window.innerWidth > 1900){
@@ -70,12 +69,7 @@ String notWithFormTag = appName + mappingName + "?command=";
 			$(".dropdown-toggle").attr("aria-expanded", "false");
 		}
 		
-		var bottom_of_window = $(window).scrollTop() + $(window).height();
-		if(bottom_of_window > $('html').outerHeight() - 90) {
-			$(".top-btn-div").addClass("bottom");
-		} else {
-			$(".top-btn-div").removeClass("bottom");
-		}
+	    return scrollheight;
 	});
 	window.addEventListener('resize', () => {
 		if(window.innerWidth <= 1900){
@@ -85,22 +79,21 @@ String notWithFormTag = appName + mappingName + "?command=";
 			$(".dropdown-toggle").attr("aria-expanded", "false");
 		}
 	});
-	/* 모바일 */
 	window.onload=function(){
-		
+		if(window.innerWidth < 501) {
+			$(".slide-div, .card-title, .card, .card-img-top, .serchcon, .tablecon, .tablecon-2, .navbar-toggle-btn").addClass("mobile");
+		}
 	}
 	window.addEventListener('resize', () => {
 		if(window.innerWidth < 501) {
-			$(".navbar-toggle-btn").addClass("mobile");
-			toggleSideOff();
+			$(".slide-div, .card-title, .card, .card-img-top, .serchcon, .tablecon, .tablecon-2, .navbar-toggle-btn").addClass("mobile");
 		}
 		if(window.innerWidth >= 501) {
-			$(".navbar-toggle-btn").removeClass("mobile");
+			$(".slide-div, .card-title, .card, .card-img-top, .serchcon, .tablecon, .tablecon-2, .navbar-toggle-btn").removeClass("mobile");
 			$(".navbar, .dropdown-div").removeClass("toggle-on");
 			$(".dropdown-div").removeClass("dropstart");
 			$(".collapse").removeClass("show");
 			navbartoggle = "";
-			toggleSideOn();
 		}
 	});
 	function navtoggle(){
@@ -116,7 +109,14 @@ String notWithFormTag = appName + mappingName + "?command=";
 			navbartoggle = "";
 		}
 	};
-	
+	var setCookie = function(name, value) {
+	    document.cookie = name + '=' + value;
+	};
+	var getCookie = function(name) {
+	    var value = document.cookie.match('(^|;) ?' + name + '=([^;]*)(;|$)');
+	    return value? value[2] : null;
+	};
+	document.cookie = getCookie("sidebar");
 	function toggleSideOn(){
 		setCookie("sidebar", "on")
 		checkToggle();
@@ -139,25 +139,11 @@ String notWithFormTag = appName + mappingName + "?command=";
 		}
 	}
 	$(function(){
-		$('.top-btn').on('click',function(e){
-		    e.preventDefault();
-		    $('html,body').animate({scrollTop:0},0);
+		  $('.top-btn').on('click',function(e){
+		      e.preventDefault();
+		      $('html,body').animate({scrollTop:0},0);
+		  });
 		});
-	});
-	$(document).ready(function(){
-		if(window.innerWidth < 501) {
-			$(".navbar-toggle-btn").addClass("mobile");
-			toggleSideOff();
-		}
-		
-		if(window.innerWidth < 501) {
-			$(".navbar-toggle-btn").addClass("mobile");
-			toggleSideOff();
-		}else{
-			$(".navbar-toggle-btn").removeClass("mobile");
-			toggleSideOn();
-		}
-	});
 </script>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com">
@@ -225,6 +211,19 @@ String notWithFormTag = appName + mappingName + "?command=";
 	border-radius: 0px 0px 0px 0px;
 	transform:translate(0px,0);
 	transition:transform 300ms ease 0ms;
+}
+.card.mobile {
+    width: 215px;
+    height: 290px;
+    margin-left: auto;
+    margin-right: auto;
+}
+.card-title.mobile {
+    font-size: 1.0rem;
+}
+.card-img-top.mobile {
+    width: 213px;
+    height: 133px;
 }
 .side-bar-inner {
 	width:200px;
@@ -460,10 +459,11 @@ body{
     position: relative !important;
     z-index: 999 !important;
     min-width: 70% !important;
+    transition:300ms;
 }
 
 body.scrolltop{
-	padding-top:220px !important;
+	padding-top:200px !important;
 	padding-bottom:120px !important;
 	justify-content: center;
     display: flex;
@@ -582,12 +582,12 @@ body.scrolltop{
 	z-index: 998 !important;
 }
 
-/* body.sideon, .navbar.sideon, .copyright.sideon{ */
-/* 	width:calc(100% - 200px) !important; */
-/* 	padding-right:0; */
-/* 	padding-left:0; */
-/* 	transition:width 300ms; */
-/* } */
+body.sideon, .navbar.sideon, .copyright.sideon{
+	width:calc(100% - 200px) !important;
+	padding-right:0;
+	padding-left:0;
+	transition:width 300ms;
+}
 .dummy-navbar{
 	height:56px !important;
 	background-color: black !important;
@@ -607,40 +607,20 @@ body.scrolltop{
 .top-btn-div{
 	position:fixed;
 	right:14px;
-	bottom:10px;
+	bottom:90px;
 	z-index: 997;
 	display: flex;
 	flex-direction: row;
 	pointer-events:none;
-	transition:100ms;
 }
 .top-btn-div.sideon{
 	position:fixed;
 	right:14px;
-	bottom:10px;
-	display: flex;
-	flex-direction: row;
-	pointer-events:all;
-	z-index: 999;
-}
-.top-btn-div.bottom{
-	position:fixed;
-	right:14px;
-	bottom:90px;
-	z-index: 997;
-	display: flex;
-	flex-direction: row;
-	pointer-events:none;
-}
-.top-btn-div.sideon.bottom{
-	position:fixed;
-	right:14px;
 	bottom:90px;
 	display: flex;
 	flex-direction: row;
 	pointer-events:all;
 	z-index: 999;
-	transition: 100ms;
 }
 .arrow {
     position: relative;
@@ -720,10 +700,7 @@ body.scrolltop{
 }
 .side-icon.sideon {
 	transform: translate(-75px, 0);
-	transition: transform 400ms;
-}
-.side-icon.sideon:hover {
-	transform: translate(-75px, 0) rotateY(360deg);
+	transition: transform 300ms;
 }
 </style>
 <!-- --------------------------review-------------------------------- -->
@@ -836,13 +813,12 @@ body.scrolltop{
 	line-height: 100px; /* 세로 가운데 정렬 : line-height와 height값을 동일하게 처리합니다.*/
 	text-align: center /* 텍스트 가운데 정렬 */
 }
-
-
 </style>
 </head>
 <body>
 	
 </body>
+<!--  footer -->
 <!-- 	<div class="dummy-navbar"></div> -->
 	<nav class="navbar navbar-expand-sm bg-dark navbar-dark" id="navbar">
 		<div class="container-fluid">
@@ -858,11 +834,11 @@ body.scrolltop{
 							<li><a class="nav-link create" href="<%=notWithFormTag%>meInsert">회원 가입</a></li>
 						</c:if>
 						<c:if test="${whologin == '1'}">
-							<a class="navbar-text">${sessionScope.loginfo.meid}(일반 유저)</a>
+							<a class="navbar-text">${sessionScope.loginfo.id}(일반 유저)</a>
 							<li class="nav-item"><a class="nav-link logout" href="<%=notWithFormTag%>meLogout">로그 아웃</a></li>
 						</c:if>
 						<c:if test="${whologin == '2'}">
-							<a class="navbar-text">${sessionScope.loginfo.meid}(관리자)</a>
+							<a class="navbar-text">${sessionScope.loginfo.id}(관리자)</a>
 							<li class="nav-item"><a class="nav-link logout" href="<%=notWithFormTag%>meLogout">로그 아웃</a></li>
 						</c:if>
 					</div>
@@ -872,7 +848,7 @@ body.scrolltop{
 								<c:if test="${whologin == '0'}">
 								</c:if>
 								<c:if test="${whologin != '0'}">
-									<li><a class="dropdown-item" href="<%=notWithFormTag%>meDetail&meid=${sessionScope.loginfo.meid}">상세 보기</a></li>
+									<li><a class="dropdown-item" href="<%=notWithFormTag%>meDetail&id=${sessionScope.loginfo.id}">상세 보기</a></li>
 									<li><a class="dropdown-item" href="/Student/member/meUpdateForm01.jsp">정보 수정</a></li>
 									<li><a class="dropdown-item" href="#">탈퇴하기</a></li>
 								</c:if>
@@ -947,6 +923,8 @@ body.scrolltop{
 							<ul class="dropdown-menu">
 								<li><a class="dropdown-item" href="<%=notWithFormTag%>rcHome">렌트카 홈</a></li>
 								<li><a class="dropdown-item" href="<%=notWithFormTag%>rcList">렌트카 리스트</a></li>
+								<c:if test="${whologin == 2}">									
+								</c:if>							
 							</ul>
 						</li>	
 					</div>
@@ -963,9 +941,8 @@ body.scrolltop{
 	  	</div>
 	  	<c:remove var="alertMessage" scope="session"/>
   	</c:if>
-<!--  footer -->
 <!-- <div class="dummy-copyright"></div> -->
-<div id="container" class="copyright" style="width: 100%; z-index: 1; bottom:0; position:absolute;">
+<div id="container" class="copyright" style="width: 100%; z-index: 1; bottom:0; position: fixed;">
 	<ul class="icons">
 		<li><a href="#" class="icon fa-twitter"><span class="label">Twitter</span></a></li>
 		<li><a href="#" class="icon fa-facebook"><span class="label">Facebook</span></a></li>
@@ -992,8 +969,8 @@ body.scrolltop{
 		<a class="kakao-button side-icon sideon" href="https://open.kakao.com/o/gY9q37Ef" target='_blank'>
 			<img class="side-button kakao" src="/Student/upload/kakao_chat.png">
 		</a>
-		<a class="naver-mail-button side-icon sideon" href="">
-			<img class="side-button naver" src="/Student/upload/naver_mail.png">
+		<a class="naver-mail-button side-icon sideon" href="mailto:﻿superman@test.com?cc=user@dammy.net">
+			<img class="side-button naver" src="/Student/upload/naver-icon.png" >
 		</a>
 		<a class="top-btn" href="">
 			<span class="arrow"></span>
