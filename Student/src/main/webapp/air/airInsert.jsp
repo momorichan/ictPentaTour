@@ -40,8 +40,7 @@
 				<span class="input-group-text col-md-2">예약 번호</span> 
 				<input id="regid" name="regid" type="number" class="form-control" placeholder="">
 			</div>
-			
-			
+	
 			<div id="flyid" class="input-group">
 				<span class="input-group-text col-md-2">항공편 번호</span>
 				<input id="fakeflid" name="fakeflid" type="number" class="form-control"	
@@ -70,6 +69,12 @@
 			<div class="input-group">
 				<span class="input-group-text col-md-2">인원수</span> <input
 					id="passengers" name="passengers" type="number" class="form-control"
+					>
+			</div>
+			
+			<div class="input-group">
+				<input
+					id="meid" name="meid" type="hidden" class="form-control" value="${sessionScope.loginfo.meid}"
 					>
 			</div>
 			

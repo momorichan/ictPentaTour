@@ -524,10 +524,6 @@ input[type='date']:valid::before {
 			</div>
 		</div>
 
-		
-		
-		
-
 		<div class="tripC">
 			<div class="container">
 				<div>

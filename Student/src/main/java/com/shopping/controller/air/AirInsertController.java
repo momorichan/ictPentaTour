@@ -17,13 +17,20 @@ public class AirInsertController extends SuperClass{
 	public void doGet(HttpServletRequest request, HttpServletResponse response) throws Exception {
 		// TODO Auto-generated method stub
 		super.doGet(request, response);
-	
+		
+		
+		if(super.loginfo==null) 
+		{
+			super.youNeededLogin();
+			return ;
+		}
+		
+		
 		int flid = Integer.parseInt(request.getParameter("flid"));
 		
 		AirDao dao = new AirDao();
 		
 		Airline air = new Airline();
-		
 		
 		try
 		{
@@ -47,6 +54,8 @@ public class AirInsertController extends SuperClass{
 		
 		Flight bean = new Flight();		
 		FlyDao dao = new FlyDao();
+		String meid = request.getParameter("meid");
+		System.out.println("meid : " + meid);
 
 		bean.setFlid(Integer.parseInt(request.getParameter("flid")));
 		bean.setSeat( request.getParameter("seat"));
@@ -58,13 +67,14 @@ public class AirInsertController extends SuperClass{
 		try
 		{
 			cnt = dao.InsertData(bean);
+
 			if(cnt == -1)
 			{
 				new AirInsertController().doGet(request, response);
 			}
 			else
-			{
-				
+			{	
+				session.setAttribute("regid", cnt);
 				new AirInsertCheckController().doGet(request, response);
 				
 			}

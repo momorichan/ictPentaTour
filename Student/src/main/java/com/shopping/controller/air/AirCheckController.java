@@ -23,6 +23,12 @@ public class AirCheckController extends SuperClass{
 			new AirHomeController().doGet(request, response);
 			return;
 		}
+		if(Integer.parseInt(request.getParameter("regid")) < 10001)
+		{
+			super.setAlertMessage("정확히 입력해주세요");
+			new AirHomeController().doGet(request, response);
+			return;
+		}
 		System.out.println("regid : " + Integer.parseInt(request.getParameter("regid")));
 		
 		int regid = Integer.parseInt(request.getParameter("regid"));
@@ -41,7 +47,6 @@ public class AirCheckController extends SuperClass{
 			if(bean == null)
 			{
 				super.setAlertMessage("잘못된 예약번호 입니다.");
-				new AirHomeController().doGet(request, response);
 			}
 			else
 			{

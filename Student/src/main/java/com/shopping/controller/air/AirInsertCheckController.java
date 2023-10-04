@@ -11,8 +11,6 @@ import com.shopping.model.dao.FlyDao;
 
 public class AirInsertCheckController extends SuperClass{
 	
-	
-	
 	@Override
 	public void doGet(HttpServletRequest request, HttpServletResponse response) throws Exception {
 		// TODO Auto-generated method stub
@@ -23,11 +21,11 @@ public class AirInsertCheckController extends SuperClass{
 		Airline bean2 = null;
 		AirDao dao2 = new AirDao();
 		
-		int flid = Integer.parseInt(request.getParameter("flid"));
+		int regid = (int) session.getAttribute("regid");
 	
 		try
 		{
-			bean = dao.getDataByFly(flid);
+			bean = dao.getDataByFly2(regid);
 			bean2 = dao2.getDataByBean(bean.getFlid());
 			
 			

@@ -13,6 +13,12 @@ public class AirCancelController extends SuperClass {
 		// TODO Auto-generated method stub
 		super.doGet(request, response);
 		
+		if(super.loginfo==null) 
+		{
+			super.youNeededLogin();
+			return ;
+		}
+		
 		int regid = Integer.parseInt(request.getParameter("regid"));
 		
 		
@@ -26,6 +32,9 @@ public class AirCancelController extends SuperClass {
 		try
 		{
 			cnt = dao.deleteFly(regid);
+			
+			
+			
 			
 			super.setAlertMessage("취소 되었습니다.");
 			new AirHomeController().doGet(request, response);
