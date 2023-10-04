@@ -77,7 +77,7 @@ img {
     max-width: 300px;
     /* 필요한 나머지 스타일 코드... */
 }
-.pink {
+.btn_purple_hover {
     background-color: #9370DB; /* 보라색 배경 */
     color: #FFFFFF; /* 텍스트는 흰색으로 */
     border: none; /* 테두리 제거 */
@@ -87,7 +87,7 @@ img {
     cursor: pointer; /* 마우스를 올렸을 때 손가락 모양으로 바뀌게 */
 }
 
-.pink:hover {
+.btn_purple_hover:hover {
     background-color: #7B68EE; /* 마우스를 올렸을 때 조금 더 진한 보라색 */
     color: #FFFFFF; /* 텍스트는 흰색으로 */
 }
@@ -369,6 +369,20 @@ document.addEventListener("DOMContentLoaded", function () {
         }
     });
 
+    // "선택완료" 버튼 클릭 이벤트
+    $(".complete-selection").click(function(){
+        // 객실과 인원 정보 가져오기
+        var roomCount = $("#roomTotal").text();
+        var guestCount = $("#guestTotal").text();
+
+        // 해당 정보를 다른 버튼의 텍스트로 설정
+        $(".btn_gray_hover span:nth-child(1)").text('객실' + roomCount);
+        $(".btn_gray_hover span:nth-child(2)").text('인원' + guestCount + '명');
+
+        // 필요한 경우, 팝업창 닫기 로직 추가
+        $("#select_room_guest").hide();
+    });
+    
 });
 
 
@@ -471,7 +485,7 @@ document.addEventListener("DOMContentLoaded", function () {
 	        객실<span class="roomTotal" name="roomTotal" id="roomTotal">1</span> 
 	        인원<span class="guestTotal" name="guestTotal" id="guestTotal">1 </span>
 	        <span class="">
-	            <button class="btn pink">선택완료</button>
+	            <button class="btn_purple_hover complete-selection">선택완료</button>
 	        </span>
 	    </div>
 	</div>
