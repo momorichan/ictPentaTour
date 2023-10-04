@@ -90,6 +90,7 @@
 			                           <select class="form-control form-control-sm" id="mode" name="mode">
 			                              <option value="all" selected="selected">--- 선택해 주세요 ---
 			                              <option value="flid">항공편번호
+			                              <option value="fname">항공사
 			                              <option value="depart">출발지
 			                              <option value="arrive">도착지
 			                           </select>
