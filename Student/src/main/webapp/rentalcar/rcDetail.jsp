@@ -2,281 +2,210 @@
     pageEncoding="UTF-8"%>
 <%@ include file="./../common/common.jsp" %>    
 <!DOCTYPE html>
-<html>
+<html xmlns:th="http://www.thymeleaf.org">
 <head>
 	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<title>Insert title here</title>
-	<style type="text/css">
-		.container{margin: 10px;}
-		#backButton{margin: auto;}
-		.emoticon{text-decoration: none;}
-	</style>
-	<style type="text/css">
-		/* 댓글들을 위한 스타일 지정 */
-		* {
-			padding: 0;
-			margin: 0;
-			color: #333;
-		}
-		ul { list-style: none; }
-		#container { padding: 30px 20px; }
-		#insertComment {
-			padding: 20px 15px;
-			border-bottom: 1px solid #7BAEB5;
-		}
-
-		#insertComment label {
-			display: inline-block;
-			width: 80px;
-			font-size: 14px;
-			font-weight: bold;
-			margin-bottom: 10px;
-		}
-
-		#insertComment input[type='text'], #insertComment textarea {
-			border: 1px solid #ccc;
-			vertical-align: middle;
-			padding: 3px 10px;
-			font-size: 12px;
-			line-height: 150%;
-		}
-
-		#insertComment textarea {
-			width: 450px;
-			height: 120px ;
-		}
-
-		.commentItem {
-			font-size: 13px;
-			color: #333;
-			padding: 15px;
-			border-bottom: 1px dotted #ccc;
-			line-height: 150%;
-		}
-
-		.commentItem .id {
-			color: #555;
-			line-height: 200%;
-		}
-
-		.commentItem .id input {
-			vertical-align: middle;
-		}
-
-		.commentItem .id .name {
-			color: #222;
-			font-weight: bold;
-			font-size: 14px;
-		}
-		
-		.form-group {
-			margin-bottom: 3px;
-		}
-		
-		.form-control {
-			height: 25px;
-		}
-		.btn-primary{opacity: 0.8;}
-	</style>	
-	<script type="text/javascript">
-		/* 삭제 버튼 클릭 */
-		/* on() 메소드는 선택된 요소에 이벤트 핸들러 함수를 연결시켜 주는 기능을 합니다. */
-		/* cnum이라는 속성을 개발자가 지정해 두었습니다. */
-		$(document).on('click', '.delete_btn', function(){
-			if(confirm('선택하신 항목을 삭제하시겠습니까?')){
-				$.ajax({
-					url:'<%=notWithFormTag%>cmDelete', 
-					data:'cnum=' + $(this).attr('cnum') ,
-					type:'get', 
-					dataType:'text',
-					success:function(result, status){
-						console.log(result);	
-						console.log(status);
-						getListComment() ; 
-					}
-				});
-			}
-		});
-		
-		
-		/* 렌터카 댓글 필요없음 */
-		function getListComment(){
-			$('#comment_list').empty();			
-			/* $.ajax() 함수를 이용하여 데이터 보여 주기 */
-			$.ajax({
-				url:'<%=notWithFormTag%>cmList', 
-				data:'no=' + '${requestScope.bean.no}',
-				type:'get', 
-				dataType:'json',
-				success:function(result, status){
-					/* console.log('result는 넘어온 데이터 결과 값') ; */
-					/* console.log(result) ; */
-					
-					$.each(result, function(idx){ /* idx는 색인 번호 */
-						var cnum = result[idx].cnum ;
-						var id = result[idx].id ;
-						var content = result[idx].content ;
-						var regdate = result[idx].regdate ;
-						addNewItem(cnum, id, content, regdate);
-					})
-				},
-				error:function(result, status){
-					console.log(result) ;
-					console.log(status) ;
-				}
-			});
-		}
-		
-		function addNewItem(cnum, id, content, regdate){
-			/* 댓글 1개를 추가해주는 함수입니다. */
-			var litag = $('<li>') ; /* 댓글의 외곽 li 태그  */
-			litag.addClass('commentItem') ;
-			
-			var ptag = $('<p>') ; /* 작성자 정보가 들어갈 태그  */
-			ptag.addClass('id') ;
-
-			var spantag = $('<span>') ; /* 작성자 이름이 들어갈 태그  */
-			spantag.addClass('name') ;
-			spantag.html(id + "님") ;
-			
-			var spandate = $('<span>') ;  /* 작성 일자가 들어갈 태그  */
-			spandate.html("&nbsp;&nbsp;/&nbsp;&nbsp;" + regdate + '&nbsp;&nbsp;&nbsp;') ;
-			
-			/* 로그인한 사람이 작성한 댓글이면 삭제 가능 */
-			if(id == '${sessionScope.loginfo.id}'){ 
-				var inputtag = $('<input>') ; /* 삭제 버튼 */
-				var attrlist = {'id':id, 'type':'button', 'value':'삭제', 'class':'btn btn-xs btn-outline-primary', 'cnum':cnum};
-				inputtag.attr(attrlist);
-				inputtag.addClass('delete_btn');
-			}else{
-				var inputtag = '' ;
-			}
-			
-			var content_p = $('<p>') ; /* 작성한 댓글 내용 */
-			content_p.html(content) ; 
-			
-			/* 조립하기(compose up) */
-			ptag.append(spantag).append(spandate).append(inputtag);
-			litag.append(ptag).append(content_p) ; 
-			
-			$('#comment_list').append(litag) ;
-		}
 	
-		 
-		
-		$(document).ready(function(){
-			getListComment();
+	<!-- kakao map api -->
+	<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=72eb84a62edf4d4ab7f08e47e8ca4b6d"></script>
+	<!-- kakao map -->
+	<script>
+	
+	/* kakaoMap */
+		$(function() {	
+			/* kakao map */
+			var container = document.getElementById('map');
+			var options = {
+				center: new kakao.maps.LatLng(33.450701, 126.570667),
+				level: 3
+			};
+			var map = new kakao.maps.Map(container, options);
 			
-			/* 사용자가 댓글을 입력하고, 전송 버튼을 눌렀습니다. */
-			$('#comment_form').submit(function(){				
-				/* 댓글 입력 없이 전송 버튼을 누른 경우 */
-				if(!$('#content').val()){
-					alert('댓글을 입력해 주셔야 합니다.');
-					$('#content').focus() ;
-					return false ;
-				}
-				
-				/* post 방식으로 데이터를 전송합니다. */
-				var URL = '<%=notWithFormTag%>cmInsert' ;
-				var parameters = $('#comment_form').serialize() ;
-				/* alert(parameters); */
-				$.post(URL, parameters, function(data){
-					getListComment(); /* 목록 갱신하기 */
-					$('#content').val('');		
-					return true ;
-					
-				}).fail(function(){
-					alert('댓글 작성에 실패하였습니다.');
-					return false ;
-				});
-				return false ;
+			/* 버튼 클릭 시 alert */
+			$("#bookCarBtn").click(function() {
+			    /*  로그인 check */
+			    if(${sessionScope.loginfo.id == null}){
+			    	const login = confirm("로그인이 필요합니다. 로그인하시겠습니까?");			    
+				    // 로그인	
+				    if(login){
+				    	location.href = ' member/meLoginForm.jsp';
+				    }else{
+				    	
+				    }
+				    
+				/* 이미 로그인 시 예약 */			    	
+			    }else{
+			    	const booking = confirm("예약하시겠습니까?");
+			    	if(booking){
+			    		swal("예약이 완료되었습니다!");
+			    		/* 사용자 아이디, 렌터카 번호 넘겨야 함. */
+			    	}else{
+			    		return;
+			    	}
+			    }
 			});
 		});
-	</script>	
+	</script>
+	
+
+	<style type="text/css">
+	.hide_login{
+		display: none;
+	}
+</style>
 </head>
 <body>
+	<!-- 사이드에 지도 및 예약 하기 팝업 -->
+	
 	<div class="container">
-		<h2>[${requestScope.bean.no}]번 게시물 정보</h2>
+		<h2>[${requestScope.bean.rcid}]번 렌터카 정보</h2>
 		<table class="table">
-			<thead></thead>
+			<thead>
+			</thead>
 			<tbody>
 				<tr>
-					<td align="center">번호</td>
-					<td>${requestScope.bean.no}</td>
+					<td align="center">차량 번호</td>
+					<td>${requestScope.bean.rcid}</td>
 				</tr>
 				<tr>
-					<td align="center">작성자</td>
-					<td>${requestScope.bean.id}</td>
+					<td align="center">차 종류</td>
+					<td>${requestScope.bean.carType}</td>
 				</tr>
 				<tr>
-					<td align="center">글제목</td>
-					<td>${requestScope.bean.subject}</td>
+					<td align="center">대여 장소</td>
+					<td><c:choose>
+							<c:when test="${requestScope.bean.startLocation eq 'seoul'}">
+								<c:out value="서울" />
+							</c:when>
+							<c:when test="${requestScope.bean.startLocation eq 'daejeon'}">
+								<c:out value="대전" />
+							</c:when>
+							<c:when test="${requestScope.bean.startLocation eq 'daegu'}">
+								<c:out value="대구" />
+							</c:when>
+							<c:when test="${requestScope.bean.startLocation eq 'busan'}">
+								<c:out value="부산" />
+							</c:when>
+							<c:when test="${requestScope.bean.startLocation eq 'jeju'}">
+								<c:out value="제주" />
+							</c:when>
+						</c:choose></td>
 				</tr>
 				<tr>
-					<td align="center">글내용</td>
-					<td>${requestScope.bean.content}</td>
+					<td align="center">반납 장소</td>
+					<td><c:choose>
+							<c:when test="${requestScope.bean.endLocation eq 'seoul'}">
+								<c:out value="서울" />
+							</c:when>
+							<c:when test="${requestScope.bean.endLocation eq 'daejeon'}">
+								<c:out value="대전" />
+							</c:when>
+							<c:when test="${requestScope.bean.endLocation eq 'daegu'}">
+								<c:out value="대구" />
+							</c:when>
+							<c:when test="${requestScope.bean.endLocation eq 'busan'}">
+								<c:out value="부산" />
+							</c:when>
+							<c:when test="${requestScope.bean.endLocation eq 'jeju'}">
+								<c:out value="제주" />
+							</c:when>
+						</c:choose></td>
 				</tr>
 				<tr>
-					<td align="center">조회수</td>
-					<td>${requestScope.bean.readhit}</td>
+					<td align="center">대여일</td>
+					<td>${requestScope.bean.startDate}</td>
 				</tr>
+				<tr>
+					<td align="center">반납일</td>
+					<td>${requestScope.bean.endDate}</td>
+				</tr>
+				<tr>
+					<td align="center">대여료</td>
+					<td>${requestScope.bean.price}</td>
+				</tr>
+				<tr>
+					<td align="center">탑승 가능 인원</td>
+					<td>${requestScope.bean.passengers}</td>
+				</tr>
+				
+				
 			</tbody>
 		</table>
-		<div id="backButton">
-			<button type="button" class="btn btn-primary" onclick="history.back();">
-				돌아 가기 
-			</button>
-			&nbsp;&nbsp;&nbsp;
-			<a class="emoticon" href="<%=notWithFormTag%>boEmoticon&mode=likes&no=${bean.no}">
-				<img src="<%=appName%>/image/likes.png" width="30px" height="30px" alt="">
-				${bean.likes}
-			</a>
-			&nbsp;&nbsp;
-			<a class="emoticon" href="<%=notWithFormTag%>boEmoticon&mode=hates&no=${bean.no}">
-				<img src="<%=appName%>/image/hates.png" width="30px" height="30px" alt="">
-				${bean.hates}
-			</a>				
-		</div>
-		<div>
-			<%-- 댓글 영역(Comment Zone) --%>
-			<ul id="comment_list">
-				<%-- 여기에 동적으로 요소들을 추가합니다. --%>
-			</ul>
-		</div>
-		<div id="insertComment">
-			<form id="comment_form" method="post" role="form" class="form-horizontal" >
-				<table class="table">
-				    <thead>
-				    </thead>
-				    <tbody>
-				      <tr>
-				        <td>
-				        	<label for="content" class="col-xs-3 col-lg-3 control-label">작성자</label>	        	
-				        </td>
-				        <td>
-							<input type="hidden" name="no" value="${bean.no}" />
-							<input type="text" name="fakeid" id="fakeid" class="form-control" size="10" 
-								disabled="disabled" value="${sessionScope.loginfo.name}(${sessionScope.loginfo.id})님">									
-							<input type="hidden" name="id" id="id" value="${sessionScope.loginfo.id}">
-				        </td>
-				      </tr>
-				      <tr>
-				        <td>
-				        	<label for="content" class="col-xs-3 col-lg-3 control-label">댓글 내용</label>
-				        </td>
-				        <td>
-				        	<textarea id="content" name="content" rows="3" cols="50"></textarea>
-				        </td>
-				      </tr>
-				      <tr>
-				        <td colspan="2">
-				        	<button type="submit" class="btn btn-info">저장하기</button> 
-						</td>
-				      </tr>
-				    </tbody>
-				</table>
-			</form>	
-		</div>		
 	</div>
+	<!--  -->
+	<div class="offcanvas offcanvas-end" id="demo">
+		<div class="offcanvas-header">
+			<h1 class="offcanvas-title">지도</h1>
+			<button type="button" class="btn-close" data-bs-dismiss="offcanvas"></button>
+		</div>
+		<div class="offcanvas-body">
+			<p>테스트</p>			
+			<div id="map" style="width: 500px; height: 400px;"></div>
+			<br/>
+			<form action= "<%=withFormTag%>" method="post"> 
+				<input type="hidden" name="id" value="${sessionScope.loginfo.id}">
+	    		<input type="hidden" name="rcid" value="${requestScope.bean.rcid}">
+				<button class="btn btn-success" type="button" id="bookCarBtn">예약 하기</button>
+			</form>
+		</div>
+	</div>
+	
+
+
+	<div class="container">
+		<div class="container-fluid mt-3">
+			<h3>예약 지점 확인</h3>
+			<p>예약 가능한 지점을 확인해보세요.</p>
+			<button class="btn btn-primary" type="button"
+				data-bs-toggle="offcanvas" data-bs-target="#demo">위치 보기</button>			
+		</div>
+	</div>
+	
+	
+	<!-- &&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&& -->
+	
+	<div class="hide_login2">
+	
+	<th:block th:fragment="setLogin(login)">
+    <body>
+    <div class="member_login">      
+        <form th:action="@{/auth/loginProc}" th:method="POST">
+            <div class="member_login_input">
+                <input type="text" name="username" placeholder="아이디" >
+            </div>
+
+            <div class="member_login_input">
+                <input type="password" name="password" placeholder="비밀번호">
+            </div>
+            <div class="member_login_btn">
+ 
+
+                <input type="submit" class="btn btn-secondary" id="btn-login" value="로그인">
+
+                <input type="button" class="btn btn-secondary" value="회원가입" onclick="location.href='/member/join'">
+				
+            </div>
+
+            <div class="find_password">
+                <a href="/forgot-password">아이디 또는 비밀번호를 잊으셨나요?</a>
+            </div>
+
+            <div class="login_api">
+                <a href="https://kauth.kakao.com/oauth/authorize?client_id=d860d38c992ca8bf5f07dcc3fd5122b9&redirect_uri=http://localhost:8181/member/auth/kakao/callback&response_type=code"><img src="${pageContext.request.contextPath}/image/kakao_login.png"></a>
+            </div>
+
+<!--             <div class="login_api"> -->
+<!--                 <a href="/oauth2/authorization/google"><img src="/image/google_login_button.png"></a> -->
+<!--             </div> -->
+
+        </form>
+    </div>
+    </body>
+</th:block>
+</div>
+	
+
 </body>
 </html>

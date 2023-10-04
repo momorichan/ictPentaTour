@@ -5,7 +5,9 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import com.shopping.model.bean.FlyManager;
 import com.shopping.model.bean.Member;
+import com.shopping.model.check.BookingManager;
 import com.shopping.model.mall.CartManager;
 
 //하위 컨트롤러들이 공통적으로 사용하는 기능들을 여기에 명시합니다.
@@ -16,6 +18,7 @@ public class SuperClass implements SuperController{
 
 	protected Member loginfo = null; //로그인 여부를 파악하는 변수
 	protected CartManager mycart = null; //내 카트 
+	protected BookingManager mybooking = null;
 	
 	public void youNeededLogin() {
 		//미로그인시 로그인 페이지로 이동
@@ -32,6 +35,8 @@ public class SuperClass implements SuperController{
 		
 		this.loginfo = (Member)session.getAttribute("loginfo");
 		this.mycart = (CartManager)session.getAttribute("mycart");
+		this.mybooking = (BookingManager)session.getAttribute("mybooking");
+		if(mybooking == null) {mybooking = new BookingManager();}
 		if(mycart == null) {mycart = new CartManager();}
 	}
 
@@ -78,6 +83,7 @@ public class SuperClass implements SuperController{
 			e.printStackTrace();
 		}
 	}
+	
 	public void setAlertMessage(String message) {
 		//session 영역에서 "alertMessage"라는 이름으로 사용자에게 주의/오류/경고 문구 등을 띄워줍니다.
 		//in common.jsp 파일 하단 참조
@@ -103,7 +109,4 @@ public class SuperClass implements SuperController{
 		String text = appName + mappingName + "?command=" + todoCommand;
 		return text;
 	}
-
-
-
 }

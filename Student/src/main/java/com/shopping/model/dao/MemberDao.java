@@ -66,7 +66,7 @@ public class MemberDao extends SuperDao{
 
 		// ?를 placehoder라고 합니다. 치환되어야 할 영역		
 		String sql = " insert into members(meid, password, name, gender, birth, phone, address, role)";
-		sql += " values(?, ?, ?, ?, ?, ?, ?, ?, ?)";
+		sql += " values(?, ?, ?, ?, ?, ?, ?, ?)";
 		PreparedStatement pstmt = null;
 		
 		conn = super.getConnection();//단계2
@@ -129,8 +129,8 @@ public class MemberDao extends SuperDao{
 		String mode = pageInfo.getMode();
 		String keyword = pageInfo.getKeyword();
 		
-		String sql = " select meid, password, name, gender, birth, phone, address, role, status";
-		sql += " from (select meid, password, name, gender, birth, phone, address, role, status, rank() over(order by meid asc) as ranking";
+		String sql = " select meid, password, name, gender, birth, phone, address, role";
+		sql += " from (select meid, password, name, gender, birth, phone, address, role, rank() over(order by meid asc) as ranking";
 		sql += 		 " from members";
 		
 		if(mode==null||mode.equals("all")) {//전체 모드인 경우

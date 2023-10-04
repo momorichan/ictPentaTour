@@ -10,6 +10,62 @@ public class Rentalcar {
 	private int price; // 대여료, 가격
 	private String passengers;// 차량의 최대 탑승인원
 	
+	// 9.27 추가 ++
+	private String carName; //차량이름...아반떼, 그랜저
+	private int cpnum; // 차량 상품 번호.
+	private String carImage01; // 이미지
+	private String carImage02;
+	private String carImage03;
+	
+	
+	public String getCarImage01() {
+		return carImage01;
+	}
+	public void setCarImage01(String carImage01) {
+		this.carImage01 = carImage01;
+	}
+	public String getCarImage02() {
+		return carImage02;
+	}
+	public void setCarImage02(String carImage02) {
+		this.carImage02 = carImage02;
+	}
+	public String getCarImage03() {
+		return carImage03;
+	}
+	public void setCarImage03(String carImage03) {
+		this.carImage03 = carImage03;
+	}
+	
+	public Rentalcar(String rcid, String carType, String startLocation, String endLocation, String startDate, String endDate, int price, String passengers, String carName, int cpnum,
+			String carImage01, String carImage02, String carImage03) {
+		super();
+		this.rcid = rcid;
+		this.carType = carType;
+		this.startLocation = startLocation;
+		this.endLocation = endLocation;
+		this.startDate = startDate;
+		this.endDate = endDate;
+		this.price = price;
+		this.passengers = passengers;
+		this.carName = carName;
+		this.cpnum = cpnum;
+		this.carImage01 = carImage01;
+		this.carImage02 = carImage02;
+		this.carImage03 = carImage03;
+	}
+	public String getCarName() {
+		return carName;
+	}
+	public void setCarName(String carName) {
+		this.carName = carName;
+	}
+	public int getCpnum() {
+		return cpnum;
+	}
+	public void setCpnum(int cpnum) {
+		this.cpnum = cpnum;
+	}
 	public String getRcid() {
 		return rcid;
 	}
@@ -58,31 +114,17 @@ public class Rentalcar {
 	public void setPassengers(String passengers) {
 		this.passengers = passengers;
 	}
-	public Rentalcar(String rcid, String carType, String startLocation, String endLocation, String startDate,
-			String endDate, int price, String passengers) {
-		super();
-		this.rcid = rcid;
-		this.carType = carType;
-		this.startLocation = startLocation;
-		this.endLocation = endLocation;
-		this.startDate = startDate;
-		this.endDate = endDate;
-		this.price = price;
-		this.passengers = passengers;
-	}
+
 	@Override
 	public String toString() {
-		return "Rentalcar [rcid=" + rcid + ", carType=" + carType + ", startLocation=" + startLocation
-				+ ", endLocation=" + endLocation + ", startDate=" + startDate + ", endDate=" + endDate + ", price="
-				+ price + ", passengers=" + passengers + "]";
+		return "Rentalcar [rcid=" + rcid + ", carType=" + carType + ", startLocation=" + startLocation + ", endLocation=" + endLocation + ", startDate=" + startDate + ", endDate=" + endDate
+				+ ", price=" + price + ", passengers=" + passengers + ", carName=" + carName + ", cpnum=" + cpnum + ", carImage01=" + carImage01 + ", carImage02=" + carImage02 + ", carImage03="
+				+ carImage03 + "]";
 	}
 	public Rentalcar() {
 		super();
 		// TODO Auto-generated constructor stub
 	}
-	
-	
-		
 	
 
 }
