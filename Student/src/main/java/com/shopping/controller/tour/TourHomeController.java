@@ -36,13 +36,13 @@ public class TourHomeController extends SuperClass {
 			if (pageInfo.getMode().equals("location"))
 				selectlocation = "selected=\"selected\"";
 
-			request.setAttribute("datalist", lists);
-			request.setAttribute("pageInfo", pageInfo);
-			request.setAttribute("selecttname", selecttname);
-			request.setAttribute("selectlocation", selectlocation);
-			request.setAttribute("eventlists", eventlists);
+			super.session.setAttribute("datalist", lists);
+			super.session.setAttribute("pageInfo", pageInfo);
+			super.session.setAttribute("selecttname", selecttname);
+			super.session.setAttribute("selectlocation", selectlocation);
+			super.session.setAttribute("eventlists", eventlists);
 
-			super.gotopage("tour/tourHome.jsp");
+			response.sendRedirect("tour/tourHome.jsp");
 		} catch (Exception e) {
 			e.printStackTrace();
 		}

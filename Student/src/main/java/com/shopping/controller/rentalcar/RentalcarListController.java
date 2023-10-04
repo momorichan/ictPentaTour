@@ -9,7 +9,7 @@ import javax.servlet.http.HttpServletResponse;
 import com.shopping.controller.SuperClass;
 import com.shopping.model.bean.Rentalcar;
 import com.shopping.model.dao.RentalcarDao;
-import com.shopping.utility.Paging;
+import com.shopping.utility.PagingCar;
 
 public class RentalcarListController extends SuperClass{
 	
@@ -32,7 +32,7 @@ public class RentalcarListController extends SuperClass{
 		
 		int totalCount = 0;
 		List<Rentalcar> lists = new ArrayList<Rentalcar>();
-		Paging pageInfo = null;
+		PagingCar pageInfo = null;
 		try {			
 			boolean isGrid = true;
 			String url = super.getUrlInfomation("rcList") ;
@@ -48,6 +48,7 @@ public class RentalcarListController extends SuperClass{
 						if(endDate == null || endDate.equals("")) {
 							System.out.println("totalCount: 싹 다 널 값");
 							totalCount = dao.GetTotalRecordCountAll();
+							System.out.println("totalCount is " + totalCount);
 						/* x x x o*/
 						}else {
 							System.out.println("totalCount: /* x x x o*/");
@@ -148,7 +149,7 @@ public class RentalcarListController extends SuperClass{
 				
 			}			
 			
-			/* Paging */			
+			/* PagingCar */			
 			/* x _ _ _ */
 			if (startLocation == null || startLocation.equals("all")) {
 				/* x x _ _ */
@@ -157,23 +158,23 @@ public class RentalcarListController extends SuperClass{
 					if (startDate == null || startDate.equals("")) {
 						/* x x x x */
 						if (endDate == null || endDate.equals("")) {
-							System.out.println("Paging: 싹 다 널 값");
-							pageInfo = new Paging(isGrid, pageNumber, pageSize, totalCount, url, startLocation, endLocation, startDate, endDate);
+							System.out.println("PagingCar: 싹 다 널 값");
+							pageInfo = new PagingCar(isGrid, pageNumber, pageSize, totalCount, url, startLocation, endLocation, startDate, endDate);
 						/* x x x o */
 						} else {
-							System.out.println("Paging:/* x x x o */");
-							pageInfo = new Paging(isGrid, pageNumber, pageSize, totalCount, url, startLocation, endLocation, startDate, endDate);
+							System.out.println("PagingCar:/* x x x o */");
+							pageInfo = new PagingCar(isGrid, pageNumber, pageSize, totalCount, url, startLocation, endLocation, startDate, endDate);
 						}
 						/* x x o _ */
 					} else {
 						/* x x o x */
 						if (endDate == null || endDate.equals("")) {
-							System.out.println("Paging:/* x x o x */");
-							pageInfo = new Paging(isGrid, pageNumber, pageSize, totalCount, url, startLocation, endLocation);
+							System.out.println("PagingCar:/* x x o x */");
+							pageInfo = new PagingCar(isGrid, pageNumber, pageSize, totalCount, url, startLocation, endLocation);
 							/* x x o o */
 						} else {
-							System.out.println("Paging:/* x x o o */");
-							pageInfo = new Paging(isGrid, pageNumber, pageSize, totalCount, url, startLocation, endLocation);
+							System.out.println("PagingCar:/* x x o o */");
+							pageInfo = new PagingCar(isGrid, pageNumber, pageSize, totalCount, url, startLocation, endLocation);
 						}
 					}
 					/* x o _ _ */
@@ -182,23 +183,23 @@ public class RentalcarListController extends SuperClass{
 					if (startDate == null || startDate.equals("")) {
 						/* x o x x */
 						if (endDate == null || endDate.equals("")) {
-							System.out.println("Paging:/* x o x x */");
-							pageInfo = new Paging(isGrid, pageNumber, pageSize, totalCount, url, startLocation, endLocation);
+							System.out.println("PagingCar:/* x o x x */");
+							pageInfo = new PagingCar(isGrid, pageNumber, pageSize, totalCount, url, startLocation, endLocation);
 						/* x o x o */
 						} else {
-							System.out.println("Paging:/* x o x o */");
-							pageInfo = new Paging(isGrid, pageNumber, pageSize, totalCount, url, startLocation, endLocation);
+							System.out.println("PagingCar:/* x o x o */");
+							pageInfo = new PagingCar(isGrid, pageNumber, pageSize, totalCount, url, startLocation, endLocation);
 						}
 					/* x o o _ */
 					} else {
 						/* x o o x */
 						if (endDate == null || endDate.equals("")) {
-							System.out.println("Paging:/* x o o x */");
-							pageInfo = new Paging(isGrid, pageNumber, pageSize, totalCount, url, startLocation, endLocation);
+							System.out.println("PagingCar:/* x o o x */");
+							pageInfo = new PagingCar(isGrid, pageNumber, pageSize, totalCount, url, startLocation, endLocation);
 						/* x o o o */
 						} else {
-							System.out.println("Paging:/* x o o o */");
-							pageInfo = new Paging(isGrid, pageNumber, pageSize, totalCount, url, startLocation, endLocation);
+							System.out.println("PagingCar:/* x o o o */");
+							pageInfo = new PagingCar(isGrid, pageNumber, pageSize, totalCount, url, startLocation, endLocation);
 						}
 					}
 				}
@@ -210,23 +211,23 @@ public class RentalcarListController extends SuperClass{
 					if (startDate == null || startDate.equals("")) {
 						/* o x x x */
 						if (endDate == null || endDate.equals("")) {
-							System.out.println("Paging:/* o x x x */");
-							pageInfo = new Paging(isGrid, pageNumber, pageSize, totalCount, url, startLocation, endLocation);
+							System.out.println("PagingCar:/* o x x x */");
+							pageInfo = new PagingCar(isGrid, pageNumber, pageSize, totalCount, url, startLocation, endLocation);
 						/* o x x o */
 						} else {
-							System.out.println("Paging:/* o x x o */");
-							pageInfo = new Paging(isGrid, pageNumber, pageSize, totalCount, url, startLocation, endLocation);
+							System.out.println("PagingCar:/* o x x o */");
+							pageInfo = new PagingCar(isGrid, pageNumber, pageSize, totalCount, url, startLocation, endLocation);
 						}
 					/* o x o _ */
 					} else {
 						/* o x o x */
 						if (endDate == null || endDate.equals("")) {
-							System.out.println("Paging:/* o x o x */");
-							pageInfo = new Paging(isGrid, pageNumber, pageSize, totalCount, url, startLocation, endLocation);
+							System.out.println("PagingCar:/* o x o x */");
+							pageInfo = new PagingCar(isGrid, pageNumber, pageSize, totalCount, url, startLocation, endLocation);
 						/* o x o o */
 						} else {
-							System.out.println("Paging:/* o x o o */");
-							pageInfo = new Paging(isGrid, pageNumber, pageSize, totalCount, url, startLocation, endLocation);
+							System.out.println("PagingCar:/* o x o o */");
+							pageInfo = new PagingCar(isGrid, pageNumber, pageSize, totalCount, url, startLocation, endLocation);
 						}
 					}
 				/* o o _ _ */
@@ -235,23 +236,23 @@ public class RentalcarListController extends SuperClass{
 					if (startDate == null || startDate.equals("")) {
 						/* o o x x */
 						if (endDate == null || endDate.equals("")) {
-							System.out.println("Paging:/* o o x x */");
-							pageInfo = new Paging(isGrid, pageNumber, pageSize, totalCount, url, startLocation, endLocation);
+							System.out.println("PagingCar:/* o o x x */");
+							pageInfo = new PagingCar(isGrid, pageNumber, pageSize, totalCount, url, startLocation, endLocation);
 						/* o o x o */
 						} else {
-							System.out.println("Paging:/* o o x o */");
-							pageInfo = new Paging(isGrid, pageNumber, pageSize, totalCount, url, startLocation, endLocation);
+							System.out.println("PagingCar:/* o o x o */");
+							pageInfo = new PagingCar(isGrid, pageNumber, pageSize, totalCount, url, startLocation, endLocation);
 						}
 					/* o o o _ */
 					} else {
 						/* o o o x */
 						if (endDate == null || endDate.equals("")) {
-							System.out.println("Paging:/* o o o x */");
-							pageInfo = new Paging(isGrid, pageNumber, pageSize, totalCount, url, startLocation, endLocation);
+							System.out.println("PagingCar:/* o o o x */");
+							pageInfo = new PagingCar(isGrid, pageNumber, pageSize, totalCount, url, startLocation, endLocation);
 						/* o o o o */
 						} else {
-							System.out.println("Paging:/* o o o o */");
-							pageInfo = new Paging(isGrid, pageNumber, pageSize, totalCount, url, startLocation, endLocation);
+							System.out.println("PagingCar:/* o o o o */");
+							pageInfo = new PagingCar(isGrid, pageNumber, pageSize, totalCount, url, startLocation, endLocation);
 						}
 					}
 				}

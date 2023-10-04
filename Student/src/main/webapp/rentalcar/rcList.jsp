@@ -151,7 +151,7 @@
 						<div class="card" style="width:19rem;">
 							<a class="removeUnderLine"  href="<%=notWithFormTag%>rcDetail&rcid=${bean.rcid}${requestScope.pageInfo.flowParameter}">
 								<!-- carName 작업 ing -->
-								<img class="card-img-top" alt="${bean.carName}" src="upload/${bean.carImage01}">
+								<img class="card-img-top" alt="${bean.carName}" src="/Student/upload/${bean.carImage01}">
 								<div class="card-body"> 
 									<h5 class="card-title">${bean.carName}</h5> 
 									<p class="card-text">

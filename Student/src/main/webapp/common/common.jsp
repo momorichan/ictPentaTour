@@ -10,7 +10,7 @@ String withFormTag = appName + mappingName;
 
 //form 태그가 아닌 영역에서 사용할 변수
 String notWithFormTag = appName + mappingName + "?command=";
-%>	
+%>
 <%-- jstl을 위한 태그 라이브러리 선언 --%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
@@ -305,7 +305,7 @@ String notWithFormTag = appName + mappingName + "?command=";
 	padding-top:10px;
 	padding-bottom:10px;
 	margin-bottom: 25px !important;
-	position: fixed !important;
+	position: absolute !important;
 	top:0px !important;
 	width:100% !important;
 	z-index: 999 !important;
@@ -316,7 +316,7 @@ String notWithFormTag = appName + mappingName + "?command=";
     padding-top: 10px;
     padding-bottom: 370px;
     margin-bottom: 25px !important;
-    position: fixed !important;
+    position: absolute !important;
     top: 0px !important;
     right: 0px !important;
     width: 100% !important;
@@ -328,7 +328,7 @@ String notWithFormTag = appName + mappingName + "?command=";
     padding-top: 10px;
     padding-bottom: 370px;
     margin-bottom: 25px !important;
-    position: fixed !important;
+    position: absolute !important;
     top: 0px !important;
     right: 0px !important;
     width: 100% !important;
@@ -337,7 +337,7 @@ String notWithFormTag = appName + mappingName + "?command=";
     transition: 300ms;
 }
 .navbar-toggle-btn.mobile{
-	position: fixed;
+	position: absolute;
 	right:10px;
 	top:10px;
 	width:40px;
@@ -354,7 +354,7 @@ String notWithFormTag = appName + mappingName + "?command=";
 	padding-top:10px;
 	padding-bottom:10px;
 	margin-bottom: 25px !important;
-	position: fixed !important;
+	position: absolute !important;
 	top:0px !important;
 	right:0px !important;
 	width:100% !important;
@@ -366,7 +366,7 @@ String notWithFormTag = appName + mappingName + "?command=";
 	padding-bottom:200px;
 	padding-top:10px;
 	margin-bottom: 25px !important;
-	position: fixed !important;
+	position: absolute !important;
 	top:0px !important;
 	width:100% !important;
 	z-index: 999 !important;

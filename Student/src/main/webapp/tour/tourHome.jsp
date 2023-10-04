@@ -233,7 +233,7 @@ window.addEventListener('resize', () => {
 				</thead>
 				<tbody>
 					<c:set var="colsu" value="3"/>
-					<c:forEach var="bean" items="${requestScope.datalist }" varStatus="asdf">
+					<c:forEach var="bean" items="${sessionScope.datalist }" varStatus="asdf">
 						<c:if test="${asdf.index % colsu == 0}">
 							<tr></tr>
 						</c:if>
@@ -265,7 +265,7 @@ window.addEventListener('resize', () => {
 				</thead>
 				<tbody>
 					<c:set var="colsu" value="2"/>
-					<c:forEach var="bean" items="${requestScope.datalist }" varStatus="asdf">
+					<c:forEach var="bean" items="${sessionScope.datalist }" varStatus="asdf">
 						<c:if test="${asdf.index % colsu == 0}">
 							<tr></tr>
 						</c:if>

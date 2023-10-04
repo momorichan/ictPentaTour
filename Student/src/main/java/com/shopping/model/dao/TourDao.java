@@ -291,4 +291,29 @@ public class TourDao extends SuperDao {
 		if(conn != null)
 			conn.close();
 	}
+
+	public int InsertReservation(int toid, int tqty, String meid) throws Exception{
+		int cnt = -1;
+		String sql = " insert into tourreser values(tourreserseq.nextval, ?, ?, ?)";
+		
+		conn = super.getConnection();
+		conn.setAutoCommit(false);
+		PreparedStatement pstmt = conn.prepareStatement(sql);
+		
+		pstmt.setInt(1, toid);
+		pstmt.setInt(2, tqty);
+		pstmt.setString(3, meid);
+				
+		cnt = pstmt.executeUpdate();
+		conn.commit();
+		
+		if(pstmt != null) {
+			pstmt.close();
+		}
+		if(conn != null) {
+			conn.close();
+		}
+		
+		return cnt;
+	}
 }

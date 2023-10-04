@@ -57,6 +57,15 @@
 			$(".slide-div, .card-title, .card, .card-img-top, .serchcon, .tablecon, .tablecon-2, .navbar-toggle-btn").removeClass("mobile");
 		}
 	})
+	
+	function showPopup(toid, meid) {
+		if(${empty sessionScope.loginfo}) {
+			alert("로그인이 필요한 서비스 입니다.");
+			return false;
+		} else {
+			window.open("<%=notWithFormTag %>tourPopup&toid=" + toid + "&meid=" + meid , "a", "width=600, height=640, left=100, top=50");
+		}
+	}
 </script>
 <style type="text/css">
 @import url('https://fonts.googleapis.com/css2?family=Black+Han+Sans&family=Noto+Sans+KR&display=swap');
@@ -112,9 +121,9 @@
 }
 .side-pannel{
 	width: 450px;
-	height: 940px;
+	height: 960px;
 	position: sticky;
-	top:0px;
+	top:-1px;
 	background-color: white;
 	border: 1px solid;
 }
@@ -474,7 +483,7 @@ h2{
 					<div>
 						<h3 class="price">　</h3>
 					</div>
-					<button type="button" class="btn btn-lg btn-danger purchasebtn">구매</button>
+					<button type="button" class="btn btn-lg btn-danger purchasebtn" onclick="showPopup('${requestScope.bean.toid}','${sessionScope.loginfo.meid}')">구매</button>
 				</div>
 			</div>
 		</div>
@@ -500,7 +509,7 @@ h2{
 					<div>
 						<h3 style="font-size: 22px; text-align: center;"class="price">　</h3>
 					</div>
-					<button type="button" class="btn btn-danger purchasebtn">구매</button>
+					<button type="button" class="btn btn-danger purchasebtn" onclick="showPopup(${requestScope.bean.toid },${sessionScope.loginfo.meid })">구매</button>
 				</div>
 			</div>
 		</div>

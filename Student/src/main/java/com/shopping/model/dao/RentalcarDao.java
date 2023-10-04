@@ -7,7 +7,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import com.shopping.model.bean.Rentalcar;
-import com.shopping.utility.Paging;
+import com.shopping.utility.PagingCar;
 
 public class RentalcarDao extends SuperDao {
 
@@ -45,7 +45,7 @@ public class RentalcarDao extends SuperDao {
 		return bean;
 	}
 	/* SL, EL, SD, ED */
-	public List<Rentalcar> selectSLELSDED(Paging pageInfo) throws Exception {
+	public List<Rentalcar> selectSLELSDED(PagingCar pageInfo) throws Exception {
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
 		String startLocation = pageInfo.getStartLocation();
@@ -201,7 +201,7 @@ public class RentalcarDao extends SuperDao {
 		return lists;
 	}
 	/* SD, ED */
-	public List<Rentalcar> selectSDED(Paging pageInfo) throws Exception {
+	public List<Rentalcar> selectSDED(PagingCar pageInfo) throws Exception {
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
 
@@ -262,7 +262,7 @@ public class RentalcarDao extends SuperDao {
 		return lists;
 	}
 	/* SL, EL */
-	public List<Rentalcar> selectSLEL(Paging pageInfo) throws Exception {
+	public List<Rentalcar> selectSLEL(PagingCar pageInfo) throws Exception {
 		// TopN 구문을 사용하여 페이징 처리된 게시물 목록을 반환합니다.
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
@@ -319,7 +319,7 @@ public class RentalcarDao extends SuperDao {
 		return lists;
 	}
 	/* ED */
-	public List<Rentalcar> selectED(Paging pageInfo) throws Exception {
+	public List<Rentalcar> selectED(PagingCar pageInfo) throws Exception {
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
 		String endDate = pageInfo.getEndDate();
@@ -366,7 +366,7 @@ public class RentalcarDao extends SuperDao {
 		return lists;
 	}
 	/* SD */
-	public List<Rentalcar> selectSD(Paging pageInfo) throws Exception {
+	public List<Rentalcar> selectSD(PagingCar pageInfo) throws Exception {
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
 		String startDate = pageInfo.getStartDate();
@@ -413,7 +413,7 @@ public class RentalcarDao extends SuperDao {
 		return lists;
 	}
 	/* EL */
-	public List<Rentalcar> selectEL(Paging pageInfo) throws Exception {
+	public List<Rentalcar> selectEL(PagingCar pageInfo) throws Exception {
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
 		String endLocation = pageInfo.getEndLocation();
@@ -459,7 +459,7 @@ public class RentalcarDao extends SuperDao {
 		return lists;
 	}
 	/* SL */
-	public List<Rentalcar> selectSL(Paging pageInfo) throws Exception {
+	public List<Rentalcar> selectSL(PagingCar pageInfo) throws Exception {
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
 		String startLocation = pageInfo.getStartLocation();

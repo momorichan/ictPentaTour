@@ -108,8 +108,8 @@ public class Paging {
 			if (i == pageNumber) {
 				// active 속성으로 활성화시키고, 빨간 색으로 진하게 표현하기
 				html += "<li class=\"page-item active\">";
-				html += "<a class=\"page-link\" href=\"#\">";
-				html += "<b><font color='red'>" + i + "</font></b>";
+				html += "<a class=\"page-link\" href=\"#\" disabled='disabled'>";
+				html += "<b><font color='white'>" + i + "</font></b>";
 				html += "</a></li>";
 
 			} else {
@@ -515,8 +515,8 @@ public class Paging {
 			{
 				// active 속성으로 활성화 시키고, 빨간색으로 진하게 표현하기
 				html += "<li class=\"page-item active\">";
-				html += "<a class=\"page-link\" href=\"#\">";
-				html += "<b><font color='red'>" + i+"</font></b>";
+				html += "<a class=\"page-link\" href=\"#\" disabled=disabled>";
+				html += "<b><font color='white'>" + i+"</font></b>";
 				html += "</a></li>";
 			}
 			else
