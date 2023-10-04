@@ -1,4 +1,3 @@
-<%@ page import="com.shopping.model.bean.Member"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ page import="java.util.*"%>
 <%@ include file="../common/bootstrap5.jsp"%>
@@ -16,12 +15,6 @@ String notWithFormTag = appName + mappingName + "?command=";
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
-<%
-	/* Member mem = new Member();
-	mem.setId("admin");
-	mem.setName("관리자");
-	session.setAttribute("loginfo",mem); */
-%>
 <c:set var="whologin" value="0"/>
 <c:if test="${not empty sessionScope.loginfo}">
 	<c:if test="${sessionScope.loginfo.meid == 'admin'}">

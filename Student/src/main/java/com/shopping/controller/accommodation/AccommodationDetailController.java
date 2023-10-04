@@ -17,18 +17,20 @@ public class AccommodationDetailController extends SuperClass{
 		super.doGet(request, response);
 		
 		Integer acid = super.getNumberData(request.getParameter("acid"));
+		Integer minprice = super.getNumberData(request.getParameter("minprice"));
 		
 		AccommodationDao dao = new AccommodationDao();
 		RoomDao roomdao = new RoomDao();
 		
 		
 		try {
-			accommodation bean = dao.getBeanData(acid); 
+			accommodation bean = dao.getDataByPk(acid); 
 			List<Room> lists = roomdao.getDataByFk(acid);
 			List<String> randomimage = roomdao.randomImage(acid);
 			request.setAttribute("roomlists", lists);
 			request.setAttribute("acbean", bean);
 			request.setAttribute("randomimage", randomimage);
+			request.setAttribute("minprice",minprice);
 			super.gotopage("accommodation/acDetail.jsp");
 		} catch (Exception e) {
 			e.printStackTrace();

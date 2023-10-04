@@ -62,7 +62,7 @@ public class AccommodationDao extends SuperDao {
 		String keyword = pageInfo.getKeyword();
 
 		
-		String column = " ACID, ADDRESS, NAME, DESCRIPTION, image01, image02, image03";
+		String column = " ACID, city, ADDRESS, NAME, DESCRIPTION, image01, image02, image03";
 		
 		String sql = " select " + column;
 		sql += " from ( select " + column + ", rank() over(order by ACID asc) as ranking";
@@ -107,7 +107,7 @@ public class AccommodationDao extends SuperDao {
 		accommodation bean = new accommodation();
 		
 		bean.setAcid(rs.getInt("acid"));
-		
+		bean.setCity(rs.getString("city"));
 		bean.setName(rs.getString("name"));
 		bean.setAddress(rs.getString("address"));
 		bean.setDescription(rs.getString("description"));
@@ -120,7 +120,7 @@ public class AccommodationDao extends SuperDao {
 		return bean;
 	}
 
-	public List<Room> getDataByPk(Integer acid) throws Exception{
+	public List<Room> getDataByPkList(Integer acid) throws Exception{
 		List<Room> lists = new ArrayList<>();
 		RoomDao roomdao = new RoomDao();
 		PreparedStatement pstmt = null;
@@ -153,7 +153,7 @@ public class AccommodationDao extends SuperDao {
 		return lists;
 	}
 
-	public accommodation getBeanData(Integer acid) throws Exception{
+	public accommodation getDataByPk(Integer acid) throws Exception{
 		accommodation bean = new accommodation();
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
@@ -185,9 +185,158 @@ public class AccommodationDao extends SuperDao {
 		return bean;
 	}
 
-	public int InsertData(accommodation bean) {
-		// TODO Auto-generated method stub
-		return 0;
+	public int InsertData(accommodation bean, int[] amlist) throws Exception{
+		int cnt = -1;
+		
+		String sql = " insert into accommodation(acid, address, name, description, image01, image02, image03, city)" ;
+		sql += "values(acseq.nextval, ?, ?, ?, ?, ?, ?, ?)";
+		
+		PreparedStatement pstmt = null;
+		conn = super.getConnection();
+		conn.setAutoCommit(false);		
+		pstmt = conn.prepareStatement(sql);
+
+		pstmt.setString(1, bean.getAddress());
+		pstmt.setString(2, bean.getName());
+		pstmt.setString(3, bean.getDescription());
+		pstmt.setString(4, bean.getImage01());
+		pstmt.setString(5, bean.getImage02());
+		pstmt.setString(6, bean.getImage03());
+		pstmt.setString(7, bean.getCity());
+
+		cnt = pstmt.executeUpdate();
+		
+		if (pstmt != null) {
+			pstmt.close();
+		}
+		
+		if(amlist.length != 0) {
+			for(int amid : amlist) {
+				sql = " insert into amenitiedetails(acid, amid) values(acseq.currval,?)" ;
+				
+				pstmt = conn.prepareStatement(sql);
+	
+				pstmt.setInt(1,amid);
+				
+				cnt = pstmt.executeUpdate();
+				
+				if (pstmt != null) {
+					pstmt.close();
+				}		
+			}
+		}
+		conn.commit();
+		
+		if (pstmt != null) {
+			pstmt.close();
+		}
+		if (conn != null) {
+			conn.close();
+		}
+		return cnt;
+	}
+
+	public int updateData(accommodation bean, int[] amlist) throws Exception{
+		int cnt = -1;
+		
+		String sql = " update accommodation set address = ?, name = ?, description = ?, image01 = ?, image02 = ?, image03 = ? , city = ?" ;
+		sql += " where acid = ?";
+		
+		PreparedStatement pstmt = null;
+		conn = super.getConnection();
+		conn.setAutoCommit(false);		
+		pstmt = conn.prepareStatement(sql);
+
+		pstmt.setString(1, bean.getAddress());
+		pstmt.setString(2, bean.getName());
+		pstmt.setString(3, bean.getDescription());
+		pstmt.setString(4, bean.getImage01());
+		pstmt.setString(5, bean.getImage02());
+		pstmt.setString(6, bean.getImage03());
+		pstmt.setString(7, bean.getCity());		
+		pstmt.setInt(8, bean.getAcid());
+
+		cnt = pstmt.executeUpdate();
+		
+		if (pstmt != null) {
+			pstmt.close();
+		}
+		
+		sql = " update rooms set acid = ? where acid = 0" ;
+		
+		pstmt = conn.prepareStatement(sql);
+
+		pstmt.setInt(1,bean.getAcid());
+		
+		cnt = pstmt.executeUpdate();
+		
+		if (pstmt != null) {
+			pstmt.close();
+		}			
+		
+		sql = " delete from amenitiedetails where acid = ?" ;
+		
+		pstmt = conn.prepareStatement(sql);
+
+		pstmt.setInt(1,bean.getAcid());
+		
+		cnt = pstmt.executeUpdate();
+		
+		if (pstmt != null) {
+			pstmt.close();
+		}		
+		
+		
+		if(amlist.length != 0) {
+			for(int amid : amlist) {
+				sql = " insert into amenitiedetails(acid, amid) values(?,?)" ;
+				
+				pstmt = conn.prepareStatement(sql);
+				
+				pstmt.setInt(1,bean.getAcid());
+				pstmt.setInt(2,amid);
+				
+				cnt = pstmt.executeUpdate();
+				
+				if (pstmt != null) {
+					pstmt.close();
+				}		
+			}
+		}
+		conn.commit();
+		
+		if (pstmt != null) {
+			pstmt.close();
+		}
+		if (conn != null) {
+			conn.close();
+		}
+		return cnt;
+	}
+
+	public int deleteData(int acid) throws Exception {
+		int cnt = -1;
+		
+		String sql = " delete from accommodation where acid = ? " ;
+		
+		PreparedStatement pstmt = null;
+		conn = super.getConnection();
+		conn.setAutoCommit(false);		
+		pstmt = conn.prepareStatement(sql);
+
+		pstmt.setInt(1, acid);
+
+		cnt = pstmt.executeUpdate();
+		
+		conn.commit();
+		
+		if (pstmt != null) {
+			pstmt.close();
+		}
+		if (conn != null) {
+			conn.close();
+		}
+		return cnt;
 	}
 
 	

@@ -8,7 +8,6 @@ public class Room {
 	
 	private String room;
 	private String roominfo;
-	private String roomtype;
 	private String breakfast;
 	private String image01;
 	private String image02;
@@ -50,12 +49,6 @@ public class Room {
 	public void setRoominfo(String roominfo) {
 		this.roominfo = roominfo;
 	}
-	public String getRoomtype() {
-		return roomtype;
-	}
-	public void setRoomtype(String roomtype) {
-		this.roomtype = roomtype;
-	}
 	public String getBreakfast() {
 		return breakfast;
 	}
@@ -83,7 +76,7 @@ public class Room {
 	@Override
 	public String toString() {
 		return "Room [roid=" + roid + ", acid=" + acid + ", price=" + price + ", guests=" + guests + ", room=" + room
-				+ ", roominfo=" + roominfo + ", roomtype=" + roomtype + ", breakfast=" + breakfast + ", image01="
+				+ ", roominfo=" + roominfo + ", breakfast=" + breakfast + ", image01="
 				+ image01 + ", image02=" + image02 + ", image03=" + image03 + "]";
 	}
 

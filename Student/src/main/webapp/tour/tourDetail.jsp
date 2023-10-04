@@ -154,7 +154,7 @@
 	right:65px;
 	display: flex;
 	flex-direction: column;
-	transition: 100ms;
+	transition: transform 100ms;
 }
 .floating.bottom{
 	position:fixed;
@@ -174,7 +174,7 @@
 	margin-bottom:5px;
 	background: none;
 	border:none;
-	filter:brightness(0.7);
+	filter:brightness(1.2);
 }
 .delete-btn {
 	color:red !important;
@@ -374,7 +374,7 @@ h2{
 	right:-40px;
 	display: flex;
 	flex-direction: column;
-	transition: 100ms;
+	transition: transform 100ms;
 	justify-content: left;
 	text-align: left;
 }
@@ -396,13 +396,13 @@ h2{
 	text-align: left;
 	justify-content: left;
 	padding:2px;
-	transition:100ms;
+	transition: transform 100ms;
 }
 .floating-btn.mobile:hover {
 	margin-bottom:5px;
 	background: none;
 	border:1px solid;
-	filter:brightness(0.7);
+	filter:brightness(1.2);
 	text-align: left;
 	justify-content: left;
 	transform:translateX(-40px);

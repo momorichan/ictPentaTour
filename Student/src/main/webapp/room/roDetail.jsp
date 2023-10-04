@@ -11,8 +11,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-<meta charset="EUC-KR">
-<title>Insert title here</title>
+<meta charset="utf-8">
 <style type="text/css">
 /* 이미지 컨테이너 스타일 */
 .image-container {
