@@ -61,6 +61,6 @@ rcHome=com.shopping.controller.rentalcar.RentalcarHomeController
 rcCheck=com.shopping.controller.rentalcar.RentalcarCheckController
 rcList=com.shopping.controller.rentalcar.RentalcarListController
 rcDetail=com.shopping.controller.rentalcar.RentalcarDetailController
-#rcInsert=com.shopping.controller.rentalcar.RentalcarInsertController
+rcInsert=com.shopping.controller.rentalcar.RentalcarInsertController
 #rcUpdate=com.shopping.controller.rentalcar.RentalcarUpdateController
 #rcDelete=com.shopping.controller.rentalcar.RentalcarDeleteController

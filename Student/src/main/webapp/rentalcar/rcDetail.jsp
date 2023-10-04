@@ -23,7 +23,7 @@
 			};
 			var map = new kakao.maps.Map(container, options);
 			
-			/* 버튼 클릭 시 alert */
+			/* '예약 하기' 버튼 클릭 시 alert */
 			$("#bookCarBtn").click(function() {
 			    /*  로그인 check */
 			    if(${sessionScope.loginfo.id == null}){
@@ -39,6 +39,7 @@
 			    }else{
 			    	const booking = confirm("예약하시겠습니까?");
 			    	if(booking){
+			    		$('#bookCarForm').submit();			    		
 			    		swal("예약이 완료되었습니다!");
 			    		/* 사용자 아이디, 렌터카 번호 넘겨야 함. */
 			    	}else{
@@ -46,6 +47,8 @@
 			    	}
 			    }
 			});
+
+
 		});
 	</script>
 	
@@ -134,7 +137,6 @@
 			</tbody>
 		</table>
 	</div>
-	<!--  -->
 	<div class="offcanvas offcanvas-end" id="demo">
 		<div class="offcanvas-header">
 			<h1 class="offcanvas-title">지도</h1>
@@ -144,10 +146,13 @@
 			<p>테스트</p>			
 			<div id="map" style="width: 500px; height: 400px;"></div>
 			<br/>
-			<form action= "<%=withFormTag%>" method="post"> 
+			<!-- 예약 submit -->
+			<!-- enctype="multipart/form-data" -->
+			<form action= "<%=withFormTag%>" method="post" id="bookCarForm" >  
+				<input type="hidden" name="command" value="rcDetail">
 				<input type="hidden" name="id" value="${sessionScope.loginfo.id}">
 	    		<input type="hidden" name="rcid" value="${requestScope.bean.rcid}">
-				<button class="btn btn-success" type="button" id="bookCarBtn">예약 하기</button>
+				<button class="btn btn-success" type="button" id="bookCarBtn" >예약 하기</button>
 			</form>
 		</div>
 	</div>

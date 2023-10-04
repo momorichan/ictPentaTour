@@ -13,7 +13,8 @@
 			var tooltipTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="tooltip"]'))
 			var tooltipList = tooltipTriggerList.map(function (tooltipTriggerEl) {
 				return new bootstrap.Tooltip(tooltipTriggerEl)
-			});		
+			});
+
 		});
 	</script>
 	<style type="text/css">
@@ -45,7 +46,7 @@
 			</div>
 			<div class="bottom_button">
 				<!-- contextual class : btn-primary, btn-info, btn-danger -->
-				<button type="submit" class="btn btn-primary btnn">로그인</button> 
+				<button type="submit" class="btn btn-primary btnn" >로그인</button> 
 				<a type="button" href="<%=notWithFormTag%>meInsert" class="btn btn-info">회원 가입</a>
 			</div>				
 		</form>

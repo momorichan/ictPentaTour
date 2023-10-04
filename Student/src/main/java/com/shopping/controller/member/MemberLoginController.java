@@ -5,9 +5,6 @@ import java.util.List;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import org.eclipse.jdt.internal.compiler.ast.Wildcard;
-
-import com.shopping.controller.HomeController;
 import com.shopping.controller.SuperClass;
 import com.shopping.controller.product.ProductListController;
 import com.shopping.model.bean.Member;
@@ -52,7 +49,7 @@ public class MemberLoginController extends SuperClass{
 			super.session.setAttribute("loginfo", bean);
 			
 			MallDao mdao = new MallDao();
-
+			String prevURL = (String) session.getAttribute("prev_url");
 			try {
 				// 나의 WishList를 테이블에서 읽어와서 session 영역에 바인딩합니다.				
 				List<WishList> wishList = mdao.getWishList(bean.getId());
@@ -60,10 +57,17 @@ public class MemberLoginController extends SuperClass{
 					super.mycart.AddCart(item.getPnum(), item.getQty());
 				}
 				super.session.setAttribute("mycart", mycart);
+				super.session.setAttribute("prev_url", request.getRequestURL());
 				
 				// 로그인 성공 시, 홈 화면으로 이동합니다. 차후 상품 목록 페이지로 갈 예정			
 				//new HomeController().doGet(request, response) ;
-				new ProductListController().doGet(request, response);
+				
+				
+//				new ProductListController().doGet(request, response);
+				
+				
+				
+				response.sendRedirect(prevURL);
 			} catch (Exception e) {
 				e.printStackTrace();
 			}

@@ -23,15 +23,10 @@
 		border: 2px;
 		border-radius: 5%;
 		box-shadow: 1px 1px 3px 1px #dadce0;
-		
-	
-	}
-	.hover-img{
 		background-color: #ffffff;
-/*         border: 1px solid #ccc; */
-        border-radius: 5%;
-	}
-	.hover-img:hover {
+        border-radius: 5%;	
+	}	
+	.item:hover {
 		background-color: #eeeeee;
         border-color: #bbb;
         border-radius: 5%;
@@ -46,9 +41,7 @@
 		border-radius: 5% 5% 0 0;
 		
 	}
-	background-color{
 	
-	}
 	
 	</style>	
 	<script type="text/javascript" async src="https://tenor.com/embed.js"></script>
@@ -61,12 +54,14 @@
 		var image = document.querySelector('.image');
 		image.src = staticImg;
 			
-		image.addEventListener("mouseenter", function() {
-		  image.src = gifImg;
+		
+		$(image).on("mouseenter", function(){
+			image.src = gifImg;
 		});
-		image.addEventListener("mouseleave", function() {
-		  image.src = staticImg;
-		});
+		$(image).on("mouseleave", function(){
+			image.src = staticImg;
+		})
+		
 		
 		
 		/* tooltip */
@@ -99,10 +94,10 @@
 			<div class="hover-img" >
 				<figure>					
 					<a href="<%=notWithFormTag%>rcList">
-<!-- 						<img src="https://content.skyscnr.com/db465e93dcaad614e9bfcaddb5865e36/GettyImages-505777764.jpg"> -->
-						<img class="image" />
+						<img src="https://content.skyscnr.com/db465e93dcaad614e9bfcaddb5865e36/GettyImages-505777764.jpg">						
 					</a>
-				</figure>			
+				</figure>
+				https://tenor.com/bogMO.gif			
 				<h5>예약 하러 가기</h5>				
 			</div>
 		</div>

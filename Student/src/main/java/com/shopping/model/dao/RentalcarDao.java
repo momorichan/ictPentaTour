@@ -6,11 +6,34 @@ import java.sql.ResultSet;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.shopping.model.bean.Member;
 import com.shopping.model.bean.Rentalcar;
 import com.shopping.utility.Paging;
 
 public class RentalcarDao extends SuperDao {
-
+	// rentalCheck 테이블에 예약 정보 등록
+	public int InsertDataToCheck(Rentalcar bean, Member mbean) throws Exception{
+		// 예약 정보를 데이터베이스(rentalCheck)에 추가합니다.
+		System.out.println("예약 등록 bean:");
+		System.out.println("rcid: " + bean.getRcid());
+		System.out.println("id: "+mbean.getId());
+		PreparedStatement pstmt = null;
+		String sql = " insert into rentalCheck(rcid, id)";
+		sql += " values(?,?)";
+		int cnt = -1;
+		
+		conn = super.getConnection();
+		conn.setAutoCommit(false);
+		pstmt = conn.prepareStatement(sql);
+		pstmt.setString(1, bean.getRcid());
+		pstmt.setString(2, mbean.getId());
+		cnt = pstmt.executeUpdate() ;
+		conn.commit();		
+		
+		if(pstmt!=null){pstmt.close();}
+		if(conn!=null){conn.close();}		
+		return cnt;
+	}
 	public Rentalcar GetDataByPk(String rcid) throws Exception {
 		// 렌트카 번호(String)를 이용하여 해당 상품에 대한 Bean 객체를 반환해 줍니다.
 		
@@ -44,6 +67,7 @@ public class RentalcarDao extends SuperDao {
 
 		return bean;
 	}
+	
 	/* SL, EL, SD, ED */
 	public List<Rentalcar> selectSLELSDED(Paging pageInfo) throws Exception {
 		PreparedStatement pstmt = null;
@@ -1024,4 +1048,8 @@ public class RentalcarDao extends SuperDao {
 		return cnt;		
 		
 	}
+	
+	
+
+
 }

@@ -37,7 +37,7 @@ public class BoardInsertController extends SuperClass {
 				
 			}else { // 성공
 				// 게시물 목록 보기 페이지로 이동
-				
+				response.sendRedirect("Shopping?command=boList");
 			}
 		} catch (Exception e) {
 			e.printStackTrace();

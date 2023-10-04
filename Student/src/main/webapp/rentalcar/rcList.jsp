@@ -145,7 +145,7 @@
 								
 				<c:forEach var="bean" items="${requestScope.datalist}" varStatus="status">
 					<c:if test="${status.index mod colsu == 0}">
-											
+						<tr>													
 					</c:if>				 
 					<td> 
 						<div class="card" style="width:19rem;">
@@ -178,7 +178,8 @@
 							</a>
 						</div>
 					</td>
-					<c:if test="${status.index mod colsu == (colsu-1)}">						
+					<c:if test="${status.index mod colsu == (colsu-1)}">
+						</tr>						
 					</c:if>
 				</c:forEach>			
 			</tbody>
