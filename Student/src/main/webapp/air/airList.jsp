@@ -12,11 +12,15 @@
 
 	<style type="text/css">
 	
+	.mode, .keyword{
+	margin: auto;
+}
+
+.form-control-sm {
+	border: 1px solid Gainsboro;
+}
 	
-	.btn-warning
-	{
-		margin-left: 30px;
-	}
+	
 	</style>
 	
 	<script type="text/javascript">
@@ -44,7 +48,7 @@
 	
 	function moveList()
 	{
-		location.href = '<%=notWithFormTag%>airList&mode=all&keyword=';
+		location.href = '<%=notWithFormTag%>airList&mode=all&keyword=&ones=rest';
 	}
 	
 	function goHome()
