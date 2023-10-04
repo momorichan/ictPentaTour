@@ -22,6 +22,7 @@ public class AirInsertCheckController extends SuperClass{
 		AirDao dao2 = new AirDao();
 		
 		int regid = (int) session.getAttribute("regid");
+		System.out.println("regid 진자 : " + regid);
 	
 		try
 		{
