@@ -25,7 +25,7 @@ public class ReviewListController extends SuperClass{
 		
 		ReviewDao dao = new ReviewDao();
 		try {
-			int totalCount = dao.getTotalRecordCount("review", mode, keyword); 
+			int totalCount = dao.getTotalRecordCount(mode, keyword); 
 			String url = super.getUrlInfomation("rvList");
 			boolean isGrid = false;
 			
@@ -33,9 +33,17 @@ public class ReviewListController extends SuperClass{
 					new Paging(pageNumber, pageSize, totalCount, url, mode, keyword, isGrid);
 			
 			List<Review> lists = dao.selectAll(pageInfo, attribute);
+			request.setAttribute("datalist", lists);
+			Object rating = null;
+			request.setAttribute("rating", rating);
 			
-			request.setAttribute("datalist", lists);	
-			
+			int commentAdd = (int) dao.commentAdd();
+			double averageRating = dao.calculateAverageRating();
+			averageRating = Math.round(averageRating * 100.0) / 100.0;
+
+			// 가져온 평균 평점을 JSP 페이지로 전달
+			super.session.setAttribute("commentAdd", commentAdd);
+	         super.session.setAttribute("averageRating", averageRating);
 			//페이징 정보를 바인딩
 			request.setAttribute("pageInfo", pageInfo);			
 			super.gotopage("review/rvList.jsp");

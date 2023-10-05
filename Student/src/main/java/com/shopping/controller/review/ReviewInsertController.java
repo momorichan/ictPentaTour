@@ -3,6 +3,7 @@ package com.shopping.controller.review;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.oreilly.servlet.MultipartRequest;
 import com.shopping.controller.SuperClass;
 import com.shopping.model.bean.Review;
 import com.shopping.model.dao.ReviewDao;
@@ -13,7 +14,7 @@ public class ReviewInsertController extends SuperClass{
 	@Override
 	public void doGet(HttpServletRequest request, HttpServletResponse response) throws Exception {
 		super.doGet(request, response);
-		super.gotopage(PREFIX+"rvInsertForm.jsp");
+		super.gotopage(PREFIX+"rvInsert.jsp");
 	}
 
 	@Override
@@ -21,11 +22,11 @@ public class ReviewInsertController extends SuperClass{
 		super.doPost(request, response);
 		
 		Review bean = new Review();
-		
-		bean.setMeid(request.getParameter("meid"));
-		bean.setRegdate(request.getParameter("regdate"));
-		bean.setRating(Integer.parseInt(request.getParameter("rating")));
-		bean.setContent(request.getParameter("content"));
+		MultipartRequest mr = (MultipartRequest)request.getAttribute("mr");
+		bean.setMeid(mr.getParameter("meid"));
+		bean.setRegdate(mr.getParameter("regdate"));
+		bean.setRating(Integer.parseInt(mr.getParameter("rating")));
+		bean.setContent(mr.getParameter("content"));
 		
 		ReviewDao dao = new ReviewDao();
 		
