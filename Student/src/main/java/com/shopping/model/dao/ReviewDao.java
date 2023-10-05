@@ -4,8 +4,6 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.util.ArrayList;
 import java.util.List;
-
-import com.shopping.model.bean.Product;
 import com.shopping.model.bean.Review;
 import com.shopping.utility.Paging;
 
@@ -19,7 +17,7 @@ public class ReviewDao extends SuperDao {
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
 
-		String sql = " SELECT count(*) as cnt FROM review";
+		String sql = " SELECT count(*) as cnt FROM tourreview";
 
 		if (mode == null || mode.equals("all")) {// 전체 모드인 경우
 
@@ -61,7 +59,7 @@ public class ReviewDao extends SuperDao {
 		
 		String sql = " select " + column;
 		sql += " from ( select " + column + ", rank() over(order by regdate asc) as ranking";
-		sql += " from review where toid = ?";
+		sql += " from tourreview where toid = ?";
 		sql += " ) ";
 		sql += " where ranking between ? and ? order by regdate desc";
 		conn = super.getConnection();
@@ -101,7 +99,7 @@ public class ReviewDao extends SuperDao {
 	    StringBuilder sql = new StringBuilder();
 	    sql.append("SELECT ").append(column).append(",");
 	    sql.append(" RANK() OVER (ORDER BY regdate DESC) AS ranking ");
-	    sql.append("FROM review ORDER BY regdate DESC ");
+	    sql.append("FROM tourreview ORDER BY regdate DESC ");
 
 	    if (mode != null && !mode.equals("all")) {
 	        // 모드가 "all"이 아닌 경우에만 조건을 추가합니다.
@@ -214,8 +212,8 @@ public class ReviewDao extends SuperDao {
 System.out.println(bean);
 		
 		int cnt = -1;
-		String sql = " insert into review(trid, meid, rating, regdate, content)";
-		sql += " values(reviewseq.nextval, 'admin', ?, sysdate, ?)";
+		String sql = " insert into tourreview(trid, meid, rating, regdate, content)";
+		sql += " values(tourreviewseq.nextval, 'admin', ?, sysdate, ?)";
 		PreparedStatement pstmt = null;
 		
 		conn = super.getConnection();//단계2
@@ -248,7 +246,7 @@ System.out.println(bean);
 	    conn.setAutoCommit(false);
 
 	    // SQL 쿼리 설정
-	    sql = "DELETE FROM review WHERE trid = ?";
+	    sql = "DELETE FROM tourreview WHERE trid = ?";
 	    pstmt = conn.prepareStatement(sql);
 	    pstmt.setInt(1, trid);
 
@@ -273,7 +271,7 @@ System.out.println(bean);
 	    ResultSet rs = null;
 	    double averageRating = 0;
 	    
-	    String sql = " SELECT AVG(rating) AS average_rating FROM review";
+	    String sql = " SELECT AVG(rating) AS average_rating FROM tourreview";
 
 	    conn = getConnection();
 	    pstmt = conn.prepareStatement(sql);
@@ -301,7 +299,7 @@ System.out.println(bean);
 	    ResultSet rs = null;
 	    int commentAdd = 0;
 	    
-	    String sql = " SELECT COUNT(*) AS comment_add FROM review";
+	    String sql = " SELECT COUNT(*) AS comment_add FROM tourreview";
 
 	    conn = getConnection();
 	    pstmt = conn.prepareStatement(sql);
