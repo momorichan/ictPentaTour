@@ -1,5 +1,8 @@
 package com.shopping.controller.rentalcar;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
@@ -12,7 +15,6 @@ public class RentalcarDetailController extends SuperClass{
 	@Override
 	public void doGet(HttpServletRequest request, HttpServletResponse response) throws Exception {	
 		super.doGet(request, response);
-
 		String rcid = String.valueOf(request.getParameter("rcid")) ;
 		
 		RentalcarDao dao = new RentalcarDao() ;
@@ -27,9 +29,7 @@ public class RentalcarDetailController extends SuperClass{
 	@Override
 	public void doPost(HttpServletRequest request, HttpServletResponse response) throws Exception {
 		super.doPost(request, response);
-//		System.out.println(request.getParameter("rcid"));
-//		System.out.println(request.getParameter("id"));
-//		System.out.println("잘왓네");
+//		System.out.println(request.getParameter("rcid")+ " / " + request.getParameter("id"));
 		Rentalcar bean = new Rentalcar();
 		bean.setRcid(request.getParameter("rcid"));
 		Member mbean = new Member();
@@ -38,25 +38,17 @@ public class RentalcarDetailController extends SuperClass{
 		RentalcarDao dao = new RentalcarDao();
 		int cnt = -1;
 		
-		try {
-			cnt = dao.InsertDataToCheck(bean, mbean);
-			if(cnt == -1) { // 등록 실패
+		try {			
+			cnt = dao.InsertDataToCheck(bean, mbean);			
+			if(cnt == -1) { // 예약 등록 실패
 				new RentalcarDetailController().doGet(request, response);
-			}else { // 성공
-				response.sendRedirect("rentalcar/rcDetail.jsp");
-//				String gotopage = super.getUrlInfomation("rcList");
-//				gotopage += "&pageNumber=" + request.getParameter("pageNumber");
-//				gotopage += "&pageSize=" + request.getParameter("pageSize");
-//				gotopage += "&startLocation=" + request.getParameter("startLocation");
-//				gotopage += "&endLocation=" + request.getParameter("endLocation");
-//				response.sendRedirect(gotopage); 
-//				return;
+			}else { // 예약 성공				
+//				new RentalcarDetailController().doGet(request, response);
+				setAlertMessageYES("예약이 완료되었습니다.");				
+				super.gotoPage("rentalcar/rcList.jsp");
 			}
 		} catch (Exception e) {
 			e.printStackTrace();		
-			
 		}
-		
-		
 	}
 }

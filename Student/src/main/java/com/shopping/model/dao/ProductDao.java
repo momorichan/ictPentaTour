@@ -41,6 +41,8 @@ public class ProductDao extends SuperDao{
 		pstmt = conn.prepareStatement(sql);
 		pstmt.setInt(1, pnum);		
 		
+		System.out.println("삭제구문 sql: "+sql+ pnum);
+		cnt = pstmt.executeUpdate();
 		conn.commit();
 		
 		if(pstmt != null) {pstmt.close();}

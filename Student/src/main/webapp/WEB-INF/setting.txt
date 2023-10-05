@@ -5,4 +5,4 @@
 #phone=0212349876
 uploadPath=upload
 product_list_column_size=3
-rentalcar_list_column_size=3
+rentalcar_list_column_size=1

@@ -70,7 +70,12 @@ public class SuperClass implements SuperController{
 		// session 영역에서 "alertMessage"라는 이름으로 사용자에게 주의/오류/경고 문구 등을 띄워 줍니다.
 		// in common.jsp 파일 하단 참조
 		session.setAttribute("alertMessage", message);
-	}	 
+	}
+	public void setAlertMessageYES(String message) {
+		// session 영역에서 "alertMessage"라는 이름으로 사용자에게 주의/오류/경고 문구 등을 띄워 줍니다.
+		// in common.jsp 파일 하단 참조
+		session.setAttribute("alertMessageYES", message);
+	}
 	
 	public void gotoPage(String gotoPage) {
 		if(this.request == null) {

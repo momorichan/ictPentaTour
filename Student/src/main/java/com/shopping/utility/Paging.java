@@ -91,7 +91,7 @@ public class Paging {
 		// isGrid=true이면 상품 목록 보기, false이면 일반 형식(회원, 게시물 목록 등등)
 		if (_pageSize == null || _pageSize.equals("null") || _pageSize.equals("")) {
 			if (isGrid) { // 격자 형식으로 보기
-				_pageSize = "6"; // 2행 3열의 격자 구조
+				_pageSize = "4"; // 2행 3열의 격자 구조
 			} else {
 				_pageSize = "10";
 			}
@@ -128,8 +128,8 @@ public class Paging {
 		this.flowParameter = "";
 		this.flowParameter += "&pageNumber=" + pageNumber;
 		this.flowParameter += "&pageSize=" + pageSize;
-		this.flowParameter += "&startLocation=" + startLocation;
-		this.flowParameter += "&endLocation=" + endLocation;
+//		this.flowParameter += "&startLocation=" + startLocation;
+//		this.flowParameter += "&endLocation=" + endLocation;
 		this.pagingHtml = this.getMakePagingHtml();
 	}
 
@@ -182,10 +182,10 @@ public class Paging {
 		this.flowParameter = "";
 		this.flowParameter += "&pageNumber=" + pageNumber;
 		this.flowParameter += "&pageSize=" + pageSize;
-		this.flowParameter += "&startLocation=" + startLocation;
-		this.flowParameter += "&endLocation=" + endLocation;
-		this.flowParameter += "&startDate=" + startDate;
-		this.flowParameter += "&endDate=" + endDate;
+//		this.flowParameter += "&startLocation=" + startLocation;
+//		this.flowParameter += "&endLocation=" + endLocation;
+//		this.flowParameter += "&startDate=" + startDate;
+//		this.flowParameter += "&endDate=" + endDate;
 
 		this.pagingHtml = this.getMakePagingHtml();
 	}

@@ -7,12 +7,11 @@ import java.util.ArrayList;
 import java.util.List;
 
 import com.shopping.model.bean.Member;
-import com.shopping.model.bean.Product;
 import com.shopping.model.bean.Rentalcar;
 import com.shopping.utility.MyUtility;
 import com.shopping.utility.Paging;
 
-public class RentalcarDao extends SuperDao {
+public class RentalcarDao_backup extends SuperDao {
 	// rentalCheck 테이블에 예약 정보 등록
 	public int InsertDataToCheck(Rentalcar bean, Member mbean) throws Exception{
 		// 예약 정보를 데이터베이스(rentalCheck)에 추가합니다.
@@ -78,123 +77,116 @@ public class RentalcarDao extends SuperDao {
 		String endLocation = pageInfo.getEndLocation();
 		String startDate = pageInfo.getStartDate();
 		String endDate = pageInfo.getEndDate();
-		
-//		sql 에서는 쓸 필요 x
 		String startDateReplace = startDate.replace("/", ""); /* 날짜 문자열 */		
 		String endDateReplace = endDate.replace("/", ""); /* 날짜 문자열 */		
-		
-		
-		
+
 		String sql = " select rcid, carType, startLocation, endLocation, startDate, endDate, price, passengers, carName, carImage01, carImage02, carImage03";
 		sql += " from (select rcid, carType, startLocation, endLocation, startDate, endDate, price, passengers, carName, carImage01, carImage02, carImage03, rank() over(order by price asc) as ranking";
 		sql += " from rentalcar ";
 		/* x _ _ _ */
 		if (startLocation == null || startLocation.equals("all")) {
-			startLocation = null;
 			/* x x _ _ */
 			if (endLocation == null || endLocation.equals("all")) {
-				endLocation = null;
 				/* x x x _ */
 				if (startDate == null || startDate.equals("")) {
-					startDate = null;
 					/* x x x x */
 					if (endDate == null || endDate.equals("")) {
-						endDate = null;
-						// 싹 다 미선택 시						
-						System.out.println("select: 싹 다 미선택 시 여기로 옴");						
-					/* x x x o */
-					} else {						
-						sql += " where endDate ='" + endDate + "'" ;
+						System.out.println("select: 싹 다 널 값이면 여기로 옴");
+						/* x x x o */
+					} else {
+						sql += " where endDate >= to_date('" + endDateReplace + "', 'YYYYMMDD')";
 					}
-				/* x x o _ */
+					/* x x o _ */
 				} else {
-					startLocation = null;
-					endLocation = null;
-					sql += " where startDate <= '" + startDate + "'";
 					/* x x o x */
 					if (endDate == null || endDate.equals("")) {
-						endDate = null;				
-					/* x x o o */
+						sql += " where startDate <= to_date('" + startDateReplace + "', 'YYYYMMDD')";
+						/* x x o o */
 					} else {
-						sql += " and endDate >= '" + endDate + "'";
+						sql += " where startDate <= to_date('" + startDateReplace + "', 'YYYYMMDD')";
+						sql += " and endDate >= to_date('" + endDateReplace + "', 'YYYYMMDD')";
 					}
 				}
-			/* x o _ _ */
+				/* x o _ _ */
 			} else {
-				startLocation = null;
-				sql += " where endLocation='" + endLocation + "'";
 				/* x o x _ */
 				if (startDate == null || startDate.equals("")) {
-					startDate = null;
 					/* x o x x */
 					if (endDate == null || endDate.equals("")) {
-						endDate = null;					
-					/* x o x o */
+						sql += " where endLocation ='" + endLocation + "'";
+						/* x o x o */
 					} else {
-						sql += " and endDate >= '" + endDate + "'" ;
+						sql += " where endLocation ='" + endLocation + "'";
+						sql += " and endDate >= to_date('" + endDateReplace + "', 'YYYYMMDD')";
 					}
-				/* x o o _ */
+					/* x o o _ */
 				} else {
-					sql += " and startDate ='" + startDate + "'";
 					/* x o o x */
 					if (endDate == null || endDate.equals("")) {
-						endDate = null;
-					/* x o o o */
+						sql += " where endLocation ='" + endLocation + "'";
+						sql += " and startDate <= to_date('" + startDateReplace + "', 'YYYYMMDD')";
+						/* x o o o */
 					} else {
-						sql += " and endDate='" + endDate + "'";
+						sql += " where endLocation ='" + endLocation + "'";
+						sql += " and startDate <= to_date('" + startDateReplace + "', 'YYYYMMDD')";
+						sql += " and endDate >= to_date('" + endDateReplace + "', 'YYYYMMDD')";
 					}
 				}
 			}
-		/* o _ _ _ */
+			/* o _ _ _ */
 		} else {
-			sql += " where startLocation ='" + startLocation + "'";
 			/* o x _ _ */
 			if (endLocation == null || endLocation.equals("all")) {
-				endLocation = null;
 				/* o x x _ */
 				if (startDate == null || startDate.equals("")) {
-					startDate = null;
 					/* o x x x */
 					if (endDate == null || endDate.equals("")) {
-						endDate = null;
-						System.out.println("select SLELSDED /* o x x x */");
-					/* o x x o */
+						sql += " where startLocation= '" + startLocation + "'";
+						/* o x x o */
 					} else {
-						sql += " and endDate >= '" + endDate + "'" ;
+						sql += " where startLocation= '" + startLocation + "'";
+						sql += " and endDate >= to_date('" + endDateReplace + "', 'YYYYMMDD')";
 					}
-				/* o x o _ */
+					/* o x o _ */
 				} else {
-					sql += " and startDate >= '" + startDate + "'";
 					/* o x o x */
 					if (endDate == null || endDate.equals("")) {
-						endDate = null;
-					/* o x o o */
+						sql += " where startLocation ='" + startLocation + "'";
+						sql += " and startDate <= to_date('" + startDateReplace + "', 'YYYYMMDD')";
+						/* o x o o */
 					} else {
-						sql += " and endDate <= '" + endDate + "'";
+						sql += " where startLocation ='" + startLocation + "'";
+						sql += " and startDate <= to_date('" + startDateReplace + "', 'YYYYMMDD')";
+						sql += " and endDate >= to_date('" + endDateReplace + "', 'YYYYMMDD')";
 					}
 				}
-			/* o o _ _ */
+				/* o o _ _ */
 			} else {
-				sql += " and endLocation ='" + endLocation + "'";
 				/* o o x _ */
 				if (startDate == null || startDate.equals("")) {
-					startDate = null;
 					/* o o x x */
 					if (endDate == null || endDate.equals("")) {
-						endDate = null;
-					/* o o x o */
+						sql += " where startLocation ='" + startLocation + "'";
+						sql += " and endLocation ='" + endLocation + "'";
+						/* o o x o */
 					} else {
-						sql += " and endDate <= '" + endDate + "'";
+						sql += " where startLocation ='" + startLocation + "'";
+						sql += " and endLocation ='" + endLocation + "'";
+						sql += " and endDate >= to_date('" + endDateReplace + "', 'YYYYMMDD')";
 					}
-				/* o o o _ */
+					/* o o o _ */
 				} else {
-					sql += " and startDate >='" + startDate + "'";
 					/* o o o x */
 					if (endDate == null || endDate.equals("")) {
-						endDate = null;
-					/* o o o o */
+						sql += " where startLocation ='" + startLocation + "'";
+						sql += " and endLocation ='" + endLocation + "'";
+						sql += " and startDate <= to_date('" + startDateReplace + "', 'YYYYMMDD')";
+						/* o o o o */
 					} else {
-						sql += " and endDate <= '" + endDate + "'";
+						sql += " where startLocation ='" + startLocation + "'";
+						sql += " and endLocation ='" + endLocation + "'";
+						sql += " and startDate <= to_date('" + startDateReplace + "', 'YYYYMMDD')";
+						sql += " and endDate >= to_date('" + endDateReplace + "', 'YYYYMMDD')";
 					}
 				}
 			}
@@ -608,70 +600,76 @@ public class RentalcarDao extends SuperDao {
 		// 테이블의 총 행개수를 구합니다.
 		/* x _ _ _ */
 		if (startLocation == null || startLocation.equals("all")) {
+			startLocation = null;
 			/* x x _ _ */
 			if (endLocation == null || endLocation.equals("all")) {
+				endLocation = null;
 				/* x x x _ */
 				if (startDate == null || startDate.equals("")) {
+					startDate = null;
 					/* x x x x */
 					if (endDate == null || endDate.equals("")) {
+						endDate = null;
 						System.out.println("싹 다 널값(all)이면 여기로 옴");
-						/* x x x o */
+					/* x x x o */
 					} else {
-						sql += " where endDate >= to_date('" + startDateReplace + "', 'YYYYMMDD')";
+						sql += " where endDate >='" + endDate + "'";
 					}
-					/* x x o _ */
+				/* x x o _ */
 				} else {
+					sql += " where startDate <='" + startDate + "'";
 					/* x x o x */
 					if (endDate == null || endDate.equals("")) {
-						sql += " where startDate <= to_date('" + startDateReplace + "', 'YYYYMMDD')";
-						/* x x o o */
+						endDate = null;
+					/* x x o o */
 					} else {
-						sql += " where startDate <= to_date('" + startDateReplace + "', 'YYYYMMDD')";
-						sql += " and endDate >= to_date('" + startDateReplace + "', 'YYYYMMDD')";
+						sql += " and where endDate ='" + endDate + "'";
 					}
 				}
-				/* x o _ _ */
+			/* x o _ _ */
 			} else {
+				sql += " where endLocation ='" + endLocation + "'";
 				/* x o x _ */
 				if (startDate == null || startDate.equals("")) {
+					startDate = null;
 					/* x o x x */
 					if (endDate == null || endDate.equals("")) {
-						sql += " where endLocation ='" + endLocation + "'";
-						/* x o x o */
+						endDate = null;
+					/* x o x o */
 					} else {
-						sql += " where endLocation ='" + endLocation + "'";
-						sql += " and endDate >= to_date('" + endDateReplace + "', 'YYYYMMDD')";
+						sql += " and endDate <='" + endDate + "'";
 					}
-					/* x o o _ */
+				/* x o o _ */
 				} else {
+					sql += " and startDate >='" + startDate + "'";
 					/* x o o x */
 					if (endDate == null || endDate.equals("")) {
-						sql += " where endLocation ='" + endLocation + "'";
-						sql += " and startDate <= to_date('" + startDateReplace + "', 'YYYYMMDD')";
-						/* x o o o */
+						endDate = null;
+					/* x o o o */
 					} else {
-						sql += " where endLocation ='" + endLocation + "'";
-						sql += " and startDate <= to_date('" + startDateReplace + "', 'YYYYMMDD')";
-						sql += " and endDate >= to_date('" + endDateReplace + "', 'YYYYMMDD')";
+						sql += " and endDate <='" + endDate + "'";
 					}
 				}
 			}
-			/* o _ _ _ */
+		/* o _ _ _ */
 		} else {
+			sql += " where startLocation ='" + startLocation + "'";
 			/* o x _ _ */
 			if (endLocation == null || endLocation.equals("all")) {
+				endLocation = null;
 				/* o x x _ */
 				if (startDate == null || startDate.equals("")) {
+					startDate =null;
 					/* o x x x */
 					if (endDate == null || endDate.equals("")) {
-						sql += " where startLocation= '" + startLocation + "'";
-						/* o x x o */
+						endDate = null;
+					/* o x x o */
 					} else {
-						sql += " where startLocation= '" + startLocation + "'";
-						sql += " and endDate >= to_date('" + startDateReplace + "', 'YYYYMMDD')";
+						sql+= " and endDate <='" + endDate + "'";
 					}
-					/* o x o _ */
+				/* o x o _ */
 				} else {
+					sql += " and startDate >='" + startDate +"'";
 					/* o x o x */
 					if (endDate == null || endDate.equals("")) {
 						sql += " where startLocation ='" + startLocation + "'";
@@ -1023,8 +1021,6 @@ public class RentalcarDao extends SuperDao {
 
 		return cnt;		
 	}
-	
-
 	public int InsertData(Rentalcar bean)throws Exception {
 		// 기입한 상품 정보를 이용하여 데이터 베이스에 추가합니다.
 		System.out.println("상품 등록 빈 :\n" + bean);		
@@ -1059,6 +1055,7 @@ public class RentalcarDao extends SuperDao {
 		return cnt;		
 		
 	}
+	
 	public int DeleteData(String rcid) throws Exception {
 		// 상품 번호를 이용하여 해당 상품을 삭제합니다.
 		String sql = "";
@@ -1099,46 +1096,6 @@ public class RentalcarDao extends SuperDao {
 		return cnt;		
 
 	}
-	public int DeleteData123123123(String rcid) throws Exception {
-	    int cnt = -1;
-	    PreparedStatement pstmt = null;
-	    conn = null;
-	    try {
-	        // 상품 번호를 이용하여 해당 상품을 가져옵니다.
-	        Rentalcar bean = this.GetDataByPk(rcid);
-	        conn = super.getConnection();
-	        conn.setAutoCommit(false);
-	        String remark = MyUtility.getCurrentTime() + "(차량 번호: " + bean.getRcid() + " )" + " 렌터카가 삭제 되었습니다." ;
-	        // step01: 주문 상세 테이블의 비고(remark) 컬럼에 삭제 히스토리 남기기
-	        String sql = " update rentalcheck set remark = ? where rcid = ? ";
-	        pstmt = conn.prepareStatement(sql);
-	        pstmt.setString(1, remark);
-	        pstmt.setString(2, rcid);
-	        cnt = pstmt.executeUpdate();
-	        pstmt.close(); // Close the previous statement
-	        // step02: 상품 테이블에서 해당 상품 번호와 관련된 행 삭제하기
-	        sql = " delete from rentalcar where rcid= ? ";
-	        pstmt = conn.prepareStatement(sql);
-	        pstmt.setString(1, rcid);
-	        cnt = pstmt.executeUpdate();
-	        conn.commit();
-	    } catch(Exception e) {
-	        if(conn != null) {
-	            conn.rollback();  // 롤백 처리
-	        }
-	        throw e;  // 예외를 상위로 던져서 처리
-	    } finally {
-	        if(pstmt != null) {
-	            pstmt.close();
-	        }
-	        if(conn != null) {
-	            conn.close();
-	        }
-	    }
-	    return cnt;
-	}
-	
-	
 
 
 }
