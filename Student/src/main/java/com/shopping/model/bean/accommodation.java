@@ -73,9 +73,4 @@ public class accommodation {
 				+ ", name=" + name + ", description=" + description + ", image01=" + image01 + ", image02=" + image02
 				+ ", image03=" + image03 + "]";
 	}
-
-	
-	
-	
-	
 }

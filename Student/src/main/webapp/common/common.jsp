@@ -1,4 +1,3 @@
-<%@ page import="com.shopping.model.bean.Member"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ page import="java.util.*"%>
 <%@ include file="../common/bootstrap5.jsp"%>
@@ -12,17 +11,11 @@ String withFormTag = appName + mappingName;
 
 //form 태그가 아닌 영역에서 사용할 변수
 String notWithFormTag = appName + mappingName + "?command=";
-%>	
+%>
 <%-- jstl을 위한 태그 라이브러리 선언 --%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
-<%
-	/* Member mem = new Member();
-	mem.setId("admin");
-	mem.setName("관리자");
-	session.setAttribute("loginfo",mem); */
-%>
 <c:set var="whologin" value="0"/>
 <c:if test="${not empty sessionScope.loginfo}">
 	<c:if test="${sessionScope.loginfo.meid == 'admin'}">
@@ -36,6 +29,7 @@ String notWithFormTag = appName + mappingName + "?command=";
 <!DOCTYPE html>
 <html>
 <head>
+<link rel="stylesheet" href="${pageContext.request.contextPath}/css/common.css">
 <meta charset="UTF-8">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
 <script type="text/javascript"
@@ -47,13 +41,21 @@ String notWithFormTag = appName + mappingName + "?command=";
 <link rel="stylesheet" type="text/css"
 	href="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.css" />
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
-<title>Insert title here</title>
+
 <!-- 이 파일은 모든 문서에서 공용으로 참조 할 파일입니다. -->
 <!-- 자바 관련 변수 및 패키지 임포트, 네비게이션 바, jstl 등등-->
 <script src="/Student/js/sweetalert.js"></script>
 <script type="text/javascript">
 	var scrollheight = 0;
 	var navbartoggle = "";
+	var setCookie = function(name, value) {
+	    document.cookie = name + '=' + value;
+	};
+	var getCookie = function(name) {
+	    var value = document.cookie.match('(^|;) ?' + name + '=([^;]*)(;|$)');
+	    return value? value[2] : null;
+	};
+	document.cookie = getCookie("sidebar");
 	$(window).scroll(function(){
 	    scrollheight = $(window).scrollTop();
 	    if(scrollheight < 1 && window.innerWidth > 1900){
@@ -70,7 +72,12 @@ String notWithFormTag = appName + mappingName + "?command=";
 			$(".dropdown-toggle").attr("aria-expanded", "false");
 		}
 		
-	    return scrollheight;
+		var bottom_of_window = $(window).scrollTop() + $(window).height();
+		if(bottom_of_window > $('html').outerHeight() - 90) {
+			$(".top-btn-div").addClass("bottom");
+		} else {
+			$(".top-btn-div").removeClass("bottom");
+		}
 	});
 	window.addEventListener('resize', () => {
 		if(window.innerWidth <= 1900){
@@ -80,23 +87,22 @@ String notWithFormTag = appName + mappingName + "?command=";
 			$(".dropdown-toggle").attr("aria-expanded", "false");
 		}
 	});
+	/* 모바일 */
 	window.onload=function(){
-		if(window.innerWidth < 501) {
-			$(".slide-div, .card-title, .card, .card-img-top, .serchcon, .tablecon, .tablecon-2, .navbar-toggle-btn").addClass("mobile");
-		}else{
-			$(".slide-div, .card-title, .card, .card-img-top, .serchcon, .tablecon, .tablecon-2, .navbar-toggle-btn").removeClass("mobile");
-		}
+		
 	}
 	window.addEventListener('resize', () => {
 		if(window.innerWidth < 501) {
-			$(".slide-div, .card-title, .card, .card-img-top, .serchcon, .tablecon, .tablecon-2, .navbar-toggle-btn").addClass("mobile");
+			$(".navbar-toggle-btn").addClass("mobile");
+			toggleSideOff();
 		}
 		if(window.innerWidth >= 501) {
-			$(".slide-div, .card-title, .card, .card-img-top, .serchcon, .tablecon, .tablecon-2, .navbar-toggle-btn").removeClass("mobile");
+			$(".navbar-toggle-btn").removeClass("mobile");
 			$(".navbar, .dropdown-div").removeClass("toggle-on");
 			$(".dropdown-div").removeClass("dropstart");
 			$(".collapse").removeClass("show");
 			navbartoggle = "";
+			toggleSideOn();
 		}
 	});
 	function navtoggle(){
@@ -112,14 +118,7 @@ String notWithFormTag = appName + mappingName + "?command=";
 			navbartoggle = "";
 		}
 	};
-	var setCookie = function(name, value) {
-	    document.cookie = name + '=' + value;
-	};
-	var getCookie = function(name) {
-	    var value = document.cookie.match('(^|;) ?' + name + '=([^;]*)(;|$)');
-	    return value? value[2] : null;
-	};
-	document.cookie = getCookie("sidebar");
+	
 	function toggleSideOn(){
 		setCookie("sidebar", "on")
 		checkToggle();
@@ -142,11 +141,25 @@ String notWithFormTag = appName + mappingName + "?command=";
 		}
 	}
 	$(function(){
-		  $('.top-btn').on('click',function(e){
-		      e.preventDefault();
-		      $('html,body').animate({scrollTop:0},0);
-		  });
+		$('.top-btn').on('click',function(e){
+		    e.preventDefault();
+		    $('html,body').animate({scrollTop:0},0);
 		});
+	});
+	$(document).ready(function(){
+		if(window.innerWidth < 501) {
+			$(".navbar-toggle-btn").addClass("mobile");
+			toggleSideOff();
+		}
+		
+		if(window.innerWidth < 501) {
+			$(".navbar-toggle-btn").addClass("mobile");
+			toggleSideOff();
+		}else{
+			$(".navbar-toggle-btn").removeClass("mobile");
+			toggleSideOn();
+		}
+	});
 </script>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com">
@@ -183,11 +196,16 @@ String notWithFormTag = appName + mappingName + "?command=";
 		}
 		
 	</script>
+<<<<<<< HEAD
+=======
+<style type="text/css">
+
+</style>
+>>>>>>> refs/remotes/origin/WoodenBatnew
 </head>
 <body>
 	
 </body>
-<!--  footer -->
 <!-- 	<div class="dummy-navbar"></div> -->
 	<nav class="navbar navbar-expand-sm bg-dark navbar-dark" id="navbar">
 		<div class="container-fluid">
@@ -290,16 +308,14 @@ String notWithFormTag = appName + mappingName + "?command=";
 						<li class="nav-item dropdown">
 						<a	class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown">렌트카</a>
 							<ul class="dropdown-menu">
-								<li><a class="dropdown-item" href="<%=notWithFormTag%>rcList">렌트카</a></li>
-								<c:if test="${whologin == 2}">
-									
-								</c:if>							
+								<li><a class="dropdown-item" href="<%=notWithFormTag%>rcHome">렌트카 홈</a></li>
+								<li><a class="dropdown-item" href="<%=notWithFormTag%>rcList">렌트카 리스트</a></li>
 							</ul>
 						</li>	
 					</div>
 				</ul>
 			</div>
-			<button type="button" class="navbar-toggle-btn mobile" onclick="navtoggle()"><img src="/Student/upload/sidebar.png" style="width:100%; height:100%"></button>
+			<button type="button" class="navbar-toggle-btn" onclick="navtoggle()"><img src="/Student/upload/sidebar.png" style="width:100%; height:100%"></button>
 		</div>
 	</nav>
 	<div id="top"></div>
@@ -310,8 +326,9 @@ String notWithFormTag = appName + mappingName + "?command=";
 	  	</div>
 	  	<c:remove var="alertMessage" scope="session"/>
   	</c:if>
+<!--  footer -->
 <!-- <div class="dummy-copyright"></div> -->
-<div id="container" class="copyright" style="width: 100%; z-index: 1; bottom:0; position: fixed;">
+<div id="container" class="copyright" style="width: 100%; z-index: 1; bottom:0; position:absolute;">
 	<ul class="icons">
 		<li><a href="#" class="icon fa-twitter"><span class="label">Twitter</span></a></li>
 		<li><a href="#" class="icon fa-facebook"><span class="label">Facebook</span></a></li>

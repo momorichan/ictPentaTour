@@ -5,7 +5,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>${bean.tname } - 투어 상세보기</title>
 <script type="text/javascript">
 	var prevScrollTop = 0;
 	
@@ -14,7 +14,14 @@
 	function wheelDelta(){
 	    return prevScrollTop - nowScrollTop > 0 ? 'up' : 'down';
 	};
-	
+	$(window).scroll(function(){
+		var bottom_of_window = $(window).scrollTop() + $(window).height();
+		if(bottom_of_window > $('html').outerHeight() - 90) {
+			$(".floating, .side-pannel.mobile").addClass("bottom");
+		} else {
+			$(".floating, .side-pannel.mobile").removeClass("bottom");
+		}
+	});
 	$(window).on('scroll', function(){
 		nowScrollTop = $(this).scrollTop();
 		if(wheelDelta() == 'down'){
@@ -26,29 +33,40 @@
 		prevScrollTop = nowScrollTop;
 	});
 	window.onload=function(){
-		if(window.innerWidth < 501) {
-			$(".main-info-div, .main-image-div, .main-div, .detail-info, .detail-info-div").addClass("mobile");
-			$(".bottom-info-div, .purchasebtn, .side-pannel, #title, .info-div, .main-location, .price, .purchasebtn, #side-title").addClass("mobile");
-		}else{
-			$(".slide-div, .card-title, .card, .card-img-top, .serchcon, .tablecon, .tablecon-2, .navbar-toggle-btn").removeClass("mobile");
-		}
+		
 	}
 	window.addEventListener('resize', () => {
 		if(window.innerWidth < 501) {
-			$(".main-info-div, .main-image-div, .main-div, .detail-info, .detail-info-div").addClass("mobile");
+			$(".main-info-div, .main-image-div, .main-div, .detail-info, .detail-info-div, .inner-image, .floating, .floating-btn").addClass("mobile");
 			$(".bottom-info-div, .purchasebtn, .side-pannel, #title, .info-div, .main-location, .price, .purchasebtn, #side-title").addClass("mobile");
 		}
 		if(window.innerWidth >= 501) {
-			$(".main-info-div, .main-image-div, .main-div, .detail-info, .detail-info-div").removeClass("mobile");
+			$(".main-info-div, .main-image-div, .main-div, .detail-info, .detail-info-div, .inner-image, .floating, .floating-btn").removeClass("mobile");
 			$(".bottom-info-div, .purchasebtn, .side-pannel, #title, .info-div, .main-location, .price, .purchasebtn, #side-title").removeClass("mobile");
 		}
 	})
 	$(document).ready(function(){
 		var price = ${bean.tprice};
 		price = '가격 : ' +  price.toLocaleString() + '원';
-		console.log(price);
 		$('.price').html(price);
+		
+		if(window.innerWidth < 501) {
+			$(".main-info-div, .main-image-div, .main-div, .detail-info, .detail-info-div, .inner-image, .floating, .floating-btn").addClass("mobile");
+			$(".bottom-info-div, .purchasebtn, .side-pannel, #title, .info-div, .main-location, .price, .purchasebtn, #side-title").addClass("mobile");
+		}else{
+			$(".slide-div, .card-title, .card, .card-img-top, .serchcon, .tablecon, .tablecon-2, .navbar-toggle-btn").removeClass("mobile");
+		}
 	})
+	
+	function showPopup(toid, meid) {
+		if(${empty sessionScope.loginfo}) {
+			alert("로그인이 필요한 서비스 입니다.");
+			window.open("<%=notWithFormTag %>mePopup" , "a", "width=600, height=640, left=100, top=50");
+			return false;
+		} else {
+			window.open("<%=notWithFormTag %>tourPopup&toid=" + toid + "&meid=" + meid , "a", "width=600, height=640, left=100, top=50");
+		}
+	}
 </script>
 <style type="text/css">
 @import url('https://fonts.googleapis.com/css2?family=Black+Han+Sans&family=Noto+Sans+KR&display=swap');
@@ -104,9 +122,9 @@
 }
 .side-pannel{
 	width: 450px;
-	height: 924px;
+	height: 960px;
 	position: sticky;
-	top:0px;
+	top:-1px;
 	background-color: white;
 	border: 1px solid;
 }
@@ -142,6 +160,15 @@
 .floating{
 	position:fixed;
 	z-index: 1;
+	bottom:5px;
+	right:65px;
+	display: flex;
+	flex-direction: column;
+	transition: transform 100ms;
+}
+.floating.bottom{
+	position:fixed;
+	z-index: 1;
 	bottom:85px;
 	right:65px;
 	display: flex;
@@ -156,9 +183,11 @@
 .floating-btn:hover {
 	margin-bottom:5px;
 	background: none;
-	color: #0d6efd;
 	border:none;
-	filter:brightness(0.7);
+	filter:brightness(1.2);
+}
+.delete-btn {
+	color:red !important;
 }
 .container{
 	max-width:1226.7px;
@@ -279,17 +308,26 @@ h2{
    width: 454px !important;
    height: 105px !important;
    position: fixed !important;
-   top: 80% !important;
+   top: 89% !important;
    margin-bottom: 85px !important;
    background-color: white !important;
    border: 1px solid !important;
    transition: margin 300ms;
 }
-.side-pannel.mobile.hide {
+.side-pannel.mobile.bottom {
    width: 454px !important;
    height: 105px !important;
    position: fixed !important;
    top: 80% !important;
+   margin-bottom: 85px !important;
+   background-color: white !important;
+   border: 1px solid !important;
+}
+.side-pannel.mobile.hide {
+   width: 454px !important;
+   height: 105px !important;
+   position: fixed !important;
+   top: 89% !important;
    margin-top: 30% !important;
    background-color: white !important;
    border: 1px solid !important;
@@ -335,13 +373,58 @@ h2{
    font-size: 16px !important;
    margin-right: auto !important;
 }
-
+.inner-image.mobile {
+	margin-right:auto;
+	margin-left:auto;
+}
+.floating.mobile{
+	position:fixed;
+	z-index: 1;
+	bottom:25%;
+	right:-40px;
+	display: flex;
+	flex-direction: column;
+	transition: transform 100ms;
+	justify-content: left;
+	text-align: left;
+}
+.floating.bottom.mobile{
+	position:fixed;
+	z-index: 1;
+	bottom:25%;
+	right:-40px;
+	display: flex;
+	flex-direction: column;
+	justify-content: left;
+	text-align: left;
+}
+.floating-btn.mobile {
+	margin-bottom:5px;
+	background: none;
+	color: #0d6efd;
+	border:1px solid;
+	text-align: left;
+	justify-content: left;
+	padding:2px;
+	transition: transform 100ms;
+}
+.floating-btn.mobile:hover {
+	margin-bottom:5px;
+	background: none;
+	border:1px solid;
+	filter:brightness(1.2);
+	text-align: left;
+	justify-content: left;
+	transform:translateX(-40px);
+	padding:2px;
+}
 </style>
 </head>
 <body>
 	<div class="floating">
-		<button class="btn btn-primary floating-btn" type="button" onclick="location.href='<%=notWithFormTag %>tourUpdate&toid=${requestScope.bean.toid }'">modify</button>
-		<button class="btn btn-primary floating-btn" type="button" onclick="history.back()">back</button>
+		<button class="btn btn-primary floating-btn delete-btn" type="button" onclick="location.href='<%=notWithFormTag %>tourDelete&toid=${requestScope.bean.toid }'">Delete</button>
+		<button class="btn btn-primary floating-btn" type="button" onclick="location.href='<%=notWithFormTag %>tourUpdate&toid=${requestScope.bean.toid }'">Modify</button>
+		<button class="btn btn-primary floating-btn" type="button" onclick="history.back()">Back</button>
 	</div>
 	<div class="container">
 		<div class="main-div">
@@ -399,9 +482,9 @@ h2{
 						<h2 align="left" style="width:530px; margin-bottom: 50px; text-align: center;"id="title">${bean.tname }</h2>
 					</div>
 					<div>
-						<h3 class="price"></h3>
+						<h3 class="price">　</h3>
 					</div>
-					<button type="button" class="btn btn-lg btn-danger purchasebtn">구매</button>
+					<button type="button" class="btn btn-lg btn-danger purchasebtn" onclick="showPopup('${requestScope.bean.toid}','${sessionScope.loginfo.meid}')">구매</button>
 				</div>
 			</div>
 		</div>
@@ -425,9 +508,9 @@ h2{
 						<h2 align="left" style="width:250px; margin-bottom: 50px; font-size:26px; text-align: center;"id="side-title">${bean.tname }</h2>
 					</div>
 					<div>
-						<h3 style="font-size: 22px; text-align: center;"class="price"></h3>
+						<h3 style="font-size: 22px; text-align: center;"class="price">　</h3>
 					</div>
-					<button type="button" class="btn btn-danger purchasebtn">구매</button>
+					<button type="button" class="btn btn-danger purchasebtn" onclick="showPopup(${requestScope.bean.toid },${sessionScope.loginfo.meid })">구매</button>
 				</div>
 			</div>
 		</div>

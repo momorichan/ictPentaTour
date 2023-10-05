@@ -39,7 +39,7 @@ public class TourInsertController extends SuperClass{
 		int cnt = -1;
 		try {
 			cnt = dao.InsertData(bean);
-			new TourListController().doGet(request, response);
+			new TourHomeController().doGet(request, response);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}

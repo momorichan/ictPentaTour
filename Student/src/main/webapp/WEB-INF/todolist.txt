@@ -7,6 +7,7 @@ meInsert=com.shopping.controller.member.MemberInsertController
 meList=com.shopping.controller.member.MemberListController
 meDetail=com.shopping.controller.member.MemberDetailController
 meDelete=com.shopping.controller.member.MemberDeleteController
+mePopup=com.shopping.controller.member.LoginPopupController
 # board section
 boInsert=com.shopping.controller.board.BoardInsertController
 boList=com.shopping.controller.board.BoardListController
@@ -62,6 +63,8 @@ tourList=com.shopping.controller.tour.TourListController
 tourDetail=com.shopping.controller.tour.TourDetailController
 tourInsert=com.shopping.controller.tour.TourInsertController
 tourUpdate=com.shopping.controller.tour.TourUpdateController
+tourDelete=com.shopping.controller.tour.TourDeleteController
+tourPopup=com.shopping.controller.tour.TourDetailPopupController
 #air section
 airHome=com.shopping.controller.air.AirHomeController
 airList=com.shopping.controller.air.AirListController
@@ -70,12 +73,14 @@ airCheck=com.shopping.controller.air.AirCheckController
 airInsert=com.shopping.controller.air.AirInsertController
 airInsertCheck=com.shopping.controller.air.AirInsertCheckController
 airCancel=com.shopping.controller.air.AirCancelController
-#rentalcar section
-#rcList=com.shopping.controller.rentalcar.RentalcarListController
-#rcDetail=com.shopping.controller.rentalcar.RentalcarDetailController
-#rcInsert=com.shopping.controller.product.RentalcarInsertController
-#rcUpdate=com.shopping.controller.product.RentalcarUpdateController
-#rcDelete=com.shopping.controller.product.RentalcarDeleteController
+# rentalcar section
+rcHome=com.shopping.controller.rentalcar.RentalcarHomeController
+rcCheck=com.shopping.controller.rentalcar.RentalcarCheckController
+rcList=com.shopping.controller.rentalcar.RentalcarListController
+rcDetail=com.shopping.controller.rentalcar.RentalcarDetailController
+#rcInsert=com.shopping.controller.rentalcar.RentalcarInsertController
+#rcUpdate=com.shopping.controller.rentalcar.RentalcarUpdateController
+#rcDelete=com.shopping.controller.rentalcar.RentalcarDeleteController
 # all check section
 allCheck=com.shopping.controller.check.allCheckController
 #review section

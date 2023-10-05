@@ -9,9 +9,9 @@ public class RentalcarHomeController extends SuperClass {
 	@Override
 	public void doGet(HttpServletRequest request, HttpServletResponse response) throws Exception {
 		// TODO Auto-generated method stub
-		super.doGet(request, response);
+		super.doGet(request, response);		
 		
-		super.gotoPage("rentalcar/rentHome.jsp");
+		super.gotoPage("rentalcar/rcHome.jsp");
 	}
 
 }

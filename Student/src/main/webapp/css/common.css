@@ -1,5 +1,4 @@
 @charset "UTF-8";
-
 @import url(//fonts.googleapis.com/earlyaccess/jejugothic.css);
 @import url(//fonts.googleapis.com/earlyaccess/kopubbatang.css);
 #side-bar-toggle .side-bar-on-btn {
@@ -63,24 +62,6 @@
 	transform:translate(0px,0);
 	transition:transform 300ms ease 0ms;
 }
-.card.mobile {
-    width: 215px;
-    height: 290px;
-    margin-left: auto;
-    margin-right: auto;
-}
-.card-title.mobile {
-    font-size: 1.0rem;
-}
-.card-img-top.mobile {
-    width: 213px;
-    height: 133px;
-}
-.card-img-top:hover.mobile{
-		width: 213px;
-		height: 133px;	
-		filter: brightness(1.1);
-	}
 .side-bar-inner {
 	width:200px;
 	height:948px;
@@ -160,21 +141,18 @@
 	padding-top:10px;
 	padding-bottom:10px;
 	margin-bottom: 25px !important;
-	position: fixed !important;
+	position: absolute !important;
 	top:0px !important;
 	width:100% !important;
 	z-index: 999 !important;
 	background-color: black !important;
 	transition: 300ms;
-	-webkit-font-smoothing: antialiased;
-    -moz-osx-font-smoothing: grayscale;
-    transform:rotate(-0.03deg);
 }
 .navbar.non-scrolltop.toggle-on {
     padding-top: 10px;
     padding-bottom: 370px;
     margin-bottom: 25px !important;
-    position: fixed !important;
+    position: absolute !important;
     top: 0px !important;
     right: 0px !important;
     width: 100% !important;
@@ -186,7 +164,7 @@
     padding-top: 10px;
     padding-bottom: 370px;
     margin-bottom: 25px !important;
-    position: fixed !important;
+    position: absolute !important;
     top: 0px !important;
     right: 0px !important;
     width: 100% !important;
@@ -195,7 +173,7 @@
     transition: 300ms;
 }
 .navbar-toggle-btn.mobile{
-	position: fixed;
+	position: absolute;
 	right:10px;
 	top:10px;
 	width:40px;
@@ -212,7 +190,7 @@
 	padding-top:10px;
 	padding-bottom:10px;
 	margin-bottom: 25px !important;
-	position: fixed !important;
+	position: absolute !important;
 	top:0px !important;
 	right:0px !important;
 	width:100% !important;
@@ -224,7 +202,7 @@
 	padding-bottom:200px;
 	padding-top:10px;
 	margin-bottom: 25px !important;
-	position: fixed !important;
+	position: absolute !important;
 	top:0px !important;
 	width:100% !important;
 	z-index: 999 !important;
@@ -306,7 +284,9 @@
 	color: white !important;
 	padding-top : 0.5rem !important;
 }
-
+html{
+	
+}
 body{
 	padding-top:70px !important;
 	padding-bottom:120px !important;
@@ -316,7 +296,6 @@ body{
     position: relative !important;
     z-index: 999 !important;
     min-width: 70% !important;
-    transition:300ms;
 }
 
 body.scrolltop{
@@ -464,13 +443,32 @@ body.scrolltop{
 .top-btn-div{
 	position:fixed;
 	right:14px;
+	bottom:10px;
+	z-index: 997;
+	display: flex;
+	flex-direction: row;
+	pointer-events:none;
+	transition:100ms;
+}
+.top-btn-div.sideon{
+	position:fixed;
+	right:14px;
+	bottom:10px;
+	display: flex;
+	flex-direction: row;
+	pointer-events:all;
+	z-index: 999;
+}
+.top-btn-div.bottom{
+	position:fixed;
+	right:14px;
 	bottom:90px;
 	z-index: 997;
 	display: flex;
 	flex-direction: row;
 	pointer-events:none;
 }
-.top-btn-div.sideon{
+.top-btn-div.sideon.bottom{
 	position:fixed;
 	right:14px;
 	bottom:90px;
@@ -478,6 +476,7 @@ body.scrolltop{
 	flex-direction: row;
 	pointer-events:all;
 	z-index: 999;
+	transition: 100ms;
 }
 .arrow {
     position: relative;
@@ -557,7 +556,10 @@ body.scrolltop{
 }
 .side-icon.sideon {
 	transform: translate(-75px, 0);
-	transition: transform 300ms;
+	transition: transform 400ms;
+}
+.side-icon.sideon:hover {
+	transform: translate(-75px, 0) rotateY(360deg);
 }
 .head {
 	width: 100%;
