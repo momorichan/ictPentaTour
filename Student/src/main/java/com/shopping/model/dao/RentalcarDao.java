@@ -8,6 +8,7 @@ import java.util.List;
 
 import com.shopping.model.bean.Member;
 import com.shopping.model.bean.Rentalcar;
+import com.shopping.utility.MyUtility;
 import com.shopping.utility.Paging;
 
 public class RentalcarDao extends SuperDao {
@@ -1049,7 +1050,46 @@ public class RentalcarDao extends SuperDao {
 		
 	}
 	
+	public int DeleteData(String rcid) throws Exception {
+		// 상품 번호를 이용하여 해당 상품을 삭제합니다.
+		String sql = "";
+		PreparedStatement pstmt = null;
+		int cnt = -1;
+		
+		Rentalcar bean =  this.GetDataByPk(rcid);
+		
+		conn = super.getConnection();
+		conn.setAutoCommit(false); 
+		
+		
+		String remark = MyUtility.getCurrentTime() + "(차량 번호: " + bean.getRcid() + " )" + " 렌터카가 삭제 되었습니다." ;
+		
+		// step01: 주문 상세 테이블의 비고(remark) 컬럼에 삭제 히스토리 남기기
+		sql = " update rentalcheck set remark = ? where rcid = ? ";
+		pstmt = conn.prepareStatement(sql);
+		pstmt.setString(1, remark);
+		pstmt.setString(2, rcid); 
+		
+		cnt = pstmt.executeUpdate();
+		if(pstmt != null) {pstmt.close();}
 	
+		
+		// step02: 상품 테이블에서 해당 상품 번호와 관련된 행 삭제하기
+		System.out.println("렌터카 삭제구문");
+		sql = " delete from rentalcar where rcid= ? ";
+		pstmt = conn.prepareStatement(sql);
+		pstmt.setString(1, rcid);		
+		
+		cnt = pstmt.executeUpdate();
+		System.out.println("여기는 렌터카다오 삭제 구문: " + sql);
+		conn.commit();
+		
+		if(pstmt != null) {pstmt.close();}
+		if(conn != null) {conn.close();}
+		
+		return cnt;		
+
+	}
 
 
 }
