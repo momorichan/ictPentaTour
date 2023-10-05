@@ -35,8 +35,11 @@
 		<form action="<%=withFormTag%>" method="post">
 			<input type="hidden" name="command" value="roReservation">
 			<div id="boardNo" class="input-group">
-				<span class="input-group-text col-md-2">방 번호</span> <input id="roid"
-					name="roid" type="number" class="form-control" placeholder="">
+				<span class="input-group-text col-md-2">방 번호</span> 
+				<input id="meid" name="meid"  value="${sessionScope.mebean.meid}">	
+				<input id="roid" name="roid"  value="${sessionScope.robean.roid}">
+				<input id="startDate" name="startDate"  value="${sessionScope.startDate}">
+				<input id="endDate" name="endDate"  value="${sessionScope.endDate}">
 			</div>
 
 			숙소 이름
@@ -54,7 +57,12 @@
 						<c:forEach items="${sessionScope.roomList}" var="room" varStatus="index">
 							<tr>
 								<td>객실${index.count} 정보</td>
-								<td>${sessionScope.robean.roominfo} * ${room}명</td>
+								<td>
+									<div id="boardNo">
+									<input id="guest${index.count}" name="guest${index.count}" value="${room}">
+									</div>
+									${sessionScope.robean.roominfo} * ${room}명
+								</td>
 							</tr>
 						</c:forEach>
 					</tbody>
@@ -63,6 +71,9 @@
 			
 			<c:forEach items="${sessionScope.roomList}" var="room" varStatus="index">
 			${index.count}번 객실
+			<div id="boardNo" class="input-group">
+				<span class="input-group-text col-md-2">방 번호</span> 
+			</div>
 			<div>
 				<table class="table">
 					<tbody class="personal">

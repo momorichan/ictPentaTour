@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ page import="java.util.*"%>
 <%@ include file="../common/bootstrap5.jsp"%>
-<link rel="stylesheet" href="${pageContext.request.contextPath}/css/common.css">
+
 <%
 String appName = request.getContextPath();
 String mappingName = "/Shopping"; //in FrontController.java file
@@ -196,12 +196,9 @@ String notWithFormTag = appName + mappingName + "?command=";
 		}
 		
 	</script>
-<<<<<<< HEAD
-=======
 <style type="text/css">
 
 </style>
->>>>>>> refs/remotes/origin/WoodenBatnew
 </head>
 <body>
 	

@@ -428,7 +428,7 @@ body.scrolltop{
 	height:56px !important;
 	background-color: black !important;
 	width:120% !important;
-	position: fixed !important;
+	position: absolute !important;
 	top:0 !important;
 	z-index: -999 !important;
 }
