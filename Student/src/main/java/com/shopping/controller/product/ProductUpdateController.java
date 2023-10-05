@@ -33,6 +33,7 @@ public class ProductUpdateController extends SuperClass{
 			lists = cdao.GetCategoryList("product", "select") ;
 			request.setAttribute("categories", lists);
 			request.setAttribute("bean", bean); 
+			System.out.println("리스트입니다"+lists);
 			
 		} catch (Exception e) {
 			e.printStackTrace();

@@ -60,13 +60,15 @@ public class MemberLoginController extends SuperClass{
 				
 				// 홈 화면으로 이동합니다. 차후 상품 목록 페이지로 갈 예정
 				//new HomeController().doGet(request, response) ;
-//				new ProductListController().doGet(request, response) ;
+				new ProductListController().doGet(request, response) ;
 				
-				super.session.setAttribute("datalist", list);
-				super.session.setAttribute("",);
-				
-				response.sendRedirect(password);
+
 				// 로그인 후 상품리스트 말고 다른 곳으로 가기
+				
+//				super.session.setAttribute("datalist", list);
+//				super.session.setAttribute("",);
+				
+//				response.sendRedirect(password);
 				
 				
 		

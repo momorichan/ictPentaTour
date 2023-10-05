@@ -37,12 +37,12 @@
 				<input type="text" class="form-control" id="id" name="id" 
 					placeholder="아이디를 입력해 주세요."
 					data-bs-toggle="tooltip" title="아이디는 3글자 이상 10글자 이하이어야 합니다."
-					data-bs-placement="top" value="qwer1">
+					data-bs-placement="top" value="admin">
 			</div>
 			<div>
 				<label for="password" class="form-label">비밀 번호 :</label> 
 				<input class="form-control" type="password" 
-					id="password" name="password" value="pppp">
+					id="password" name="password" value="1234">
 			</div>
 			<div class="bottom_button">
 				<!-- contextual class : btn-primary, btn-info, btn-danger -->

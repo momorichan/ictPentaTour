@@ -17,10 +17,10 @@ String notWithFormTag = appName + mappingName + "?command=";
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <c:set var="whologin" value="0"/>
 <c:if test="${not empty sessionScope.loginfo}">
-	<c:if test="${sessionScope.loginfo.meid == 'admin'}">
+	<c:if test="${sessionScope.loginfo.id == 'admin'}">
 		<c:set var="whologin" value="2"/>
 	</c:if>
-	<c:if test="${sessionScope.loginfo.meid != 'admin'}">
+	<c:if test="${sessionScope.loginfo.id != 'admin'}">
 		<c:set var="whologin" value="1"/>
 	</c:if>
 </c:if>
@@ -858,11 +858,11 @@ body.scrolltop{
 							<li><a class="nav-link create" href="<%=notWithFormTag%>meInsert">회원 가입</a></li>
 						</c:if>
 						<c:if test="${whologin == '1'}">
-							<a class="navbar-text">${sessionScope.loginfo.meid}(일반 유저)</a>
+							<a class="navbar-text">${sessionScope.loginfo.id}(일반 유저)</a>
 							<li class="nav-item"><a class="nav-link logout" href="<%=notWithFormTag%>meLogout">로그 아웃</a></li>
 						</c:if>
 						<c:if test="${whologin == '2'}">
-							<a class="navbar-text">${sessionScope.loginfo.meid}(관리자)</a>
+							<a class="navbar-text">${sessionScope.loginfo.id}(관리자)</a>
 							<li class="nav-item"><a class="nav-link logout" href="<%=notWithFormTag%>meLogout">로그 아웃</a></li>
 						</c:if>
 					</div>
@@ -872,7 +872,7 @@ body.scrolltop{
 								<c:if test="${whologin == '0'}">
 								</c:if>
 								<c:if test="${whologin != '0'}">
-									<li><a class="dropdown-item" href="<%=notWithFormTag%>meDetail&meid=${sessionScope.loginfo.meid}">상세 보기</a></li>
+									<li><a class="dropdown-item" href="<%=notWithFormTag%>meDetail&id=${sessionScope.loginfo.id}">상세 보기</a></li>
 									<li><a class="dropdown-item" href="/Student/member/meUpdateForm01.jsp">정보 수정</a></li>
 									<li><a class="dropdown-item" href="#">탈퇴하기</a></li>
 								</c:if>
