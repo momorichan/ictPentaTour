@@ -283,9 +283,10 @@
 	text-decoration-line : none !important;
 	color: white !important;
 	padding-top : 0.5rem !important;
+	font-family: 'Jeju Gothic', sans-serif !important;
 }
 html{
-	
+	min-height: 933px !important;
 }
 body{
 	padding-top:70px !important;
@@ -296,6 +297,7 @@ body{
     position: relative !important;
     z-index: 999 !important;
     min-width: 70% !important;
+    min-height: 933px !important;
 }
 
 body.scrolltop{

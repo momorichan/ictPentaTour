@@ -5,31 +5,22 @@ import java.sql.ResultSet;
 import java.util.ArrayList;
 import java.util.List;
 
-import com.shopping.model.bean.Board;
 import com.shopping.model.bean.Review;
 import com.shopping.utility.Paging;
 
 public class ReviewDao extends SuperDao {
 
-	public int getTotalRecordCount(String mode, String keyword) throws Exception {
-		System.out.println("검색할 필드명 : " + mode);
-		System.out.println("검색할 키워드 : " + keyword);
+	public int getTotalRecordCount(int toid) throws Exception {
 
 		// 테이블의 모든 행 개수를 구합니다.
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
 
-		String sql = " SELECT count(*) as cnt FROM review";
+		String sql = " SELECT count(*) as cnt FROM review where toid = ?";
 
-		if (mode == null || mode.equals("all")) {// 전체 모드인 경우
-
-		} else {// 전체 모드가 아닌 경우
-			sql += " where " + mode + " like '%" + keyword + "%'";
-		}
-
-		conn = super.getConnection();
+		conn = getConnection();
 		pstmt = conn.prepareStatement(sql);
-
+		pstmt.setInt(1, toid);
 		rs = pstmt.executeQuery();
 
 		int cnt = -1;
@@ -65,7 +56,7 @@ public class ReviewDao extends SuperDao {
 		
 		String sql = " select " + column;
 		sql += " from ( select " + column + ", rank() over(order by ACID asc) as ranking";
-		sql += " from review ";
+		sql += " from review order by regdate desc";
 
 		if (mode == null || mode.equals("all")) {// 전체 모드인 경우
 
@@ -167,12 +158,11 @@ public class ReviewDao extends SuperDao {
 	}
 
 	public int InsertData(Review bean) throws Exception{
-		System.out.println(bean);
+System.out.println(bean);
 		
 		int cnt = -1;
-		
-		String sql = " insert into review(meid, rating, regdate, content)";
-		sql += " values(?, ?, ?, ?)";
+		String sql = " insert into review(trid, meid, toid, acid, rating, regdate, content)";
+		sql += " values(reviewseq.nextval, ?, ?, ?, ?, sysdate, ?)";
 		PreparedStatement pstmt = null;
 		
 		conn = super.getConnection();//단계2
@@ -181,9 +171,18 @@ public class ReviewDao extends SuperDao {
 		pstmt = conn.prepareStatement(sql); //단계3
 		
 		pstmt.setString(1, bean.getMeid());
-		pstmt.setString(2, bean.getRegdate());
-		pstmt.setInt(3, bean.getRating());
-		pstmt.setString(4, bean.getContent());
+		if(bean.getToid() != null) {
+			pstmt.setInt(2, bean.getToid());
+		} else {
+			pstmt.setInt(2, 0);
+		}
+		if(bean.getAcid() != null) {
+			pstmt.setInt(3, bean.getAcid());
+		} else {
+			pstmt.setInt(3, 0);
+		}
+		pstmt.setInt(4, bean.getRating());
+		pstmt.setString(5, bean.getContent());
 
 		
 		cnt = pstmt.executeUpdate();//단계4-1
@@ -196,12 +195,11 @@ public class ReviewDao extends SuperDao {
 		return cnt;
 	}
 
-	public int UpdateData(Review bean) throws Exception{
-		System.out.println(bean);
+	public int DeleteData(int trid) throws Exception{
 		
 		int cnt = -1;
 		
-		String sql = " update review set meid = ?, rating = ?, content = ?, regdate = ?";
+		String sql = " delete from review where trid = ?";
 		PreparedStatement pstmt = null;
 		
 		conn = super.getConnection();//단계2
@@ -209,10 +207,7 @@ public class ReviewDao extends SuperDao {
 		
 		pstmt = conn.prepareStatement(sql); //단계3
 		
-		pstmt.setString(1, bean.getMeid());
-		pstmt.setInt(2, bean.getRating());
-		pstmt.setString(3, bean.getContent());
-		pstmt.setString(4, bean.getRegdate());
+		pstmt.setInt(1, trid);
 		
 		cnt = pstmt.executeUpdate();//단계4-1
 		conn.commit();
@@ -223,32 +218,105 @@ public class ReviewDao extends SuperDao {
 		
 		return cnt;
 	}
+	public double calculateAverageRating(int toid) throws Exception{
+	    PreparedStatement pstmt = null;
+	    ResultSet rs = null;
+	    double averageRating = 0;
+	    
+	    String sql = " SELECT AVG(rating) AS average_rating FROM review where toid = ?";
 
-	public int InsertAcData(Review bean) throws Exception{
-int cnt = -1;
-		
-		String sql = " insert into review(trid, meid, acid, rating, regdate, content)";
-		sql += " values(seqreview.nextval, ?, ?, ?, sysdate, ?)";
+	    conn = getConnection();
+	    pstmt = conn.prepareStatement(sql);
+	    
+	    pstmt.setInt(1, toid);
+	    rs = pstmt.executeQuery();
+
+	    if (rs.next()) {
+	        averageRating = rs.getDouble("average_rating"); // "average_rating"으로 열을 가져옴
+	    }
+
+	    if (rs != null) {
+	        rs.close();
+	    }
+	    if (pstmt != null) {
+	        pstmt.close();
+	    }
+	    if (conn != null) {
+	        conn.close();
+	    }
+	    
+	    averageRating = Math.round(averageRating * 100) / 100.0;
+	    return averageRating;
+	}
+	
+	public int commentAdd() throws Exception{
+	    PreparedStatement pstmt = null;
+	    ResultSet rs = null;
+	    int commentAdd = 0;
+	    
+	    String sql = " SELECT COUNT(*) AS comment_add FROM review";
+
+	    conn = getConnection();
+	    pstmt = conn.prepareStatement(sql);
+	    rs = pstmt.executeQuery();
+
+	    if (rs.next()) {
+	    	commentAdd = rs.getInt("comment_add"); // "comment_add"으로 열을 가져옴
+	    }
+
+	    if (rs != null) {
+	        rs.close();
+	    }
+	    if (pstmt != null) {
+	        pstmt.close();
+	    }
+	    if (conn != null) {
+	        conn.close();
+	    }
+
+	    return commentAdd;
+	}
+
+	public List<Review> getDataByToid(Paging pageInfo, int toid) throws Exception{
+		List<Review> lists = new ArrayList<Review>();
+
 		PreparedStatement pstmt = null;
-		
-		conn = super.getConnection();//단계2
-		conn.setAutoCommit(false);
-		
-		pstmt = conn.prepareStatement(sql); //단계3
-		
-		pstmt.setString(1, bean.getMeid());
-		pstmt.setInt(2, bean.getAcid());
-		pstmt.setInt(3, bean.getRating());
-		pstmt.setString(4, bean.getContent());
+		ResultSet rs = null;
 
+		String mode = pageInfo.getMode();
+		String keyword = pageInfo.getKeyword();
+
+		String column = " TRID, MEID, TOID, ACID, REGDATE, RATING, CONTENT";
 		
-		cnt = pstmt.executeUpdate();//단계4-1
-		conn.commit();
+		String sql = " select " + column;
+		sql += " from ( select " + column + ", rank() over(order by trid desc) as ranking";
+		sql += " from review where toid = ?";
+		sql += " ) ";
+		sql += " where ranking between ? and ? order by regdate desc";
+		conn = super.getConnection();
+
+		pstmt = conn.prepareStatement(sql);
 		
-		//단계5
-		if(pstmt != null) {pstmt.close();}
-		if(conn != null) {conn.close();}
-		
-		return cnt;
+		pstmt.setInt(1, toid);
+		pstmt.setInt(2, pageInfo.getBeginRow());
+		pstmt.setInt(3, pageInfo.getEndRow());
+
+		rs = pstmt.executeQuery();
+
+		while (rs.next()) {
+			lists.add(getBeanData(rs));
+		}
+
+		if (rs != null) {
+			rs.close();
+		}
+		if (pstmt != null) {
+			pstmt.close();
+		}
+		if (conn != null) {
+			conn.close();
+		}
+
+		return lists;
 	}
 }

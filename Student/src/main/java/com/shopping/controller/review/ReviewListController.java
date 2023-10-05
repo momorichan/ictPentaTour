@@ -25,13 +25,12 @@ public class ReviewListController extends SuperClass{
 		
 		ReviewDao dao = new ReviewDao();
 		try {
-			int totalCount = dao.getTotalRecordCount(mode, keyword); 
+			int totalCount = dao.getTotalRecordCount(1); 
 			String url = super.getUrlInfomation("rvList");
 			boolean isGrid = false;
 			
 			Paging pageInfo = 
 					new Paging(pageNumber, pageSize, totalCount, url, mode, keyword, isGrid);
-			
 			List<Review> lists = dao.selectAll(pageInfo, attribute);
 			
 			request.setAttribute("datalist", lists);	

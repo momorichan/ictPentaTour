@@ -23,11 +23,12 @@
     alert( ticket + ' 티켓 ' + qty + "장 구매 완료." );
   }
   var price = ${requestScope.bean.tprice};
-  $(document).ready(function(){
-	  var qty = document.getElementById('tqty').value;
-	  $('#totalprice').html(totalprice);
-	  var totalprice = qty * price;
-  });
+  var input = document.getElementById('tqty');
+  input.onchange = (e) => {
+		var qty = document.getElementById('tqty').value;
+		var totalprice = qty * price;
+		$('#totalprice').html('총 ' + totalprice + '원');
+	}
 </script>
 <style type="text/css">
 html, body {
@@ -105,7 +106,7 @@ h2 {
 				<div class="qty-div">
 					매수 : <input type="number" class="qty" name="tqty" id="tqty" value="1">
 				</div>
-				<span class="totalprice" id="totalprice">asdfsadf</span>
+				<span class="totalprice" id="totalprice"></span>
 				<button type="submit" class="submit-btn" onclick="Submit()">구매</button>
 			</div>
 		</form>

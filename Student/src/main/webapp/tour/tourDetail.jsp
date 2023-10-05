@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ include file="./../common/common.jsp"%>
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -66,6 +67,18 @@
 		} else {
 			window.open("<%=notWithFormTag %>tourPopup&toid=" + toid + "&meid=" + meid , "a", "width=600, height=640, left=100, top=50");
 		}
+	}
+	$(document).on("pageload",function(){
+		  window.location.reload(true);
+	});
+	
+	function tourdeleteclick(toid) {
+		if (confirm("정말 삭제하시겠습니까?") == true){
+		    location.href = '<%=notWithFormTag%>tourDelete&toid=' + toid;
+		}else{
+		    return;
+		}
+		
 	}
 </script>
 <style type="text/css">
@@ -422,7 +435,7 @@ h2{
 </head>
 <body>
 	<div class="floating">
-		<button class="btn btn-primary floating-btn delete-btn" type="button" onclick="location.href='<%=notWithFormTag %>tourDelete&toid=${requestScope.bean.toid }'">Delete</button>
+		<button class="btn btn-primary floating-btn delete-btn" type="button" onclick="tourdeleteclick(${requestScope.bean.toid})">Delete</button>
 		<button class="btn btn-primary floating-btn" type="button" onclick="location.href='<%=notWithFormTag %>tourUpdate&toid=${requestScope.bean.toid }'">Modify</button>
 		<button class="btn btn-primary floating-btn" type="button" onclick="history.back()">Back</button>
 	</div>
@@ -518,5 +531,6 @@ h2{
 			
 		</div>
 	</div>
+<%@ include file="./../review/rvList.jsp"%>
 </body>
 </html>

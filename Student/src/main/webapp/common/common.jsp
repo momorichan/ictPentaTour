@@ -29,7 +29,7 @@ String notWithFormTag = appName + mappingName + "?command=";
 <!DOCTYPE html>
 <html>
 <head>
-<link rel="stylesheet" href="${pageContext.request.contextPath}/css/common.css">
+<link rel="stylesheet" href="${pageContext.request.contextPath}/css/common.css?after">
 <meta charset="UTF-8">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
 <script type="text/javascript"
@@ -160,6 +160,9 @@ String notWithFormTag = appName + mappingName + "?command=";
 			toggleSideOn();
 		}
 	});
+	function clicklogin() {
+		window.open("<%=notWithFormTag %>mePopup" , "a", "width=600, height=640, left=100, top=50");
+	}
 </script>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com">
@@ -197,7 +200,6 @@ String notWithFormTag = appName + mappingName + "?command=";
 		
 	</script>
 <style type="text/css">
-
 </style>
 </head>
 <body>
@@ -214,7 +216,7 @@ String notWithFormTag = appName + mappingName + "?command=";
 				<ul class="navbar-nav">
 					<div class="login-div">
 						<c:if test="${whologin == '0'}">
-							<li class="nav-item"><a class="nav-link login" href="<%=notWithFormTag%>meLogin">로그인</a></li>
+							<li class="nav-item"><a class="nav-link login" href="" onclick="clicklogin()">로그인</a></li>
 							<li><a class="nav-link create" href="<%=notWithFormTag%>meInsert">회원 가입</a></li>
 						</c:if>
 						<c:if test="${whologin == '1'}">

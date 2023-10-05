@@ -12,6 +12,7 @@
 	<title>Insert title here</title>
 	  	<style type="text/css">
   		/* box model에 대한 공부가 필요합니다. */
+  		#trid{display: none; visibility: hidden;}
   		.container{margin-top: 10px;}
   		.input-group{margin: 7px;}
   		.input-group-text{
@@ -21,9 +22,6 @@
   		}
   		#buttonset{margin-top: 15px;}
   		#boardNo{display: none; visibility: hidden;}
-  		.trid{
-  			display:none;
-  		}
   	</style>
   	<script type="text/javascript">
 		$(document).ready(function(){
@@ -32,26 +30,19 @@
   	
   	function validCheck(){
 
-		
-		var subject = $('#subject').val();
-		if(subject.length<3||subject.length>20){
-			swal('글 제목은 3글자 이상 20글자 이하이어야 합니다.');
-			return false;
-		}
-		
 		var content = $('#content').val();
 		if(content.length<5||content.length>30){
 			swal('글 내용은 5글자 이상 30글자 이하이어야 합니다.');
 			return false;
 		}
 		
-// 		var regdate = $('#regdate').val();
-// 		var regex1 = /^\d{4}\/[01]\d{1}\/[0123]\d{1}$/;
-// 		var regex2 = /^\d{4}\-[01]\d{1}\-[0123]\d{1}$/;
-// 		var result = regex1.test(regdate) || regex2.test(regdate);
-// 		if(result==false){
-// 			swal('날짜 형식은 반드시 yyyy/mm/dd 형식 또는 yyyy-mm-dd으로 작성해 주세요.');
-// 			return false;
+		var regdate = $('#regdate').val();
+		var regex1 = /^\d{4}\/[01]\d{1}\/[0123]\d{1}$/;
+		var regex2 = /^\d{4}\-[01]\d{1}\-[0123]\d{1}$/;
+		var result = regex1.test(regdate) || regex2.test(regdate);
+		if(result==false){
+			swal('날짜 형식은 반드시 yyyy/mm/dd 형식 또는 yyyy-mm-dd으로 작성해 주세요.');
+			return false;
 		}		
   	}
   	
@@ -63,20 +54,24 @@
 	<div class="container">
 		<h2>게시물 등록</h2>
 		<p>사용자들이 게시물을 등록하는 페이지입니다.</p>
-		<form action="<%=withFormTag%>" method="post" name="myform" id="myform">
+		<form action="<%=withFormTag%>" method="post" name="myform" id="myform"  enctype="multipart/form-data">
 		<input type="hidden" name="command" value="rvInsert">
-		<input type="hidden" name="catagory" value="${sessionScope.category}">
-		<input type="hidden" name="acid" value="${sessionScope.acid}">
-		<input type="hidden" name="meid" value="${sessionScope.meid}">
+		<input type="hidden" name="acid" value="${requestScope.acid }">
+		<input type="hidden" name="toid" value="${requestScope.toid }">
+		<input type="hidden" name="meid" value="${sessionScope.loginfo.meid }">
+			<div id = "trid" class="input-group">
+				<span class="input-group-text col-md-2">리뷰 번호</span> 
+				<input id="trid" name="trid" type="number" class="form-control" placeholder="">
+			</div> 
 			<div class="input-group">
 				<span class="input-group-text col-md-2">작성자</span> 
+				<c:set var="userInfo" value="${sessionScope.loginfo.name}(${sessionScope.loginfo.meid})"/>	
 				<input id="fakeid" name="fakeid" disabled="disabled" 
-					type="text" class="form-control" placeholder="" value="${sessionScope.meid}">
+					type="text" class="form-control" placeholder="" value="${userInfo}">
 			</div>
 			<div class="input-group">
-				<span class="input-group-text col-md-2">글제목</span> 
-				<input id="subject" name="subject" type="text" class="form-control" placeholder="">
-				<select name="type" style ="text-align : center">
+				<span class="input-group-text col-md-2">카테고리</span> 
+				<select name="type" class = "form-control" style ="text-align : center">
 					<option selected ="selected">--- 선택해주세요 ---
 					<option value="해외숙박">해외숙박
 					<option value="국내숙박">국내숙박
@@ -102,7 +97,7 @@
 			for="rate5">★</label>
 	</fieldset>
 	<div>
-		<textarea class="col-auto form-control" id="content" name="content"
+		<textarea class="col-auto form-control" type="text" name="content"
 				  placeholder=""></textarea>
 	</div>
 			<div id="buttonset" class="input-group">
