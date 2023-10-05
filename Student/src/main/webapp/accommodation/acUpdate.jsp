@@ -127,7 +127,7 @@ $(document).ready(function() {
 					<th>수용인원</th>
 					<th>이미지</th>
 					<th>수정</th>
-					<th>삭제</th>
+					<th>삭제00</th>
 				</tr>
 			</thead>
 			<tbody>
