@@ -14,17 +14,18 @@ public class FlyDao extends SuperDao{
 	    
 	    try {
 	        conn = super.getConnection();
-	        String sql = "INSERT INTO flight(regid, flid, seat, stopover, passengers, price) ";
-	        sql += "VALUES(seqregid.nextval, ?, ?, ?, ?, ?)";
+	        String sql = "INSERT INTO flight(regid, flid,meid, seat, stopover, passengers, price) ";
+	        sql += "VALUES(seqregid.nextval,  ?, ?, ?, ?, ?, ?)";
 
 	        conn.setAutoCommit(false);
 	        PreparedStatement pstmt = conn.prepareStatement(sql, new String[] { "regid" });
 
 	        pstmt.setInt(1, bean.getFlid());
-	        pstmt.setString(2, bean.getSeat());
-	        pstmt.setString(3, bean.getStopover());
-	        pstmt.setInt(4, bean.getPassengers());
-	        pstmt.setInt(5, bean.getPrice() * bean.getPassengers());
+	        pstmt.setString(2, bean.getMeid());
+	        pstmt.setString(3, bean.getSeat());
+	        pstmt.setString(4, bean.getStopover());
+	        pstmt.setInt(5, bean.getPassengers());
+	        pstmt.setInt(6, bean.getPrice() * bean.getPassengers());
 
 	        int cnt = pstmt.executeUpdate();
 	        if (cnt > 0) {
@@ -83,6 +84,7 @@ public class FlyDao extends SuperDao{
 		
 		bean.setRegid(rs.getInt("regid"));
 		bean.setFlid(rs.getInt("flid"));
+		bean.setMeid(rs.getString("meid"));
 		bean.setPassengers(rs.getInt("passengers"));
 		bean.setPrice(rs.getInt("price"));
 		bean.setRegid(rs.getInt("regid"));

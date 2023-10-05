@@ -33,7 +33,7 @@ public class AirCheckController extends SuperClass{
 		
 		int regid = Integer.parseInt(request.getParameter("regid"));
 		
-		String meid = (String) session.getAttribute("regmeid");
+		String meid = request.getParameter("meid");
 		
 		
 		Flight bean = null;
@@ -54,7 +54,7 @@ public class AirCheckController extends SuperClass{
 			else
 			{
 				air = dao2.getDataByFlid(bean.getFlid());
-				request.setAttribute("meid", meid);
+				request.setAttribute("rests", meid);
 				request.setAttribute("bean", bean);
 				request.setAttribute("air", air);
 				super.gotopage("air/airCheck.jsp");

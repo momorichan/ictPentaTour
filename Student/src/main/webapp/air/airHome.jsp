@@ -191,7 +191,7 @@ input[type='number'] {
   padding: 10px;
   background: url(../../../assets/Calendar.svg) no-repeat right 10px center /
   35px auto;
-  background-color: white;
+  background-color: #184DA0;
   box-shadow: 2px 2px 7px rgba(0, 0, 0, 0.2);
   border-radius: 8px;
   text-align: center;
@@ -307,8 +307,13 @@ input[type='date']:valid::before {
   
   input::placeholder
   {
-  color: white;}
+  	color: white;
+  }
   
+  #meid::placeholder,#regid::placeholder {
+    color: white; /* 원하는 색상 코드로 변경하세요 */
+}
+   
 		
 </style>
 
@@ -533,6 +538,11 @@ input[type='date']:valid::before {
 							<div class="from">
 								<input class="form-control" type="number" id="regid" name="regid"
 									placeholder="번호를 입력해주세요">
+							</div>
+							
+							<div class="checkid">
+								<input class="form-control" type="text" id="meid" name="meid"
+									placeholder="아이디를 입력해주세요">
 							</div>
 							
 							<button type="submit" class="check_btn btn-primary"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-search" viewBox="0 0 16 16">

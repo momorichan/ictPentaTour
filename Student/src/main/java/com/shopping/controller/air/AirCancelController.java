@@ -20,25 +20,23 @@ public class AirCancelController extends SuperClass {
 		}
 		
 		int regid = Integer.parseInt(request.getParameter("regid"));
+		String resid = request.getParameter("meid");
 		
 		String meid = super.loginfo.getMeid();
 		System.out.println("머함 : " + meid);
+		System.out.println("머함 : " + resid);
 		
-		 if (meid != null && meid.equals(session.getAttribute("regmeid"))) {
+		 if (meid != null && meid.equals(resid)) {
 		        // meid가 세션에 저장된 값과 일치하면 예약 취소를 수행합니다.
 		    } else {
-		        // meid가 세션에 저장된 값과 일치하지 않으면 예약 취소를 거부합니다.
+		        // meid가 세션에 저장된 값과 일치하지 않으면 예약 취소를 거부합니다.ㅗ
 		        super.setAlertMessage("예약 취소 권한이 없습니다.");
 		        new AirHomeController().doGet(request, response);
 		        
 		        return;
 		    }
 		
-		
-		System.out.println("regid : " + regid);
-		
 		FlyDao dao = new FlyDao();
-		
 		
 		int cnt = -1;
 	

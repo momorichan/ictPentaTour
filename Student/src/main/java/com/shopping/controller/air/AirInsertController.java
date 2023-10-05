@@ -55,13 +55,14 @@ public class AirInsertController extends SuperClass{
 		Flight bean = new Flight();		
 		FlyDao dao = new FlyDao();
 
+		
 		bean.setFlid(Integer.parseInt(request.getParameter("flid")));
+		bean.setMeid(request.getParameter("meid"));
 		bean.setSeat( request.getParameter("seat"));
 		bean.setStopover( request.getParameter("stopover"));
 		bean.setPassengers( Integer.parseInt(request.getParameter("passengers")));
 		bean.setPrice(Integer.parseInt(request.getParameter("price")));
 		
-		String meid = request.getParameter("meid");
 		
 		int cnt = -1;
 		try
@@ -75,7 +76,6 @@ public class AirInsertController extends SuperClass{
 			else
 			{	
 				session.setAttribute("regid", cnt);
-				session.setAttribute("regmeid", meid);
 				new AirInsertCheckController().doGet(request, response);
 				
 			}
