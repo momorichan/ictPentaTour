@@ -2,10 +2,10 @@ package com.shopping.model.bean;
 
 public class accommodation {
 	private int acid;
-	
-	private String name;
+	private String global;
 	private String city;
 	private String address;
+	private String name;
 	private String description;
 	private String image01;
 	private String image02;
@@ -13,6 +13,12 @@ public class accommodation {
 	
 	
 	
+	public String getGlobal() {
+		return global;
+	}
+	public void setGlobal(String global) {
+		this.global = global;
+	}
 	public String getCity() {
 		return city;
 	}
@@ -63,9 +69,9 @@ public class accommodation {
 	}
 	@Override
 	public String toString() {
-		return "accommodation [acid=" + acid + ", name=" + name + ", city=" + city + ", address=" + address
-				+ ", description=" + description + ", image01=" + image01 + ", image02=" + image02 + ", image03="
-				+ image03 + "]";
+		return "accommodation [acid=" + acid + ", global=" + global + ", city=" + city + ", address=" + address
+				+ ", name=" + name + ", description=" + description + ", image01=" + image01 + ", image02=" + image02
+				+ ", image03=" + image03 + "]";
 	}
 
 	

@@ -33,11 +33,11 @@
 
          var optionList = $('#mode option');
 			for(var i = 0 ; i < optionList.length ; i++){
-				if(optionList[i].value == '${requestScope.pageInfo.mode}'){
+				if(optionList[i].value == '${sessionScope.pageInfo.mode}'){
 					optionList[i].selected = true;
 				}
 			}
-			$('#keyword').val('${requestScope.pageInfo.keyword}');
+			$('#keyword').val('${sessionScope.pageInfo.keyword}');
 			
 			
 			// 기존의 삭제 버튼 href 속성을 저장합니다.
@@ -107,7 +107,7 @@
                       	 <c:if test="${whologin==2}">
                          <button type="button" class="btn btn-info form-control-sm"  onclick="writeForm();">숙소 등록</button>
                          </c:if>          
-                         <span class="label label-default">${requestScope.pageInfo.pagingStatus}</span> 
+                         <span class="label label-default">${sessionScope.pageInfo.pagingStatus}</span> 
                       </div>
                    </div>
                 </form>                     
@@ -116,13 +116,13 @@
 			</td>
 			</tr>
 				<c:set var="colsu" value="${applicationScope.map['accommodation_list_column_size']}"/>
-				<c:forEach var="bean" items="${requestScope.datalist}" varStatus="status">
+				<c:forEach var="bean" items="${sessionScope.datalist}" varStatus="status">
 				<c:if test="${status.index%colsu==0}">
 					<tr>
 				</c:if> 
 				<td>
 					<div class="card" style="width:19rem;">
-						<a href="<%=notWithFormTag%>acDetail&acid=${bean.acid}&minprice=${bean.minprice}${requestScope.pageInfo.flowParameter}" class="removeUnderLine">
+						<a href="<%=notWithFormTag%>acDetail&acid=${bean.acid}&minprice=${bean.minprice}${sessionScope.pageInfo.flowParameter}" class="removeUnderLine">
 							<img class="card-img-top" alt="${bean.name}" src="${pageContext.request.contextPath}/upload/${bean.image}" >
 							<div class="card-body"> 
 								<h5 class="card-title">${bean.name}</h5> 
@@ -135,7 +135,7 @@
 								</p>
 							<c:if test="${whologin == 2}">
 								<div id="buttonList">
-									<a id="updateAnchor" href="<%=notWithFormTag%>acUpdate&acid=${bean.acid}${requestScope.pageInfo.flowParameter}" class="btn btn-info">
+									<a id="updateAnchor" href="<%=notWithFormTag%>acUpdate&acid=${bean.acid}${sessionScope.pageInfo.flowParameter}" class="btn btn-info">
 									수정</a>
 									<span id="deleteAnchor${bean.acid}" data-bs-toggle="modal" data-bs-target="#myModal" class="btn btn-info" data-acid="${bean.acid}">
 									삭제
@@ -159,7 +159,7 @@
 				</c:forEach>
 			</tbody>
 		</table>
-		${requestScope.pageInfo.pagingHtml}	
+		${sessionScope.pageInfo.pagingHtml}	
 	</div>	 
 	
 	

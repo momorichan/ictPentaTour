@@ -21,6 +21,13 @@ public class AccommodationInsertController extends SuperClass{
 		RoomDao dao = new RoomDao();
 		List<Room> lists = dao.getTempRoom();
 		request.setAttribute("roomlist", lists);
+		
+		// 세션에서 메시지를 가져와서 JSP에 전달하고, 해당 메시지를 세션에서 제거
+        if (request.getSession().getAttribute("message") != null) {
+            request.setAttribute("message", request.getSession().getAttribute("message"));
+            request.getSession().removeAttribute("message");
+        }
+		
 		super.gotoPage(PREFIX + "acInsert.jsp");	
 	}
 	

@@ -12,7 +12,7 @@
 
 <script type="text/javascript">
 function roomForm(){ 
-	location.href = '<%=notWithFormTag%>roInsert&acid=${requestScope.acbean.acid}';
+	location.href = '<%=notWithFormTag%>roInsert&acid=${sessionScope.acbean.acid}';
 	}
 function amenitiesForm(){ 
 	location.href = '<%=notWithFormTag%>amInsert';
@@ -23,7 +23,7 @@ function selectAmenities(){
 	//$.ajax() 함수를 이용하여 데이터 보여주기 
 	$.ajax({
 		url:'<%=notWithFormTag%>amUpdate',
-			data:'acid=' + '${requestScope.acbean.acid}',
+			data:'acid=' + '${sessionScope.acbean.acid}',
 			type : 'get',
 			//dataType:'json', 
 			dataType : 'html',
@@ -75,39 +75,39 @@ $(document).ready(function() {
 			<div id="invisible" class="input-group">
 				<span class="input-group-text col-md-2">예약 번호</span> <input
 					id="acid" name="acid" 
-					type="number" class="form-control" value="${requestScope.acbean.acid}">
+					type="number" class="form-control" value="${sessionScope.acbean.acid}">
 			</div>
 			<div class="input-group">
 				<span class="input-group-text col-md-2">숙소 이름</span> 
 				<input
 					id="name" name="name" type="text" class="form-control"
-					value="${requestScope.acbean.name}">
+					value="${sessionScope.acbean.name}">
 			</div>
 			<div class="input-group">
 				<span class="input-group-text col-md-2">숙소 주소</span> <input
 					id="address" name="address" type="text" class="form-control"
-					value="${requestScope.acbean.address}">
+					value="${sessionScope.acbean.address}">
 			</div>
 			<div class="input-group">
 				<span class="input-group-text col-md-2">설명</span> <input
 					id="description" name="description" type="text"
 					class="form-control" placeholder=""
-					value="${requestScope.acbean.description}">
+					value="${sessionScope.acbean.description}">
 			</div>
 			<div class="input-group">
 				<span class="input-group-text col-md-2">이미지01</span> 
 				<input id="image01" name="newimage01" type="file" class="form-control">
-				<input type="hidden" name="preimage01"  value=${requestScope.acbean.image01 }>
+				<input type="hidden" name="preimage01"  value=${sessionScope.acbean.image01 }>
 			</div>
 			<div class="input-group">
 				<span class="input-group-text col-md-2">이미지02</span> 
 				<input id="image02" name="newimage02" type="file" class="form-control">
-				<input type="hidden" name="preimage02"  value=${requestScope.acbean.image02 }>				
+				<input type="hidden" name="preimage02"  value=${sessionScope.acbean.image02 }>				
 			</div>
 			<div class="input-group">
 				<span class="input-group-text col-md-2">이미지03</span> 
 				<input id="image03" name="newimage03" type="file" class="form-control">
-				<input type="hidden" name="preimage03"  value=${requestScope.acbean.image03 }>				
+				<input type="hidden" name="preimage03"  value=${sessionScope.acbean.image03 }>				
 			</div>		
 			<div class="input-group">
 					<span class="input-group-text col-md-2 " >편의시설 선택</span>
@@ -132,8 +132,8 @@ $(document).ready(function() {
 			</thead>
 			<tbody>
 			
-			<c:if test="${requestScope.roomlist != null}">
-				<c:forEach items="${requestScope.roomlist}" var="room">
+			<c:if test="${sessionScope.roomlist != null}">
+				<c:forEach items="${sessionScope.roomlist}" var="room">
 					<tr>
 						<td>${room.room}</td>
 						<td>${room.roominfo}</td>

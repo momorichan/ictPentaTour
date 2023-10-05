@@ -1,29 +1,21 @@
 package com.shopping.model.bean;
 
 public class Roomreser {
-	private int reid;
-	private int roid;
-	private int guests;
+	private int rrid;
+	private int meid;
 	private String checkin;
 	private String checkout;
-	
-	public int getReid() {
-		return reid;
+	public int getRrid() {
+		return rrid;
 	}
-	public void setReid(int reid) {
-		this.reid = reid;
+	public void setRrid(int rrid) {
+		this.rrid = rrid;
 	}
-	public int getRoid() {
-		return roid;
+	public int getMeid() {
+		return meid;
 	}
-	public void setRoid(int roid) {
-		this.roid = roid;
-	}
-	public int getGuests() {
-		return guests;
-	}
-	public void setGuests(int guests) {
-		this.guests = guests;
+	public void setMeid(int meid) {
+		this.meid = meid;
 	}
 	public String getCheckin() {
 		return checkin;
@@ -39,9 +31,10 @@ public class Roomreser {
 	}
 	@Override
 	public String toString() {
-		return "Roomreser [reid=" + reid + ", roid=" + roid + ", guests=" + guests + ", checkin=" + checkin
-				+ ", checkout=" + checkout + "]";
+		return "Roomreser [rrid=" + rrid + ", meid=" + meid + ", checkin=" + checkin + ", checkout=" + checkout + "]";
 	}
+	
+	
 	
 	
 }

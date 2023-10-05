@@ -206,6 +206,9 @@ function getAmenities(){
 
 		
 		$('.reserve-button').click(function(e) {
+			
+			
+			
 	        e.preventDefault(); // 기본 동작 방지
 
 	        var datepickerId = $(this).data('datepicker'); // datepicker 필드의 ID 가져오기
@@ -218,17 +221,65 @@ function getAmenities(){
 	        var startDate = dateParts[0].trim(); // 시작 날짜
 	        var endDate = dateParts[1].trim();   // 끝 날짜
 
+	        const exampleData = { room: 1, guests: 4 };
+	        const result = `room${exampleData.room}=${exampleData.guests}`;
+	        console.log(result);
+
+	        
+	     	// 객실 및 인원 정보 가져오기
+	        const guestData = collectRoomGuestData();
+    		const guestParams = guestDataToURLParams(guestData);
+    		
 	        // 예약 페이지 URL 생성 및 이동
 	        var reservationUrl = '<%=notWithFormTag%>roReservation';
-											reservationUrl += '&startDate='
-													+ startDate + '&endDate='
-													+ endDate + '&acid=' + acid
-													+ '&roid=' + roid;
+    					reservationUrl += '&startDate=' + startDate;
+    					reservationUrl += '&endDate=' + endDate;
+    					reservationUrl += '&acid=' + acid;
+    					reservationUrl += '&roid=' + roid;
+    					reservationUrl += '&' + guestParams; // 추가된 부분
 
-											// 생성된 URL로 페이지 이동
-											window.location.href = reservationUrl;
-										});
+						// 생성된 URL로 페이지 이동
+						window.location.href = reservationUrl;
 					});
+		
+		function collectRoomGuestData() {
+		    const guestData = [];
+
+		    const rooms = document.querySelectorAll('#roomList .guest-configuration'); // '.guest-configuration' 클래스를 포함한 li만 선택합니다.
+
+		    rooms.forEach((room, index) => {
+		        
+		        const guestQtyElem = room.querySelector(`span[name^="guest"][name$="Qty"]`); // Starts with 'guest' and ends with 'Qty'
+		        if (guestQtyElem) {
+		            guestData.push({
+		                room: index + 1,
+		                guests: parseInt(guestQtyElem.textContent, 10)
+		            });
+		        } else {
+		        }
+		    });
+		    return guestData;
+		}
+
+
+		function guestDataToURLParams(data) {
+		    console.log("Input Data for URL Params:", data);
+		    
+		    const urlParamArray = data.map(entry => {
+		    	const roomKey = "room" + entry.room;
+		    	const roomValue = entry.guests;
+		    	return roomKey + "=" + roomValue;
+		    });
+		    
+		    console.log("Generated URL Param Array:", urlParamArray);
+
+		    const urlParams = urlParamArray.join('&');
+		    console.log("Joined URL Params:", urlParams);
+		    return urlParams;
+		}
+
+
+});
 </script>
 <script>
 //페이지의 모든 내용이 로드된 후 실행합니다.
@@ -264,11 +315,12 @@ document.addEventListener("DOMContentLoaded", function () {
         if (event.target.classList.contains("add-room") && roomCounter <= 8) {
             // 새로운 객실 항목을 생성합니다.
             const roomItem = document.createElement("li");
+            roomItem.classList.add('guest-configuration'); // 클래스 추가
             roomItem.innerHTML = '<div class=""><strong class="">객실 선택</strong></div><div class=""><p class="">'
                 + '<span class=""></span> 객실 ' + roomCounter + '</p></div><div class="">'
                 + '<span class="">인원</span>'
                 + '<button class="minus" data-type="guest' + roomCounter + '">-</button>'
-                + '&nbsp;<span name="guest' + roomCounter + 'Qty" class="guest' + roomCounter + 'Qty" >1</span>'
+                + '&nbsp;<span name="guest' + roomCounter + 'Qty" class="guest' + roomCounter + 'Qty" >2</span>'
                 + '&nbsp;<button class="plus" data-type="guest' + roomCounter + '">+</button>'
                 + '</div>';
             roomList.appendChild(roomItem);  // 새 객실을 리스트에 추가합니다.
@@ -462,7 +514,7 @@ document.addEventListener("DOMContentLoaded", function () {
 	                </div>
 	            </li>
 	            <!-- 인원 수량 관련 코드 -->
-	            <li class="">
+	            <li class="guest-configuration">
 	                <div class="">
 	                    <strong class="">객실별 인원 설정</strong>
 	                </div>
@@ -474,7 +526,7 @@ document.addEventListener("DOMContentLoaded", function () {
 	                <div class="">
 	                        <span class="">인원</span>
 	                    <button class="minus" data-type="guest1">-</button> 
-	                    <span name="guest1Qty" class="guest1Qty" >1</span>
+	                    <span name="guest1Qty" class="guest1Qty" >2</span>
 	                    <button class="plus" data-type="guest1">+</button>
 	                </div>
 	            </li>
@@ -483,7 +535,7 @@ document.addEventListener("DOMContentLoaded", function () {
 	    <br>
 	    <div class="">
 	        객실<span class="roomTotal" name="roomTotal" id="roomTotal">1</span> 
-	        인원<span class="guestTotal" name="guestTotal" id="guestTotal">1 </span>
+	        인원<span class="guestTotal" name="guestTotal" id="guestTotal">2 </span>
 	        <span class="">
 	            <button class="btn_purple_hover complete-selection">선택완료</button>
 	        </span>
@@ -492,19 +544,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
 
 
-
-
-
-
-
-
-
-
-
-
-
 		<table class="table">
-
 			<tbody>
 				<c:forEach var="bean" items="${requestScope.roomlists}">
 					<tr>

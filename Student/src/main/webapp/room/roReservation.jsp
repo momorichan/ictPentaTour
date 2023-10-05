@@ -45,46 +45,49 @@
 					<tbody>
 						<tr>
 							<td class="col-2">도시</td>
-							<td>${requestScope.acbean.city}</td>
+							<td>${sessionScope.acbean.city}</td>
 						</tr>
 						<tr>
 							<td>체크인/체크아웃</td>
-							<td>${requestScope.startDate} ~ ${requestScope.endDate}</td>
+							<td>${sessionScope.startDate} ~ ${sessionScope.endDate}</td>
 						</tr>
-						<tr>
-							<td>객실 정보</td>
-							<td>${requestScope.robean.roominfo}</td>
-						</tr>
+						<c:forEach items="${sessionScope.roomList}" var="room" varStatus="index">
+							<tr>
+								<td>객실${index.count} 정보</td>
+								<td>${sessionScope.robean.roominfo} * ${room}명</td>
+							</tr>
+						</c:forEach>
 					</tbody>
 				</table>
 			</div>
 			
-			
-			투숙자 정보
+			<c:forEach items="${sessionScope.roomList}" var="room" varStatus="index">
+			${index.count}번 객실
 			<div>
 				<table class="table">
-					<tbody>
+					<tbody class="personal">
 						<tr>
 							<td class="col-2">이름</td>
 							<td class="col-4">
-							<input id="membername" name="membername" type="text" class="form-control" value="${requestScope.mebean.name}">
+							<input id="membername${index.count}" name="membername${index.count}" type="text" class="form-control" 
+							value="<c:choose><c:when test="${index.count == 1}">${sessionScope.mebean.name}</c:when></c:choose>">
 							</td>
+							<td>전화번호</td>
+							<td><input id="phone${index.count}" name="phone${index.count}" type="text" class="form-control" 
+							value="<c:choose><c:when test="${index.count == 1}">${sessionScope.mebean.phone}</c:when></c:choose>"></td>
 						</tr>
 						<tr>
 							<td class="col-2">생년월일</td>
-							<td class="col-4"><input id="brith" name="brith" type="text" class="form-control" value="${requestScope.mebean.birth}"></td>
+							<td class="col-4"><input id="birth${index.count}" name="birth${index.count}" type="text" class="form-control" 
+							value="<c:choose><c:when test="${index.count == 1}">${sessionScope.mebean.birth}</c:when></c:choose>"></td>
 							<td class="col-2">성별</td>
-							<td class="col-4"><input id="gender" name="gender" type="text" class="form-control" value="${requestScope.mebean.gender}"></td>
-						</tr>
-						<tr>
-							<td>전화번호</td>
-							<td><input id="phone" name="phone" type="text" class="form-control" value="${requestScope.mebean.phone}"></td>
-							<td>이메일</td>
-							<td><input id="meid" name="meid" type="text" class="form-control" value="${requestScope.mebean.meid}"></td>
+							<td class="col-4"><input id="gender${index.count}" name="gender${index.count}" type="text" class="form-control" 
+							value="<c:choose><c:when test="${index.count == 1}">${sessionScope.mebean.gender}</c:when></c:choose>"></td>
 						</tr>
 					</tbody>
 				</table>
 			</div>
+			</c:forEach>				
 
 			결제 정보
 			<div>

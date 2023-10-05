@@ -31,10 +31,10 @@ public class AccommodationListController extends SuperClass {
 			Paging pageInfo = new Paging(pageNumber, pageSize, totalCount, url, mode, keyword, isGrid);
 			List<AcRoomPrice> lists = ardao.selectAll(pageInfo);
 			
-			request.setAttribute("datalist", lists);
-			request.setAttribute("pageInfo", pageInfo);
+			session.setAttribute("datalist", lists);
+			session.setAttribute("pageInfo", pageInfo);
 			
-			super.gotopage("accommodation/acList.jsp");
+			response.sendRedirect("accommodation/acList.jsp");
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
