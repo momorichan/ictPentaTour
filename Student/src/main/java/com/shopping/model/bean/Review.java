@@ -9,6 +9,8 @@ public class Review {
 	private Integer rating; // 별점
 	private String content; // 내용작성
 	
+	private double average_rating; // 별점 평균
+	
 	public Review() {}
 	
 	
@@ -61,6 +63,14 @@ public class Review {
 	}
 	public void setContent(String content) {
 		this.content = content;
+	}
+
+	public double getAverage_rating() {
+		return average_rating;
+	}
+
+	public void setAverage_rating(double average_rating) {
+		this.average_rating = average_rating;
 	}
 	
 }
