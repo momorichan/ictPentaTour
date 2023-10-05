@@ -61,6 +61,7 @@
 	function showPopup(toid, meid) {
 		if(${empty sessionScope.loginfo}) {
 			alert("로그인이 필요한 서비스 입니다.");
+			window.open("<%=notWithFormTag %>mePopup" , "a", "width=600, height=640, left=100, top=50");
 			return false;
 		} else {
 			window.open("<%=notWithFormTag %>tourPopup&toid=" + toid + "&meid=" + meid , "a", "width=600, height=640, left=100, top=50");

@@ -42,7 +42,7 @@ public class TourDetailPopupController extends SuperClass{
 		try {
 			cnt = dao.InsertReservation(toid, tqty, meid);
 			
-			super.gotopage("tour/tourClosePopup.jsp");
+			super.gotopage("common/ClosePopup.jsp");
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
