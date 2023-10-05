@@ -537,7 +537,7 @@ input[type='date']:valid::before {
 						<div class="search justify-content-center">
 							<div class="from">
 								<input class="form-control" type="number" id="regid" name="regid"
-									placeholder="번호를 입력해주세요">
+									placeholder="예약 번호">
 							</div>
 							
 							<div class="checkid">

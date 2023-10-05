@@ -24,7 +24,7 @@ public class AirCancelController extends SuperClass {
 		
 		String meid = super.loginfo.getMeid();
 		System.out.println("머함 : " + meid);
-		System.out.println("머함 : " + resid);
+		System.out.println("머함2 : " + resid);
 		
 		 if (meid != null && meid.equals(resid)) {
 		        // meid가 세션에 저장된 값과 일치하면 예약 취소를 수행합니다.
