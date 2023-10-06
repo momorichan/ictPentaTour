@@ -52,8 +52,7 @@
 </head>
 <body>
 	<div class="container">
-		<h2>게시물 등록</h2>
-		<p>사용자들이 게시물을 등록하는 페이지입니다.</p>
+		<h2>리뷰 등록</h2>
 		<form action="<%=withFormTag%>" method="post" name="myform" id="myform"  enctype="multipart/form-data">
 		<input type="hidden" name="command" value="rvInsert">
 		<input type="hidden" name="acid" value="${requestScope.acid }">

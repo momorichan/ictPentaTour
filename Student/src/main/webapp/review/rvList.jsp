@@ -162,7 +162,7 @@
 	<form name="myform" action="<%=withFormTag%>" method="get">
 									<input type="hidden" name="command" value="rvList">
 									<div class="row">
-											<button type="button" class="btn btn-info form-control-md"
+											<button type="button" class="btn btn-info form-control-lg"
 												onclick="writeForm();">글 쓰기</button>
 									</div>
 								</form>				

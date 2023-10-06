@@ -49,6 +49,42 @@ public class ReviewDao extends SuperDao {
 		return cnt;
 	}
 	
+
+	public List<Review> getDataByAcid(Paging pageInfo, int acid) throws Exception{
+		List<Review> lists = new ArrayList<Review>();
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		String mode = pageInfo.getMode();
+		String keyword = pageInfo.getKeyword();
+		String column = " TRID, MEID, TOID, ACID, REGDATE, RATING, CONTENT";
+		
+		String sql = " select " + column;
+		sql += " from ( select " + column + ", rank() over(order by acid asc) as ranking";
+		sql += " from tourreview where acid = ?";
+		sql += " ) ";
+		sql += " where ranking between ? and ? order by regdate desc";
+		conn = super.getConnection();
+		pstmt = conn.prepareStatement(sql);
+		
+		pstmt.setInt(1, acid);
+		pstmt.setInt(2, pageInfo.getBeginRow());
+		pstmt.setInt(3, pageInfo.getEndRow());
+		rs = pstmt.executeQuery();
+		while (rs.next()) {
+			lists.add(getBeanData(rs));
+		}
+		if (rs != null) {
+			rs.close();
+		}
+		if (pstmt != null) {
+			pstmt.close();
+		}
+		if (conn != null) {
+			conn.close();
+		}
+		return lists;
+	}
+	
 	public List<Review> getDataByToid(Paging pageInfo, int toid) throws Exception{
 		List<Review> lists = new ArrayList<Review>();
 		PreparedStatement pstmt = null;
@@ -161,7 +197,7 @@ public class ReviewDao extends SuperDao {
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
 		
-		String sql = " select * from review";
+		String sql = " select * from tourreview";
 		sql += " where trid = ? ";
 		
 		conn = super.getConnection();
@@ -187,7 +223,7 @@ public class ReviewDao extends SuperDao {
 		ResultSet rs = null;
 		Review bean = null;
 		
-		String sql = " select * from review";
+		String sql = " select * from tourreview";
 		sql += " where trid = ?";
 		
 		conn = super.getConnection();

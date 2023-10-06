@@ -46,7 +46,7 @@ public class ReviewListController extends SuperClass{
 	         super.session.setAttribute("averageRating", averageRating);
 			//페이징 정보를 바인딩
 			request.setAttribute("pageInfo", pageInfo);			
-			super.gotopage("review/rvList.jsp");
+			super.gotopage("accommodation/acDetail.jsp");
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
