@@ -190,7 +190,7 @@ public class AccommodationDao extends SuperDao {
 		int cnt = -1;
 		
 		String sql = " insert into accommodation(acid, global, city, address, name, description, image01, image02, image03)" ;
-		sql += "values(acseq.nextval, ?, ?, ?, ?, ?, ?, ?)";
+		sql += "values(acseq.nextval, ?, ?, ?, ?, ?, ?, ?, ?)";
 		
 		PreparedStatement pstmt = null;
 		conn = super.getConnection();
