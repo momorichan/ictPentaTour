@@ -477,7 +477,7 @@ document.addEventListener("DOMContentLoaded", function () {
 					<tr>
 					</tr>
 					<tr>
-						<td>리뷰 정보</td>
+						<td><jsp:include page="./../review/rvList.jsp" /></td>
 					</tr>
 					<tr>
 						<td class="col-6"><p class="tit">1박 요금 최저가</p></td>
@@ -489,7 +489,6 @@ document.addEventListener("DOMContentLoaded", function () {
 					</tr>
 				</thead>
 			</table>
-			<jsp:include page="./../review/rvList.jsp" />
 		</div>
 		<div>
 			<table class="table">
@@ -589,6 +588,7 @@ document.addEventListener("DOMContentLoaded", function () {
 		</table>
 		<table class="table table-borderless" id="amList">
 		</table>
+		<jsp:include page="./../review/rvDetail.jsp" />
 	</div>
 	<!-- The Modal -->
 	<div class="modal fade" id="myModal">
