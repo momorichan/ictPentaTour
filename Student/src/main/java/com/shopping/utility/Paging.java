@@ -98,7 +98,7 @@ public class Paging {
 //		this.flowParameter += "&startDate=" + startDate;
 //		this.flowParameter += "&endDate=" + endDate;
 
-		this.pagingHtml = this.getMakePagingHtml();
+		this.pagingHtml = this.getMakePageHtml();
 	}
 
 

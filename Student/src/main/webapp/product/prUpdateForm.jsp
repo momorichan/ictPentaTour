@@ -37,6 +37,10 @@
 			
 			var optionList = $('#category option');
 			optionList.each(function(){
+<<<<<<< HEAD
+=======
+				console.log($(this).val());
+>>>>>>> refs/remotes/origin/rentalcar
 				if($(this).val() == category){
 					$('option[value="' + category + '"').attr('selected', true);
 				}

@@ -1,16 +1,12 @@
 package com.shopping.controller.rentalcar;
 
-import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import com.oreilly.servlet.MultipartRequest;
 import com.shopping.controller.SuperClass;
-import com.shopping.controller.product.ProductListController;
-import com.shopping.model.bean.Category;
 import com.shopping.model.bean.Rentalcar;
-import com.shopping.model.dao.CategoryDao;
 import com.shopping.model.dao.RentalcarDao;
 
 public class RentalcarInsertController extends SuperClass{
@@ -37,19 +33,6 @@ private final String PREFIX = "rentalcar/" ;
 	public void doGet(HttpServletRequest request, HttpServletResponse response) throws Exception {
 		super.doGet(request, response);
 		
-		// Categories 테이블에서 상품 카테고리 목록을 읽어서 request에 바인딩합니다.
-		CategoryDao dao = new CategoryDao() ;
-		List<Category> lists = null ;
-		
-		try {
-			lists = dao.GetCategoryList("product", "select") ;
-			request.setAttribute("categories", lists); 
-			
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-		
-		super.gotoPage(PREFIX + "prInsertForm.jsp");
 	}
 	
 	@Override
@@ -84,7 +67,7 @@ private final String PREFIX = "rentalcar/" ;
 			if(cnt == -1) {
 				super.gotoPage(PREFIX + "rcInsertForm.jsp");				
 			}else {
-				 new ProductListController().doGet(request, response); 
+				 new RentalcarListController().doGet(request, response); 
 			}
 		} catch (Exception e) {
 			e.printStackTrace();

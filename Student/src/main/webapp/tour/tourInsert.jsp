@@ -8,6 +8,7 @@
 <title>Insert title here</title>
 <style type="text/css">
 	.input-group-text{
+<<<<<<< HEAD
 		width:150px;
 		text-align: center;
 	}
@@ -58,6 +59,57 @@
 			$('#tname').focus();
 			return false;
 		};
+=======
+		width:133px;
+		text-align: center;
+	}
+</style>
+<script type="text/javascript">
+	function validationcheck(){
+		var location = $('#location').val();
+		if(location.length < 1){
+			alert('지역은 필수 입력 사항입니다.')
+			$('#location').focus();
+			return false;
+		};
+		
+		var location = $('#tname').val();
+		if(location.length < 1){
+			alert('티켓 이름은 필수 입력 사항입니다.')
+			$('#tname').focus();
+			return false;
+		};
+		
+		var location = $('#tprice').val();
+		if(location.length < 1){
+			alert('티켓 가격은 필수 입력 사항입니다.')
+			$('#tprice').focus();
+			return false;
+		};
+		
+		var location = $('#tname').val();
+		if(location.length < 1){
+			alert('티켓 이름은 필수 입력 사항입니다.')
+			$('#tname').focus();
+			return false;
+		};
+		
+		var location = $('#tname').val();
+		if(location.length < 1){
+			alert('티켓 이름은 필수 입력 사항입니다.')
+			$('#tname').focus();
+			return false;
+		};
+		
+		var location = $('#tname').val();
+		if(location.length < 1){
+			alert('티켓 이름은 필수 입력 사항입니다.')
+			$('#tname').focus();
+			return false;
+		};
+		
+		
+>>>>>>> refs/remotes/origin/rentalcar
 	};
 </script>
 </head>

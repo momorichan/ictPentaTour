@@ -12,5 +12,9 @@ public class RentalcarCheckController extends SuperClass{
 		
 		super.gotoPage("rentalcar/rcCheck.jsp");
 	}
-
+	@Override
+	public void doPost(HttpServletRequest request, HttpServletResponse response) throws Exception {
+		super.doPost(request, response);
+		
+	}
 }

@@ -3,7 +3,6 @@ package com.shopping.model.dao;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import com.shopping.model.bean.Flight;
-import com.shopping.model.bean.Product;
 import com.shopping.utility.MyUtility;
 
 public class FlyDao extends SuperDao{
