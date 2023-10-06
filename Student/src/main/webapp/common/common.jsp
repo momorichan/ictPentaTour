@@ -244,7 +244,7 @@ String notWithFormTag = appName + mappingName + "?command=";
 						<li class="nav-item dropdown"><a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown">게시물</a>
 							<ul class="dropdown-menu">
 								<c:if test="${whologin == '1' || whologin == '2'}">
-									<li><a class="dropdown-item" href="<%=notWithFormTag%>boInsert">게시물 등록</a></li>
+									<li><a class="dropdown-item" href="<%=notWithFormTag%>rvDetail">게시물 등록</a></li>
 								</c:if>
 								<li><a class="dropdown-item" href="<%=notWithFormTag%>rvList">목록 보기</a></li>
 							</ul>

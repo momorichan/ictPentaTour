@@ -87,5 +87,4 @@ allCheck=com.shopping.controller.check.allCheckController
 rvList=com.shopping.controller.review.ReviewListController
 rvInsert=com.shopping.controller.review.ReviewInsertController
 rvDelete=com.shopping.controller.review.ReviewDeleteController
-#rvDetail=com.shopping.controller.review.ReviewDetailController
-#rvUpdate=com.shopping.controller.mall.ReviewUpdateController
+rvDetail=com.shopping.controller.review.ReviewDetailController
