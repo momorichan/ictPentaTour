@@ -1,4 +1,4 @@
-package com.shopping.controller.review;
+package com.shopping.controller.tourreview;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -8,17 +8,17 @@ import com.shopping.controller.SuperClass;
 import com.shopping.controller.tour.TourDeleteController;
 import com.shopping.controller.tour.TourDetailController;
 import com.shopping.model.bean.Review;
-import com.shopping.model.dao.ReviewDao;
+import com.shopping.model.dao.TourReviewDao;
 
 public class ReviewInsertController extends SuperClass{
-	private final String PREFIX = "review/" ;
+	private final String PREFIX = "tourreview/" ;
 
 	@Override
 	public void doGet(HttpServletRequest request, HttpServletResponse response) throws Exception {
 		super.doGet(request, response);
 		int toid = Integer.parseInt(request.getParameter("toid"));
 		request.setAttribute("toid", toid);
-		super.gotopage(PREFIX+"rvInsert.jsp");
+		super.gotopage(PREFIX+"tourrvInsert.jsp");
 	}
 
 	@Override
@@ -35,7 +35,7 @@ public class ReviewInsertController extends SuperClass{
 			bean.setToid(Integer.parseInt(mr.getParameter("toid")));
 		}
 		
-		ReviewDao dao = new ReviewDao();
+		TourReviewDao dao = new TourReviewDao();
 		
 		int cnt = -1;
 		

@@ -25,8 +25,14 @@ public class MemberDetailController extends SuperClass{
 				super.setAlertMessage("잘못된 회원 정보입니다.");
 				super.gotopage("common/home.jsp");
 			}else {
+				if(bean.getRole().equals("1")) {
+					request.setAttribute("role", "일반");
+				} else {
+					request.setAttribute("role", "관리자");
+				}
 				request.setAttribute("bean", bean);
 				super.gotopage("member/meDetail.jsp");
+				
 			}
 		} catch (Exception e) {
 			e.printStackTrace();

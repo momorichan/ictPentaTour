@@ -9,7 +9,7 @@ import javax.servlet.http.HttpServletResponse;
 import com.shopping.controller.SuperClass;
 import com.shopping.model.bean.Review;
 import com.shopping.model.bean.Tour;
-import com.shopping.model.dao.ReviewDao;
+import com.shopping.model.dao.TourReviewDao;
 import com.shopping.model.dao.TourDao;
 import com.shopping.utility.Paging;
 
@@ -21,7 +21,7 @@ public class TourDetailController extends SuperClass{
 		int toid = Integer.parseInt(request.getParameter("toid"));
 		TourDao dao = new TourDao();
 		Tour bean = null;
-		ReviewDao rdao = new ReviewDao();
+		TourReviewDao rdao = new TourReviewDao();
 		List<Review> rbean = new ArrayList<Review>();
 		String pageNumber = request.getParameter("pageNumber");
 		String pageSize = "10";

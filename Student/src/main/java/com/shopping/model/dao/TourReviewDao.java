@@ -8,7 +8,7 @@ import java.util.List;
 import com.shopping.model.bean.Review;
 import com.shopping.utility.Paging;
 
-public class ReviewDao extends SuperDao {
+public class TourReviewDao extends SuperDao {
 
 	public int getTotalRecordCount(int toid) throws Exception {
 

@@ -66,7 +66,7 @@ public class MemberDao extends SuperDao{
 
 		// ?를 placehoder라고 합니다. 치환되어야 할 영역		
 		String sql = " insert into members(meid, password, name, gender, birth, phone, address, role)";
-		sql += " values(?, ?, ?, ?, ?, ?, ?, ?)";
+		sql += " values(?, ?, ?, ?, ?, ?, ?, '1')";
 		PreparedStatement pstmt = null;
 		
 		conn = super.getConnection();//단계2
@@ -81,7 +81,6 @@ public class MemberDao extends SuperDao{
 		pstmt.setString(5, bean.getBirth());
 		pstmt.setString(6, bean.getPhone());
 		pstmt.setString(7, bean.getAddress());
-		pstmt.setString(8, bean.getRole());
 		
 		cnt = pstmt.executeUpdate();//단계4-1
 		conn.commit();
@@ -162,79 +161,88 @@ public class MemberDao extends SuperDao{
 		return lists;
 	}
 	
-public int deleteData(String id) throws Exception{
+	public int deleteData(String meid) throws Exception{
 		
-		String sql = "";
+		String sql = " delete from members where meid = ?";
 		int cnt = -1;
 		PreparedStatement pstmt = null;
 		
-		Member bean = getDataByPrimaryKey(id);
 		
 		conn = super.getConnection();
 		conn.setAutoCommit(false);
-
-		String remark = MyUtility.getCurrentTime() + bean.getName() + "(회원 : '" + id + "')님이 탈퇴했습니다.";
-
-		// step01 : 게시판 테이블의 비고(remark) 컬럼에 삭제 히스토리 남기기
-		sql = " update boards set remark = ? where id = ?";
-		
 		pstmt = conn.prepareStatement(sql);
-		pstmt.setString(1, remark);
-		pstmt.setString(2, id);
-
-		cnt = pstmt.executeUpdate();
-		if(pstmt != null) {pstmt.close();}
 		
+		pstmt.setString(1, meid);
 		
-		// step02 : 주문 테이블의 비고(remark) 컬럼에 삭제 히스토리 남기기
-		sql = " update orders set remark = ? where id = ?";
-		
-		pstmt = conn.prepareStatement(sql);
-		pstmt.setString(1, remark);
-		pstmt.setString(2, id);
-
-		cnt = pstmt.executeUpdate();
-		if(pstmt != null) {pstmt.close();}
-		
-		
-		// step03 : 회원 테이블에서 해당 회원 아이디와 관련된 행 삭제하기
-		sql = " delete from members where id = ?";
-		
-		pstmt = conn.prepareStatement(sql);
-		pstmt.setString(1, id);
 		cnt = pstmt.executeUpdate();
 		
 		conn.commit();
-		if(pstmt != null) {pstmt.close();}
-		if(conn != null) {conn.close();}
+		
+		if(pstmt != null) {
+			pstmt.close();
+		}
+		if(conn != null) {
+			conn.close();
+		}
 		
 		return cnt;
 	}
 
-public int GetTotalRecordCount() throws Exception {
-	// 테이블의 총 행개수를 구합니다.
-	String sql = " select count(*) as cnt from members " ;
-	
-	PreparedStatement pstmt = null ;
-	ResultSet rs = null ;
-	
-	conn = super.getConnection() ;
-	pstmt = conn.prepareStatement(sql) ;
-	
-	rs = pstmt.executeQuery() ; 
-	
-	int cnt = -1 ;
-	
-	if(rs.next()) {
-		cnt = rs.getInt("cnt") ;
+	public int GetTotalRecordCount() throws Exception {
+		// 테이블의 총 행개수를 구합니다.
+		String sql = " select count(*) as cnt from members " ;
+		
+		PreparedStatement pstmt = null ;
+		ResultSet rs = null ;
+		
+		conn = super.getConnection() ;
+		pstmt = conn.prepareStatement(sql) ;
+		
+		rs = pstmt.executeQuery() ; 
+		
+		int cnt = -1 ;
+		
+		if(rs.next()) {
+			cnt = rs.getInt("cnt") ;
+		}
+		
+		if(rs!=null) {rs.close();}
+		if(pstmt!=null) {pstmt.close();}
+		if(conn!=null) {conn.close();}
+		
+		return cnt;
 	}
-	
-	if(rs!=null) {rs.close();}
-	if(pstmt!=null) {pstmt.close();}
-	if(conn!=null) {conn.close();}
-	
-	return cnt;
-}	
+
+	public int UpdateMemberData(Member bean) throws Exception{
+		int cnt = -1;
+		
+		String sql = " update members set password=?, name=?, gender=?, birth=?, phone=?, address=? where meid=?";
+		
+		conn = super.getConnection();
+		conn.setAutoCommit(false);
+		PreparedStatement pstmt = conn.prepareStatement(sql);
+		
+		pstmt.setString(1, bean.getPassword());
+		pstmt.setString(2, bean.getName());
+		pstmt.setString(3, bean.getGender());
+		pstmt.setString(4, bean.getBirth());
+		pstmt.setString(5, bean.getPhone());
+		pstmt.setString(6, bean.getAddress());
+		pstmt.setString(7, bean.getMeid());
+		
+		cnt = pstmt.executeUpdate();
+		
+		conn.commit();
+		
+		if(pstmt!=null) {
+			pstmt.close();
+		}
+		if(conn!=null) {
+			conn.close();
+		}
+		
+		return cnt;
+	}	
 }
 
 

@@ -1,11 +1,11 @@
-package com.shopping.controller.review;
+package com.shopping.controller.tourreview;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import com.shopping.controller.SuperClass;
 import com.shopping.model.bean.Review;
-import com.shopping.model.dao.ReviewDao;
+import com.shopping.model.dao.TourReviewDao;
 
 public class ReviewDeleteController extends SuperClass{
 	private final String PREFIX = "common/" ;
@@ -16,7 +16,7 @@ public class ReviewDeleteController extends SuperClass{
 		
 		Integer trid = Integer.parseInt(request.getParameter("trid"));
 		
-		ReviewDao dao = new ReviewDao();
+		TourReviewDao dao = new TourReviewDao();
 		
 		int cnt = -1;
 		

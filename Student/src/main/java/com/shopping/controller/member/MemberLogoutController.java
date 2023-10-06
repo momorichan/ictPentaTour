@@ -27,7 +27,7 @@ public class MemberLogoutController extends SuperClass {
 			}
 			// 로그인시 저장했던 로그인 정보 등을 깨끗히 비웁니다.
 			super.session.invalidate();			
-			super.gotoPage("member/meLoginForm.jsp"); // 로그인 페이지로 이동함
+			response.sendRedirect("common/home.jsp"); // 로그인 페이지로 이동함
 		} catch (Exception e) {
 			e.printStackTrace();
 

@@ -531,6 +531,6 @@ h2{
 			
 		</div>
 	</div>
-<%@ include file="./../review/rvList.jsp"%>
+<%@ include file="./../tourreview/tourrvList.jsp"%>
 </body>
 </html>

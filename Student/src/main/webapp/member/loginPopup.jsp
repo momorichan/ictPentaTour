@@ -28,6 +28,10 @@
 	function login() {
 		$("#form").submit();
 	}
+	function create() {
+		opener.location.href = "<%=notWithFormTag%>meInsert";
+		self.close();
+	}
 </script>
 <style type="text/css">
 html, body {

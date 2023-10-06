@@ -9,8 +9,7 @@
 	<title>Insert title here</title>
 	<script type="text/javascript">
   		$(document).ready(function(){
-  	  		/* $('#birth').datepicker(); */
-  	  		$('#birth').datepicker({dateFormat: "yy/mm/dd"});   	  	 	
+  	  		$('#birth').datepicker({dateFormat: "yy/mm/dd"});
   		});
   		
   		
@@ -121,25 +120,17 @@
 			</div>
 		
 			<div class="input-group">
-				<span class="input-group-text">생일</span>
-				<input class="form-control" type="datetime" id="birth" name="birth">				
+				<span class="input-group-text">생년월일</span>
+				<input class="form-control" type="date" id="birth" name="birth">				
 			</div>
 			<div class="input-group">
-				<span class="input-group-text">결혼 여부</span>
-				<input class="form-control" type="text" id="marriage" name="marriage">				
+				<span class="input-group-text">전화 번호</span>
+				<input class="form-control" type="text" id="phone" name="phone">				
 			</div>				
-			<div class="input-group">
-				<span class="input-group-text">급여</span>
-				<input class="form-control" type="number" id="salary" name="salary">				
-			</div>
 			<div class="input-group">
 				<span class="input-group-text">주소</span>
 				<input class="form-control" type="text" id="address" name="address">				
 			</div>
-			<div class="input-group">
-				<span class="input-group-text">매니저</span>
-				<input class="form-control" type="text" id="manager" name="manager">				
-			</div>			
 			<div id="buttonset" class="input-group">
 				<button type="submit" class="btn btn-primary rounded" onclick="return validChack();">
 				등록

@@ -1,4 +1,4 @@
-package com.shopping.controller.review;
+package com.shopping.controller.tourreview;
 
 import java.util.List;
 
@@ -7,7 +7,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import com.shopping.controller.SuperClass;
 import com.shopping.model.bean.Review;
-import com.shopping.model.dao.ReviewDao;
+import com.shopping.model.dao.TourReviewDao;
 import com.shopping.utility.Paging;
 
 public class ReviewListController extends SuperClass{
@@ -23,7 +23,7 @@ public class ReviewListController extends SuperClass{
 		
 		String attribute = "meid, rating, regdate, content";
 		
-		ReviewDao dao = new ReviewDao();
+		TourReviewDao dao = new TourReviewDao();
 		try {
 			int totalCount = dao.getTotalRecordCount(1); 
 			String url = super.getUrlInfomation("rvList");
@@ -37,7 +37,7 @@ public class ReviewListController extends SuperClass{
 			
 			//페이징 정보를 바인딩
 			request.setAttribute("pageInfo", pageInfo);			
-			super.gotopage("review/rvList.jsp");
+			super.gotopage("tourreview/tourrvList.jsp");
 		} catch (Exception e) {
 			e.printStackTrace();
 		}

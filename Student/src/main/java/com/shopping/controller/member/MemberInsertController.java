@@ -31,8 +31,6 @@ public class MemberInsertController extends SuperClass{
 		bean.setBirth(request.getParameter("birth"));
 		bean.setPhone(request.getParameter("phone"));
 		bean.setAddress(request.getParameter("address"));
-		bean.setRole(request.getParameter("role"));
-		
 		
 		MemberDao dao = new MemberDao();
 		

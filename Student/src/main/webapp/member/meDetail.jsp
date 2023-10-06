@@ -26,53 +26,76 @@
 	display: flex;
 }
 .left {
-	width:20%;
-	justify-content: left;
+	width:48%;
+	margin-right:2%;
+	justify-content: right;
+}
+.left-text {
+	width:100px;
+	text-align: left;
 }
 .right {
-	width:80%;
+	width:48%;
+	margin-left:2%;
 }
 #backButton {
 	margin: auto;
+	display: flex;
+	justify-content: center;
+}
+h2 {
+	text-align: center;
 }
 
 </style>
 </head>
 <body>
 	<div class="container">
-		<h2>${requestScope.bean.name}님의 회원 정보</h2>
+	<h2>${requestScope.bean.name}님의 회원 정보</h2>
+		<br>
 		<div class="row">
-			<span class="left">회원 아이디</span>
+			<div class="left">
+				<span class="left-text">회원 아이디</span>
+			</div>
 			<span class="right">${requestScope.bean.meid}</span>
 		</div>
 		<div class="row">
-			<span class="left">회원 이름</span>
+			<div class="left">
+				<span class="left-text">회원 이름</span>
+			</div>
 			<span class="right">${requestScope.bean.name}</span>
 		</div>
 		<div class="row">
-			<span class="left">성별</span>
+			<div class="left">
+				<span class="left-text">성별</span>
+			</div>
 			<span class="right">${requestScope.bean.gender}</span>
 		</div>
 		<div class="row">
-			<span class="left">생년월일</span>
+			<div class="left">
+				<span class="left-text">생년월일</span>
+			</div>
 			<span class="right">${requestScope.bean.birth}</span>
 		</div>
 		<div class="row">
-			<span class="left">휴대폰번호</span>
+			<div class="left">
+				<span class="left-text">휴대폰번호</span>
+			</div>
 			<span class="right">${requestScope.bean.phone}</span>
 		</div>
 		<div class="row">
-			<span class="left">주소</span>
+			<div class="left">
+				<span class="left-text">주소</span>
+			</div>
 			<span class="right">${requestScope.bean.address}</span>
 		</div>
 		<div class="row">
-			<span class="left"></span>
-			<span class="right"></span>
+			<div class="left">
+				<span class="left-text">회원 유형</span>
+			</div>
+			<span class="right">${requestScope.role}</span>
 		</div>
-		<div class="row">
-			<span class="left"></span>
-			<span class="right"></span>
-		</div>
+		<br>
 		<div id="backButton">
 			<button type="button" class="btn btn-primary" onclick="history.back();">
 				돌아 가기 
