@@ -92,7 +92,7 @@ img{
 					id="city" name="city" type="text" class="form-control"
 					placeholder="">
 			</div>
-			<div class="input-group">
+			<div class="input-group d-flex justify-content-start" >
 				<span class="input-group-text col-md-2">국제</span> 
 				<input class="form-check-input" type="radio" name="global" id="국내">
 			    <label class="form-check-label" for="국내">
@@ -101,7 +101,7 @@ img{
 			    <input class="form-check-input" type="radio" name="global" id="해외" checked>
 			    <label class="form-check-label" for="해외">
 			      해외
-			  </label>
+			  	</label>
 			</div>
 			<div class="input-group">
 				<span class="input-group-text col-md-2">설명</span> <input
