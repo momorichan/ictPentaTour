@@ -472,13 +472,12 @@ document.addEventListener("DOMContentLoaded", function () {
 		<div class="right-div">
 			<h2 align="right">${requestScope.acbean.name}</h2>
 			<p align="right">${requestScope.acbean.description}</p>
-			<jsp:include page="./../review/rvList.jsp" />
 			<table class="table table-borderless">
 				<thead>
 					<tr>
 					</tr>
 					<tr>
-						<td></td>
+						<td><jsp:include page="./../review/rvList.jsp" /></td>
 					</tr>
 					<tr>
 						<td class="col-6"><p class="tit">1박 요금 최저가</p></td>
@@ -589,7 +588,7 @@ document.addEventListener("DOMContentLoaded", function () {
 		</table>
 		<table class="table table-borderless" id="amList">
 		</table>
-		<jsp:include page="./../review/rvDetail.jsp" />
+		<%@ include file="./../review/rvDetail.jsp" %>
 	</div>
 	<!-- The Modal -->
 	<div class="modal fade" id="myModal">
