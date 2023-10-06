@@ -29,18 +29,22 @@
 		}	
 	</script>
 <style type="text/css">
-.point_txt{
- 	width: 400px;height: 300px;
+.point_txt2{
  	text-align: center; /* 텍스트 가운데 정렬 */
  	line-height: 3.0;
+    margin: 20px 0px 25px;
+    padding-bottom: 25px;
+    border-bottom: 1px solid rgb(221, 221, 221);
+    border-top: 1px solid rgb(221, 221, 221);
+	
 }
 </style>
 </head>
 <body>
-	<div class="point_txt">
+	<div class="point_txt2">
 				<strong class="tit mid">숙소후기</strong><br>
-					<span style="color : red"> ★</span><strong>${sessionScope.averageRating}</strong> <span>/ 5</span><br>
-					<span>${sessionScope.commentAdd}개의 여행후기</span>
+					<span style="color : red"> ★</span><strong>${sessionScope.averageRating}</strong> <span>/ 5</span>
+					<span>&nbsp;&nbsp;&nbsp;     ${sessionScope.commentAdd}개의 여행후기</span>
 					</div>
 </body>
 </html>

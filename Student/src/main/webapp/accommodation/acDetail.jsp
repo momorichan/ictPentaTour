@@ -472,12 +472,13 @@ document.addEventListener("DOMContentLoaded", function () {
 		<div class="right-div">
 			<h2 align="right">${requestScope.acbean.name}</h2>
 			<p align="right">${requestScope.acbean.description}</p>
+			<jsp:include page="./../review/rvList.jsp" />
 			<table class="table table-borderless">
 				<thead>
 					<tr>
 					</tr>
 					<tr>
-						<td><jsp:include page="./../review/rvList.jsp" /></td>
+						<td></td>
 					</tr>
 					<tr>
 						<td class="col-6"><p class="tit">1박 요금 최저가</p></td>
