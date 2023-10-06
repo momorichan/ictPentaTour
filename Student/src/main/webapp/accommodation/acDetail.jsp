@@ -140,6 +140,15 @@ img {
     color: #ffffff;
 }
 
+.breakfast {
+    color: rgb(14, 186, 191);
+}
+
+.price{
+	font-size: 24px;
+	 font-weight: 550;
+}
+
 </style>
 <script type="text/javascript">
 
@@ -457,13 +466,11 @@ document.addEventListener("DOMContentLoaded", function () {
 
 		</div>
 		<div class="right-div">
+			<h2 align="right">${requestScope.acbean.name}</h2>
+			<p align="right">${requestScope.acbean.description}</p>
 			<table class="table table-borderless">
 				<thead>
 					<tr>
-						<td>
-							<h2 align="right">${requestScope.acbean.name}</h2>
-							<p align="right">${requestScope.acbean.description}</p>
-						</td>
 					</tr>
 					<tr>
 						<td>리뷰 정보</td>
@@ -483,7 +490,11 @@ document.addEventListener("DOMContentLoaded", function () {
 			<table class="table">
 				<tbody>
 					<tr>
-						<td>주소 : ${requestScope.acbean.address}</td>
+					<td>주소 : ${requestScope.acbean.address}</td>
+					
+					</tr>
+					<tr>
+						
 						<td align="right">
 						<input class="btn_gray_hover" type="text" name="date" id="datepicker" placeholder="날짜를 선택하세요." readonly > 
 						<a href="#select_room_guest" class="btn_gray_hover open-popup"> 
@@ -550,13 +561,21 @@ document.addEventListener("DOMContentLoaded", function () {
 					<tr>
 						<td class="col-6" data-bs-toggle="modal" data-bs-target="#myModal"
 							data-roid="${bean.roid}" data-zxc="zxc">${bean.room}</td>
-						<td class="col-3">조식 ${bean.breakfast}</td>
-						<td class="col-1">1박<br> <fmt:formatNumber
-								value="${bean.price}"></fmt:formatNumber>원
+						<td class="col-3">
+						<span class="breakfast">
+						<img alt="아침" src="${pageContext.request.contextPath}/upload/lunch.jpg" style="width: 14px;">
+						조식 ${bean.breakfast}
+						</span>
 						</td>
-						<td class="col-2"><a href="#"
+						<td class="col-2">1박<br> 
+						<span class="price">
+						<fmt:formatNumber value="${bean.price}"></fmt:formatNumber>
+						</span>
+						원
+						</td>
+						<td class="col-1"><a href="#"
 							class="btn_gray_hover reserve-button"
-							data-datepicker="#datepicker" data-roid="${bean.roid}"> 예약하기
+							data-datepicker="#datepicker" data-roid="${bean.roid}"> 예약
 						</a></td>
 					</tr>
 				</c:forEach>
