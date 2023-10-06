@@ -196,7 +196,7 @@
 											<img src="${pageContext.request.contextPath}/image/car.png">
 											${bean.carType}
 											<img src="${pageContext.request.contextPath}/image/credit.png">
-											${bean.price}																				
+											<fmt:formatNumber type="number" value="${bean.price}" pattern="###,###"/>																				
 									</div>
 									<!-- 관리자 로그인 시... -->
 	    							<c:if test="${whologin == 2}">	    							

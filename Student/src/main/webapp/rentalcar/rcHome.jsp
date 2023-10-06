@@ -12,8 +12,8 @@
 
 	.container {
 		display: grid;
-		grid-template-columns: repeat(3, 1fr);
-		grid-template-rows: repeat(3, minmax(100px, auto));
+		grid-template-columns: repeat(2, 1fr);
+		grid-template-rows: repeat(2, minmax(100px, auto));
 		align-item: stretch;
 		
 		row-gap: 20px;
@@ -32,7 +32,9 @@
         border-radius: 5%;
         cursor: pointer;
 	}
-	
+	h5 {
+ 	 text-align: center;
+	}
 
 	
 	img{
@@ -88,16 +90,7 @@
 						<img src="https://content.skyscnr.com/db465e93dcaad614e9bfcaddb5865e36/GettyImages-505777764.jpg">						
 					</a>
 				</figure>
-				https://tenor.com/bogMO.gif			
 				<h5>예약 하러 가기</h5>				
-			</div>
-		</div>
-		<div class="item">
-			<div class="hover-img">
-				<figure>
-					<img src="https://content.skyscnr.com/db465e93dcaad614e9bfcaddb5865e36/GettyImages-505777764.jpg">
-				</figure>			
-				<h5>예약 정보 확인하기</h5>				
 			</div>
 		</div>
 	</div>
