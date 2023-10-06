@@ -45,6 +45,7 @@ public class Paging {
 			}
 		}
 		this.pageSize = Integer.parseInt(_pageSize);
+		System.out.println("페이지 사이즈"+pageSize);
 
 		this.totalCount = totalCount;
 		this.url = url;
@@ -81,7 +82,7 @@ public class Paging {
 		this.pagingHtml = this.getMakePagingHtml();
 	}
 
-	/* <2> startLocation, endLocation */
+	/* <2> startLocation, endLocation  10.7 안씀*/
 	public Paging(boolean isGrid, String _pageNumber, String _pageSize, int totalCount, String url, String startLocation, String endLocation) {
 		if (_pageNumber == null || _pageNumber.equals("null") || _pageNumber.equals("")) {
 			_pageNumber = "1";
@@ -91,13 +92,13 @@ public class Paging {
 		// isGrid=true이면 상품 목록 보기, false이면 일반 형식(회원, 게시물 목록 등등)
 		if (_pageSize == null || _pageSize.equals("null") || _pageSize.equals("")) {
 			if (isGrid) { // 격자 형식으로 보기
-				_pageSize = "4"; // 2행 3열의 격자 구조
+				_pageSize = "6"; // 2행 3열의 격자 구조
 			} else {
 				_pageSize = "10";
 			}
 		}
 		this.pageSize = Integer.parseInt(_pageSize);
-
+		
 		this.totalCount = totalCount;
 		this.url = url;
 
@@ -144,13 +145,13 @@ public class Paging {
 		// isGrid=true이면 상품 목록 보기, false이면 일반 형식(회원, 게시물 목록 등등)
 		if (_pageSize == null || _pageSize.equals("null") || _pageSize.equals("")) {
 			if (isGrid) { // 격자 형식으로 보기
-				_pageSize = "6"; // 2행 3열의 격자 구조
+				_pageSize = "20"; // 2행 3열의 격자 구조
 			} else {
 				_pageSize = "10";
 			}
 		}
 		this.pageSize = Integer.parseInt(_pageSize);
-
+		System.out.println("페이즈 사이즈 : " + pageSize);
 		this.totalCount = totalCount;
 		this.url = url;
 		// all 이면 전체 검색
@@ -177,7 +178,8 @@ public class Paging {
 			endPage = totalPage;
 		}
 
-		this.pagingStatus = "총 " + totalCount + "건[" + pageNumber + "/" + totalPage + "]";
+//		this.pagingStatus = "총 " + totalCount + "건[" + pageNumber + "/" + totalPage + "]";
+		this.pagingStatus = "총 " + totalCount + "건";
 
 		this.flowParameter = "";
 		this.flowParameter += "&pageNumber=" + pageNumber;

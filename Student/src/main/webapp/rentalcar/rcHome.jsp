@@ -53,26 +53,17 @@
 		
 		var image = document.querySelector('.image');
 		image.src = staticImg;
-			
-		
 		$(image).on("mouseenter", function(){
 			image.src = gifImg;
 		});
 		$(image).on("mouseleave", function(){
 			image.src = staticImg;
 		})
-		
-		
-		
 		/* tooltip */
 		var tooltipTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="tooltip"]'))
 		var tooltipList = tooltipTriggerList.map(function (tooltipTriggerEl) {
 		  return new bootstrap.Tooltip(tooltipTriggerEl)
 		})
-		
-		
-		
-		
 	});
 		
 	</script>

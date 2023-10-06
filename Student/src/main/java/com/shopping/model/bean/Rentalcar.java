@@ -11,8 +11,8 @@ public class Rentalcar {
 	private String passengers;// 차량의 최대 탑승인원
 	
 	// 9.27 추가 ++
-	private String carName; //차량이름...아반떼, 그랜저
 	private int cpnum; // 차량 상품 번호.
+	private String carName; //차량이름...아반떼, 그랜저
 	private String carImage01; // 이미지
 	private String carImage02;
 	private String carImage03;

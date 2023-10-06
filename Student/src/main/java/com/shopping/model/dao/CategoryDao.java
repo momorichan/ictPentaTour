@@ -9,6 +9,7 @@ import com.shopping.model.bean.Category;
 
 public class CategoryDao extends SuperDao{
 	
+	// gg
 	public List<Category> GetCategoryListForCar(String module, String type) throws Exception{
 		PreparedStatement pstmt = null ;
 		ResultSet rs = null ;
