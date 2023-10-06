@@ -125,6 +125,7 @@ public class AirListController extends SuperClass{
 					{
 						// 2x3x4x
 						pageInfo = new Paging(pageNumber, pageSize, totalCount, url, mode, keyword,isGrid);
+						System.out.println("여기시작-----------------");
 					}
 					else
 					{

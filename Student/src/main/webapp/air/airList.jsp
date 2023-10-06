@@ -25,7 +25,6 @@
 	
 	<script type="text/javascript">
 	
-	
 	$(document).ready(function(){
 	
 	/* 	var optionList = $('#mode option');
@@ -48,7 +47,7 @@
 	
 	function moveList()
 	{
-		location.href = '<%=notWithFormTag%>airList&mode=all&keyword=&ones=rest';
+		location.href = '<%=notWithFormTag%>airList&mode=all&keyword=';
 	}
 	
 	function goHome()
@@ -110,7 +109,7 @@
 		                </div>
 		                
 		               <c:forEach var="bean" items="${requestScope.datalist}"> 
-					<tr onclick="location.href='<%=notWithFormTag%>airDetail&flid=${bean.flid}'" style="cursor: pointer;"
+					<tr onclick="location.href='<%=notWithFormTag%>airDetail&flid=${bean.flid}${requestScope.pageinfo.flowparameter}'" style="cursor: pointer;"
 >
 						<td align="left">${bean.flid}</td>
 						<td align="left">${bean.fname}</td>
@@ -132,6 +131,8 @@
 			</tbody>
 		</table>
 		
+		${requestScope.pageInfo.pagingHtml}
+		
 		
 		<c:if test="${requestScope.ones == null}">
 		<div class="container mt-2">
@@ -152,7 +153,7 @@
 			
 			<tbody>
 				<c:forEach var="lest" items="${requestScope.list}"> 
-					<tr onclick="location.href='<%=notWithFormTag%>airDetail&flid=${lest.flid}'" style="cursor: pointer;">
+					<tr onclick="location.href='<%=notWithFormTag%>airDetail&flid=${lest.flid}${requestScope.pageInfo.flowParameter}'" style="cursor: pointer;">
 						<td align="left">${lest.flid}</td>
 						<td align="left">${lest.fname}</td>
 						<td align="left" class="deptime">${lest.depart}</td>
@@ -170,10 +171,7 @@
 				홈으로
 			</button>
 	</div>
-		
-		
-		
-		
+		 
 		</div>
 		
 		

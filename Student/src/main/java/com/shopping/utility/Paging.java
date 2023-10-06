@@ -98,6 +98,12 @@ public class Paging {
 		this.flowParameter += "&pageSize=" + pageSize;
 		this.flowParameter += "&mode=" + mode;
 		this.flowParameter += "&keyword=" + keyword;
+		this.flowParameter += "&mode=" + mode2;
+		this.flowParameter += "&keyword=" + keyword2;
+		this.flowParameter += "&mode=" + mode3;
+		this.flowParameter += "&keyword=" + keyword3;
+		this.flowParameter += "&mode=" + mode4;
+		this.flowParameter += "&keyword=" + keyword4;
 		
 		this.pagingHtml = this.getMakePageHtml();
 	 
@@ -165,6 +171,10 @@ public class Paging {
 		this.flowParameter += "&pageSize=" + pageSize;
 		this.flowParameter += "&mode=" + mode;
 		this.flowParameter += "&keyword=" + keyword;
+		this.flowParameter += "&mode=" + mode2;
+		this.flowParameter += "&keyword=" + keyword2;
+		this.flowParameter += "&mode=" + mode3;
+		this.flowParameter += "&keyword=" + keyword3;
 		
 		this.pagingHtml = this.getMakePageHtml();
 	 
@@ -229,6 +239,8 @@ public class Paging {
 		this.flowParameter += "&pageSize=" + pageSize;
 		this.flowParameter += "&mode=" + mode;
 		this.flowParameter += "&keyword=" + keyword;
+		this.flowParameter += "&mode=" + mode2;
+		this.flowParameter += "&keyword=" + keyword2;
 		
 		this.pagingHtml = this.getMakePageHtml();
 	 
@@ -331,7 +343,7 @@ public class Paging {
 		{
 			// 맨 끝이면서 이전 항목이 존재하지않는 경우
 			
-		}
+		}	
 		else
 		{
 			
@@ -359,6 +371,12 @@ public class Paging {
 		result += "&pageSize=" + this.pageSize;
 		result += "&mode=" + this.mode;
 		result += "&keyword=" + this.keyword;
+		result += "&mode=" + this.mode2;
+		result += "&keyword=" + this.keyword2;
+		result += "&mode=" + this.mode3;
+		result += "&keyword=" + this.keyword3;
+		result += "&mode=" + this.mode4;
+		result += "&keyword=" + this.keyword4;
 		result +="'>";
 		result += caption;
 		result += "</a></li>";
