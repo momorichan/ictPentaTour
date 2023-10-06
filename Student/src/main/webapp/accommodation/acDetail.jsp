@@ -147,6 +147,10 @@ img {
 .price{
 	font-size: 24px;
 	 font-weight: 550;
+.point_txt{
+ 	width: 400px;height: 100px;
+	line-height: 100px; /* 세로 가운데 정렬 : line-height와 height값을 동일하게 처리합니다.*/
+	text-align: center; /* 텍스트 가운데 정렬 */
 }
 
 </style>
@@ -485,6 +489,7 @@ document.addEventListener("DOMContentLoaded", function () {
 					</tr>
 				</thead>
 			</table>
+			<jsp:include page="./../review/rvList.jsp" />
 		</div>
 		<div>
 			<table class="table">
