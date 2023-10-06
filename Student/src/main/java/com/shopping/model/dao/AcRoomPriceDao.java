@@ -60,7 +60,7 @@ public class AcRoomPriceDao extends SuperDao{
 		String keyword = pageInfo.getKeyword();
 		
 		String sql = " with ranked as ( "
-				+ " SELECT a.acid, a.name, a.address, a.image01 image, COALESCE(MIN(r.price), 0) minprice, "
+				+ " SELECT a.acid, a.name, a.address, a.image01 image, a.city, a.global, COALESCE(MIN(r.price), 0) minprice, "
 				+ " rank() over(order by a.acid asc) as ranking "
 				+ " FROM ACCOMMODATION a "
 				+ " LEFT JOIN ROOMS r ON a.acid = r.acid ";
@@ -71,10 +71,10 @@ public class AcRoomPriceDao extends SuperDao{
 			sql += " where " + mode + " like '%" + keyword + "%' " ;
 		}		
 		
-		sql +=  " GROUP BY a.acid, a.name, a.address, a.image01 "
+		sql +=  " GROUP BY a.acid, a.name, a.address, a.image01, a.city, a.global "
 				+ " order by acid desc "
 				+ " ) "
-				+ " select ranked.acid, ranked.name, ranked.address, ranked.image, ranked.minprice "
+				+ " select ranked.acid, ranked.name, ranked.address, ranked.image, ranked.city, ranked.global, ranked.minprice "
 				+ " from ranked where ranking between ? and ? ";
 		
 		conn = super.getConnection();
@@ -112,7 +112,8 @@ public class AcRoomPriceDao extends SuperDao{
 		bean.setName(rs.getString("name"));
 		bean.setAddress(rs.getString("address"));
 		bean.setImage(rs.getString("image"));
-		
+		bean.setCity(rs.getString("city"));
+		bean.setGlobal(rs.getString("global"));
 		return bean;
 	}
 	

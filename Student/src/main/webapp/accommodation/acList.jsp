@@ -9,8 +9,8 @@
 <title>Insert title here</title>
 <style type="text/css">
       /* table 셀의 수평 가운데 정렬 */
-      .card{margin-left:auto;margin-right:auto;}
-      .card-img-top{width:300px;height:300px;}
+      .card{margin-left:auto;margin-right:auto; border: none; min-height: 400px;}
+      .card-img-top{width:282px;height:210px;}
       .removeUnderLine{text-decoration-line: none;}
 		#buttonList{margin-top:10px;}		
 		#updateAnchor, #deleteAnchor{opacity:0.8;}   
@@ -80,58 +80,40 @@
 </head>
 <body>
 	<div class="container">
-		<h2>숙소 목록</h2>
-		<p>숙소 목록입니다.</p>		
-		<table class="table table-borderless">
-			<thead>
-			</thead>
-			<tbody>
-			<tr>
-			<td colspan="7" align="center">
-				<div class="row">
-	            <div class="col-sm-12">               
-                <form name="myform" action="<%=withFormTag%>" method="get">
-                   <input type="hidden" name="command" value="acList">
-                   <div class="row">
-                      <div class="col-sm-12 mode">
-                         <select class="form-control-sm" id="mode" name="mode">
-                            <option value="all" selected="selected">--- 선택해 주세요 ---
-                            <option value="name">상품 이름
-                            <option value="company">제조 회사
-                            <option value="category">카테고리
-                         </select>    
-                      <input class="form-control-sm" type="text" name="keyword" id="keyword"
-                         placeholder="키워드 입력">                             
-                         <button type="submit" class="btn btn-warning form-control-sm" onclick="">검색</button>    
-                         <button type="button" class="btn btn-warning form-control-sm" onclick="searchAll();">전체 검색</button>       
-                      	 <c:if test="${whologin==2}">
-                         <button type="button" class="btn btn-info form-control-sm"  onclick="writeForm();">숙소 등록</button>
-                         </c:if>          
-                         <span class="label label-default">${sessionScope.pageInfo.pagingStatus}</span> 
-                      </div>
-                   </div>
-                </form>                     
-             	</div>
-          		</div>
-			</td>
-			</tr>
-				<c:set var="colsu" value="${applicationScope.map['accommodation_list_column_size']}"/>
-				<c:forEach var="bean" items="${sessionScope.datalist}" varStatus="status">
-				<c:if test="${status.index%colsu==0}">
-					<tr>
-				</c:if> 
-				<td>
-					<div class="card" style="width:19rem;">
+    <form name="myform" action="<%=withFormTag%>" method="get">
+        <input type="hidden" name="command" value="acList">
+        <input type="hidden" name="mode" id="mode" value="global">
+        <div class="row mb-3">
+            <div class="col-sm-12 mode">
+                <button name="keyword" type="submit" class="btn btn-info" onclick="" value="국내">국내</button>
+                <button name="keyword" type="submit" class="btn btn-info" onclick="" value="해외">해외</button>
+                <button name="keyword" type="submit" class="btn btn-info" onclick="" value="">전체</button>
+            </div>
+        </div>
+    </form>
+    
+    <table class="table table-borderless">
+        <thead></thead>
+        <tbody>
+            <c:set var="colsu" value="${applicationScope.map['accommodation_list_column_size']}"/>
+            <c:forEach var="bean" items="${sessionScope.datalist}" varStatus="status">
+                <c:if test="${status.index % colsu == 0}">
+                    <tr>
+                </c:if>
+                <td>
+                    <div class="card" style="width: 100%;">
 						<a href="<%=notWithFormTag%>acDetail&acid=${bean.acid}&minprice=${bean.minprice}${sessionScope.pageInfo.flowParameter}" class="removeUnderLine">
 							<img class="card-img-top" alt="${bean.name}" src="${pageContext.request.contextPath}/upload/${bean.image}" >
 							<div class="card-body"> 
-								<h5 class="card-title">${bean.name}</h5> 
+								<h6 class="card-title" style="color: black; font-weight: 550;">[${bean.city}]${bean.name}</h6> 
 								<p class="card-text">
-									<span id="minprice">
+									<span id="minprice" style="font-size: 1.5em;">
 									<c:if test="${bean.minprice != 0}">
-									<fmt:formatNumber value="${bean.minprice}" ></fmt:formatNumber>원~
+									<br>
+									<fmt:formatNumber value="${bean.minprice}" ></fmt:formatNumber>
 									</c:if>
 									</span>
+									<span style="color: black;">원~</span>
 								</p>
 							<c:if test="${whologin == 2}">
 								<div id="buttonList">
@@ -150,18 +132,22 @@
 							</div>
 						</a>
 
-					</div>
-					</td>
-					
- 				 <c:if test="${status.index%colsu==colsu-1}">
-					
-				</c:if>			
-				</c:forEach>
-			</tbody>
-		</table>
-		${sessionScope.pageInfo.pagingHtml}	
-	</div>	 
-	
+							</div>
+		                </td>
+		                <c:if test="${status.index % colsu == colsu - 1}">
+		                    </tr>
+		                </c:if>
+		            </c:forEach>
+		        </tbody>
+		    </table>
+		    
+		    ${sessionScope.pageInfo.pagingHtml}
+		    
+		    <c:if test="${whologin == 2}">
+		        <button type="button" class="btn btn-info form-control-sm" onclick="writeForm();">숙소 등록</button>
+		    </c:if>
+		</div>
+		
 	
 			<!-- The Modal -->
 	<div class="modal fade" id="myModal">

@@ -483,7 +483,7 @@ document.addEventListener("DOMContentLoaded", function () {
 			<table class="table">
 				<tbody>
 					<tr>
-						<td>숙소 정보</td>
+						<td>주소 : ${requestScope.acbean.address}</td>
 						<td align="right">
 						<input class="btn_gray_hover" type="text" name="date" id="datepicker" placeholder="날짜를 선택하세요." readonly > 
 						<a href="#select_room_guest" class="btn_gray_hover open-popup"> 

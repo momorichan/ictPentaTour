@@ -1,5 +1,5 @@
 # setting.txt
 uploadPath=upload
 product_list_column_size=3
-accommodation_list_column_size=3
+accommodation_list_column_size=4
 rentalcar_list_column_size=3

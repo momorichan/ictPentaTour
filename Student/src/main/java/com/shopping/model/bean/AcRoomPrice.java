@@ -6,6 +6,8 @@ public class AcRoomPrice {
 	private String name;
 	private String address;
 	private String image;
+	private String city;
+	private String global;
 	
 	public int getAcid() {
 		return acid;
@@ -37,11 +39,25 @@ public class AcRoomPrice {
 	public void setImage(String image) {
 		this.image = image;
 	}
+	
+	public String getCity() {
+		return city;
+	}
+	public void setCity(String city) {
+		this.city = city;
+	}
+	public String getGlobal() {
+		return global;
+	}
+	public void setGlobal(String global) {
+		this.global = global;
+	}
 	@Override
 	public String toString() {
 		return "AcRoomPrice [acid=" + acid + ", minprice=" + minprice + ", name=" + name + ", address=" + address
-				+ ", image=" + image + "]";
+				+ ", image=" + image + ", city=" + city + ", global=" + global + "]";
 	}
+
 
 	
 }
