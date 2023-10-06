@@ -1,7 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 
-
 <!DOCTYPE html>
 <html>
 <head>
@@ -70,7 +69,7 @@
 								</form>				
 	<!--  임시 창 -->
 	 <div class ="review_text">
-      <c:forEach var="bean" items="${requestScope.datalist}">
+      <c:forEach var="bean" items="${sessionScope.datalist}">
          <tr>
             <td>${bean.meid}님</td>
            	<td>${bean.regdate}</td><br>
@@ -102,7 +101,9 @@
             <td>${bean.content}</td><br><br>
             <td><c:if test="${whologin==2||sessionScope.loginfo.meid==bean.meid}">
 			<a id="meid" class="btn btn-info" onclick="deleteReview(${bean.trid})">삭제</a>
+			<br>
 							</c:if>
+						
          </tr>
       </c:forEach>
       ${requestScope.pageInfo.pagingHtml}

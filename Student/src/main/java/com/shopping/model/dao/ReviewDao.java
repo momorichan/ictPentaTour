@@ -65,6 +65,7 @@ public class ReviewDao extends SuperDao {
 		sql += " where ranking between ? and ? order by regdate desc";
 		conn = super.getConnection();
 		pstmt = conn.prepareStatement(sql);
+		System.out.println(sql);
 		
 		pstmt.setInt(1, acid);
 		pstmt.setInt(2, pageInfo.getBeginRow());
@@ -137,10 +138,6 @@ public class ReviewDao extends SuperDao {
 	    sql.append(" RANK() OVER (ORDER BY regdate DESC) AS ranking ");
 	    sql.append("FROM tourreview ORDER BY regdate DESC ");
 
-	    if (mode != null && !mode.equals("all")) {
-	        // 모드가 "all"이 아닌 경우에만 조건을 추가합니다.
-	        sql.append("WHERE ").append(mode).append(" LIKE ? ");
-	    }
 
 	    // 서브쿼리 내부의 괄호와 최종 결과의 괄호를 정확하게 닫아줍니다.
 	    sql.insert(0, "SELECT * FROM (");
@@ -154,11 +151,11 @@ public class ReviewDao extends SuperDao {
 
 	    if (mode != null && !mode.equals("all")) {
 	        // 모드가 "all"이 아닌 경우에만 파라미터를 설정합니다.
-	        pstmt.setString(parameterIndex++, "%" + keyword + "%");
+	        pstmt.setString(1, "%" + keyword + "%");
 	    }
 
-	    pstmt.setInt(parameterIndex++, pageInfo.getBeginRow());
-	    pstmt.setInt(parameterIndex, pageInfo.getEndRow());
+	    pstmt.setInt(2, pageInfo.getBeginRow());
+	    pstmt.setInt(3, pageInfo.getEndRow());
 
 	    rs = pstmt.executeQuery();
 
@@ -328,6 +325,68 @@ System.out.println(bean);
 	    }
 
 	    return averageRating;
+	}
+	public double calculateAverageRating(int acid) throws Exception{
+	    PreparedStatement pstmt = null;
+	    ResultSet rs = null;
+	    double averageRating = 0;
+	    
+	    String sql = " SELECT AVG(rating) AS average_rating FROM tourreview where acid = ?";
+
+	    conn = getConnection();
+	    pstmt = conn.prepareStatement(sql);
+	    
+	    pstmt.setInt(1, acid);
+	    rs = pstmt.executeQuery();
+
+	    if (rs.next()) {
+	        averageRating = rs.getDouble("average_rating"); // "average_rating"으로 열을 가져옴
+	    }
+
+	    if (rs != null) {
+	        rs.close();
+	    }
+	    if (pstmt != null) {
+	        pstmt.close();
+	    }
+	    if (conn != null) {
+	        conn.close();
+	    }
+	    
+	    averageRating = Math.round(averageRating * 100) / 100.0;
+	    return averageRating;
+	}
+	
+	public int getTotalRecordCount(int acid) throws Exception {
+
+		// 테이블의 모든 행 개수를 구합니다.
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+
+		String sql = " SELECT count(*) as cnt FROM tourreview where acid = ?";
+
+		conn = getConnection();
+		pstmt = conn.prepareStatement(sql);
+		pstmt.setInt(1, acid);
+		rs = pstmt.executeQuery();
+
+		int cnt = -1;
+
+		if (rs.next()) {
+			cnt = rs.getInt("cnt");
+		}
+
+		if (rs != null) {
+			rs.close();
+		}
+		if (pstmt != null) {
+			pstmt.close();
+		}
+		if (conn != null) {
+			conn.close();
+		}
+
+		return cnt;
 	}
 	
 	public int commentAdd() throws Exception{
