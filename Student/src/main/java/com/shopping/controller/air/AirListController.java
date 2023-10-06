@@ -36,8 +36,7 @@ public class AirListController extends SuperClass{
 		String keyword4 =  request.getParameter("keyword4");
 		
 		String ones = request.getParameter("ones");
-		System.out.println("ones : " + ones);
-				
+
 		AirDao dao = new AirDao();
 
 		int totalCount = 0;
@@ -163,7 +162,7 @@ public class AirListController extends SuperClass{
 					{
 						// 2o 3x 4o
 						pageInfo = new Paging(pageNumber, pageSize, totalCount, url, mode, keyword, mode2, keyword2 ,mode4,keyword4,isGrid);
-						pageInfo = new Paging(pageNumber, pageSize, addCount, url, mode2, keyword2, mode, keyword ,mode4,keyword4,isGrid);
+						page = new Paging(pageNumber, pageSize, addCount, url, mode2, keyword2, mode, keyword ,mode4,keyword4,isGrid);
 					}	
 				}
 				else

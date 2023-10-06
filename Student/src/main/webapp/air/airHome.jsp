@@ -356,6 +356,10 @@ input[type='date']:valid::before {
 	        return new Date().toJSON().split('T')[0];
 	    });
 	});
+ 	
+ 	
+ 	
+ 	
 
 </script>
 
@@ -387,6 +391,68 @@ input[type='date']:valid::before {
 			$(this).val('');
 		});
 	});
+	
+	
+	function validCheck() {
+		
+		var keyword_number = $('#keyword').val();
+		
+		if(keyword_number.trim() == "all" || keyword_number == null)
+			{
+				alert('출발지를 선택 해주세요');
+				$('#keyword').focus();
+				return false;
+			}
+		
+		var keyword_number_second = $('#keyword2').val();
+		
+		if(keyword_number_second.trim() == "all" || keyword_number_second == null)
+			{
+				alert('도착지를 선택 해주세요');
+				$('#keyword2').focus();
+				return false;
+			}
+
+		  /* 폼 유효성 검사 */  			
+		  var tripakeyword = $('#keyword3').val();
+		  
+		  if (tripakeyword == null || tripakeyword.trim() == "") {
+		    alert('가는 날을 입력해주세요.');
+		    $('#keyword3').focus();
+		    return false;
+		  }
+		  
+		  var regex = /^\d{4}-\d{2}-\d{2}$/;
+		  var result = regex.test(tripakeyword);
+
+		  if (result == false) {
+		    alert('날짜 형식은 반드시 yyyy-mm-dd으로 작성해 주세요.');
+		    $('.first1').focus();
+		    return false;
+		  }
+		  
+		  var lastkeyword = $('#keyword4').val();
+		  
+		  if (tripakeyword == null || tripakeyword.trim() == "") {
+		    alert('오는 날을 입력해주세요.');
+		    $('#keyword4').focus();
+		    return false;
+		  }
+		  
+		  
+		  var regex = /^\d{4}-\d{2}-\d{2}$/;
+		  var result = regex.test(lastkeyword);
+
+		  if (result == false) {
+		    alert('날짜 형식은 반드시 yyyy-mm-dd으로 작성해 주세요.');
+		    $('#keyword4').focus();
+		    return false;
+		  }
+		}
+	
+	
+	
+	
 </script>
 
 </head>
@@ -436,7 +502,6 @@ input[type='date']:valid::before {
 
 							<div class="departday">
 								<input type="hidden" id="mode3" name="mode3" value="detime">
-								
 								<input class="departdate datepicker" type="text" id="keyword3" 
 									name="keyword3" placeholder="가는날">
 
@@ -450,7 +515,7 @@ input[type='date']:valid::before {
 							
 							
 							<div class="find">
-								<button type="submit" class="search_btn btn-primary"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-search" viewBox="0 0 16 16">
+								<button type="submit" class="search_btn btn-primary" onclick="return validCheck();"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-search" viewBox="0 0 16 16">
   								<path d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001c.03.04.062.078.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1.007 1.007 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0z"/>
 								</svg></button>
 							</div>
