@@ -6,9 +6,27 @@ public class Category {
 	private Integer ordering;
 	private String engname;
 	private String korname;
+	//	렌터카 카테고리 추가 ++ 10.9 
+	private String startLocation; // 픽업 장소. 렌트시작
+	private String endLocation; // 반납 장소. 렌트 끝
 	
 	public Category() {}
 	
+	public String getStartLocation() {
+		return startLocation;
+	}
+
+	public void setStartLocation(String startLocation) {
+		this.startLocation = startLocation;
+	}
+
+	public String getEndLocation() {
+		return endLocation;
+	}
+
+	public void setEndLocation(String endLocation) {
+		this.endLocation = endLocation;
+	}
 	public String getModule() {
 		return module;
 	}
