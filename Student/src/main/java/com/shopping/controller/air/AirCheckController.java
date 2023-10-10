@@ -31,6 +31,14 @@ public class AirCheckController extends SuperClass{
 		}
 		
 		
+		if(Integer.parseInt(request.getParameter("regid")) > 10200)
+		{
+			super.setAlertMessage("정확히 입력해주세요");
+			new AirHomeController().doGet(request, response);
+			return;
+		}
+		
+		
 		int regid = Integer.parseInt(request.getParameter("regid"));
 		
 		String meid = request.getParameter("meid");
