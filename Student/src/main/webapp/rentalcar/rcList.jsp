@@ -6,7 +6,7 @@
 <head>
 	
 	<meta charset="UTF-8">
-	<title>rcList</title>
+	<title>렌터카</title>
 	<style type="text/css">
 	.col{
 		align-content: center;

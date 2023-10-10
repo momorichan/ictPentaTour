@@ -110,7 +110,7 @@ public class Paging {
 		// isGrid=true이면 상품 목록 보기, false이면 일반 형식(회원, 게시물 목록 등등)
 		if (_pageSize == null || _pageSize.equals("null") || _pageSize.equals("")) {
 			if (isGrid) { // 격자 형식으로 보기
-				_pageSize = "20"; // 2행 3열의 격자 구조
+				_pageSize = "100"; // 10.10 바뀜
 			} else {
 				_pageSize = "10";
 			}
