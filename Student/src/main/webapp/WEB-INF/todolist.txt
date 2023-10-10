@@ -28,7 +28,6 @@ amInsert=com.shopping.controller.amenities.AmenitiesInsertController
 amUpdate=com.shopping.controller.amenities.AmenitiesUpdateController
 #tour section
 tourHome=com.shopping.controller.tour.TourHomeController
-tourList=com.shopping.controller.tour.TourListController
 tourDetail=com.shopping.controller.tour.TourDetailController
 tourInsert=com.shopping.controller.tour.TourInsertController
 tourUpdate=com.shopping.controller.tour.TourUpdateController
