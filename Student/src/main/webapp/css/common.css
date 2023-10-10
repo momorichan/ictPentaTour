@@ -588,3 +588,4 @@ body.scrolltop{
 .side-icon.sideon:hover {
 	transform: translate(-75px, 0) rotateY(360deg);
 	pointer-events: all;
+}
