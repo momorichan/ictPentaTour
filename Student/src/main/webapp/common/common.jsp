@@ -246,43 +246,6 @@ String notWithFormTag = appName + mappingName + "?command=";
 								</c:if>
 							</ul>
 						</li>
-						<li class="nav-item dropdown"><a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown">게시물</a>
-							<ul class="dropdown-menu">
-								<c:if test="${whologin == '1' || whologin == '2'}">
-									<li><a class="dropdown-item" href="<%=notWithFormTag%>rvDetail">게시물 등록</a></li>
-								</c:if>
-								<li><a class="dropdown-item" href="<%=notWithFormTag%>rvList">목록 보기</a></li>
-							</ul>
-						</li>
-						<li class="nav-item dropdown"><a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown">상품</a>
-							<ul class="dropdown-menu">
-								<c:if test="${whologin == '2'}">
-									<li><a class="dropdown-item" href="<%=notWithFormTag%>prInsert">상품 등록</a></li>
-								</c:if>
-								<li><a class="dropdown-item" href="<%=notWithFormTag%>prList">목록 보기</a></li>
-							</ul>
-						</li>
-						                 <!-- 쇼핑몰 section -->
-		                <li class="nav-item dropdown">
-		                	<a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown">쇼핑몰</a>
-		                  	<ul class="dropdown-menu">          
-		                    	<li>
-			                       <a class="dropdown-item" href="<%=notWithFormTag%>maList">
-			                          카트 내역 보기
-			                       </a>
-			                    </li>
-			                    <li>
-			                       <a class="dropdown-item" href="<%=notWithFormTag%>maHistory">
-			                          나의 쇼핑 내역
-			                       </a>
-			                   </li>
-		                  	</ul>
-		                </li> 
-						<li class="nav-item dropdown"><a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown">데이터 보기</a>
-							<ul class="dropdown-menu">
-								<li><a class="dropdown-item" href="<%=notWithFormTag%>vwList">목록 보기</a></li>
-							</ul>
-						</li>
 						<li class="nav-item dropdown">
 							<a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown">항공</a>
 							<ul class="dropdown-menu">

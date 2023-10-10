@@ -10,14 +10,9 @@
 </head>
 <body>
 <%
-<<<<<<< HEAD
 	String gotopage = notWithFormTag + "home" ;
 	//out.print(gotopage);
 	response.sendRedirect(gotopage) ;
-=======
-	
-	
->>>>>>> refs/remotes/origin/rentalcar
 %>
 </body>
 </html>
