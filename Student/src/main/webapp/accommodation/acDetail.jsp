@@ -478,9 +478,6 @@ document.addEventListener("DOMContentLoaded", function () {
 					<tr>
 					</tr>
 					<tr>
-						<td><jsp:include page="./../review/rvList.jsp" /></td>
-					</tr>
-					<tr>
 						<td class="col-6"><p class="tit">1박 요금 최저가</p></td>
 						<td class="col-6" align="right"><strong class="price">
 								<fmt:formatNumber>

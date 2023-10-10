@@ -4,116 +4,14 @@
 <!DOCTYPE html>
 <html>
 <head>
+<!-- 10.10 -->
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<meta charset="UTF-8">
 	<title>Insert title here</title>
 	<style type="text/css">
 	
-
 	.container {
 		display: grid;
-<<<<<<< HEAD
-		grid-template-columns: repeat(3, 1fr);
-		grid-template-rows: repeat(3, minmax(100px, auto));
-		align-item: stretch;
-		
-		row-gap: 20px;
-		column-gap: 20px;
-	}
-	.item {
-		border: 2px;
-		border-radius: 5%;
-		box-shadow: 1px 1px 3px 1px #dadce0;
-		
-	
-	}
-	.hover-img{
-		background-color: #ffffff;
-/*         border: 1px solid #ccc; */
-        border-radius: 5%;
-	}
-	.hover-img:hover {
-		background-color: #eeeeee;
-        border-color: #bbb;
-        border-radius: 5%;
-        cursor: pointer;
-	}
-	
-
-	
-	img{
-		width:100%;
-		/* 왼쪽 위, 오른쪽 위, 왼쪽 아래, 오른쪽 아래 */
-		border-radius: 5% 5% 0 0;
-		
-	}
-	background-color{
-	
-	}
-	
-	</style>	
-	<script type="text/javascript" async src="https://tenor.com/embed.js"></script>
-	<script type="text/javascript">
-	$(function(){
-		/* gif 테스트 */
-		var staticImg="https://media.vlpt.us/images/gicomong/post/0e017975-70cc-41f5-b9a0-c5fa2b8b9e94/image.png";
-		var gifImg ="https://media.vlpt.us/images/gicomong/post/94c268f8-9b9c-4662-b3e8-73a0487ed0cc/1.gif";
-		
-		var image = document.querySelector('.image');
-		image.src = staticImg;
-			
-		image.addEventListener("mouseenter", function() {
-		  image.src = gifImg;
-		});
-		image.addEventListener("mouseleave", function() {
-		  image.src = staticImg;
-		});
-		
-		
-		/* tooltip */
-		var tooltipTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="tooltip"]'))
-		var tooltipList = tooltipTriggerList.map(function (tooltipTriggerEl) {
-		  return new bootstrap.Tooltip(tooltipTriggerEl)
-		})
-		
-		
-		
-		
-	});
-		
-	</script>
-</head>
-<body>
-
-	<div class="container">
-		<div class="item">
-			<div class="hover-img">
-				<figure>
-					 <a  data-bs-toggle="modal" data-bs-target="#myModal">
-						<img class="image" />		
-					</a>			
-				</figure>			
-				<h5>예약 정보 확인하기</h5>				
-			</div>
-		</div>
-		<div class="item">
-			<div class="hover-img" >
-				<figure>					
-					<a href="<%=notWithFormTag%>rcList">
-<!-- 						<img src="https://content.skyscnr.com/db465e93dcaad614e9bfcaddb5865e36/GettyImages-505777764.jpg"> -->
-						<img class="image" />
-					</a>
-				</figure>			
-				<h5>예약 하러 가기</h5>				
-			</div>
-		</div>
-		<div class="item">
-			<div class="hover-img">
-				<figure>
-					<img src="https://content.skyscnr.com/db465e93dcaad614e9bfcaddb5865e36/GettyImages-505777764.jpg">
-				</figure>			
-				<h5>예약 정보 확인하기</h5>				
-=======
 		grid-template-columns: repeat(2, 1fr);
 		grid-template-rows: repeat(2, minmax(100px, auto));
 		align-item: stretch;
@@ -124,12 +22,12 @@
 	.item {
 		border: 2px;
 		border-radius: 5%;
-		box-shadow: 1px 1px 3px 1px #dadce0;
-		background-color: #ffffff;
+		box-shadow: 1px 1px 3px 1px #DADCE0;
+		background-color: #FFFFFF;
         border-radius: 5%;	
 	}	
 	.item:hover {
-		background-color: #eeeeee;
+		background-color: #EEEEEE;
         border-color: #bbb;
         border-radius: 5%;
         cursor: pointer;
@@ -137,7 +35,6 @@
 	h5 {
  	 text-align: center;
 	}
-
 	
 	img{
 		width:100%;
@@ -173,7 +70,6 @@
 	</script>
 </head>
 <body>
-
 	<div class="container">
 		<div class="item">
 			<div class="hover-img">
@@ -193,7 +89,6 @@
 					</a>
 				</figure>
 				<h5>예약 하러 가기</h5>				
->>>>>>> refs/remotes/origin/rentalcar
 			</div>
 		</div>
 	</div>
