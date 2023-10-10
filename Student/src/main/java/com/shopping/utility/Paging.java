@@ -131,11 +131,13 @@ public class Paging {
 
 		beginRow = (pageNumber - 1) * pageSize + 1;
 
+		
 		endRow = pageNumber * pageSize;
+		
+		
 		if (endRow > totalCount) {
 			endRow = totalCount;
 		}
-
 		beginPage = (pageNumber - 1) / pageCount * pageCount + 1;
 
 		endPage = beginPage + pageCount - 1;
@@ -155,6 +157,8 @@ public class Paging {
 //		this.flowParameter += "&endDate=" + endDate;
 
 		this.pagingHtml = this.getMakePageHtml();
+		System.out.println("endRow : " + endRow);
+
 	}
 
 

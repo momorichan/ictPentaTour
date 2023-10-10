@@ -30,7 +30,7 @@ public class RentalcarDetailController extends SuperClass{
 		Rentalcar bean = new Rentalcar();
 		bean.setRcid(request.getParameter("rcid"));
 		Member mbean = new Member();
-		mbean.setMeid(request.getParameter("id"));; // 추후 meid로 변경
+		mbean.setMeid(request.getParameter("meid"));; // 추후 meid로 변경
 		
 		RentalcarDao dao = new RentalcarDao();
 		int cnt = -1;
