@@ -43,7 +43,11 @@ public class AccommodationUpdateController extends SuperClass{
 		bean.setName(request.getParameter("name"));
 		bean.setAddress(request.getParameter("address"));
 		bean.setDescription(request.getParameter("description"));
+		bean.setCity(request.getParameter("city"));
+		bean.setGlobal(request.getParameter("global"));
 		
+		System.out.println(bean.getCity());
+		System.out.println(bean.getGlobal());
 		
 		String preimage01 = request.getParameter("preimage01");
 		String preimage02 = request.getParameter("preimage02");

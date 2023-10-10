@@ -502,8 +502,7 @@ document.addEventListener("DOMContentLoaded", function () {
 						<a href="#select_room_guest" class="btn_gray_hover open-popup"> 
 						<span>객실1</span>
 						<span>인원2명</span>
-						</a>
-							<button class="btn_gray_hover">객실 검색</button></td>
+						</a></td>
 					</tr>
 				</tbody>
 			</table>

@@ -95,6 +95,18 @@ $(document).ready(function() {
 					value="${sessionScope.acbean.description}">
 			</div>
 			<div class="input-group">
+				<span class="input-group-text col-md-2">국제</span> <input
+					id="global" name="global" type="text"
+					class="form-control" placeholder=""
+					value="${sessionScope.acbean.global}">
+			</div>
+			<div class="input-group">
+				<span class="input-group-text col-md-2">도시</span> <input
+					id="city" name="city" type="text"
+					class="form-control" placeholder=""
+					value="${sessionScope.acbean.city}">
+			</div>						
+			<div class="input-group">
 				<span class="input-group-text col-md-2">이미지01</span> 
 				<input id="image01" name="newimage01" type="file" class="form-control">
 				<input type="hidden" name="preimage01"  value=${sessionScope.acbean.image01 }>
