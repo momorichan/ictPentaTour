@@ -11,10 +11,19 @@
 <title>Insert title here</title>
 
 	<style type="text/css">
+	
+	.mode, .keyword{
+	margin: auto;
+}
+
+.form-control-sm {
+	border: 1px solid Gainsboro;
+}
+	
+	
 	</style>
 	
 	<script type="text/javascript">
-	
 	
 	$(document).ready(function(){
 	
@@ -80,6 +89,7 @@
 			                           <select class="form-control form-control-sm" id="mode" name="mode">
 			                              <option value="all" selected="selected">--- 선택해 주세요 ---
 			                              <option value="flid">항공편번호
+			                              <option value="fname">항공사
 			                              <option value="depart">출발지
 			                              <option value="arrive">도착지
 			                           </select>
@@ -92,15 +102,14 @@
 			                        <div class="col">                     
 			                           <button type="submit" class="btn btn-warning form-control-sm" onclick="">검색</button>
 			                        </div>
-			                        <div class="col">
-			                           <button type="button" class="btn btn-warning form-control-sm" onclick="moveList();">전체 검색</button>
+			                        
+			                         <div class="col">                     
+			                           <button type="button" class="btn btn-warning form-control-sm" onclick="moveList();">전체검색</button>
 			                        </div>
-			                         <div class="col">            
-		                   </div>     
 		                </div>
 		                
 		               <c:forEach var="bean" items="${requestScope.datalist}"> 
-					<tr onclick="location.href='<%=notWithFormTag%>airDetail&flid=${bean.flid}'" style="cursor: pointer;"
+					<tr onclick="location.href='<%=notWithFormTag%>airDetail&flid=${bean.flid}${requestScope.pageinfo.flowparameter}'" style="cursor: pointer;"
 >
 						<td align="left">${bean.flid}</td>
 						<td align="left">${bean.fname}</td>
@@ -122,6 +131,8 @@
 			</tbody>
 		</table>
 		
+		${requestScope.pageInfo.pagingHtml}
+		
 		
 		<c:if test="${requestScope.ones == null}">
 		<div class="container mt-2">
@@ -142,7 +153,7 @@
 			
 			<tbody>
 				<c:forEach var="lest" items="${requestScope.list}"> 
-					<tr onclick="location.href='<%=notWithFormTag%>airDetail&flid=${lest.flid}'" style="cursor: pointer;">
+					<tr onclick="location.href='<%=notWithFormTag%>airDetail&flid=${lest.flid}${requestScope.pageInfo.flowParameter}'" style="cursor: pointer;">
 						<td align="left">${lest.flid}</td>
 						<td align="left">${lest.fname}</td>
 						<td align="left" class="deptime">${lest.depart}</td>
@@ -160,10 +171,7 @@
 				홈으로
 			</button>
 	</div>
-		
-		
-		
-		
+		 
 		</div>
 		
 		

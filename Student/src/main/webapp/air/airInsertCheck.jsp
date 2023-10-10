@@ -108,7 +108,7 @@
 			<tbody>
 			<tr>
 				<td align="center">예약번호</td>
-				<td>${requestScope.fly.regid}</td>
+				<td><strong>${requestScope.fly.regid}</strong></td>
 			</tr>
 			
 			
@@ -158,6 +158,11 @@
 					<tr>
 					<td align="center">인원수</td>
 					<td>${requestScope.fly.passengers}</td>
+				</tr>
+				
+				<tr>
+					<td align="center">예약자</td>
+					<td>${sessionScope.loginfo.name}</td>
 				</tr>
 				
 				

@@ -9,29 +9,44 @@ public class FlyDao extends SuperDao{
 
 	public int InsertData(Flight bean) throws Exception
 	{	
-		System.out.println(bean);
-		 
-		int cnt = -1;
-		conn = super.getConnection();
-		String sql = " insert into flight(regid,flid, seat,stopover,passengers,price) ";
-		sql += " 	    values(seqregid.nextval,   ?,    ?,       ?,         ?,    ?) ";
+		int regid = -1;
+	    
+	    try {
+	        conn = super.getConnection();
+	        String sql = "INSERT INTO flight(regid, flid,meid, seat, stopover, passengers, price) ";
+	        sql += "VALUES(seqregid.nextval,  ?, ?, ?, ?, ?, ?)";
 
-		conn.setAutoCommit(false);
-		PreparedStatement pstmt = conn.prepareStatement(sql);
-		
-		pstmt.setInt(1, bean.getFlid());
-		pstmt.setString(2, bean.getSeat());
-		pstmt.setString(3, bean.getStopover());
-		pstmt.setInt(4, bean.getPassengers());
-		pstmt.setInt(5, bean.getPrice() * bean.getPassengers());
-		
-		cnt = pstmt.executeUpdate();
-		conn.commit();
-		
-		if(pstmt != null) {pstmt.close();}
-		if(conn != null) {conn.close();}
-		
-		return cnt;
+	        conn.setAutoCommit(false);
+	        PreparedStatement pstmt = conn.prepareStatement(sql, new String[] { "regid" });
+
+	        pstmt.setInt(1, bean.getFlid());
+	        pstmt.setString(2, bean.getMeid());
+	        pstmt.setString(3, bean.getSeat());
+	        pstmt.setString(4, bean.getStopover());
+	        pstmt.setInt(5, bean.getPassengers());
+	        pstmt.setInt(6, bean.getPrice() * bean.getPassengers());
+
+	        int cnt = pstmt.executeUpdate();
+	        if (cnt > 0) {
+	            ResultSet generatedKeys = pstmt.getGeneratedKeys();
+	            if (generatedKeys.next()) {
+	                regid = generatedKeys.getInt(1); // seqregid.nextval의 값 가져오기
+	            }
+	        }
+
+	        conn.commit();
+
+	        if (pstmt != null) {
+	            pstmt.close();
+	        }
+	        if (conn != null) {
+	            conn.close();
+	        }
+	    } catch (Exception e) {
+	        e.printStackTrace();
+	    }
+
+	    return regid;
 	}
 
 	public Flight getDataByAirLine(int flid)  throws Exception
@@ -68,6 +83,7 @@ public class FlyDao extends SuperDao{
 		
 		bean.setRegid(rs.getInt("regid"));
 		bean.setFlid(rs.getInt("flid"));
+		bean.setMeid(rs.getString("meid"));
 		bean.setPassengers(rs.getInt("passengers"));
 		bean.setPrice(rs.getInt("price"));
 		bean.setRegid(rs.getInt("regid"));
@@ -88,6 +104,35 @@ public class FlyDao extends SuperDao{
 		conn = super.getConnection();
 		pstmt = conn.prepareStatement(sql);
 		pstmt.setInt(1, flid);
+		rs = pstmt.executeQuery();		
+		
+		Flight bean = null;
+		if(rs.next())
+		{
+			bean = this.getBeanData(rs);
+		}
+		
+		if(rs != null) {rs.close();}
+		if(pstmt != null) {pstmt.close();}
+		if(conn != null) {conn.close();}
+		
+		return bean;
+	}
+	
+	
+	
+	
+	public Flight getDataByFly2(int regid)   throws Exception 
+	{
+
+		String sql = " select * from flight ";
+		sql += " where regid = ? ";
+		
+		ResultSet rs = null;
+		PreparedStatement pstmt = null;
+		conn = super.getConnection();
+		pstmt = conn.prepareStatement(sql);
+		pstmt.setInt(1, regid);
 		rs = pstmt.executeQuery();		
 		
 		Flight bean = null;
@@ -154,4 +199,5 @@ public class FlyDao extends SuperDao{
 		
 		return cnt;
 	}
+
 }

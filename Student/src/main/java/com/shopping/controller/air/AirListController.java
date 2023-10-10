@@ -36,8 +36,7 @@ public class AirListController extends SuperClass{
 		String keyword4 =  request.getParameter("keyword4");
 		
 		String ones = request.getParameter("ones");
-		System.out.println("ones : " + ones);
-				
+
 		AirDao dao = new AirDao();
 
 		int totalCount = 0;
@@ -47,13 +46,13 @@ public class AirListController extends SuperClass{
 		{
 			boolean isGrid = false; // 상품목록이 아니기때문에 false
 			String url = super.getUrlInfomation("airList");
-
-			if(keyword2.equals("all") || keyword2 == null)
+			
+			if(keyword2 == null || keyword2.equals("all"))
 			{
 				// 2 x
 				if(keyword3 == null || keyword3.equals(""))
 				{
-					
+						
 					if(keyword4 == null || keyword4.equals(""))
 					{
 						totalCount = dao.GetTotalRecordCount(mode,keyword); // 수정 예정
@@ -61,9 +60,9 @@ public class AirListController extends SuperClass{
 					}
 					else
 					{
-						totalCount = dao.GetTotalRecordCountDate2(mode,keyword,mode4,keyword4); // 수정 예정
-						addCount = dao.GetTotalRecordCount(mode,keyword,mode4,keyword4);
-					}
+							totalCount = dao.GetTotalRecordCountDate2(mode,keyword,mode4,keyword4); // 수정 예정
+							addCount = dao.GetTotalRecordCount(mode,keyword,mode4,keyword4);
+						}
 				}
 				else
 				{
@@ -77,46 +76,42 @@ public class AirListController extends SuperClass{
 						totalCount = dao.GetTotalRecordCountDate2x3o4o(mode,keyword,mode3,keyword3,mode4,keyword4); // 수정 예정
 						addCount  =   dao.GetTotalRecordCountDate2x3o4o(mode,keyword,mode3,keyword3,mode4,keyword4);
 					}
-					
 				}
-				// 2x --
+					// 2x --
 			}
 			else
 			{	
-				// 2 o
-				if(keyword3 == null || keyword3.equals(""))
-				{
-					if(keyword4 == null || keyword4.equals(""))
+			// 2 o
+					if(keyword3 == null || keyword3.equals(""))
 					{
-						totalCount = dao.GetTotalRecordCount(mode,keyword,mode2,keyword2);
-						addCount = dao.GetTotalRecordCount(mode2,keyword2,mode,keyword);
+						if(keyword4 == null || keyword4.equals(""))
+						{
+							totalCount = dao.GetTotalRecordCount(mode,keyword,mode2,keyword2);
+							addCount = dao.GetTotalRecordCount(mode2,keyword2,mode,keyword);
+						}
+						else
+						{
+							totalCount = dao.GetTotalRecordCount2o3x4o(mode,keyword,mode2,keyword2,mode4,keyword4);
+							addCount = dao.GetTotalRecordCount2o3x4o(mode2,keyword2,mode,keyword,mode4,keyword4);
+						}
+						
 					}
 					else
 					{
-						totalCount = dao.GetTotalRecordCount2o3x4o(mode,keyword,mode2,keyword2,mode4,keyword4);
-						addCount = dao.GetTotalRecordCount2o3x4o(mode2,keyword2,mode,keyword,mode4,keyword4);
+						if(keyword4 == null || keyword4.equals(""))
+						{
+							System.out.println("여기로와야함============");
+							totalCount = dao.GetTotalRecordCountDate2(mode,keyword,mode2,keyword2,mode3,keyword3);
+							addCount = dao.GetTotalRecordCountDate2(mode2,keyword2,mode,keyword,mode3,keyword3);
+						}
+						else
+						{
+							totalCount = dao.GetTotalRecordCountDate2o3o4o(mode,keyword,mode2,keyword2,mode3,keyword3,mode4,keyword4);
+							addCount = dao.GetTotalRecordCountDate2o3o4o(mode2,keyword2,mode,keyword,mode3,keyword3,mode4,keyword4);
+						}
 					}
-					
+					// 2o
 				}
-				else
-				{
-					if(keyword4 == null || keyword4.equals(""))
-					{
-						System.out.println("여기로와야함============");
-						totalCount = dao.GetTotalRecordCountDate2(mode,keyword,mode2,keyword2,mode3,keyword3);
-						addCount = dao.GetTotalRecordCountDate2(mode2,keyword2,mode,keyword,mode3,keyword3);
-					}
-					else
-					{
-						totalCount = dao.GetTotalRecordCountDate2o3o4o(mode,keyword,mode2,keyword2,mode3,keyword3,mode4,keyword4);
-						addCount = dao.GetTotalRecordCountDate2o3o4o(mode2,keyword2,mode,keyword,mode3,keyword3,mode4,keyword4);
-					}
-				}
-				// 2o
-				
-			}
-			
-			
 			
 			Paging pageInfo = null;
 			Paging page = null;
@@ -130,6 +125,7 @@ public class AirListController extends SuperClass{
 					{
 						// 2x3x4x
 						pageInfo = new Paging(pageNumber, pageSize, totalCount, url, mode, keyword,isGrid);
+						System.out.println("여기시작-----------------");
 					}
 					else
 					{
@@ -167,7 +163,7 @@ public class AirListController extends SuperClass{
 					{
 						// 2o 3x 4o
 						pageInfo = new Paging(pageNumber, pageSize, totalCount, url, mode, keyword, mode2, keyword2 ,mode4,keyword4,isGrid);
-						pageInfo = new Paging(pageNumber, pageSize, addCount, url, mode2, keyword2, mode, keyword ,mode4,keyword4,isGrid);
+						page = new Paging(pageNumber, pageSize, addCount, url, mode2, keyword2, mode, keyword ,mode4,keyword4,isGrid);
 					}	
 				}
 				else
