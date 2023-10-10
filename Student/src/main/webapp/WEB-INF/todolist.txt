@@ -4,6 +4,7 @@ home=com.shopping.controller.HomeController
 meLogin=com.shopping.controller.member.MemberLoginController
 meLogout=com.shopping.controller.member.MemberLogoutController
 meInsert=com.shopping.controller.member.MemberInsertController
+meUpdate=com.shopping.controller.member.MemberUpdateController
 meList=com.shopping.controller.member.MemberListController
 meDetail=com.shopping.controller.member.MemberDetailController
 meDelete=com.shopping.controller.member.MemberDeleteController

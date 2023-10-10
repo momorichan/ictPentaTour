@@ -358,6 +358,66 @@ public class Paging {
 		this.pagingHtml = this.getMakePageHtml();
 	 
 	}
+	public Paging(String _pageNumber, String _pageSize, int totalCount, String url, String mode, String keyword, boolean isGrid, int toid) {
+		
+		
+		if(_pageNumber == null || _pageNumber.equals("null") || _pageNumber.equals(""))
+		{
+			_pageNumber = "1";
+		}
+		this.pageNumber = Integer.parseInt(_pageNumber);
+		
+		
+		// isGrid == true 이면 상품 목록 보기, false 면 일반 형식(회원,게시물 목록 등등)
+		if(_pageSize == null || _pageSize.equals("null") || _pageSize.equals(""))
+		{
+			if(isGrid == true)
+			{
+				_pageSize = "12"; // 2행3열의 격자 구조
+			}
+			else
+			{
+				_pageSize = "10";
+			}
+		}
+		this.pageSize = Integer.parseInt(_pageSize);
+		
+		this.totalCount = totalCount;
+		this.url = url;
+		
+		// "all" 이면 전체검색
+		this.mode = mode == null ? "all" : mode;
+		this.keyword = keyword == null ? "" : keyword;
+		
+		double _totalPage = Math.ceil((double)totalCount / pageSize);
+		
+		totalPage=(int)_totalPage;
+		beginRow= (pageNumber-1) * pageSize +1;
+		
+		endRow= pageNumber * pageSize;
+		if(endRow > this.totalCount)
+			endRow = this.totalCount;
+		
+		beginPage= (pageNumber - 1)/ this.pageCount * this.pageCount + 1;
+		endPage= beginPage + this.pageCount - 1;
+		
+		if(endPage > totalPage)
+			endPage = totalPage;
+		
+		this.pagingStatus = "총 "+this.totalCount+ "건[" + pageNumber+"/"+totalPage+ "]";
+		
+		this.pageCategory = "null";
+		
+		this.flowParameter = "";
+		this.flowParameter += "&pageNumber=" + pageNumber;
+		this.flowParameter += "&pageSize=" + pageSize;
+		this.flowParameter += "&mode=" + mode;
+		this.flowParameter += "&keyword=" + keyword;
+		this.flowParameter += "&toid=" + toid;
+		
+		this.pagingHtml = this.getMakePageHtmlWithToid(toid);
+		
+	}
 	
 public Paging(String _pageNumber, String _pageSize, int totalCount, String url, String mode, String keyword, boolean isGrid, int acid) {
 		
@@ -474,6 +534,55 @@ public Paging(String _pageNumber, String _pageSize, int totalCount, String url, 
 		html += "</ul>";
 		return html;
 	}
+	private String getMakePageHtmlWithToid(int toid) {
+		String html = "";
+		
+		html += "<ul class=\"pagination justify-content-center\">";
+		
+		if(pageNumber <= pageCount)
+		{
+			// 맨 처음이면서 이전 항목이 존재하지않는 경우
+			
+		}
+		else
+		{
+			html += makeLiTageWithToid("맨 처음", 1, toid);
+			html += makeLiTageWithToid("이전", beginPage - 1, toid);
+		}
+		
+		for (int i = beginPage; i <= endPage ;i++) 
+		{
+			if(i == pageNumber)
+			{
+				// active 속성으로 활성화 시키고, 빨간색으로 진하게 표현하기
+				html += "<li class=\"page-item active\">";
+				html += "<a class=\"page-link\" href=\"#\" disabled=disabled>";
+				html += "<b><font color='white'>" + i+"</font></b>";
+				html += "</a></li>";
+			}
+			else
+			{
+				html += makeLiTageWithToid(String.valueOf(i), i, toid);
+			}
+			
+		}
+		
+		if(pageNumber >= (totalPage/pageCount * pageCount + 1))
+		{
+			// 맨 끝이면서 이전 항목이 존재하지않는 경우
+			
+		}
+		else
+		{
+			
+			html += makeLiTageWithToid("다음", endPage + 1, toid);
+			html += makeLiTageWithToid("맨끝", totalPage, toid);
+		}
+		
+		
+		html += "</ul>";
+		return html;
+	}
 
 	private String makeLiTage(String caption, int currPageNumber) {
 		
@@ -490,6 +599,28 @@ public Paging(String _pageNumber, String _pageSize, int totalCount, String url, 
 		result += "&pageSize=" + this.pageSize;
 		result += "&mode=" + this.mode;
 		result += "&keyword=" + this.keyword;
+		result +="'>";
+		result += caption;
+		result += "</a></li>";
+		
+		return result;
+	}
+	private String makeLiTageWithToid(String caption, int currPageNumber, int toid) {
+		
+		// caption : 보여지는 문자열(이전,다음 등등)
+		// currPageNumber : 이동할 페이지 번호
+		
+		
+		String result = "";
+		
+		result += "<li class='page-item'>";
+		result +="<a class='page-link' href='";
+		result += this.url;
+		result += "&pageNumber=" + currPageNumber;
+		result += "&pageSize=" + this.pageSize;
+		result += "&mode=" + this.mode;
+		result += "&keyword=" + this.keyword;
+		result += "&toid=" + toid;
 		result +="'>";
 		result += caption;
 		result += "</a></li>";

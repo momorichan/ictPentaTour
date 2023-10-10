@@ -29,7 +29,7 @@ String notWithFormTag = appName + mappingName + "?command=";
 <!DOCTYPE html>
 <html>
 <head>
-<link rel="stylesheet" href="${pageContext.request.contextPath}/css/common.css">
+<link rel="stylesheet" href="${pageContext.request.contextPath}/css/common.css?after">
 <meta charset="UTF-8">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
 <script type="text/javascript"
@@ -58,16 +58,20 @@ String notWithFormTag = appName + mappingName + "?command=";
 	document.cookie = getCookie("sidebar");
 	$(window).scroll(function(){
 	    scrollheight = $(window).scrollTop();
+	    if(scrollheight < 50){
+			$(".navbar").removeClass("non-scrolltop");
+		}
+	    if(scrollheight >= 50){
+			$(".navbar").addClass("non-scrolltop");
+		}
 	    if(scrollheight < 1 && window.innerWidth > 1900){
 			$(".navbar-brand, .navbar, .dropdown, .login-div, body, .dropdown-div").addClass("scrolltop");
-			$(".navbar").removeClass("non-scrolltop");
 			$(".dropdown-toggle, .dropdown-menu").addClass("show");
 			$(".dropdown-toggle").attr("aria-expanded", "true");
 			$('html,body').animate({scrollTop:0},0);
 		}
 		if(scrollheight > 1 || window.innerWidth <= 1900){
 			$(".navbar-brand, .navbar, .dropdown, .login-div, body, .dropdown-div").removeClass("scrolltop");
-			$(".navbar").addClass("non-scrolltop");
 			$(".dropdown-toggle, .dropdown-menu").removeClass("show");
 			$(".dropdown-toggle").attr("aria-expanded", "false");
 		}
@@ -82,7 +86,6 @@ String notWithFormTag = appName + mappingName + "?command=";
 	window.addEventListener('resize', () => {
 		if(window.innerWidth <= 1900){
 			$(".navbar-brand, .navbar, .dropdown, .login-div, body, .dropdown-div").removeClass("scrolltop");
-			$(".navbar").addClass("non-scrolltop");
 			$(".dropdown-toggle, .dropdown-menu").removeClass("show");
 			$(".dropdown-toggle").attr("aria-expanded", "false");
 		}
@@ -93,11 +96,11 @@ String notWithFormTag = appName + mappingName + "?command=";
 	}
 	window.addEventListener('resize', () => {
 		if(window.innerWidth < 501) {
-			$(".navbar-toggle-btn").addClass("mobile");
+			$(".navbar-toggle-btn, .navbar").addClass("mobile");
 			toggleSideOff();
 		}
 		if(window.innerWidth >= 501) {
-			$(".navbar-toggle-btn").removeClass("mobile");
+			$(".navbar-toggle-btn, .navbar").removeClass("mobile");
 			$(".navbar, .dropdown-div").removeClass("toggle-on");
 			$(".dropdown-div").removeClass("dropstart");
 			$(".collapse").removeClass("show");
@@ -160,6 +163,9 @@ String notWithFormTag = appName + mappingName + "?command=";
 			toggleSideOn();
 		}
 	});
+	function clicklogin() {
+		window.open("<%=notWithFormTag %>mePopup" , "a", "width=600, height=640, left=100, top=50");
+	}
 </script>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com">
@@ -197,7 +203,6 @@ String notWithFormTag = appName + mappingName + "?command=";
 		
 	</script>
 <style type="text/css">
-
 </style>
 </head>
 <body>
@@ -214,7 +219,7 @@ String notWithFormTag = appName + mappingName + "?command=";
 				<ul class="navbar-nav">
 					<div class="login-div">
 						<c:if test="${whologin == '0'}">
-							<li class="nav-item"><a class="nav-link login" href="<%=notWithFormTag%>meLogin">로그인</a></li>
+							<li class="nav-item"><a class="nav-link login" href="" onclick="clicklogin()">로그인</a></li>
 							<li><a class="nav-link create" href="<%=notWithFormTag%>meInsert">회원 가입</a></li>
 						</c:if>
 						<c:if test="${whologin == '1'}">
@@ -233,8 +238,8 @@ String notWithFormTag = appName + mappingName + "?command=";
 								</c:if>
 								<c:if test="${whologin != '0'}">
 									<li><a class="dropdown-item" href="<%=notWithFormTag%>meDetail&meid=${sessionScope.loginfo.meid}">상세 보기</a></li>
-									<li><a class="dropdown-item" href="/Student/member/meUpdateForm01.jsp">정보 수정</a></li>
-									<li><a class="dropdown-item" href="#">탈퇴하기</a></li>
+									<li><a class="dropdown-item" href="<%=notWithFormTag%>meUpdate&meid=${sessionScope.loginfo.meid}">정보 수정</a></li>
+									<li><a class="dropdown-item" href="<%=notWithFormTag%>meDelete&meid=${sessionScope.loginfo.meid}">탈퇴하기</a></li>
 								</c:if>
 								<c:if test="${whologin == '2'}">
 									<li><a class="dropdown-item" href="<%=notWithFormTag%>meList">목록 보기</a></li>

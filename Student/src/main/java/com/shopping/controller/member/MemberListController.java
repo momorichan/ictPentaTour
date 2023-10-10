@@ -30,9 +30,9 @@ public class MemberListController extends SuperClass {
 			
 			List<Member> lists = dao.selectAll(pageInfo);
 			
-			request.setAttribute("pageInfo", pageInfo);
-			request.setAttribute("datalist", lists);
-			super.gotoPage("member/meList.jsp");
+			super.session.setAttribute("pageInfo", pageInfo);
+			super.session.setAttribute("datalist", lists);
+			response.sendRedirect("member/meList.jsp");
 			
 		} catch (Exception e) {
 			e.printStackTrace();

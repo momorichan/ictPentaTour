@@ -141,30 +141,55 @@
 	padding-top:10px;
 	padding-bottom:10px;
 	margin-bottom: 25px !important;
-	position: absolute !important;
+	position: fixed !important;
 	top:0px !important;
+	left: 0px;
 	width:100% !important;
 	z-index: 999 !important;
 	background-color: black !important;
-	transition: 300ms;
+	transition: 100ms;
+}
+.navbar.navbar.non-scrolltop {
+	padding-top:10px;
+	padding-bottom:10px;
+	margin-bottom: 25px !important;
+	position: fixed !important;
+	top:-60px !important;
+	right: 0px;
+	width:100% !important;
+	z-index: 999 !important;
+	background-color: black !important;
+	transition: 100ms;
+}
+.navbar.mobile {
+	padding-top:10px;
+	padding-bottom:10px;
+	margin-bottom: 25px !important;
+	position: fixed !important;
+	top:0px !important;
+	right: 0px;
+	width:100% !important;
+	z-index: 999 !important;
+	background-color: black !important;
+	transition: 100ms;
 }
 .navbar.non-scrolltop.toggle-on {
     padding-top: 10px;
     padding-bottom: 370px;
     margin-bottom: 25px !important;
-    position: absolute !important;
+    position: fixed !important;
     top: 0px !important;
-    right: 0px !important;
+    right: 0px;
     width: 100% !important;
     z-index: 999 !important;
     background-color: black !important;
-    transition: 300ms;
+    transition: 100ms;
 }
 .navbar.toggle-on {
     padding-top: 10px;
     padding-bottom: 370px;
     margin-bottom: 25px !important;
-    position: absolute !important;
+    position: fixed !important;
     top: 0px !important;
     right: 0px !important;
     width: 100% !important;
@@ -259,7 +284,7 @@
 }
 .logout {
 	color : red !important;
-	top:2px;
+	top:0px;
 	opacity: 90%;
 	z-index: 998;
 	position: relative;
@@ -283,19 +308,21 @@
 	text-decoration-line : none !important;
 	color: white !important;
 	padding-top : 0.5rem !important;
+	font-family: 'Jeju Gothic', sans-serif !important;
 }
 html{
-	
+	min-height: 948px !important;
 }
 body{
 	padding-top:70px !important;
 	padding-bottom:120px !important;
-	justify-content: center;
+	justify-content: flex-start;
     display: flex;
     flex-direction:column;
     position: relative !important;
     z-index: 999 !important;
     min-width: 70% !important;
+    min-height: 948px !important;
 }
 
 body.scrolltop{
@@ -560,4 +587,3 @@ body.scrolltop{
 }
 .side-icon.sideon:hover {
 	transform: translate(-75px, 0) rotateY(360deg);
-}
