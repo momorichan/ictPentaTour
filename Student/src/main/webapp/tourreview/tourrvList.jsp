@@ -19,14 +19,14 @@
 			
 			$('#keyword').val('${requestScope.pageInfo.keyword}');
 			
-			$("#mode").change(function(){				 
+			$("#mode").change(function(){
 				  if($(this).val() != 'all'){
 					  $('#keyword').attr('disabled', false);
 				  }else{
 					  $('#keyword').val('');
 					  $('#keyword').attr('disabled', true);
 				  }
-			});			
+			});	
 		});
 		
 		function searchAll(){ /* 전체 검색 */
@@ -41,12 +41,12 @@
 				window.open("<%=notWithFormTag %>mePopup" , "a", "width=600, height=640, left=100, top=50");
 				return false;
 			} else {
-				location.href = '<%=notWithFormTag%>rvInsert&toid=' + toid;	
+				location.href = '<%=notWithFormTag%>tourrvInsert&toid=' + toid;	
 			}
 		}
 		function deleteclick(trid) {
 			if (confirm("정말 삭제하시겠습니까?") == true){    //확인
-			      location.href = '<%= notWithFormTag%>rvDelete&trid=' + trid;
+			      location.href = '<%= notWithFormTag%>tourrvDelete&trid=' + trid;
 			  }else{   //취소
 			      return;
 			  }

@@ -55,7 +55,7 @@
 		<h2>게시물 등록</h2>
 		<p>사용자들이 게시물을 등록하는 페이지입니다.</p>
 		<form action="<%=withFormTag%>" method="post" name="myform" id="myform"  enctype="multipart/form-data">
-		<input type="hidden" name="command" value="rvInsert">
+		<input type="hidden" name="command" value="tourrvInsert">
 		<input type="hidden" name="acid" value="${requestScope.acid }">
 		<input type="hidden" name="toid" value="${requestScope.toid }">
 		<input type="hidden" name="meid" value="${sessionScope.loginfo.meid }">

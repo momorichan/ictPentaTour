@@ -17,18 +17,22 @@
 <meta charset="EUC-KR">
 <title>Insert title here</title>
 <script>
-  function Submit() {
-    var ticket = document.getElementById('title').innerText;
-    var qty = document.getElementById('tqty').value;
-    alert( ticket + ' 티켓 ' + qty + "장 구매 완료." );
-  }
-  var price = ${requestScope.bean.tprice};
-  var input = document.getElementById('tqty');
-  input.onchange = (e) => {
+  	function Submit() {
+	    var ticket = document.getElementById('title').innerText;
+	    var qty = document.getElementById('tqty').value;
+	    alert( ticket + ' 티켓 ' + qty + "장 구매 완료." );
+ 	 }
+	var price = ${requestScope.bean.tprice};
+	var input = document.getElementById('tqty');
+	function caltotalprice() {
 		var qty = document.getElementById('tqty').value;
 		var totalprice = qty * price;
 		$('#totalprice').html('총 ' + totalprice + '원');
 	}
+	
+	$(document).ready(function() {
+		caltotalprice();
+	});
 </script>
 <style type="text/css">
 html, body {
@@ -104,7 +108,7 @@ h2 {
 			</div>
 			<div class="reservation">
 				<div class="qty-div">
-					매수 : <input type="number" class="qty" name="tqty" id="tqty" value="1">
+					매수 : <input type="number" class="qty" name="tqty" id="tqty" value="1" onchange="caltotalprice()">
 				</div>
 				<span class="totalprice" id="totalprice"></span>
 				<button type="submit" class="submit-btn" onclick="Submit()">구매</button>
