@@ -60,11 +60,29 @@
 		$(image).on("mouseleave", function(){
 			image.src = staticImg;
 		})
+		
+		
+		
+		var image2 = document.querySelector('.image2');
+		image2.src = staticImg;
+		$(image2).on("mouseenter", function(){
+			image2.src = gifImg;
+		});
+		$(image2).on("mouseleave", function(){
+			image2.src = staticImg;
+		})
+		
+		
+		
+		
+		
 		/* tooltip */
 		var tooltipTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="tooltip"]'))
 		var tooltipList = tooltipTriggerList.map(function (tooltipTriggerEl) {
 		  return new bootstrap.Tooltip(tooltipTriggerEl)
 		})
+		
+		
 	});
 		
 	</script>
@@ -85,7 +103,7 @@
 			<div class="hover-img" >
 				<figure>					
 					<a href="<%=notWithFormTag%>rcList">
-						<img src="https://content.skyscnr.com/db465e93dcaad614e9bfcaddb5865e36/GettyImages-505777764.jpg">						
+						<img class="image2" />	
 					</a>
 				</figure>
 				<h5>예약 하러 가기</h5>				
