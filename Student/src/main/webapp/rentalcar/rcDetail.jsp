@@ -425,7 +425,7 @@
     </body>
 	</th:block>
 	</div>
->>>>>>> refs/remotes/origin/rentalcar
+
 
 </body>
 </html>
