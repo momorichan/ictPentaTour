@@ -35,19 +35,7 @@
 			swal('글 내용은 5글자 이상 30글자 이하이어야 합니다.');
 			return false;
 		}
-		
-		var regdate = $('#regdate').val();
-		var regex1 = /^\d{4}\/[01]\d{1}\/[0123]\d{1}$/;
-		var regex2 = /^\d{4}\-[01]\d{1}\-[0123]\d{1}$/;
-		var result = regex1.test(regdate) || regex2.test(regdate);
-		if(result==false){
-			swal('날짜 형식은 반드시 yyyy/mm/dd 형식 또는 yyyy-mm-dd으로 작성해 주세요.');
-			return false;
-		}		
   	}
-  	
-  	
-  	
   	</script>
 </head>
 <body>
@@ -63,27 +51,14 @@
 			</div> 
 			<div class="input-group">
 				<span class="input-group-text col-md-2">작성자</span> 
+				<input type="hidden" name="meid" value="${sessionScope.loginfo.meid}">
 				<c:set var="userInfo" value="${sessionScope.loginfo.name}(${sessionScope.loginfo.meid})"/>	
 				<input id="fakeid" name="fakeid" disabled="disabled" 
 					type="text" class="form-control" placeholder="" value="${userInfo}">
 			</div>
-			<div class="input-group">
-				<span class="input-group-text col-md-2">카테고리</span> 
-				<select name="type" class = "form-control" style ="text-align : center">
-					<option selected ="selected">--- 선택해주세요 ---
-					<option value="해외숙박">해외숙박
-					<option value="국내숙박">국내숙박
-					<option value="국내여행">국내여행
-					<option value="해외여행">해외여행
-				</select>
-			</div> 		
-			<div class="input-group">
-				<span class="input-group-text col-md-2">등록 일자</span> 
-				<input id="regdate" name="regdate" type="datetime" class="form-control" placeholder="">
-			</div>
 	<fieldset>
 		<span class="text-bold">별점을 선택해주세요</span>
-		<input type="radio" name="rating" value="5" id="rate1"><label
+		<input type="radio" name="rating" value="5" id="rate1" checked="checked"><label
 			for="rate1">★</label>
 		<input type="radio" name="rating" value="4" id="rate2"><label
 			for="rate2">★</label>

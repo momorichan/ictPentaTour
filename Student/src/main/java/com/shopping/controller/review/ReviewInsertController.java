@@ -14,6 +14,8 @@ public class ReviewInsertController extends SuperClass{
 	@Override
 	public void doGet(HttpServletRequest request, HttpServletResponse response) throws Exception {
 		super.doGet(request, response);
+		int acid = Integer.parseInt(request.getParameter("acid"));
+		request.setAttribute("acid", acid);
 		super.gotopage(PREFIX+"rvInsert.jsp");
 	}
 
@@ -25,9 +27,12 @@ public class ReviewInsertController extends SuperClass{
 		MultipartRequest mr = (MultipartRequest)request.getAttribute("mr");
 		bean.setMeid(mr.getParameter("meid"));
 		bean.setRegdate(mr.getParameter("regdate"));
-		bean.setRating(Integer.parseInt(mr.getParameter("rating")));
+		int rating = 5;
+		if(mr.getParameter("rating") != null)
+			rating = Integer.parseInt(mr.getParameter("rating"));
+		bean.setRating(rating);
 		bean.setContent(mr.getParameter("content"));
-		
+		bean.setAcid(Integer.parseInt(mr.getParameter("acid")));
 		ReviewDao dao = new ReviewDao();
 		
 		int cnt = -1;
@@ -38,7 +43,7 @@ public class ReviewInsertController extends SuperClass{
 				new ReviewInsertController().doGet(request, response);
 			}else { // 성공
 				//게시물 목록 보기 페이지로 이동
-				new ReviewListController().doGet(request, response);
+				response.sendRedirect("common/back2.jsp");
 			}
 		} catch (Exception e) {
 			e.printStackTrace();

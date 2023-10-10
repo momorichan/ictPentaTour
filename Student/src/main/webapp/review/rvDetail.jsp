@@ -26,9 +26,17 @@
 				  }
 			});			
 		});
-			
+		if(${requestScope.acbean.acid} != null) {
+			var acid = ${requestScope.acbean.acid};
+		}
 		function writeForm(){ /* 글쓰기 */
-			location.href = '<%=notWithFormTag%>rvInsert';
+			if(${empty sessionScope.loginfo}) {
+				alert("로그인이 필요한 서비스 입니다.");
+				window.open("<%=notWithFormTag %>mePopup" , "a", "width=600, height=640, left=100, top=50");
+				return false;
+			} else {
+				location.href = '<%=notWithFormTag%>rvInsert&acid=' + acid;	
+			}
 		}
 		
 		function deleteReview(trid) {
@@ -61,12 +69,13 @@
 <body>	
 	<hr class="shape"></hr>
 	<form name="myform" action="<%=withFormTag%>" method="get">
-									<input type="hidden" name="command" value="rvList">
-									<div class="row">
-											<button type="button" class="btn btn-info form-control-lg"
-												onclick="writeForm();">글 쓰기</button>
-									</div>
-								</form>				
+	<input type="hidden" name="acid" value="${requestScope.datalist.acid }">
+		<input type="hidden" name="command" value="rvList">
+		<div class="row">
+				<button type="button" class="btn btn-info form-control-lg"
+					onclick="writeForm();">글 쓰기</button>
+		</div>
+	</form>				
 	<!--  임시 창 -->
 	 <div class ="review_text">
       <c:forEach var="bean" items="${sessionScope.datalist}">

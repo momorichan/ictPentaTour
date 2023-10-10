@@ -2,11 +2,14 @@ package com.shopping.model.dao;
 
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
+import com.shopping.model.bean.Flight;
 import com.shopping.model.bean.Tour;
+import com.shopping.model.bean.TourReser;
 import com.shopping.utility.Paging;
 
 public class TourDao extends SuperDao {
@@ -315,5 +318,40 @@ public class TourDao extends SuperDao {
 		}
 		
 		return cnt;
+	}
+
+	public List<TourReser> getTourReserByMeid(String meid) throws Exception{
+		List<TourReser> bean = new ArrayList<TourReser>();
+		String sql = " select * \r\n"
+				+ "from tourreser";
+		sql += " where meid = ? ";
+		
+		ResultSet rs = null;
+		PreparedStatement pstmt = null;
+		conn = super.getConnection();
+		pstmt = conn.prepareStatement(sql);
+		pstmt.setString(1, meid);
+		rs = pstmt.executeQuery();		
+		
+		while(rs.next())
+		{
+			bean.add(this.getTourReserData(rs));
+		}
+		
+		if(rs != null) {rs.close();}
+		if(pstmt != null) {pstmt.close();}
+		if(conn != null) {conn.close();}
+		
+		return bean;
+	}
+
+	private TourReser getTourReserData(ResultSet rs) throws Exception {
+		TourReser bean = new TourReser();
+		bean.setMeid(rs.getString("meid"));
+		bean.setToid(rs.getInt("toid"));
+		bean.setTorid(rs.getInt("torid"));
+		bean.setTqty(rs.getInt("tqty"));
+		
+		return bean;
 	}
 }
