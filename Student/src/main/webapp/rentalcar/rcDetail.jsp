@@ -424,7 +424,7 @@
     </div>
     </body>
 	</th:block>
-	</div>
+	</div >
 
 
 </body>
