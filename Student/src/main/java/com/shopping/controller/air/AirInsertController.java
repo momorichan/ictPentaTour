@@ -19,11 +19,11 @@ public class AirInsertController extends SuperClass{
 		super.doGet(request, response);
 		
 		
-		if(super.loginfo==null) 
-		{
-			super.youNeededLogin();
-			return ;
-		}
+//		if(super.loginfo==null) 
+//		{
+//			super.youNeededLogin();
+//			return ;
+//		}
 		
 		
 		int flid = Integer.parseInt(request.getParameter("flid"));

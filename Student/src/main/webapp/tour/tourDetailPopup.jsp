@@ -27,7 +27,7 @@
 	function caltotalprice() {
 		var qty = document.getElementById('tqty').value;
 		var totalprice = qty * price;
-		$('#totalprice').html('총 ' + totalprice + '원');
+		$('#totalprice').html('총 ' + totalprice.toLocaleString() + '원');
 	}
 	
 	$(document).ready(function() {

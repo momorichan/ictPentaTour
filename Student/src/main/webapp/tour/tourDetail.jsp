@@ -523,7 +523,7 @@ h2{
 					<div>
 						<h3 style="font-size: 22px; text-align: center;"class="price">　</h3>
 					</div>
-					<button type="button" class="btn btn-danger purchasebtn" onclick="showPopup(${requestScope.bean.toid },${sessionScope.loginfo.meid })">구매</button>
+					<button type="button" class="btn btn-danger purchasebtn" onclick="showPopup('${requestScope.bean.toid}','${sessionScope.loginfo.meid}')">구매</button>
 				</div>
 			</div>
 		</div>

@@ -149,11 +149,11 @@ public class TourDao extends SuperDao {
 		if(bean.getTusedate() == null || bean.getTusedate().equals("")) {
 			pstmt.setInt(4, bean.getTexdate());
 			pstmt.setInt(5, bean.getTage());
-			pstmt.setInt(6, bean.getTfreeage());
-			pstmt.setString(7, bean.getTimage01());
-			pstmt.setString(8, bean.getTimage02());
-			pstmt.setString(9, bean.getTimage03());
-			pstmt.setString(10, bean.getTcontent());
+			pstmt.setString(6, bean.getTcontent());
+			pstmt.setInt(7, bean.getTfreeage());
+			pstmt.setString(8, bean.getTimage01());
+			pstmt.setString(9, bean.getTimage02());
+			pstmt.setString(10, bean.getTimage03());
 		} else {
 			pstmt.setString(4, bean.getTusedate());
 			pstmt.setInt(5, bean.getTexdate());

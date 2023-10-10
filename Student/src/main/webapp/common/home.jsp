@@ -328,9 +328,11 @@ body {
 	<div class="content-div air-content">
 		<div class="content-text-div air-text">
 			<span class="content-text">
-				매주 화요일은 휴궁일입니다.
+				<h2>일상을 벗어나 새로운 세상을 만나다.</h2>
 				<br>
-				※ 휴궁일이 공휴일(대체공휴일 포함)과 겹칠 경우 개방하며, 이 경우 개방한 공휴일 다음의 첫 번째 비공휴일을 휴궁일로 합니다.
+				일상에서 벗어나 새로운 세상을 만나고 싶은 당신을 위한 여행. 
+				<br>
+				아름다운 자연, 이국적인 문화, 다양한 체험을 통해 새로운 경험을 쌓고, 삶의 활력을 되찾을 수 있습니다.
 			</span>
 		</div>
 		<div class="content-img-div air-img-div">
@@ -346,9 +348,11 @@ body {
 		</div>
 		<div class="content-text-div accommodation-text">
 			<span class="content-text">
-				매주 화요일은 휴궁일입니다.
+				<h2>잊지 못할 추억을 만들어드립니다.</h2>
 				<br>
-				※ 휴궁일이 공휴일(대체공휴일 포함)과 겹칠 경우 개방하며, 이 경우 개방한 공휴일 다음의 첫 번째 비공휴일을 휴궁일로 합니다.
+				여행은 잊지 못할 추억을 만들어주는 소중한 경험입니다. 
+				<br>
+				여행사가 함께 만들어주는 특별한 추억으로 당신의 인생을 더욱 풍요롭게 만들어보세요.
 			</span>
 		</div>
 	</div>
@@ -356,19 +360,16 @@ body {
 	<div class="content-div tour-content">
 		<div class="content-text-div tour-text">
 			<span class="content-text">
-				매주 화요일은 휴궁일입니다.
+				<h2>설렘과 기대가 가득한 여행의 시작.</h2>
 				<br>
-				※ 휴궁일이 공휴일(대체공휴일 포함)과 겹칠 경우 개방하며, 이 경우 개방한 공휴일 다음의 첫 번째 비공휴일을 휴궁일로 합니다.
+				여행을 계획하고 준비하는 과정은 설렘과 기대로 가득합니다. 
+				<br>
+				ICTPentaTour가 제공하는 다양한 상품과 서비스를 통해 여행을 더욱 편리하고 즐겁게 만들어보세요.
 			</span>
 		</div>
 		<div class="content-img-div tour-img-div">
-			
+			<img class="content-background-img" src="/Student/upload/travel.png">
 		</div>
-	</div>
-	<div class="button-div">
-		<button type="button" class="air-btn ">항공</button>
-		<button type="button" class="accommodation-btn">숙박</button>
-		<button type="button" class="tour-btn">투어</button>
 	</div>
 </body>
 </html>

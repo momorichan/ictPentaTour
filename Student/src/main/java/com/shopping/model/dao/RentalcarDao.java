@@ -18,8 +18,8 @@ public class RentalcarDao extends SuperDao {
 		System.out.println("rcid: " + bean.getRcid());
 		System.out.println("id: "+mbean.getMeid());
 		PreparedStatement pstmt = null;
-		String sql = " insert into rentalCheck(rcid, id)";
-		sql += " values(?,?)";
+		String sql = " insert into RCRESERVE(recid, rcid, meid)";
+		sql += " values(recidseq.nextval,?,?)";
 		int cnt = -1;
 		
 		conn = super.getConnection();
@@ -809,7 +809,7 @@ public class RentalcarDao extends SuperDao {
 		String remark = MyUtility.getCurrentTime() + "(차량 번호: " + bean.getRcid() + " )" + " 렌터카가 삭제 되었습니다." ;
 		
 		// step01: 주문 상세 테이블의 비고(remark) 컬럼에 삭제 히스토리 남기기
-		sql = " update rentalcheck set remark = ? where rcid = ? ";
+		sql = " update RCRESERVE set remark = ? where rcid = ? ";
 		pstmt = conn.prepareStatement(sql);
 		pstmt.setString(1, remark);
 		pstmt.setString(2, rcid); 

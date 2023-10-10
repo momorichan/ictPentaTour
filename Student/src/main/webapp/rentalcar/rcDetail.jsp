@@ -178,7 +178,7 @@
 			<!-- enctype="multipart/form-data" -->
 			<form action= "<%=withFormTag%>" method="post" id="bookCarForm" >  
 				<input type="hidden" name="command" value="rcDetail">
-				<input type="hidden" name="id" value="${sessionScope.loginfo.meid}">
+				<input type="hidden" name="meid" value="${sessionScope.loginfo.meid}">
 	    		<input type="hidden" name="rcid" value="${requestScope.bean.rcid}">
 				<button class="btn btn-success" type="button" id="bookCarBtn" >예약 하기</button>
 			</form>

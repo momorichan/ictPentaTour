@@ -91,6 +91,7 @@
 		
 		});
 		
+		
 		$(document).on('click','.reserve_btn',function(){
 			$.ajax({
 				url:'<%=notWithFormTag%>airInsert', 
@@ -102,8 +103,13 @@
 						console.log(status);
 					}
 				});
-			
-			location.href = '<%=notWithFormTag%>airInsert&flid=${requestScope.bean.flid}';
+			if(${empty sessionScope.loginfo}) {
+				alert("로그인이 필요한 서비스 입니다.");
+				window.open("<%=notWithFormTag %>mePopup" , "a", "width=600, height=640, left=100, top=50");
+				return false;
+			} else {
+				location.href = '<%=notWithFormTag%>airInsert&flid=${requestScope.bean.flid}';
+			}
 			
 		});
 		

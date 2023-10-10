@@ -291,6 +291,13 @@ String notWithFormTag = appName + mappingName + "?command=";
 	  	</div>
 	  	<c:remove var="alertMessage" scope="session"/>
   	</c:if>
+	<c:if test="${not empty requestScope.alertMessageYES}">
+		<div class="alert alert-primary alert-dismissible fade show">
+	    	<button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+	    	<strong></strong> ${requestScope.alertMessageYES}
+	  	</div>
+	  	<c:remove var="alertMessage" scope="session"/>
+  	</c:if>
 <!--  footer -->
 <!-- <div class="dummy-copyright"></div> -->
 <div id="container" class="copyright" style="width: 100%; z-index: 1; bottom:0; position:absolute;">

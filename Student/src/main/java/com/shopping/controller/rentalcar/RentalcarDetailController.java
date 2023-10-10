@@ -42,7 +42,7 @@ public class RentalcarDetailController extends SuperClass{
 			}else { // 예약 성공				
 //				new RentalcarDetailController().doGet(request, response);
 				setAlertMessageYES("예약이 완료되었습니다.");				
-				super.gotoPage("rentalcar/rcList.jsp");
+				new RentalcarListController().doGet(request, response);
 			}
 		} catch (Exception e) {
 			e.printStackTrace();		

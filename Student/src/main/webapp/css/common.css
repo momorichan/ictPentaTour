@@ -583,7 +583,8 @@ body.scrolltop{
 }
 .side-icon.sideon {
 	transform: translate(-75px, 0);
-	transition: transform 400ms;
+	transition: transform 500ms;
 }
 .side-icon.sideon:hover {
 	transform: translate(-75px, 0) rotateY(360deg);
+	pointer-events: all;

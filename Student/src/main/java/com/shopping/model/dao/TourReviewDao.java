@@ -162,7 +162,7 @@ System.out.println(bean);
 		
 		int cnt = -1;
 		String sql = " insert into review(trid, meid, toid, acid, rating, regdate, content)";
-		sql += " values(reviewseq.nextval, ?, ?, ?, ?, sysdate, ?)";
+		sql += " values(reviewseq.nextval, ?, ?, null, ?, sysdate, ?)";
 		PreparedStatement pstmt = null;
 		
 		conn = super.getConnection();//단계2
@@ -176,13 +176,8 @@ System.out.println(bean);
 		} else {
 			pstmt.setInt(2, 0);
 		}
-		if(bean.getAcid() != null) {
-			pstmt.setInt(3, bean.getAcid());
-		} else {
-			pstmt.setInt(3, 0);
-		}
-		pstmt.setInt(4, bean.getRating());
-		pstmt.setString(5, bean.getContent());
+		pstmt.setInt(3, bean.getRating());
+		pstmt.setString(4, bean.getContent());
 
 		
 		cnt = pstmt.executeUpdate();//단계4-1
