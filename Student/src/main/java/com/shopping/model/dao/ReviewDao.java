@@ -17,7 +17,7 @@ public class ReviewDao extends SuperDao {
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
 
-		String sql = " SELECT count(*) as cnt FROM tourreview";
+		String sql = " SELECT count(*) as cnt FROM review";
 
 		if (mode == null || mode.equals("all")) {// 전체 모드인 경우
 
@@ -60,7 +60,7 @@ public class ReviewDao extends SuperDao {
 		
 		String sql = " select " + column;
 		sql += " from ( select " + column + ", rank() over(order by acid asc) as ranking";
-		sql += " from tourreview where acid = ?";
+		sql += " from review where acid = ?";
 		sql += " ) ";
 		sql += " where ranking between ? and ? order by regdate desc";
 		conn = super.getConnection();
@@ -96,7 +96,7 @@ public class ReviewDao extends SuperDao {
 		
 		String sql = " select " + column;
 		sql += " from ( select " + column + ", rank() over(order by regdate asc) as ranking";
-		sql += " from tourreview where toid = ?";
+		sql += " from review where toid = ?";
 		sql += " ) ";
 		sql += " where ranking between ? and ? order by regdate desc";
 		conn = super.getConnection();
@@ -136,7 +136,7 @@ public class ReviewDao extends SuperDao {
 	    StringBuilder sql = new StringBuilder();
 	    sql.append("SELECT ").append(column).append(",");
 	    sql.append(" RANK() OVER (ORDER BY regdate DESC) AS ranking ");
-	    sql.append("FROM tourreview ORDER BY regdate DESC ");
+	    sql.append("FROM review ORDER BY regdate DESC ");
 
 
 	    // 서브쿼리 내부의 괄호와 최종 결과의 괄호를 정확하게 닫아줍니다.
@@ -194,7 +194,7 @@ public class ReviewDao extends SuperDao {
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
 		
-		String sql = " select * from tourreview";
+		String sql = " select * from review";
 		sql += " where trid = ? ";
 		
 		conn = super.getConnection();
@@ -220,7 +220,7 @@ public class ReviewDao extends SuperDao {
 		ResultSet rs = null;
 		Review bean = null;
 		
-		String sql = " select * from tourreview";
+		String sql = " select * from review";
 		sql += " where trid = ?";
 		
 		conn = super.getConnection();
@@ -245,8 +245,8 @@ public class ReviewDao extends SuperDao {
 System.out.println(bean);
 		
 		int cnt = -1;
-		String sql = " insert into tourreview(trid, meid, rating, regdate, content)";
-		sql += " values(tourreviewseq.nextval, 'admin', ?, sysdate, ?)";
+		String sql = " insert into review(trid, meid, rating, regdate, content)";
+		sql += " values(reviewseq.nextval, 'admin', ?, sysdate, ?)";
 		PreparedStatement pstmt = null;
 		
 		conn = super.getConnection();//단계2
@@ -279,7 +279,7 @@ System.out.println(bean);
 	    conn.setAutoCommit(false);
 
 	    // SQL 쿼리 설정
-	    sql = "DELETE FROM tourreview WHERE trid = ?";
+	    sql = "DELETE FROM review WHERE trid = ?";
 	    pstmt = conn.prepareStatement(sql);
 	    pstmt.setInt(1, trid);
 
@@ -304,7 +304,7 @@ System.out.println(bean);
 	    ResultSet rs = null;
 	    double averageRating = 0;
 	    
-	    String sql = " SELECT AVG(rating) AS average_rating FROM tourreview";
+	    String sql = " SELECT AVG(rating) AS average_rating FROM review";
 
 	    conn = getConnection();
 	    pstmt = conn.prepareStatement(sql);
@@ -331,7 +331,7 @@ System.out.println(bean);
 	    ResultSet rs = null;
 	    double averageRating = 0;
 	    
-	    String sql = " SELECT AVG(rating) AS average_rating FROM tourreview where acid = ?";
+	    String sql = " SELECT AVG(rating) AS average_rating FROM review where acid = ?";
 
 	    conn = getConnection();
 	    pstmt = conn.prepareStatement(sql);
@@ -363,7 +363,7 @@ System.out.println(bean);
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
 
-		String sql = " SELECT count(*) as cnt FROM tourreview where acid = ?";
+		String sql = " SELECT count(*) as cnt FROM review where acid = ?";
 
 		conn = getConnection();
 		pstmt = conn.prepareStatement(sql);
@@ -394,7 +394,7 @@ System.out.println(bean);
 	    ResultSet rs = null;
 	    int commentAdd = 0;
 	    
-	    String sql = " SELECT COUNT(*) AS comment_add FROM tourreview";
+	    String sql = " SELECT COUNT(*) AS comment_add FROM review";
 
 	    conn = getConnection();
 	    pstmt = conn.prepareStatement(sql);

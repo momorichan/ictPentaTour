@@ -1,14 +1,13 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 
-<%@ include file="./../common/bootstrap5.jsp"%>
 <%@ include file="./../common/common.jsp"%>
 <!DOCTYPE html>
 <html>
 <head>
 <!-- http-equiv=Refresh content=1 -->
 <meta charset="UTF-8" >
-<title>Insert title here</title>
+<title>투어 홈 - ICTPentaTour</title>
 <script type="text/javascript">
 $(document).ready(function(){
    // Initialize popoveer
@@ -16,9 +15,14 @@ $(document).ready(function(){
    var popoverList = popoverTriggerList.map(function (popoverTriggerEl) {
         return new bootstrap.Popover(popoverTriggerEl);
    });
+   if(window.innerWidth < 501) {
+		$(".slide-div, .card-title, .card, .card-img-top, .serchcon, .tablecon, .tablecon-2").addClass("mobile");
+	}else{
+		$(".slide-div, .card-title, .card, .card-img-top, .serchcon, .tablecon, .tablecon-2").removeClass("mobile");
+	}
 });
 function searchAll(){ /* 전체 검색 */
-	location.href = '<%=notWithFormTag%>tourList';
+	location.href = '<%=notWithFormTag%>tourHome';
 	}
 
 function deleteCheck(toid){
@@ -29,22 +33,41 @@ function deleteCheck(toid){
 		return false;
 	}
 }
+
+window.addEventListener('resize', () => {
+	if(window.innerWidth < 501) {
+		$(".slide-div, .card-title, .card, .card-img-top, .serchcon, .tablecon, .tablecon-2").addClass("mobile");
+	}
+	if(window.innerWidth >= 501) {
+		$(".slide-div, .card-title, .card, .card-img-top, .serchcon, .tablecon, .tablecon-2").removeClass("mobile");
+	}
+});
 </script>
 <link href="../css/jquery-picZoomer.css">
+
 <style type="text/css">
+@import url('https://fonts.googleapis.com/css2?family=Black+Han+Sans&family=Noto+Sans+KR&display=swap');
 	.card-img-top{
-		width: 302px;
+		width: 300px;
 		height: 250px;	
 	}
-	/* table 셀의 수평 가운데 정렬 */
+	.card-img-top:hover{
+		width: 300px;
+		height: 250px;	
+		filter: brightness(1.1);
+	}
 	.container-main{
 		
 	}
     .card{
     	width: 302px;
-		height: 450px;
+		height: 430px;
     	margin-left:auto;
     	margin-right:auto;
+    }
+    .price {
+    	text-align: right;
+    	margin:0px;
     }
     button-div{
     	margin-left:10px;
@@ -76,7 +99,7 @@ function deleteCheck(toid){
 		margin-right: -720px;
 		text-align: center;
 		width: 120px;
-		z-index: 1;
+		z-index: 3;
 	}
 	.tablecon{
 		
@@ -86,14 +109,14 @@ function deleteCheck(toid){
 		left: 0%;
 	}
 	.pur-btn-div{
-		margin-top:19px;
+		margin-top:0px;
 		margin-bottom:auto;
 		display:flex;
 		justify-content: center;
 	}
     .slide-div{
 		justify-content: center;
- 		display: flex;
+ 		display: block;
  		width:1106px;
  		height:220px;
 		margin-left:auto;
@@ -115,9 +138,13 @@ function deleteCheck(toid){
  		border-radius: 10px; 
 	}
 	body{
+		padding-top:70px;
 		width:100%;
 		min-width:100%;
 		margin: 0px;
+		font-family: 'Noto Sans KR', sans-serif;
+		-webkit-font-smoothing: antialiased;
+   		-moz-osx-font-smoothing: grayscale;
 	}
 	.container{
 		max-width:1226.7px;
@@ -126,14 +153,33 @@ function deleteCheck(toid){
 		margin-left:auto;
 		margin-right:auto;
 	}
-	.carousel-item{
-		display: flex;
+	.btn-insert {
+		position:relative;
+		z-index: 1;
+	}
+	.card.mobile {
+    width: 215px;
+    height: 322px;
+    margin-left: auto;
+    margin-right: auto;
+	}
+	.card-title.mobile {
+	    font-size: 1.0rem;
+	}
+	.card-img-top.mobile {
+	    width: 213px;
+	    height: 150px;
+	}
+	.card-img-top:hover.mobile{
+		width: 213px;
+		height: 150px;	
+		filter: brightness(1.1);
 	}
 </style>
-<!-- </head> -->
+</head>
 <body>
 	<div class="container container-main">
-		<h2>투어</h2>
+		<h2 style="text-align:center;">투어</h2>
 		<div class="slide-div">
 			<div class="slide-image-div">
 				<div id="demo" class="carousel slide" data-bs-ride="carousel">
@@ -143,16 +189,17 @@ function deleteCheck(toid){
 						<button type="button" data-bs-target="#demo" data-bs-slide-to="2"></button>
 					</div>
 					<div class="carousel-inner">
-						<c:forEach var="bean" items="${requestScope.eventlists }">
+<%-- 						<c:forEach var="bean" items="${requestScope.eventlists }"> --%>
 						<div class="carousel-item active">
-							<div class="slide-image">
-								<img src="/Student/upload/${bean.timage01}" alt="${bean.timage01}" class="d-block" style="width: 100%">
-							</div>
-							<div class="slide-caption">
-								
-							</div>
+							<img src="/Student/upload/상단배너01.png" alt="상단배너01.png" class="d-block" style="width:100%">
 						</div>
-						</c:forEach>
+						<div class="carousel-item">
+							<img src="/Student/upload/상단배너02.jpg" alt="상단배너02.jpg" class="d-block" style="width:100%">
+						</div>
+						<div class="carousel-item">
+							<img src="/Student/upload/상단배너03.jpg" alt="상단배너03.jpg" class="d-block" style="width:100%">
+						</div>
+<%-- 						</c:forEach> --%>
 					</div>
 					<button class="carousel-control-prev" type="button" data-bs-target="#demo" data-bs-slide="prev">
 						<span class="carousel-control-prev-icon"></span>
@@ -164,7 +211,7 @@ function deleteCheck(toid){
 			</div>
 		</div>
 		<form action="<%=withFormTag %>">
-			<input type="hidden" name="command" value="tourList">
+			<input type="hidden" name="command" value="tourHome">
 			<div class="container serchcon">
 				<div class="justify-content-center input-group search">
 					<select class="form-select" id="mode" name="mode" >
@@ -174,9 +221,6 @@ function deleteCheck(toid){
 					<input type="text" class="input-group-text" id="keyword" name="keyword" style="width:250px;" value="${pageInfo.getKeyword()}">
 					<button type="submit" class="btn btn-secondary rounded" value="search">검색</button>
 					<button type="button" class="btn btn-dark rounded" onclick="searchAll();" style="margin-left:5px;">전체 검색</button>
-					<c:if test="${whologin == '2'}">
-						<button type="button" class="btn btn-primary rounded" onclick="writeForm();" style="margin-left:5px;">상품 등록</button>
-					</c:if>
 				</div>
 			</div>
 		</form>
@@ -189,7 +233,7 @@ function deleteCheck(toid){
 				</thead>
 				<tbody>
 					<c:set var="colsu" value="3"/>
-					<c:forEach var="bean" items="${requestScope.datalist }" varStatus="asdf">
+					<c:forEach var="bean" items="${sessionScope.datalist }" varStatus="asdf">
 						<c:if test="${asdf.index % colsu == 0}">
 							<tr></tr>
 						</c:if>
@@ -200,19 +244,39 @@ function deleteCheck(toid){
 										<div class = "card-body">
 											<p>${bean.location }
 											<h5 class = "card-title">${bean.tname}</h5>
-											<p class = "card-text">										
-												<span
-												data-bs-toggle="popover"
-												data-bs-content="${bean.tcontent}"
-												data-bs-trigger="hover">
-												<c:if test="${fn:length(bean.tcontent) >= 18}">
-													${fn:substring(bean.tcontent, 0, 18)}...
-												</c:if>
-												</span>
-											</p>
-												<c:if test="${fn:length(bean.tcontent) < 18}">
-													${bean.tcontent}
-												</c:if>
+											<p class = "price" id="price1"><fmt:formatNumber value="${bean.tprice}" pattern="#,###" />원</p>
+										</div>
+										<div class="pur-btn-div">
+											<a href="<%=notWithFormTag%>tourDetail&toid=${bean.toid}" class="purchasebtn btn btn-outline-secondary">예매하기</a>
+										</div>
+									</div>
+								</div>
+							</td>
+					</c:forEach>
+				</tbody>
+			</table>
+		</div>
+		<div class="tablecon-2">
+			<table class="table table-borderless">
+				<thead>
+					<div class="input-group" style="margin-left:8px;">
+						<span class="label label-info">${pageInfo.pagingStatus }</span>
+					</div>
+				</thead>
+				<tbody>
+					<c:set var="colsu" value="2"/>
+					<c:forEach var="bean" items="${sessionScope.datalist }" varStatus="asdf">
+						<c:if test="${asdf.index % colsu == 0}">
+							<tr></tr>
+						</c:if>
+							<td>
+								<div class = "card">
+									<div class="removeUnderLine">
+										<img class = "card-img-top" alt="${bean.timage01 }" src="/Student/upload/${bean.timage01 }">
+										<div class = "card-body">
+											<p>${bean.location }</p>
+											<h5 class = "card-title">${bean.tname}</h5>
+											<p class = "price"><fmt:formatNumber value="${bean.tprice}" pattern="#,###" />원</p>
 										</div>
 										<div class="pur-btn-div">
 											<a href="<%=notWithFormTag%>tourDetail&toid=${bean.toid}" class="purchasebtn btn btn-outline-secondary">예매하기</a>
@@ -225,7 +289,7 @@ function deleteCheck(toid){
 			</table>
 		</div>
 		${pageInfo.pagingHtml}
-		<button type="button" class="btn btn-outline-primary" onclick="location.href='<%=notWithFormTag %>tourInsert'">등록</button>
+		<button type="button" class="btn-insert btn btn-outline-primary" onclick="location.href='<%=notWithFormTag %>tourInsert'">등록</button>
 	</div>
 </body>
 </html>
