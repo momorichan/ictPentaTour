@@ -43,6 +43,62 @@ public class Paging {
 	private String flowParameter = "" ; // 페이지 이동시 같이 수반되는 파라미터 리스트
 	
 
+	public String getEndLocation() {
+		return endLocation;
+	}
+
+
+
+
+	public void setEndLocation(String endLocation) {
+		this.endLocation = endLocation;
+	}
+
+
+
+
+	public String getStartDate() {
+		return startDate;
+	}
+
+
+
+
+	public void setStartDate(String startDate) {
+		this.startDate = startDate;
+	}
+
+
+
+
+	public String getEndDate() {
+		return endDate;
+	}
+
+
+
+
+	public void setEndDate(String endDate) {
+		this.endDate = endDate;
+	}
+
+
+
+
+	public void setStartLocation(String startLocation) {
+		this.startLocation = startLocation;
+	}
+
+
+
+
+	public String getStartLocation() {
+		return startLocation;
+	}
+
+
+
+
 	/* 렌터카 startLocation, endLocation, startDate, endDate */
 	public Paging(boolean isGrid, String _pageNumber, String _pageSize, int totalCount, String url, String startLocation, String endLocation, String startDate, String endDate
 			) {
@@ -781,5 +837,6 @@ public class Paging {
 
 	public void setKeyword2(String keyword2) {
 		this.keyword2 = keyword2;
-	}	
+	}
+
 }
