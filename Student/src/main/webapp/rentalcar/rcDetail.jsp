@@ -27,7 +27,7 @@
 			/* 버튼 클릭 시 alert */
 			$("#bookCarBtn").click(function() {
 			    /*  로그인 check */
-			    if(${sessionScope.loginfo.id == null}){
+			    if(${sessionScope.loginfo.meid == null}){
 			    	const login = confirm("로그인이 필요합니다. 로그인하시겠습니까?");			    
 				    // 로그인	
 				    if(login){
@@ -146,7 +146,7 @@
 			<div id="map" style="width: 500px; height: 400px;"></div>
 			<br/>
 			<form action= "<%=withFormTag%>" method="post"> 
-				<input type="hidden" name="id" value="${sessionScope.loginfo.id}">
+				<input type="hidden" name="id" value="${sessionScope.loginfo.meid}">
 	    		<input type="hidden" name="rcid" value="${requestScope.bean.rcid}">
 				<button class="btn btn-success" type="button" id="bookCarBtn">예약 하기</button>
 			</form>
@@ -225,7 +225,7 @@
 			/* '예약 하기' 버튼 클릭 시 alert */
 			$("#bookCarBtn").click(function() {
 			    /*  로그인 check */
-			    if(${sessionScope.loginfo.id == null}){
+			    if(${sessionScope.loginfo.meid == null}){
 			    	const login = confirm("로그인이 필요합니다. 로그인하시겠습니까?");			    
 				    // 로그인	
 				    if(login){
@@ -379,7 +379,7 @@
 			<!-- enctype="multipart/form-data" -->
 			<form action= "<%=withFormTag%>" method="post" id="bookCarForm" >  
 				<input type="hidden" name="command" value="rcDetail">
-				<input type="hidden" name="id" value="${sessionScope.loginfo.id}">
+				<input type="hidden" name="id" value="${sessionScope.loginfo.meid}">
 	    		<input type="hidden" name="rcid" value="${requestScope.bean.rcid}">
 				<button class="btn btn-success" type="button" id="bookCarBtn" >예약 하기</button>
 			</form>
