@@ -2,7 +2,7 @@ package com.shopping.model.bean;
 
 public class Roomreser {
 	private int rrid;
-	private int meid;
+	private String meid;
 	private String checkin;
 	private String checkout;
 	public int getRrid() {
@@ -11,10 +11,10 @@ public class Roomreser {
 	public void setRrid(int rrid) {
 		this.rrid = rrid;
 	}
-	public int getMeid() {
+	public String getMeid() {
 		return meid;
 	}
-	public void setMeid(int meid) {
+	public void setMeid(String meid) {
 		this.meid = meid;
 	}
 	public String getCheckin() {

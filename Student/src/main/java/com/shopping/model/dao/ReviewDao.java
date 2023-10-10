@@ -245,8 +245,8 @@ public class ReviewDao extends SuperDao {
 System.out.println(bean);
 		
 		int cnt = -1;
-		String sql = " insert into review(trid, meid, rating, regdate, content)";
-		sql += " values(reviewseq.nextval, 'admin', ?, sysdate, ?)";
+		String sql = " insert into review(trid, meid, acid, rating, regdate, content)";
+		sql += " values(reviewseq.nextval,?, ?, ?, sysdate, ?)";
 		PreparedStatement pstmt = null;
 		
 		conn = super.getConnection();//단계2
@@ -254,8 +254,10 @@ System.out.println(bean);
 		
 		pstmt = conn.prepareStatement(sql); //단계3
 		
-		pstmt.setInt(1, bean.getRating());
-		pstmt.setString(2, bean.getContent());
+		pstmt.setString(1, bean.getMeid());
+		pstmt.setInt(2, bean.getAcid());
+		pstmt.setInt(3, bean.getRating());
+		pstmt.setString(4, bean.getContent());
 
 		
 		cnt = pstmt.executeUpdate();//단계4-1
