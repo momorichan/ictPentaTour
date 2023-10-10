@@ -54,7 +54,7 @@
 	
 			$('.datepicker').daterangepicker({
 				autoUpdateInput : false,
-				"minDate" : new Date(), // 10.10 추가
+				"minDate" : new Date(), // 10.10 추가 
 				locale : {
 					cancelLabel : 'Clear'
 				}
