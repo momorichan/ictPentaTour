@@ -8,7 +8,6 @@ import javax.servlet.http.HttpSession;
 import com.shopping.model.bean.FlyManager;
 import com.shopping.model.bean.Member;
 import com.shopping.model.check.BookingManager;
-import com.shopping.model.mall.CartManager;
 
 // 하위 컨트롤러 들이 공통적으로 사용하는 기능들을 여기에 명시합니다.
 public class SuperClass implements SuperController{
@@ -17,7 +16,6 @@ public class SuperClass implements SuperController{
 	protected HttpSession session;
 
 	protected Member loginfo = null; //로그인 여부를 파악하는 변수
-	protected CartManager mycart = null; //내 카트 
 	protected BookingManager mybooking = null;
 	
 	public void youNeededLogin() {
@@ -34,10 +32,8 @@ public class SuperClass implements SuperController{
 		this.session = request.getSession() ;
 		
 		this.loginfo = (Member)session.getAttribute("loginfo");
-		this.mycart = (CartManager)session.getAttribute("mycart");
 		this.mybooking = (BookingManager)session.getAttribute("mybooking");
 		if(mybooking == null) {mybooking = new BookingManager();}
-		if(mycart == null) {mycart = new CartManager();}
 	}
 
 	@Override
@@ -47,8 +43,6 @@ public class SuperClass implements SuperController{
 		this.session = request.getSession() ;
 		
 		this.loginfo = (Member)session.getAttribute("loginfo") ;
-		this.mycart = (CartManager)session.getAttribute("mycart") ;
-		if(mycart==null) {mycart = new CartManager();}		
 	}	
 	
 	public String getUrlInfomation(String todoCommmand) {

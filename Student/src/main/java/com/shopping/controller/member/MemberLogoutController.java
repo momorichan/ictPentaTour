@@ -12,7 +12,6 @@ public class MemberLogoutController extends SuperClass {
 	public void doGet(HttpServletRequest request, HttpServletResponse response) throws Exception {
 		super.doGet(request, response);
 		
-		Map<Integer, Integer> wishList = super.mycart.getAllCartList();
 		try {
 			// 로그인시 저장했던 로그인 정보 등을 깨끗히 비웁니다.
 			super.session.invalidate();			

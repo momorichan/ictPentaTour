@@ -1,15 +1,5 @@
 # setting.txt
-<<<<<<< HEAD
-=======
-#company=IT 교육 센터
-#ceo=김대표
-#email=itcompany@naver.com
-#phone=0212349876
->>>>>>> refs/remotes/origin/rentalcar
 uploadPath=upload
 product_list_column_size=3
-<<<<<<< HEAD
 accommodation_list_column_size=4
-=======
->>>>>>> refs/remotes/origin/rentalcar
 rentalcar_list_column_size=3
