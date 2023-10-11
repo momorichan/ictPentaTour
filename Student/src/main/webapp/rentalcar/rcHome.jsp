@@ -132,6 +132,25 @@
 					data-bs-placement="top">
 	      	</form>
 	      </div>
+	      <div class="info-div rentalcar">
+		<h3>렌트카 예약 정보</h3>
+		<table class="table table-hover">
+			<!-- table-hover, table-striped, table-condensed  -->
+			<thead>
+				<tr class="table-primary">
+					<th>렌트카 예약 번호</th>
+					<th>차량 번호</th>
+				</tr>
+			</thead>
+			<tbody>
+				<c:forEach var="ccbean" items="${requestScope.ccbean}" varStatus="status">
+					<tr>
+						<td>${ccbean.recid}</td>
+						<td>${ccbean.rcid}</td>
+				</c:forEach>
+			</tbody>
+		</table>
+	</div>
 	      <!-- Modal footer -->
 	      <div class="modal-footer">
 	      	<button type="submit" class="btn btn-primary" data-bs-dismiss="modal">검색</button>
