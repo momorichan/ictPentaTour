@@ -110,47 +110,36 @@
 			</div>
 		</div>
 	</div>
-	
 	<!-- The Modal -->
 	<div class="modal fade" id="myModal">
 	  <div class="modal-dialog">
 	    <div class="modal-content">
 	      <!-- Modal Header -->
 	      <div class="modal-header">
-	        <h4 class="modal-title">차량 번호를 입력해주세요.</h4>
+	        <h4 class="modal-title">렌트카 예약 정보</h4>
 	        <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
 	      </div>
 	      <!-- Modal body -->
 	      <div class="modal-body">
-	      	<form name="myform" action="<%=withFormTag%>" method="get">
-	      		<label>
-	      			차량 번호
-	      		</label>
-	      		<input type="hidden" name="command" value="rcList">
-	      		<input type="text" id="rcid" name="rcid" class="form-control"
-	      			data-bs-toggle="tooltip" title="ex)OO호OOOO"
-					data-bs-placement="top">
-	      	</form>
-	      </div>
-	      <div class="info-div rentalcar">
-		<h3>렌트카 예약 정보</h3>
-		<table class="table table-hover">
-			<!-- table-hover, table-striped, table-condensed  -->
-			<thead>
-				<tr class="table-primary">
-					<th>렌트카 예약 번호</th>
-					<th>차량 번호</th>
-				</tr>
-			</thead>
-			<tbody>
-				<c:forEach var="ccbean" items="${requestScope.ccbean}" varStatus="status">
-					<tr>
-						<td>${ccbean.recid}</td>
-						<td>${ccbean.rcid}</td>
-				</c:forEach>
-			</tbody>
-		</table>
-	</div>
+		      <div class="info-div rentalcar">
+					<table class="table table-hover">
+						<!-- table-hover, table-striped, table-condensed  -->
+						<thead>
+							<tr class="table-primary">
+								<th>렌트카 예약 번호</th>
+								<th>차량 번호</th>
+							</tr>
+						</thead>
+						<tbody>
+							<c:forEach var="ccbean" items="${sessionScope.ccbean}" varStatus="status">
+								<tr>
+									<td>${ccbean.recid}</td>
+									<td>${ccbean.rcid}</td>
+							</c:forEach>
+						</tbody>
+					</table>
+				</div>
+			</div>
 	      <!-- Modal footer -->
 	      <div class="modal-footer">
 	      	<button type="submit" class="btn btn-primary" data-bs-dismiss="modal">검색</button>

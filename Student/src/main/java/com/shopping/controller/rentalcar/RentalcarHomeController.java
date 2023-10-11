@@ -21,8 +21,8 @@ public class RentalcarHomeController extends SuperClass {
 		
 		ccbean = carcheckdao.getDataByMeid(meid);
 		
-		request.setAttribute("ccbean", ccbean);
-		super.gotoPage("rentalcar/rcHome.jsp");
+		session.setAttribute("ccbean", ccbean);
+		response.sendRedirect("rentalcar/rcHome.jsp");
 	}
 
 }

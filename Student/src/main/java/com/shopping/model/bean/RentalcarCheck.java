@@ -2,14 +2,15 @@ package com.shopping.model.bean;
 
 public class RentalcarCheck {
 	private int recid;
+	private String rcid;
+	private String meid;
+	
 	public int getRecid() {
 		return recid;
 	}
 	public void setRecid(int recid) {
 		this.recid = recid;
 	}
-	private String rcid;
-	private String meid;
 	public String getRcid() {
 		return rcid;
 	}
