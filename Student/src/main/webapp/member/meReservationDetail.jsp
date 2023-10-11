@@ -9,13 +9,18 @@
 .accommodation {
 	font-size: 13px;
 }
+.info-div {
+	margin-left:auto;
+	margin-right:auto;
+	width:1400px !important;
+}
 </style>
 <title>Insert title here</title>
 </head>
 <body>
 	<h2 style="text-align: center;">${sessionScope.loginfo.name}님의 예약 정보 입니다.</h2>
 	<br>
-	<div class="container">
+	<div class="info-div air">
 		<h3>항공 예매 정보</h3>
 		<table class="table table-hover">
 			<!-- table-hover, table-striped, table-condensed  -->
@@ -57,8 +62,8 @@
 	<br>
 	<br>
 	<br>
-	<div class="container accommodation">
-		<h3>숙박 예매 정보</h3>
+	<div class="info-div accommodation">
+		<h3>숙박 예약 정보</h3>
 		<table class="table table-hover">
 			<!-- table-hover, table-striped, table-condensed  -->
 			<thead>
@@ -107,13 +112,13 @@
 	<br>
 	<br>
 	<br>
-	<div class="container tour">
+	<div class="info-div tour">
 		<h3>티켓 예매 정보</h3>
 		<table class="table table-hover">
 			<!-- table-hover, table-striped, table-condensed  -->
 			<thead>
 				<tr class="table-primary">
-					<th>티켓 예약 번호</th>
+					<th>티켓 예매 번호</th>
 					<th>티켓 번호</th>
 					<th>지역</th>
 					<th>티켓 이름</th>
@@ -141,6 +146,43 @@
 				</c:forEach>
 			</tbody>
 		</table>
-	</div>	 
+	</div>
+	<div class="info-div tour">
+		<h3>렌트카 예약 정보</h3>
+		<table class="table table-hover">
+			<!-- table-hover, table-striped, table-condensed  -->
+			<thead>
+				<tr class="table-primary">
+					<th>렌트카 예약 번호</th>
+					<th>차량 번호</th>
+					<th>차종</th>
+					<th>차량 이름</th>
+					<th>대여 장소</th>
+					<th>반납 장소</th>
+					<th>대여 날짜</th>
+					<th>반납 일자</th>
+					<th>탑승 인원</th>
+					<th>대여료</th>
+				</tr>
+			</thead>
+			<tbody>
+				<c:forEach var="ccbean" items="${requestScope.ccbean}" varStatus="status">
+				<c:forEach var="cbean" items="${requestScope.cbean}" begin="${status.index}" end="${status.index}">
+					<tr>
+						<td>${ccbean.recid}</td>
+						<td>${ccbean.rcid}</td>
+						<td>${cbean.carType}</td>
+						<td>${cbean.carName}</td>
+						<td>${cbean.startLocation}</td>
+						<td>${cbean.endLocation}</td>
+						<td>${cbean.startDate}</td>
+						<td>${cbean.endDate}</td>
+						<td>${cbean.passengers}</td>
+						<td><fmt:formatNumber value="${cbean.price}" pattern="#,###" />원</td>
+				</c:forEach>
+				</c:forEach>
+			</tbody>
+		</table>
+	</div>
 </body>
 </html>

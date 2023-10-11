@@ -1,28 +1,35 @@
 package com.shopping.model.bean;
 
 public class RentalcarCheck {
+	private int recid;
+	public int getRecid() {
+		return recid;
+	}
+	public void setRecid(int recid) {
+		this.recid = recid;
+	}
 	private String rcid;
-	private String id;
+	private String meid;
 	public String getRcid() {
 		return rcid;
 	}
 	public void setRcid(String rcid) {
 		this.rcid = rcid;
 	}
-	public String getId() {
-		return id;
+	public String getMeid() {
+		return meid;
 	}
-	public void setId(String id) {
-		this.id = id;
+	public void setMeid(String meid) {
+		this.meid = meid;
 	}
 	@Override
 	public String toString() {
-		return "RentalcarCheck [rcid=" + rcid + ", id=" + id + "]";
+		return "RentalcarCheck [rcid=" + rcid + ", meid=" + meid + "]";
 	}
-	public RentalcarCheck(String rcid, String id) {
+	public RentalcarCheck(String rcid, String meid) {
 		super();
 		this.rcid = rcid;
-		this.id = id;
+		this.meid = meid;
 	}
 	public RentalcarCheck() {
 		super();

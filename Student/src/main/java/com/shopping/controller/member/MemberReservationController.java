@@ -10,6 +10,7 @@ import com.shopping.controller.SuperClass;
 import com.shopping.model.bean.Airline;
 import com.shopping.model.bean.Flight;
 import com.shopping.model.bean.Rentalcar;
+import com.shopping.model.bean.RentalcarCheck;
 import com.shopping.model.bean.Room;
 import com.shopping.model.bean.Roomreser;
 import com.shopping.model.bean.Rrdetails;
@@ -19,6 +20,7 @@ import com.shopping.model.bean.accommodation;
 import com.shopping.model.dao.AccommodationDao;
 import com.shopping.model.dao.AirDao;
 import com.shopping.model.dao.FlyDao;
+import com.shopping.model.dao.RentalcarCheckDao;
 import com.shopping.model.dao.RentalcarDao;
 import com.shopping.model.dao.RoomDao;
 import com.shopping.model.dao.RoomreserDao;
@@ -31,6 +33,7 @@ public class MemberReservationController extends SuperClass{
 		
 		String meid = request.getParameter("meid");
 		System.out.println("meid is " + meid);
+		
 //		항공 예약 정보
 		List<Flight> fbean = new ArrayList<Flight>();
 		List<Airline> airbean = new ArrayList<Airline>();
@@ -81,8 +84,18 @@ public class MemberReservationController extends SuperClass{
 		request.setAttribute("tbean", tbean);
 		
 //		렌트카 예약 정보
-		Rentalcar cbean = new Rentalcar();
+		List<Rentalcar> cbean = new ArrayList<Rentalcar>();
+		List<RentalcarCheck> ccbean = new ArrayList<RentalcarCheck>();
 		RentalcarDao cardao = new RentalcarDao();
+		RentalcarCheckDao carcheckdao = new RentalcarCheckDao();
+		
+		ccbean = carcheckdao.getDataByMeid(meid);
+		for(RentalcarCheck bean : ccbean) {
+			cbean.add(cardao.GetDataByPk(bean.getRcid()));
+		}
+		
+		request.setAttribute("ccbean", ccbean);
+		request.setAttribute("cbean", cbean);
 		
 		super.gotopage("member/meReservationDetail.jsp");
 	}
