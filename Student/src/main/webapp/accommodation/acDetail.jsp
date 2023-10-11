@@ -157,7 +157,7 @@ img {
 <script type="text/javascript">
 
 //JSP에서 JavaScript로 값을 전달
-var isLogin = ${sessionScope.loginfo != null && $sessionScope.loginfo.meid != null};
+var isLogin = ${sessionScope.loginfo.meid != null};
 var notWithFormTagUrl = "<%=notWithFormTag%>mePopup";
 
 
