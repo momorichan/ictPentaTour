@@ -147,7 +147,7 @@
 			</tbody>
 		</table>
 	</div>
-	<div class="info-div tour">
+	<div class="info-div rentalcar">
 		<h3>렌트카 예약 정보</h3>
 		<table class="table table-hover">
 			<!-- table-hover, table-striped, table-condensed  -->
@@ -173,8 +173,44 @@
 						<td>${ccbean.rcid}</td>
 						<td>${cbean.carType}</td>
 						<td>${cbean.carName}</td>
-						<td>${cbean.startLocation}</td>
-						<td>${cbean.endLocation}</td>
+						<td>
+							<c:choose>
+								<c:when test="${cbean.startLocation eq 'seoul'}">
+									<c:out value="서울" />
+								</c:when>
+								<c:when test="${cbean.startLocation eq 'daejeon'}">
+									<c:out value="대전" />
+								</c:when>
+								<c:when test="${cbean.startLocation eq 'daegu'}">
+									<c:out value="대구" />
+								</c:when>
+								<c:when test="${cbean.startLocation eq 'busan'}">
+									<c:out value="부산" />
+								</c:when>
+								<c:when test="${cbean.startLocation eq 'jeju'}">
+									<c:out value="제주" />
+								</c:when>
+							</c:choose>
+						</td>
+						<td>
+							<c:choose>
+								<c:when test="${cbean.endLocation eq 'seoul'}">
+									<c:out value="서울" />
+								</c:when>
+								<c:when test="${cbean.endLocation eq 'daejeon'}">
+									<c:out value="대전" />
+								</c:when>
+								<c:when test="${cbean.endLocation eq 'daegu'}">
+									<c:out value="대구" />
+								</c:when>
+								<c:when test="${cbean.endLocation eq 'busan'}">
+									<c:out value="부산" />
+								</c:when>
+								<c:when test="${cbean.endLocation eq 'jeju'}">
+									<c:out value="제주" />
+								</c:when>
+							</c:choose>
+						</td>
 						<td>${cbean.startDate}</td>
 						<td>${cbean.endDate}</td>
 						<td>${cbean.passengers}</td>
