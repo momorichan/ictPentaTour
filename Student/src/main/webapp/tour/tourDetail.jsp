@@ -507,7 +507,7 @@ h2{
 				<br>
 				<h4 class="detail-info">사용 가능 일자 : ${bean.tusedate }</h4>
 				<br>
-				<h4 class="detail-info">제한 연령 : ${bean.tage }</h4>
+				<h4 class="detail-info">제한 연령 : ${bean.tage } 세</h4>
 				<br>
 				<br>
 				<p class="detail-info">${bean.tcontent }</p>

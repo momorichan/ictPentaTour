@@ -159,12 +159,12 @@
 					</div>
 	
 	<form name="myform" action="<%=withFormTag%>" method="get">
-									<input type="hidden" name="command" value="rvList">
-									<div class="row">
-											<button type="button" class="btn btn-info form-control-sm"
-												onclick="writeForm();">글 쓰기</button>
-									</div>
-								</form>				
+		<input type="hidden" name="command" value="rvList">
+		<div class="row">
+				<button type="button" class="btn btn-info form-control-sm"
+					onclick="writeForm();">글 쓰기</button>
+		</div>
+	</form>				
 	<hr class="shape"></hr>
 	<!--  임시 창 -->
 	 <div class ="review_text">

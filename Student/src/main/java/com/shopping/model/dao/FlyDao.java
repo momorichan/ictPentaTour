@@ -2,6 +2,9 @@ package com.shopping.model.dao;
 
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.util.ArrayList;
+import java.util.List;
+
 import com.shopping.model.bean.Flight;
 import com.shopping.utility.MyUtility;
 
@@ -198,6 +201,32 @@ public class FlyDao extends SuperDao{
 		if(conn != null) {conn.close();}
 		
 		return cnt;
+	}
+
+	public List<Flight> getDataByFly3(String meid) throws Exception{
+		List<Flight> bean = new ArrayList<Flight>();
+		String sql = " select * \r\n"
+				+ "from flight f left join airline a\r\n"
+				+ "on f.flid = a.flid ";
+		sql += " where meid = ? ";
+		
+		ResultSet rs = null;
+		PreparedStatement pstmt = null;
+		conn = super.getConnection();
+		pstmt = conn.prepareStatement(sql);
+		pstmt.setString(1, meid);
+		rs = pstmt.executeQuery();		
+		
+		while(rs.next())
+		{
+			bean.add(this.getBeanData(rs));
+		}
+		
+		if(rs != null) {rs.close();}
+		if(pstmt != null) {pstmt.close();}
+		if(conn != null) {conn.close();}
+		
+		return bean;
 	}
 
 }

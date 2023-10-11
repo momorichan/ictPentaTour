@@ -237,7 +237,8 @@ String notWithFormTag = appName + mappingName + "?command=";
 								<c:if test="${whologin == '0'}">
 								</c:if>
 								<c:if test="${whologin != '0'}">
-									<li><a class="dropdown-item" href="<%=notWithFormTag%>meDetail&meid=${sessionScope.loginfo.meid}">상세 보기</a></li>
+									<li><a class="dropdown-item" href="<%=notWithFormTag%>meDetail&meid=${sessionScope.loginfo.meid}">회원 상세 보기</a></li>
+									<li><a class="dropdown-item" href="<%=notWithFormTag%>meReserve&meid=${sessionScope.loginfo.meid}">예약 상세 보기</a></li>
 									<li><a class="dropdown-item" href="<%=notWithFormTag%>meUpdate&meid=${sessionScope.loginfo.meid}">정보 수정</a></li>
 									<li><a class="dropdown-item" href="<%=notWithFormTag%>meDelete&meid=${sessionScope.loginfo.meid}">탈퇴하기</a></li>
 								</c:if>

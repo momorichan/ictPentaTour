@@ -160,6 +160,7 @@ $(function() {
 
 	$('#datepicker').daterangepicker({
 		autoUpdateInput : false,
+		"minDate" : new Date(),
 		locale : {
 			cancelLabel : 'Clear'
 		}
