@@ -8,6 +8,11 @@
 	<meta charset="UTF-8">
 	<title>렌터카</title>
 	<style type="text/css">
+	.card-img-top{
+		width: 304px;
+		height: 219.86px;
+		
+	}
 	.col{
 		align-content: center;
 	}
