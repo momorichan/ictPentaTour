@@ -171,37 +171,6 @@ String notWithFormTag = appName + mappingName + "?command=";
 <link rel="preconnect" href="https://fonts.gstatic.com">
 <link href="https://fonts.googleapis.com/css2?family=Black+Han+Sans&display=swap" rel="stylesheet">
 
-<!-- --------------------------review-------------------------------- -->
-<script type="text/javascript">
-		$(document).ready(function(){
-			var optionList = $('#mode option');
-			for(var i=0 ; i<optionList.length ; i++){
-				if(optionList[i].value == '${requestScope.pageInfo.mode}'){
-					optionList[i].selected = true ;
-				}	
-			}
-			
-			$('#keyword').val('${requestScope.pageInfo.keyword}');
-			
-			$("#mode").change(function(){				 
-				  if($(this).val() != 'all'){
-					  $('#keyword').attr('disabled', false);
-				  }else{
-					  $('#keyword').val('');
-					  $('#keyword').attr('disabled', true);
-				  }
-			});			
-		});
-		
-		function searchAll(){ /* 전체 검색 */
-			location.href = '<%=notWithFormTag%>rvList';
-		}
-		
-		function writeForm(){ /* 글쓰기 */
-			location.href = '<%=notWithFormTag%>rvInsert';
-		}
-		
-	</script>
 <style type="text/css">
 </style>
 </head>
