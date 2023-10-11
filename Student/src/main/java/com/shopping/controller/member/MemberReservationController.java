@@ -44,6 +44,7 @@ public class MemberReservationController extends SuperClass{
 		for(Flight bean : fbean) {
 			airbean.add(airdao.getDataByFlid(bean.getFlid()));
 		}
+		
 		request.setAttribute("fbean", fbean);
 		request.setAttribute("airbean", airbean);
 		
