@@ -228,7 +228,7 @@
 			</tbody>
 		</table>
 		</div>		
-<%-- 		${requestScope.pageInfo.pagingHtml} --%>
+<%-- 		${requestScope.pageInfo.pagingHtml} --%> 
 	</div>
 </body>
 </html>
