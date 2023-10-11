@@ -479,7 +479,8 @@ input[type='date']:valid::before {
 						<div class="search justify-content-center">
 							<div class="from">
 								<input class="form-control " type="hidden" id="mode" name="mode"
-									value="depart"> <select id="keyword" name="keyword">
+									value="depart"> 
+									<select id="keyword" name="keyword">
 									<option value="all" selected="selected">출발지
 									<option value="김포">김포
 									<option value="인천">인천
@@ -490,8 +491,8 @@ input[type='date']:valid::before {
 
 							<div class="to">
 								<input class="form-control" type="hidden" id="mode2"
-									name="mode2" value="arrive"> <select class="city2"
-									id="keyword2" name="keyword2">
+									name="mode2" value="arrive"> 
+									<select class="city2" id="keyword2" name="keyword2">
 									<option value="all" selected="selected">도착지
 									<option value="일본">일본
 									<option value="대만">대만

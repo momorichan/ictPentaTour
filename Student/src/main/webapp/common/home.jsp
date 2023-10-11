@@ -295,21 +295,21 @@ body {
 		<!-- The slideshow/carousel -->
 		<div class="carousel-inner">
 			<div class="carousel-item active ">
-				<img src="<%=appName%>/image/la.jpg" alt="Los Angeles"class="d-block" style="width: 100%">
+				<img src="<%=appName%>/image/la.jpg" alt=""class="d-block" style="width: 100%">
 				<div class="carousel-caption">
-					<h3>Los Angeles</h3>
-					<p>We had such a great time in LA!</p>
+					<h3></h3>
+					<p></p>
 				</div>
 			</div>
 			<div class="carousel-item">
-				<img src="<%=appName%>/image/chicago.jpg" alt="Chicago"class="d-block" style="width: 100%">
+				<img src="<%=appName%>/image/chicago.jpg" alt=""class="d-block" style="width: 100%">
 				<div class="carousel-caption">
-					<h3>Chicago</h3>
-					<p>Thank you, Chicago!</p>
+					<h3></h3>
+					<p></p>
 				</div>
 			</div>
 			<div class="carousel-item">
-				<img src="<%=appName%>/image/ny.jpg" alt="New York" class="d-block"style="width: 100%">
+				<img src="<%=appName%>/image/ny.jpg" alt="" class="d-block"style="width: 100%">
 				<div class="carousel-caption">
 					<h3>New York</h3>
 					<p>We love the Big Apple!</p>

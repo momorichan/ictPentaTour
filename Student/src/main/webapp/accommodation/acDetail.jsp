@@ -156,6 +156,12 @@ img {
 </style>
 <script type="text/javascript">
 
+//JSP에서 JavaScript로 값을 전달
+var isLogin = ${sessionScope.loginfo != null && $sessionScope.loginfo.meid != null};
+var notWithFormTagUrl = "<%=notWithFormTag%>mePopup";
+
+
+
 $(function() {
 
 	$('#datepicker').daterangepicker({
@@ -218,6 +224,21 @@ function getAmenities(){
 			getRoomDetail(roid); // 가져온 roid 값을 사용하여 함수 호출
 		});
 
+		$("#islogin").click(function(event) {
+	        // a 태그의 기본 동작 중지
+	        event.preventDefault();
+
+	        // 로그인 체크
+	        if(!isLogin){
+	            const login = confirm("로그인이 필요합니다. 로그인하시겠습니까?");			    
+	            
+	            if(login){
+	                window.open(notWithFormTagUrl , "a", "width=600, height=640, left=100, top=50");
+	                return false;
+	            }
+	        }
+	    });
+		
 		
 		$('.reserve-button').click(function(e) {
 			
@@ -577,7 +598,7 @@ document.addEventListener("DOMContentLoaded", function () {
 						</td>
 						<td class="col-1"><a href="#"
 							class="btn_gray_hover reserve-button"
-							data-datepicker="#datepicker" data-roid="${bean.roid}"> 예약
+							data-datepicker="#datepicker" data-roid="${bean.roid}" id = "islogin"> 예약
 						</a></td>
 					</tr>
 				</c:forEach>
