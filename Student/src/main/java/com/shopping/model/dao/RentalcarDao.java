@@ -569,8 +569,8 @@ public class RentalcarDao extends SuperDao {
 		bean.setCarType(rs.getString("carType"));
 		bean.setStartLocation(rs.getString("startLocation"));
 		bean.setEndLocation(rs.getString("endLocation"));
-		bean.setStartDate(String.valueOf(rs.getString("startDate")));
-		bean.setEndDate(String.valueOf(rs.getString("endDate")));
+		bean.setStartDate(rs.getString("startDate"));
+		bean.setEndDate(rs.getString("endDate"));
 		bean.setPrice(rs.getInt("price"));
 		bean.setPassengers(rs.getString("passengers"));
 		/* 9.27 추가 칼럼 */
@@ -785,6 +785,39 @@ public class RentalcarDao extends SuperDao {
 		pstmt.setString(10, bean.getCarImage01());
 		pstmt.setString(11, bean.getCarImage02());
 		pstmt.setString(12, bean.getCarImage03());
+		
+		cnt = pstmt.executeUpdate() ;
+		conn.commit();		
+		
+		if(pstmt!=null){pstmt.close();}
+		if(conn!=null){conn.close();}		
+		return cnt;		
+		
+	}
+	public int updateData(Rentalcar bean)throws Exception {
+		// 기입한 상품 정보를 이용하여 데이터 베이스에 추가합니다.
+		System.out.println("상품 업데이트 빈 :\n" + bean);		
+		PreparedStatement pstmt = null ;
+		// cpnum 안 씀
+		String sql = "update rentalcar set carType=?, startLocation=?, endLocation=?, startDate=?, endDate=?, price=?, passengers=?, carName=?, carImage01=?, carImage02=?, carImage03=? where rcid=? ";
+		int cnt = -1 ;
+		
+		conn = super.getConnection() ;
+		conn.setAutoCommit(false);		
+		
+		pstmt = conn.prepareStatement(sql);		
+		pstmt.setString(1, bean.getCarType());
+		pstmt.setString(2, bean.getStartLocation());
+		pstmt.setString(3, bean.getEndLocation());
+		pstmt.setString(4, bean.getStartDate());
+		pstmt.setString(5, bean.getEndDate());
+		pstmt.setInt(6, bean.getPrice());
+		pstmt.setString(7, bean.getPassengers());
+		pstmt.setString(8, bean.getCarName());
+		pstmt.setString(9, bean.getCarImage01());
+		pstmt.setString(10, bean.getCarImage02());
+		pstmt.setString(11, bean.getCarImage03());
+		pstmt.setString(12, bean.getRcid());
 		
 		cnt = pstmt.executeUpdate() ;
 		conn.commit();		

@@ -64,11 +64,11 @@
 			</div>
 			<div class="input-group">
 				<span class="input-group-text">대여 시작일</span>				
-				<input class="form-control" type="text" id="startDate" name="startDate" value="${requestScope.bean.startDate}">
+				<input class="form-control" type="date" id="startDate" name="startDate" value="${requestScope.bean.startDate}">
 			</div>
 			<div class="input-group">
 				<span class="input-group-text">반납일</span>
-				<input class="form-control" type="text" id="endDate" name="endDate" value="${requestScope.bean.endDate}">			
+				<input class="form-control" type="date" id="endDate" name="endDate" value="${requestScope.bean.endDate}">			
 			</div>
 			<div class="input-group">
 				<span class="input-group-text">대여료</span>

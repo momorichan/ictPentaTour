@@ -161,11 +161,11 @@ public class TourDao extends SuperDao {
 			pstmt.setString(4, bean.getTusedate());
 			pstmt.setInt(5, bean.getTexdate());
 			pstmt.setInt(6, bean.getTage());
-			pstmt.setInt(7, bean.getTfreeage());
-			pstmt.setString(8, bean.getTimage01());
-			pstmt.setString(9, bean.getTimage02());
-			pstmt.setString(10, bean.getTimage03());
-			pstmt.setString(11, bean.getTcontent());
+			pstmt.setString(7, bean.getTcontent());
+			pstmt.setInt(8, bean.getTfreeage());
+			pstmt.setString(9, bean.getTimage01());
+			pstmt.setString(10, bean.getTimage02());
+			pstmt.setString(11, bean.getTimage03());
 		}
 		cnt = pstmt.executeUpdate();
 		conn.commit();

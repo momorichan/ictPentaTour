@@ -28,8 +28,6 @@ public class RentalcarUpdateController extends SuperClass{
 		Rentalcar bean = rdao.GetDataByPk(rcid) ;
 		
 		try {
-			lists = cdao.GetCategoryListForCar("rentalcar", "select") ;
-			request.setAttribute("categories", lists);
 			request.setAttribute("bean", bean); 
 			
 			System.out.println("리스트입니다"+lists);
@@ -68,10 +66,10 @@ public class RentalcarUpdateController extends SuperClass{
 		RentalcarDao dao = new RentalcarDao() ;
 		int cnt = -1 ;
 		try {
-			cnt = dao.InsertData(bean) ; 
+			cnt = dao.updateData(bean) ; 
 			
 			if(cnt == -1) {
-				super.gotoPage(PREFIX + "rcInsertForm.jsp");				
+				super.gotoPage(PREFIX + "rcUpdateForm.jsp");				
 			}else {
 				 new RentalcarListController().doGet(request, response); 
 			}
