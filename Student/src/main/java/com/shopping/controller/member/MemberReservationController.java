@@ -44,12 +44,10 @@ public class MemberReservationController extends SuperClass{
 		for(Flight bean : fbean) {
 			airbean.add(airdao.getDataByFlid(bean.getFlid()));
 		}
-		System.out.println("fname is " + airbean.get(0).getFname());
-		
 		request.setAttribute("fbean", fbean);
 		request.setAttribute("airbean", airbean);
 		
-//		숙박 예약 정보
+//		숙박 예약 정보 
 		List<accommodation> abean = new ArrayList<accommodation>();
 		List<Room> rbean = new ArrayList<Room>();
 		List<Roomreser> rrbean = new ArrayList<Roomreser>();
