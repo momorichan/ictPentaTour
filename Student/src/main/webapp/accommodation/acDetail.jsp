@@ -224,58 +224,48 @@ function getAmenities(){
 			getRoomDetail(roid); // 가져온 roid 값을 사용하여 함수 호출
 		});
 
-		$("#islogin").click(function(event) {
-	        // a 태그의 기본 동작 중지
-	        event.preventDefault();
-
-	        // 로그인 체크
-	        if(!isLogin){
-	            const login = confirm("로그인이 필요합니다. 로그인하시겠습니까?");			    
-	            
-	            if(login){
-	                window.open(notWithFormTagUrl , "a", "width=600, height=640, left=100, top=50");
-	                return false;
-	            }
-	        }
-	    });
-		
-		
 		$('.reserve-button').click(function(e) {
 			
+			if(${empty sessionScope.loginfo}) {
+				alert("로그인이 필요한 서비스 입니다.");
+				window.open("<%=notWithFormTag %>mePopup" , "a", "width=600, height=640, left=100, top=50");
+				return false;
+				} else {
+// 					 e.preventDefault(); // 기본 동작 방지
+
+				        var datepickerId = $(this).data('datepicker'); // datepicker 필드의 ID 가져오기
+				        var dateRange = $(datepickerId).val(); // 선택한 날짜 범위 가져오기
+				        var roid = $(this).data('roid'); // 선택한 방의 roid 가져오기
+				        var acid = ${requestScope.acbean.acid};
+
+				        // 날짜 범위를 시작 날짜와 끝 날짜로 분리
+				        var dateParts = dateRange.split(' - ');
+				        var startDate = dateParts[0].trim(); // 시작 날짜
+				        var endDate = dateParts[1].trim();   // 끝 날짜
+
+				        const exampleData = { room: 1, guests: 4 };
+				        const result = `room${exampleData.room}=${exampleData.guests}`;
+				        console.log(result);
+
+				        
+				     	// 객실 및 인원 정보 가져오기
+				        const guestData = collectRoomGuestData();
+			    		const guestParams = guestDataToURLParams(guestData);
+			    		
+				        // 예약 페이지 URL 생성 및 이동
+				        var reservationUrl = '<%=notWithFormTag%>roReservation';
+			    					reservationUrl += '&startDate=' + startDate;
+			    					reservationUrl += '&endDate=' + endDate;
+			    					reservationUrl += '&acid=' + acid;
+			    					reservationUrl += '&roid=' + roid;
+			    					reservationUrl += '&' + guestParams; // 추가된 부분
+
+									// 생성된 URL로 페이지 이동
+									window.location.href = reservationUrl;
+				}
 			
-			
-	        e.preventDefault(); // 기본 동작 방지
-
-	        var datepickerId = $(this).data('datepicker'); // datepicker 필드의 ID 가져오기
-	        var dateRange = $(datepickerId).val(); // 선택한 날짜 범위 가져오기
-	        var roid = $(this).data('roid'); // 선택한 방의 roid 가져오기
-	        var acid = ${requestScope.acbean.acid};
-
-	        // 날짜 범위를 시작 날짜와 끝 날짜로 분리
-	        var dateParts = dateRange.split(' - ');
-	        var startDate = dateParts[0].trim(); // 시작 날짜
-	        var endDate = dateParts[1].trim();   // 끝 날짜
-
-	        const exampleData = { room: 1, guests: 4 };
-	        const result = `room${exampleData.room}=${exampleData.guests}`;
-	        console.log(result);
-
-	        
-	     	// 객실 및 인원 정보 가져오기
-	        const guestData = collectRoomGuestData();
-    		const guestParams = guestDataToURLParams(guestData);
-    		
-	        // 예약 페이지 URL 생성 및 이동
-	        var reservationUrl = '<%=notWithFormTag%>roReservation';
-    					reservationUrl += '&startDate=' + startDate;
-    					reservationUrl += '&endDate=' + endDate;
-    					reservationUrl += '&acid=' + acid;
-    					reservationUrl += '&roid=' + roid;
-    					reservationUrl += '&' + guestParams; // 추가된 부분
-
-						// 생성된 URL로 페이지 이동
-						window.location.href = reservationUrl;
-					});
+	       
+		});
 		
 		function collectRoomGuestData() {
 		    const guestData = [];
@@ -598,7 +588,7 @@ document.addEventListener("DOMContentLoaded", function () {
 						</td>
 						<td class="col-1"><a href="#"
 							class="btn_gray_hover reserve-button"
-							data-datepicker="#datepicker" data-roid="${bean.roid}" id = "islogin"> 예약
+							data-datepicker="#datepicker" data-roid="${bean.roid}"> 예약
 						</a></td>
 					</tr>
 				</c:forEach>
